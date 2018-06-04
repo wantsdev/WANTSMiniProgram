@@ -1,0 +1,20 @@
+<!--pages/WNTSPersonInfo/WNTSPersonInfo.wxml-->
+<view class="personinfo_parent">
+  <view class="person_head">
+    <text class="head_tips">头像</text>
+    <image class="{{userInfo.head ? 'head_icon' : 'hide' }}" style="" mode="" src="{{userInfo.head}}" binderror="" bindload=""></image>
+      <image class="{{userInfo.head ? 'hide' : 'head_icon' }}" style="" mode="" src='../WANTSImages/buy_user.png' binderror="" bindload=""></image>
+  </view>
+  <view class="person_userid">
+    <text class="userid_tips">用户Id</text>
+    <text class="userid_text">{{userInfo.id}}</text>
+  </view>
+  <view class="person_nick">
+    <text class="nick_tips">昵称</text>
+    <text class="nick_text">{{userInfo.name}}</text>
+  </view>
+  <view class="person_sex">
+    <text class="sex_tips">性别</text>
+    <text class="sex_text">{{(userInfo.gender == 1)?"男":"女"}}</text>
+  </view>
+</view>

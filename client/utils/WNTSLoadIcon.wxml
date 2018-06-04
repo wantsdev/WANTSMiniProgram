@@ -1,0 +1,7 @@
+<!--pages/WNTSLoadIcon/WNTSLoadIcon.wxml-->
+<view class="{{show ? 'wants' :'hide'}}">
+  <view class="loadIconContainer">
+    <image class="loadIconOne" style="" mode="widthFix" src="../WANTSImages/FanMaiLogo.png" binderror="" bindload=""></image>
+    <image animation="{{animationData}}" class="loadIconTwo" style="" mode="widthFix" src="../WANTSImages/Artboard@3x.png" binderror="" bindload=""></image>
+  </view>
+</view>

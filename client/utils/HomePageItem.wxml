@@ -1,0 +1,334 @@
+<!--pages/WNTSHomePage/WNTSHomePage.wxml-->
+<view wx:if="{{true}}">
+  <!--轮播图布局三⬇️ -->
+  <view class="swiper-container-two" wx:if="{{(blockArrNew[index]=='BannerBlock')?(true):(false)}}">
+    <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{BannerBlock}}" wx:key="{{item.item_id}}">
+        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
+          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
+          <image mode="widthFix" src="{{item.item_image}}" class="img" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
+  <!--轮播图布局三⬆️-->
+  <!--热门品牌⬇️ -->
+  <view wx:if="{{(blockArrNew[index]=='HotBrandBlock')?(true):(false)}}">
+    <view class="popBand">
+      <text class="popBandText"> {{ '热门品牌' }} </text>
+    </view>
+    <scroll-view scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap;" class="scrollPop">
+      <block wx:for="{{HotBrandBlock}}" wx:key="{{item.item_id}}">
+        <view bindtap="popBandClick" data-pop_item="{{item}}" style="background-image: {{'url('+item.item_image+')'}}; background-repeat: no-repeat; background-size: 100% 100%; background-position: center; margin-right:{{(item.item_id==block_band.length)?(20+'rpx'):(10+'rpx')}}; margin-left:{{(item.item_id==1)?(20+'rpx'):(10+'rpx')}};"
+          class="popBandStyle">
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  <view wx:if="{{(blockArrNew[index]=='HotBrandBlock')?(true):(false)}}" class="scrollBot"></view>
+  <!--热门品牌⬆️--->
+  <!--五大块layout⬇️-->
+  <view class="fiveBlock" wx:if="{{(blockArrNew[index]=='GoodsBlock')?(true):(false)}}">
+    <view class="left">
+      <image style="position:absolute;top: 0rpx; left:0rpx; width: 374rpx; height: 364rpx; background-image: {{'url('+GoodsBlock[0].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{GoodsBlock[0]}}" catchtap="popBandClick" mode="" src="" binderror="" bindload=""></image>
+      <image style="position:absolute; bottom: 0rpx; left:0rpx; width: 374rpx; height: 182rpx; background-image: {{'url('+GoodsBlock[1].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{GoodsBlock[1]}}" catchtap="popBandClick" mode="" src="" binderror="" bindload=""></image>
+    </view>
+    <view class="right">
+      <image style="position:absolute; top: 0rpx; left:0rpx; width:374rpx; height: 181rpx; background-image: {{'url('+GoodsBlock[2].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{GoodsBlock[2]}}" catchtap="popBandClick" mode="" src="" binderror="" bindload=""></image>
+      <image style="position:absolute; top:183rpx; left:0rpx; width:374rpx; height: 181rpx; background-image: {{'url('+GoodsBlock[3].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{GoodsBlock[3]}}" catchtap="popBandClick" mode="" src="" binderror="" bindload=""></image>
+      <image style="position:absolute; bottom: 0rpx; left:0rpx; width:374rpx; height: 182rpx; background-image: {{'url('+GoodsBlock[4].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{GoodsBlock[4]}}" catchtap="popBandClick" mode="" src="" binderror="" bindload="">
+      </image>
+    </view>
+  </view>
+  <!--五大块layout⬆️-->
+
+  <!-- 主题列表⬆️-->
+  <block wx:for="{{blockIdArr}}" wx:for-index="idx" wx:key="{{idx}}">
+    <!-- 主题图 -->
+    <image wx:if="{{(blockArrNew[index]=='SubjectBlock'&&index==blockIdArr[idx]&&SubjectBlock[idx].display_style==2)?(true):(false)}}" style="width: 750rpx; height: 596rpx;display:block;margin-top:50rpx;" data-pop_item="{{SubjectBlock[idx]}}" bindtap="popBandClick" mode="widthFix" src="{{SubjectBlock[idx].item_image}}" binderror="" bindload=""></image>
+    <!--主题列表⬇️布局三⬇️  -->
+    <view wx:if="{{(blockArrNew[index]=='SubjectBlock'&&index==blockIdArr[idx])?(true):(false)}}">
+      <view data-target="{{SubjectBlock[idx].item_target.target_id}}" data-item_title="{{SubjectBlock[idx].item_title}}" catchtap="band_touch" class="detailBlockOne" wx:index="{{SubjectBlock[idx].index}}" style="height:84rpx;margin-left:40rpx;margin-top:0rpx;">
+        <view class="left" style="height:84rpx;margin-top:40rpx;">
+          <text class="a" style="height:56rpx;display: block;float: left;height: 56rpx;width: 464rpx;font-size: 40rpx;color: rgba(25,25,25,1);line-height: 56rpx;"> {{SubjectBlock[idx].item_title}} </text>
+          <text class="b"> {{SubjectBlock[idx].item_subtitle}} </text>
+        </view>
+        <view class="right" style="margin-top:40rpx;">
+          <text class="a" style="font-size: 24rpx;color: rgba(25,25,25,1);display: block;position: absolute;left: 0rpx;top: 25rpx;height: 34rpx;width: 114rpx;line-height: 34rpx;"> {{ '查看更多' }} </text>
+        </view>
+      </view>
+      <view style="display:block;padding-top:30rpx;">
+        <scroll-view scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap;" class="scrollColumn">
+          <block wx:for="{{SubjectBlock[idx].itemData}}" wx:for-item="itemDatas" wx:key="{{index}}">
+            <view data-subject="{{itemDatas}}" class="subjectDetail" bindtap="columnClick" style="margin-right:{{(index==9)?(20+'rpx'):(0+'rpx')}}; margin-left:{{(index==0)?(40+'rpx'):(0+'rpx')}};">
+              <view style="width:200rpx;height:200rpx;position:relative;">
+                <image mode="aspectFit" src="{{(itemDatas.small_img)?(itemDatas.small_img):(itemDatas.imgs[0])}}" style="width:200rpx;height:200rpx;display:block;position:absolute;left:0rpx;top:0rpx;{{'background:'+(imgOnloadStatus)?(randomBackgroundColor[index%8]):(randomBackgroundColor[index%8])}};"
+                  class="columnStyle" bindload="imageLoad">
+                </image>
+                <image wx:if="{{backgroundColorStatus}}" mode="aspectFit" style="width:200rpx;height:200rpx;display:block;position:absolute;left:0rpx;top:0rpx;z-index:22;{{'background:'+randomBackgroundColor[index%8]}};" class="columnStyle" bindload="imageLoad">
+                </image>
+              </view>
+              <view class="subjectPriceTitle" style="background:#ffffff;margin-left:20rpx;margin-top:-9rpx;width:200rpx;">
+                <text class="name" style="width:162rpx;color:rgba(185,188,191,1);line-height:52rpx;font-size:22rpx;padding-left:4rpx;padding-right:4rpx;"> {{ itemDatas.title }}</text>
+                <view class="changed" style="width:162rpx;text-align:center;">
+                  <text wx:if="{{itemDatas.price}}" class="b" style="width:200rpx;text-align:center;color:rgba(72,70,73,1);font-size:24rpx;line-height:24rpx;"> {{'￥'+itemDatas.price/100 }} </text>
+                </view>
+              </view>
+            </view>
+          </block>
+        </scroll-view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 猜你喜欢⬇️ -->
+  <view wx:if="{{(blockArrNew[index]=='RecommendBlock')?(true):(false)}}">
+    <include src="../utils/WNTSRecommend.wxml" />
+    <view style="width:100%;height:26rpx;box-sizing:border-box;color:black;background:white;display:block;"></view>
+    <include src="../utils/WNTSLoadIcon.wxml" />
+  </view>
+
+  <!-- 单图主题一 -->
+  <image wx:if="{{(blockArrNew[index]=='SubjectBlock_single')?(true):(false)}}" style="width: 750rpx; height: 596rpx;display:block;" data-pop_item="{{SubjectBlock_single[0]}}" bindtap="popBandClick" mode="widthFix" src="{{SubjectBlock_single[0].item_image}}"
+    binderror="" bindload=""></image>
+  <!-- 双主题图布局 -->
+  <view wx:if="{{(blockArrNew[index]=='SubjectBlock_double')?(true):(false)}}" style="width:670rpx;height:440rpx;margin-left:40rpx;display:flex;flex-direction:column;flex-wrap:wrap;">
+    <image style="width: 314rpx; height: 440rpx; background-image: {{'url('+SubjectBlock_double[0].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-target="{{SubjectBlock_double[0].item_target.target_id}}" data-item_title="{{SubjectBlock_double[0].item_title}}"
+      catchtap="band_touch" mode="" src="" binderror="" bindload=""></image>
+    <image style="width: 314rpx; height: 440rpx; background-image: {{'url('+SubjectBlock_double[1].item_image+')'}}; margin-left:40rpx;background-repeat:no-repeat; background-size: 100% 100%;" data-target="{{SubjectBlock_double[1].item_target.target_id}}"
+      data-item_title="{{SubjectBlock_double[0].item_title}}" catchtap="band_touch" mode="" src="" binderror="" bindload=""></image>
+  </view>
+  <!--主题列表⬇️布局三⬇️  -->
+  <view>
+    <view style="display:block;">
+      <scroll-view wx:if="{{(blockArrNew[index]=='SubjectBlock_double')?(true):(false)}}" scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap;" class="scrollColumn">
+        <block wx:for="{{SubjectBlock_double[0].itemData}}" wx:for-item="itemDatas" wx:key="{{index}}">
+          <view data-subject="{{itemDatas}}" class="subjectDetail" bindtap="columnClick" style="margin-right:{{(index==9)?(20+'rpx'):(0+'rpx')}}; margin-left:{{(index==0)?(40+'rpx'):(0+'rpx')}};">
+            <view style="width:200rpx;height:200rpx;position:relative;">
+              <image mode="aspectFit" src="{{(itemDatas.small_img)?(itemDatas.small_img):(itemDatas.imgs[0])}}" style="width:200rpx;height:200rpx;display:block;position:absolute;left:0rpx;top:0rpx;" class="columnStyle" bindload="imageLoad">
+              </image>
+              <image wx:if="{{backgroundColorStatus}}" mode="aspectFit" style="width:200rpx;height:200rpx;display:block;position:absolute;left:0rpx;top:0rpx;z-index:22;{{'background:'+randomBackgroundColor[index%8]}};" class="columnStyle" bindload="imageLoad">
+              </image>
+            </view>
+            <view class="subjectPriceTitle" style="background:#ffffff;margin-left:20rpx;margin-top:-9rpx;width:200rpx;">
+              <text class="name" style="width:162rpx;color:rgba(185,188,191,1);line-height:52rpx;font-size:22rpx;padding-left:4rpx;padding-right:4rpx;"> {{ itemDatas.title }}</text>
+              <view class="changed" style="width:162rpx;text-align:center;">
+                <text class="b" wx:if="{{itemDatas.price}}" style="width:200rpx;text-align:center;color:rgba(72,70,73,1);font-size:24rpx;line-height:24rpx;"> {{'￥'+itemDatas.price/100 }} </text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+  <!-- 三个主题图的主题（面积最大块的主题图在左边） -->
+  <view wx:if="{{(blockArrNew[index]=='SubjectBlock_three_left')?(true):(false)}}" style="width:670rpx;height:440rpx;margin-left:40rpx; margin-top:40rpx;display:flex;flex-direction:column;flex-wrap:wrap;">
+    <image style="width: 314rpx; height: 440rpx; background-image: {{'url('+SubjectBlock_three_left[0].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{SubjectBlock_three_left[0]}}" bindtap="popBandClick" mode=""
+      src="" binderror="" bindload=""></image>
+    <image style="width: 316rpx; height: 200rpx; background-image: {{'url('+SubjectBlock_three_left[1].item_image+')'}}; margin-left:40rpx;margin-bottom:40rpx;background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{SubjectBlock_three_left[1]}}"
+      bindtap="popBandClick" mode="" src="" binderror="" bindload=""></image>
+    <image style="width: 316rpx; height: 200rpx; background-image: {{'url('+SubjectBlock_three_left[2].item_image+')'}}; margin-left:40rpx;background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{SubjectBlock_three_left[2]}}" bindtap="popBandClick"
+      mode="" src="" binderror="" bindload=""></image>
+  </view>
+  <!--主题列表⬇️布局三⬇️ (三左) -->
+  <view wx:if="{{(blockArrNew[index]=='SubjectBlock_three_left')?(true):(false)}}">
+    <view style="display:block;padding-top:30rpx;">
+      <scroll-view scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap;" class="scrollColumn">
+        <block wx:for="{{SubjectBlock_three_left[0].itemData}}" wx:for-item="itemDatas" wx:key="{{index}}">
+          <view data-subject="{{itemDatas}}" class="subjectDetail" bindtap="columnClick" style="margin-right:{{(index==9)?(20+'rpx'):(0+'rpx')}}; margin-left:{{(index==0)?(40+'rpx'):(0+'rpx')}};">
+            <view style="width:200rpx;height:200rpx;position:relative;">
+              <image mode="aspectFit" src="{{(itemDatas.small_img)?(itemDatas.small_img):(itemDatas.imgs[0])}}" style="width:200rpx;height:200rpx;display:block;position:absolute;left:0rpx;top:0rpx;{{'background:'+(imgOnloadStatus)?(randomBackgroundColor[index%8]):(randomBackgroundColor[index%8])}};" class="columnStyle" bindload="imageLoad">
+              </image>
+              <image wx:if="{{backgroundColorStatus}}" mode="aspectFit" style="width:200rpx;height:200rpx;display:block;position:absolute;left:0rpx;top:0rpx;z-index:22;{{'background:'+randomBackgroundColor[index%8]}};" class="columnStyle" bindload="imageLoad">
+              </image>
+            </view>
+            <view class="subjectPriceTitle" style="background:#ffffff;margin-left:20rpx;margin-top:-9rpx;width:200rpx;">
+              <text class="name" style="width:162rpx;color:rgba(185,188,191,1);line-height:52rpx;font-size:22rpx;padding-left:4rpx;padding-right:4rpx;"> {{ itemDatas.title }}</text>
+              <view class="changed" style="width:162rpx;text-align:center;">
+                <text class="b" wx:if="{{itemDatas.price}}" style="width:200rpx;text-align:center;color:rgba(72,70,73,1);font-size:24rpx;line-height:24rpx;"> {{'￥'+itemDatas.price/100 }} </text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+  <!-- 三个主题图的主题（面积最大块的主题图在上边） -->
+  <view wx:if="{{(blockArrNew[index]=='SubjectBlock_three_top')?(true):(false)}}" style="width:670rpx;height:440rpx;margin-left:40rpx;">
+    <image style="width: 670rpx; height: 200rpx; margin-bottom:35rpx;margin-right:40rpx;background-image: {{'url('+SubjectBlock_three_top[0].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{SubjectBlock_three_top[0]}}" bindtap="popBandClick" mode="" src="" binderror="" bindload=""></image>
+    <view style="width:670rpx;height:440rpx;display:flex;flex-direction:row;">
+      <image style="width: 316rpx; height: 200rpx; background-image: {{'url('+SubjectBlock_three_top[1].item_image+')'}}; margin-right:40rpx;background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{SubjectBlock_three_top[1]}}" bindtap="popBandClick" mode="" src="" binderror="" bindload=""></image>
+      <image style="width: 316rpx; height: 200rpx; background-image: {{'url('+SubjectBlock_three_top[2].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{SubjectBlock_three_top[2]}}" bindtap="popBandClick" mode="" src="" binderror="" bindload=""></image>
+    </view>
+  </view>
+  <!--主题列表⬇️布局三⬇️  -->
+  <view wx:if="{{(blockArrNew[index]=='SubjectBlock_three_top')?(true):(false)}}">
+    <view style="display:block;padding-top:30rpx;">
+      <scroll-view scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap;" class="scrollColumn">
+        <block wx:for="{{SubjectBlock_three_top[0].itemData}}" wx:for-item="itemDatas" wx:key="{{index}}">
+          <view data-subject="{{itemDatas}}" class="subjectDetail" bindtap="columnClick" style="margin-right:{{(index==9)?(20+'rpx'):(0+'rpx')}}; margin-left:{{(index==0)?(40+'rpx'):(0+'rpx')}};">
+            <view style="width:200rpx;height:200rpx;position:relative;">
+              <image mode="aspectFit" src="{{(itemDatas.small_img)?(itemDatas.small_img):(itemDatas.imgs[0])}}" style="width:200rpx;height:200rpx;display:block;position:absolute;left:0rpx;top:0rpx;{{'background:'+(imgOnloadStatus)?(randomBackgroundColor[index%8]):(randomBackgroundColor[index%8])}};"
+                class="columnStyle" bindload="imageLoad">
+              </image>
+              <image wx:if="{{backgroundColorStatus}}" mode="aspectFit" style="width:200rpx;height:200rpx;display:block;position:absolute;left:0rpx;top:0rpx;z-index:22;{{'background:'+randomBackgroundColor[index%8]}};" class="columnStyle" bindload="imageLoad">
+              </image>
+            </view>
+            <view class="subjectPriceTitle" style="background:#ffffff;margin-left:20rpx;margin-top:-9rpx;width:200rpx;">
+              <text class="name" style="width:162rpx;color:rgba(185,188,191,1);line-height:52rpx;font-size:22rpx;padding-left:4rpx;padding-right:4rpx;"> {{ itemDatas.title }}</text>
+              <view class="changed" style="width:162rpx;text-align:center;">
+                <text class="b" wx:if="{{itemDatas.price}}" style="width:200rpx;text-align:center;color:rgba(72,70,73,1);font-size:24rpx;line-height:24rpx;"> {{'￥'+itemDatas.price/100 }} </text>
+              </view>
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+    </view>
+  </view>
+  <!-- 为您推荐(n*2) -->
+  <view wx:if="{{(blockArrNew[index]=='SubjectBlock_n_two')?(true):(false)}}" style="margin-bottom:30rpx;">
+    <view data-target="{{SubjectBlock_n_two[1].item_target.block_default_item_id}}" data-item_title="{{SubjectBlock_n_two[1].item_target.target_title}}" class="detailBlockOne" wx:index="{{SubjectBlock_n_two[1].index}}" style="height:84rpx;margin-left:40rpx;margin-top:0rpx;">
+      <view class="left" style="height:84rpx;margin-top:40rpx;">
+        <text class="a" style="height:56rpx;display: block;float: left;height: 56rpx;width: 464rpx;font-size: 40rpx;color: rgba(25,25,25,1);line-height: 56rpx;"> {{(block_title!=='')?(block_title):(SubjectBlock_n_two.block_title)}} </text>
+        <text class="b"> {{(block_subtitle!=='')?(block_subtitle):(SubjectBlock_n_two.block_subtitle)}} </text>
+      </view>
+    </view>
+    <view style="width:708rpx;display:flex;flex-direction:row;flex-wrap:wrap;margin-top:76rpx;margin-left:40rpx;overflow:hidden;">
+      <block wx:for="{{SubjectBlock_n_two.block_items}}" wx:for-item="itemDatas" wx:key="{{index}}">
+        <view data-pop_item="{{itemDatas}}" catchtap="popBandClick" class="subjectDetail" style="width:314rpx;height:430rpx;display:inline-block;margin-bottom:30rpx;margin-right:{{(index%2==0)?(0+'rpx'):(40+'rpx')}}; margin-left:{{(index%2==1)?(40+'rpx'):(0+'rpx')}};">
+          <image mode="aspectFit" src="{{itemDatas.item_image}}" style="width:314rpx;height:430rpx;{{'background:'+randomBackgroundColor[index%8]}};" class="columnStyle">
+          </image>
+          <!-- <view class="subjectPriceTitle" style="background:#ffffff;margin-left:0rpx;margin-top:-9rpx;width:314rpx;height:116rpx;">
+          <text class="name" style="width:238rpx;height:68rpx;position:absolute;top:0rpx;left:0rpx;color:rgba(185,188,191,1);line-height:68rpx;font-size:28rpx;padding-left:38rpx;padding-right:38rpx;"> {{ itemDatas.title }}</text>
+          <view class="changed" style="width:314rpx;height:24rpx;position:absolute;bottom:24rpx;left:0rpx;text-align:center;">
+            <text class="b" style="width:314rpx;height:24rpx;text-align:center;color:rgba(72,70,73,1);font-size:32rpx;line-height:24rpx;"> {{'￥'+itemDatas.price/100 }} </text>
+          </view>
+        </view> -->
+        </view>
+      </block>
+    </view>
+  </view>
+</view>
+
+
+
+<!-- WNTSGOODSMiniProgram -->
+
+
+<view wx:if="{{false}}" class="WNTSGOODSMiniProgram">
+  <!--轮播图布局一⬇️ -->
+  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock')?(true):(false)}}">
+    <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{BannerBlock}}" wx:key="{{item.item_id}}">
+        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
+          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
+          <image mode="widthFix" src="{{item.item_image}}" class="img" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <!--轮播图布局一⬆️-->
+
+  <!-- 主题列表⬇️ -->
+  <view wx:if="{{(blockArrNew[index]=='SubjectBlock')?(true):(false)}}">
+    <block wx:for="{{SubjectBlock}}" wx:key="{{index}}">
+    <!--主题列表⬇️布局一⬇️  -->
+    <view class="detailBlockOne" wx:index="{{item.index}}" data-target="{{item.item_target.target_id}}" data-item_title="{{item.item_title}}" catchtap="band_touch">
+      <view class="left">
+        <text class="a" style=""> {{item.item_title}} </text>
+      </view>
+      <view class="right">
+        <text class="a"> {{ '查看更多>' }} </text>
+      </view>
+    </view>
+    <!--主题列表⬇️布局一⬆️  -->
+    <!--主题列表⬇️布局二⬇️  -->
+    <view wx:if="{{item.display_style==2}}" data-target="{{item.item_target.block_default_item_id}}" data-item_title="{{item.item_title}}" catchtap="band_touch" class="subjectCover" style="background: url({{item.item_image?item.item_image:'http://static.wantscart.com/product/1520825796736_1000_500'}}) no-repeat;background-size:cover;">
+      <text class="seeMoreSubject">{{'查看更多>'}}</text>
+    </view>
+    <!--主题列表⬇️布局二⬆️  -->
+    <scroll-view scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap;" class="scrollColumn">
+      <view wx:for="{{item.itemData}}" wx:for-item="itemDatas" wx:key="{{itemDatas.id}}" data-subject="{{itemDatas}}" class="subjectDetail" bindtap="columnClick">
+        <image mode="scaleToFill" src="{{(itemDatas.small_img)?(itemDatas.small_img):(itemDatas.imgs[0])}}" style="{{'background:'+randomBackgroundColor[index%8]}}; margin-left:20rpx; margin-right:{{(itemDatas.index==10)?(25+'rpx'):(45+'rpx')}};" class="columnStyle">
+        </image>
+        <view class="subjectPriceTitle">
+          <text class="name"> {{ itemDatas.title }}</text>
+          <view class="changed">
+            <text wx:if="{{itemDatas.price}}" class="b"> {{'￥'+itemDatas.price/100 }} </text>
+            <view class="a"></view>
+          </view>
+          <view class="change">
+            <view class="tagPrice"></view>
+            <text wx:if="{{itemDatas.tag_price}}" class="b"> {{ '￥'+itemDatas.tag_price/100 }} </text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </block>
+
+  </view>
+
+  <!-- 猜你喜欢 -->
+  <view class="guessYouLike" wx:if="{{(blockArrNew[index]=='RecommendBlock')?(true):(false)}}" style="margin-top:50rpx;">
+    <text class="a" style="width:{{(28*5+'rpx')}};"> {{ '猜你喜欢' }} </text>
+  </view>
+  <view class="guessYouLikeDetailLayout" wx:if="{{(blockArrNew[index]=='RecommendBlock')?(true):(false)}}">
+    <view class="guessYouLike-items" wx:for="{{guessLike}}" wx:key="{{item.id}}">
+      <view bindtap='guessLike_item' data-item='{{item}}'>
+        <view class="guessLikeLayout">
+          <image style="{{'background:'+randomBackgroundColor[index%8]}}" class="guessYouLikePic" mode="widthFix" src="{{(item.small_img)?(item.small_img):(item.imgs[0])}}" binderror="" bindload="">
+            <view class="{{item.showTips ? 'guessYouLikeTipLayout' :'noshow'}}">
+              <text class="guessYouLike-tips" style="position:absolute;"> {{item.tips}} </text>
+              <image class='tip-background' mode="" src="{{item.tip_background}}" binderror="" bindload=""></image>
+              <image class='tip-icon' style="display:block; width:20rpx; height: 20rpx; position: absolute; top: 10rpx; left: 10rpx;" mode="" src="{{item.tip_icon}}" binderror="" bindload=""></image>
+            </view>
+          </image>
+        </view>
+        <view class="guessYouLikePrice">
+          <text class="name"> {{ item.title }}</text>
+          <text class="changed"> {{'￥'+ item.price/100 }} </text>
+          <view class="change">
+            <view class="a"> </view>
+            <text class="b"> {{ '￥'+item.tag_price/100 }} </text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='loading' wx:if="{{(blockArrNew[index]=='RecommendBlock')?(true):(false)}}">{{loaddingContext}}</view>
+</view>
+<!--热门品牌⬇️ -->
+<view wx:if="{{(blockArrNew[index]=='HotBrandBlock')?(true):(false)}}">
+  <view class="popBand">
+    <text class="popBandText"> {{ '热门品牌' }} </text>
+  </view>
+  <scroll-view scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap;" class="scrollPop">
+    <block wx:for="{{HotBrandBlock}}" wx:key="{{item.item_id}}">
+      <view bindtap="popBandClick" data-pop_item="{{item}}" style="background-image: {{'url('+item.item_image+')'}}; background-repeat: no-repeat; background-size: 100% 100%; background-position: center; margin-right:{{(item.item_id==block_band.length)?(20+'rpx'):(10+'rpx')}}; margin-left:{{(item.item_id==1)?(20+'rpx'):(10+'rpx')}};"
+        class="popBandStyle">
+      </view>
+    </block>
+  </scroll-view>
+</view>
+<view wx:if="{{(blockArrNew[index]=='HotBrandBlock')?(true):(false)}}" class="scrollBot"></view>
+<!--热门品牌⬆️--->
+<!--五大块layout⬇️-->
+<view class="fiveBlock" wx:if="{{(blockArrNew[index]=='GoodsBlock')?(true):(false)}}">
+  <view class="left">
+    <image style="position:absolute;top: 0rpx; left:0rpx; width: 374rpx; height: 364rpx; background-image: {{'url('+GoodsBlock[0].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{GoodsBlock[0]}}" catchtap="popBandClick"
+      mode="" src="" binderror="" bindload=""></image>
+    <image style="position:absolute; bottom: 0rpx; left:0rpx; width: 374rpx; height: 182rpx; background-image: {{'url('+GoodsBlock[1].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{GoodsBlock[1]}}" catchtap="popBandClick"
+      mode="" src="" binderror="" bindload=""></image>
+  </view>
+  <view class="right">
+    <image style="position:absolute; top: 0rpx; left:0rpx; width:374rpx; height: 181rpx; background-image: {{'url('+GoodsBlock[2].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{GoodsBlock[2]}}" catchtap="popBandClick"
+      mode="" src="" binderror="" bindload=""></image>
+    <image style="position:absolute; top:183rpx; left:0rpx; width:374rpx; height: 181rpx; background-image: {{'url('+GoodsBlock[3].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{GoodsBlock[3]}}" catchtap="popBandClick"
+      mode="" src="" binderror="" bindload=""></image>
+    <image style="position:absolute; bottom: 0rpx; left:0rpx; width:374rpx; height: 182rpx; background-image: {{'url('+GoodsBlock[4].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{GoodsBlock[4]}}" catchtap="popBandClick"
+      mode="" src="" binderror="" bindload="">
+    </image>
+  </view>
+</view>
+<!--五大块layout⬆️-->

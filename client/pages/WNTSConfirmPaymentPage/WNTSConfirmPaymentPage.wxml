@@ -1,0 +1,42 @@
+<!--pages/WNTSConfirmPaymentPage/WNTSConfirmPaymentPage.wxml-->
+<view class='order-layout'>
+  <image class='image-location' src='../WANTSImages/order_img.png' />
+  <view class='address-layout2'>
+    <view class='reciver-info'>
+      <text class='address-name1'>商品总额:</text>
+      <text class='order-price'>￥{{orderData.sum}}</text>
+    </view>
+    <text class='address-detail'>订单号：{{orderData.id}}</text>
+  </view>
+</view>
+
+
+<view class='address-layout'>
+  <image class='image-location' src='../WANTSImages/userinfo_address.png' />
+  <view class='address-layout2'>
+    <view class='reciver-info'>
+      <text class='address-name2'>收货人：{{orderData.receiver_name}}</text>
+      <text class='address-phone'>{{orderData.receiver_phone}}</text>
+    </view>
+    <text class='address-detail'>{{orderData.receiver_address}}</text>
+  </view>
+</view>
+
+<view class='address-layout_wechat'>
+  <image class='image-location_wechat' src='../WANTSImages/wechat_pressed.png' />
+  <view class='address-layout2_wechat'>
+    <text class='address-name3'>微信</text>
+  </view>
+</view>
+<view wx:if="{{orderData.warning_message_on_confirm_order_page}}" class='address-layout_tips'>
+  <image class='image-location_tips' src='../WANTSImages/tip.png' />
+  <view class='address-layout2_tips'>
+    <text class='address-tips'>{{orderData.warning_message_on_confirm_order_page}}</text>
+  </view>
+</view>
+
+
+<view class='bottom_views'>
+  <view class='wechatPay' bindtap='wechatPayClick' data-id="{{orderData.id}}">微信支付 ￥{{orderData.sum}}</view>
+  <view style="display: block;width: 750rpx;height: 68rpx;background: #ffffff;" wx:if="{{iPhoneX}}"></view>
+</view>

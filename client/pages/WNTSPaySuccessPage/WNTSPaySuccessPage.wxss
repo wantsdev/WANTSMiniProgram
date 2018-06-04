@@ -1,0 +1,75 @@
+/* pages/WNTSPaySuccessPage/WNTSPaySuccessPage.wxss */
+@import '../../utils/WNTSRecommend.wxss';
+
+.parent_layout {
+  height: 516rpx;
+  width: 710rpx;
+  display: flex;
+  flex-direction: column;
+  background: #fcfcfc;
+  border-left: 20rpx solid #fff;
+  border-right: 20rpx solid #fff;
+}
+
+.no_history_layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+}
+
+.no_history_icon {
+  width: 142rpx;
+  height: 142rpx;
+  margin-left: 284rpx;
+  margin-top: 60rpx;
+}
+
+.no_history {
+  font-size: 32rpx;
+  color: #666;
+  text-align: center;
+  margin-top: 30rpx;
+}
+
+.seller_message {
+  font-size: 28rpx;
+  color: #b2b1b2;
+  text-align: center;
+  margin-top: 10rpx;
+}
+
+.opreation_layout {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  height: 56rpx;
+  width: 710rpx;
+  margin-top: 50rpx;
+}
+
+.go_shop {
+  width: 192rpx;
+  height: 80rpx;
+  background: #333;
+  font-size: 28rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 80rpx;
+  margin-left: 108rpx;
+}
+
+.seeOrder {
+  width: 192rpx;
+  height: 80rpx;
+  background: #333;
+  font-size: 28rpx;
+  color: #fff;
+  text-align: center;
+  line-height: 80rpx;
+  margin-left: 108rpx;
+}
+
+.hide {
+  display: none;
+}

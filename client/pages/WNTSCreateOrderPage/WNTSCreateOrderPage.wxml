@@ -1,0 +1,113 @@
+<!--pages/WNTSCreateOrderPage/WNTSCreateOrderPage.wxml-->
+<loading hidden="{{loadingHidden}}" bindchange="loadingChange">
+    正在提交订单...
+</loading>
+<view wx:if="{{currentAddress}}">
+  <view class='address-layout' bindtap='address_edit'>
+    <image class='image-location' src='../WANTSImages/userinfo_address.png' />
+    <view class='address-layout2'>
+      <view class='reciver-info'>
+        <text class='address-name'>收货人:{{currentAddress.name}}</text>
+        <text class='address-phone'>{{currentAddress.phone}}</text>
+        <image class='address-righe' src='../WANTSImages/right.png' />
+      </view>
+      <text class='address-detail'>{{currentAddress.province}}\t{{currentAddress.city}}\t{{currentAddress.region}}\t{{currentAddress.address}}</text>
+    </view>
+  </view>
+</view>
+<view wx:else>
+  <view class='address-layout' bindtap='address_edit'>
+    <image class='image-location' src='../WANTSImages/userinfo_address.png' />
+    <view class='address-layout2'>
+      <view class='reciver-info'>
+        <text class='address-name'>点击可选择收货地址</text>
+        <image class='address-righe' src='../WANTSImages/right.png' />
+      </view>
+      <text class='address-detail'>还没有地址，请添加地址</text>
+
+    </view>
+  </view>
+</view>
+<!--当有商品时  -->
+<view wx:if="{{selectedProducts}}" class='goods-layout' bindtap="go_goodDetail">
+  <!--当一商品时 start  -->
+  <view wx:if="{{selectedProducts.length == 1}}">
+    <view class="goods-list ">
+      <image class="goods-img " src="{{selectedProducts[0].product_img}}"></image>
+      <view class="goods-desc ">
+        <view class="goods-title ">{{selectedProducts[0].product_title}}</view>
+        <view class="goods-stock ">{{selectedProducts[0].stock_descp}}</view>
+        <view class="goods-bottom ">
+          <view class="goods-price ">¥{{selectedProducts[0].price/100}}</view>
+          <view class="goods-num ">x{{selectedProducts[0].num}}</view>
+        </view>
+        <view class="quit-bottom ">
+          <image class='quitImage' src='{{quitImage}}'></image>
+          <view class='quit'>七天无理由退货</view>
+        </view>
+        <!-- <view class="goods-bottom ">
+          <form report-submit=''>
+            <input>哈哈哈哈</input>
+            hhaha</form>
+        </view> -->
+      </view>
+    </view>
+  </view>
+  <!--当一商品时 end  -->
+  <!--当多商品时 start -->
+  <view wx:else>
+    <!-- 1-start -->
+    <view wx:for="{{selectedProducts}}" wx:key="{{index}}">
+      <view class='seller-line'></view>
+      <view class=" goods-list ">
+        <image class="goods-img " src="{{item.product_img}}"></image>
+        <view class="goods-desc ">
+          <view class="goods-title ">{{item.product_title}}</view>
+          <view class="goods-stock ">{{item.stock_descp}}</view>
+          <view class="goods-bottom ">
+            <view class="goods-price ">¥{{item.price/100}}</view>
+            <view class="goods-num ">x{{item.num}}</view>
+          </view>
+          <view class="quit-bottom ">
+            <view class='quitImage'>退</view>
+            <view class='quit'>七天无理由退货</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--2 start  -->
+  <!--订单详情  -->
+  <view class='orderDetial-layout'>
+    <view class='order-detail'>订单详情</view>
+    <view class="seller-line "></view>
+    <view class='order-totalpay-layout'>
+      <view class='order-totalpay'>商品总额：</view>
+      <view class='content'>¥{{totalPrice}}</view>
+    </view>
+    <view class="seller-line "></view>
+    <view class='order-totalpay-layout'>
+      <view class='order-totalpay'>运费：</view>
+      <view class='content'>包邮</view>
+    </view>
+    <view class="seller-line "></view>
+    <view class='order-totalpay-layout'>
+      <view class='order-totalpay'>总计：</view>
+      <view class='total-content'>¥{{totalPrice}}</view>
+    </view>
+    <view class="seller-line "></view>
+    <!-- <view class='msg-layout' wx:if="{{1}}">
+      <view class='horizontal-line'></view>
+      <image class='msg-icon' src='WNTSCreateOrderImage/liuyan_msg.png'></image>
+      <view class='msg-text'>{{"留言留言留言留言留言留言留言留言留言留言留言留言"}}</view>
+    </view> -->
+  </view>
+  <!--2 end  -->
+
+</view>
+<view class='bottom_view' style="height:{{(iPhoneX)?(168+'rpx'):(100+'rpx')}};">
+  <view class='funPay'>实付款：￥{{totalPrice}}</view>
+  <view class='submitOrder' bindtap='submitOrderClick'>提交订单</view>
+  <view style="display: block;width: 750rpx;height: 68rpx;background: #ffffff;" wx:if="{{iPhoneX}}"></view>
+</view>
+ <include src="../../utils/WNTSAlertView.wxml" />

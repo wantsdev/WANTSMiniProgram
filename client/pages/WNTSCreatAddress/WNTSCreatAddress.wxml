@@ -1,0 +1,53 @@
+<!--pages/WNTSCreatAddress/WNTSCreatAddress.wxml-->
+<view class='view-parent'>
+  <view class="add_item">
+    <text class="item_text">收货人:</text>
+    <input class="item_input" bindinput="bindNameInput" placeholder="请输入收货人" value="{{name}}" />
+  </view>
+  <view class="add_item">
+    <text class="item_text">手机号:</text>
+    <input class="item_input" bindinput="bindPhoneInput" maxlength="11" type='number' placeholder="请输入手机号" value="{{phoneNum}}" />
+  </view>
+  <!-- <view class="add_item">
+    <text class="item_text">邮政编码:</text>
+    <input class="item_input_1" bindinput="bindZipCodeInput" placeholder="请输入邮政编码" value="{{addressInfo.zipCode}}" />
+  </view> -->
+  <view class="add_item">
+    <text class="item_text">省市区:</text>
+    <view class='item_province' bindtap='bindProvinceChange'>{{province}}\t{{city}}\t{{area}}</view>
+  </view>
+  <view class="add_item">
+    <text class="item_text">详细地址:</text>
+    <input class="item_input_1" bindinput="bindAddressInput" placeholder="街道，小区，门牌号等" maxlength='50' value="{{detailAddress}}" />
+  </view>
+  <view class='add_item'>
+    <view class='item_text'>设置默认地址</view>
+    <image wx:if="{{defaultSelect}}" class="addressSelect" src="../WANTSImages/toggle_on.png" data-index="{{index}}" data-item="{{item}}" bindtap="addressSelect"></image>
+    <image wx:else class="addressSelect" src="../WANTSImages/toggle_off.png" data-index="{{index}}" data-item="{{item}}" bindtap="addressSelect"></image>
+  </view>
+</view>
+<view class="add_address" bindtap="addAddress">
+  <text class="add">保存</text>
+</view>
+<view class="dialog-mask " style="z-index:11;visibility:{{addressMenuIsShow ? 'visible': 'hidden'}}" bindtap="hideCitySelected" />
+<view class="picker-view" animation="{{animationAddressMenu}}" style="visibility:{{addressMenuIsShow ? 'visible':'hidden'}}">
+  <view style="height:10% ;width:95%;margin-top:10rpx">
+    <text class="opreation-text" catchtap="cityCancel">取消</text>
+    <text class="opreation-text" style="float: right" catchtap="citySure">确定</text>
+  </view>
+  <!--"可以显示默认的城市，使用后级联选择城市反应很慢就不使用了-->
+  <picker-view style="width: 100%; height: 300px;" bindchange="cityChange" value="{{value}}" wx:key="">
+    <picker-view-column>
+      <view wx:for="{{provinces}}" class="picker-item" wx:key="">
+        {{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{citys}}" class="picker-item" wx:key="">
+        {{item.name}}</view>
+    </picker-view-column>
+    <picker-view-column>
+      <view wx:for="{{areas}}" class="picker-item" wx:key="">
+        {{item.name}}</view>
+    </picker-view-column>
+  </picker-view>
+</view>

@@ -1,0 +1,66 @@
+{
+  "pages": [
+    "pages/WNTSHomePage/WNTSHomePage",
+    "pages/WNTSShoppingCartPage/WNTSShoppingCartPage",
+    "pages/WNTSUserInfo/WNTSUserInfo",
+    "pages/WNTSProductdetailPage/WNTSProductdetailPage",
+    "pages/WNTSOrder/WNTSOrder",
+    "pages/WNTSHistory/WNTSHistory",
+    "pages/WNTSPersonInfo/WNTSPersonInfo",
+    "pages/WNTSSetting/WNTSSetting",
+    "pages/WNTSAbout/WNTSAbout",
+    "pages/WNTSOrderDetial/WNTSOrderDetial",
+    "pages/WNTSExpress/WNTSExpress",
+    "pages/WNTSCell/WNTSCell",
+    "pages/WNTSPrivacy/WNTSPrivacy",
+    "pages/WNTSCreateOrderPage/WNTSCreateOrderPage",
+    "pages/WNTSConfirmPaymentPage/WNTSConfirmPaymentPage",
+    "pages/WNTSAddressManager/WNTSAddressManager",
+    "pages/WNTSCreatAddress/WNTSCreatAddress",
+    "pages/WNTSLoginPage/WNTSLoginPage",
+    "pages/WNTSSearch/WNTSSearch",
+    "pages/WNTSBandDetail/WNTSBandDetail",
+    "pages/WNTSShopPage/WNTSShopPage",
+    "pages/WNTSPaySuccessPage/WNTSPaySuccessPage",
+    "pages/WNTSSharePage/WNTSSharePage"
+  ],
+  "window": {
+    "backgroundColor": "#FFFFFF",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "navigationBarTitleText": "販賣東西",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#A8ABAF",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "black",
+    "selectedColor": "#000000",
+    "list": [
+      {
+        "pagePath": "pages/WNTSHomePage/WNTSHomePage",
+        "text": "首页",
+        "iconPath": "pages/WANTSImages/tab_home_normal.png",
+        "selectedIconPath": "pages/WANTSImages/tab_home_focus.png"
+      },
+      {
+        "pagePath": "pages/WNTSShoppingCartPage/WNTSShoppingCartPage",
+        "text": "购物车",
+        "iconPath": "pages/WANTSImages/tab_cart_normal.png",
+        "selectedIconPath": "pages/WANTSImages/tab_cart_focus.png"
+      },
+      {
+        "pagePath": "pages/WNTSUserInfo/WNTSUserInfo",
+        "text": "我的",
+        "iconPath": "pages/WANTSImages/tab_profile_normal.png",
+        "selectedIconPath": "pages/WANTSImages/tab_profile_focus.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  }
+}

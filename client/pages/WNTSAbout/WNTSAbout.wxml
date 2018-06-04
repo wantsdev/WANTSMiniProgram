@@ -1,0 +1,6 @@
+<!--pages/WNTSAbout/WNTSAbout.wxml-->
+<view class='parent-layout'>
+  <image class='logo' src="../WANTSImages/ic_logo.png"></image>
+  <view class='text'>总有新奇在贩卖</view>
+  <view class='copyright'>Copyright©2010-2020 呼朋科技（北京）有限公司</view>
+</view>

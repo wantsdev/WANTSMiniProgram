@@ -1,0 +1,62 @@
+<!--pages/WNTSShoppingCartPage/WNTSShoppingCartPage.wxml-->
+<!-- <contact-button>客服</contact-button> -->
+<!-- <view> -->
+<!-- <scroll-view scroll-y="true" style="height:{{winHeight}}px;" bindscrolltolower="loadMore"> -->
+<!-- <view class="main"> -->
+<view class="{{showNoData?'hide':'cart-box'}}" wx:for="{{seller_list}}" wx:key="{{index}}">
+  <!--商家-->
+  <view class="sellerView">
+    <!--选择店铺的所有商品按钮-->
+    <image wx:if="{{item.seller.selected}}" class="sellerSelect" src="{{seletedBtnImage}}" data-index="{{index}}" data-seller="{{item.seller}}" bindtap="selectSeller"></image>
+    <image wx:else class="sellerSelect" src="{{unSeletedBtnImage}}" data-index="{{index}}" data-seller="{{item.seller}}" bindtap="selectSeller"></image>
+    <image class="sellerIcon" src="{{sellerIconImage}}"></image>
+    <view class="sellerText">{{item.seller.name}}</view>
+    <image class="right_Icon" src="{{right_IconImage}}"></image>
+  </view>
+  <view class='horizontal-line'></view>
+  <!--商品列表  -->
+  <view class="cart-list" wx:for="{{item.products}}" wx:key="{{index}}">
+    <view>
+      <image wx:if="{{item.selected}}" class="cart-pro-select" src="{{seletedBtnImage}}" data-index="{{index}}" data-product="{{item}}" bindtap="selectList"></image>
+      <image wx:else class="cart-pro-select" src="{{unSeletedBtnImage}}" data-index="{{index}}" data-product="{{item}}" bindtap="selectList"></image>
+      <image class="cart-thumb" mode="aspectFill" src="{{item.product_img}}" bindtap='products_item' data-item='{{item}}'></image>
+      <text class="cart-pro-name" bindtap='products_item' data-item='{{item}}'>{{item.product_title}}</text>
+      <image class="cart-del" src="{{deleteImage}}" data-product='{{item}}' bindtap="shoppingCartDeleteSeller_List" data-index="{{index}}"></image>
+      <view class="cart-stock">
+        <text class="cart-pro-stock" bindtap='products_item' data-item='{{item}}'>{{item.stock_descp}}</text>
+      </view>
+      <text class="cart-pro-price" bindtap='products_item' data-item='{{item}}'> ￥{{item.price/100}}</text>
+      <view class="cart-count-box">
+        <text class="cart-count-down" data-product="{{item}}" bindtap="shoppingCartMinusProduct" data-index="{{index}}">-</text>
+        <text class="cart-count-num">{{item.num}}</text>
+        <text class="cart-count-add" data-product='{{item}}' bindtap="shoppingCartAddProduct" data-index="{{index}}">+</text>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="{{showNoData || seller_list.length == 0 ?'cart-no-data':'hide'}}">
+  <image class='no_cart_icon' src='../WANTSImages/empty_buy_cart.png'></image>
+  <view class='no_cart_layout' bindtap='go_shop'>
+    <view class='no_cart'>购物车空空如也，一起</view>
+    <view class='go_shop'>逛一逛</view>
+  </view>
+</view>
+<!-- </view> -->
+<include src="../../utils/WNTSRecommend.wxml" />
+<!-- </scroll-view> -->
+<!-- </view> -->
+<include src="../../utils/WNTSAlertView.wxml" />
+<!-- <view style='height:50rpx'></view> -->
+
+
+<view style="width:100%;height:116rpx;box-sizing:border-box;color:black;background:white;display:block;">
+</view>
+<view class="{{showNoData?'hide':'cart-footer'}}">
+  <image wx:if="{{selectAllStatus}}" class="total-select" src="{{seletedBtnImage}}" bindtap="shoppingCartSelectAll"></image>
+  <image wx:else class="total-select" src="{{unSeletedBtnImage}}" bindtap="shoppingCartSelectAll"></image>
+  <text class='allSelected_text'>全选</text>
+  <text class='heji'>合计：</text>
+  <text class='totalPrice_text'>￥{{totalPrice}}</text>
+  <text class='allSelected_text'>(包邮)</text>
+  <view class="JieSuan" bindtap="createOrderClick">结算({{selectedNewProductsNum}})</view>
+</view>

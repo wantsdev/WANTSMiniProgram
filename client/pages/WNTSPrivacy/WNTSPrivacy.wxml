@@ -1,0 +1,3 @@
+<!--pages/WNTSPrivacy/WNTSPrivacy.wxml-->
+<web-view class='webview' src="https://www.wantscart.com/app/privacy">
+</web-view>

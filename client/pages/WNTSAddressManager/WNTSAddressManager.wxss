@@ -1,0 +1,121 @@
+/* pages/WNTSAddressManager/WNTSAddressManager.wxss */
+@import '../../utils/WNTSAlertView.wxss';
+
+.page {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.address-layout {
+  width: 710rpx;
+  height: 222rpx;
+  border-left: 20rpx solid #ffffff;
+  border-right: 20rpx solid #ffffff;
+  border-top: 10rpx solid #ffffff;
+  border-bottom: 10rpx solid #ffffff;
+  background: #fcfcfc;
+  flex-direction: row;
+  display: flex;
+}
+
+.addressSelect {
+  margin-left: 30rpx;
+  width: 30rpx;
+  height: 30rpx;
+  margin-top: 96rpx;
+}
+
+.address-detail-layout {
+  width: 620rpx;
+  display: flex;
+  margin-left: 30rpx;
+  flex-direction: column;
+}
+
+.address-detail-user {
+  display: flex;
+  flex-direction: row;
+}
+
+.name {
+  font-size: 28rpx;
+  color: #222;
+  margin-top: 30rpx;
+}
+
+.phone {
+  font-size: 28rpx;
+  color: #222;
+  margin-left: 40rpx;
+  margin-top: 30rpx;
+}
+
+.default {
+  font-size: 22rpx;
+  color: white;
+  background: #333;
+  width: 54rpx;
+  margin-left: 20rpx;
+  height: 28rpx;
+  text-align: center;
+  line-height: 28rpx;
+  margin-top: 34rpx;
+}
+
+.hide {
+  display: none;
+}
+
+.address-edit {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.address-delete {
+  width: 30rpx;
+  height: 32rpx;
+}
+
+.address-edit-layout {
+  width: 120rpx;
+  height: 100rpx;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  right: 0rpx;
+}
+
+.address-detele-layout {
+  width: 120rpx;
+  height: 100rpx;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  right: 80rpx;
+}
+
+.address {
+  font-size: 24rpx;
+  color: #484649;
+  line-height: 34rpx;
+  margin-top: 20rpx;
+  margin-right: 96rpx;
+}
+
+.add-address {
+  width: 646rpx;
+  height: 80rpx;
+  text-align: center;
+  font-size: 32rpx;
+  justify-content: center;
+  line-height: 80rpx;
+  color: #fff;
+  background: #333;
+  border-left: 52rpx solid #ffffff;
+  border-right: 52rpx solid #ffffff;
+  border-top: 10rpx solid #ffffff;
+  border-bottom: 30rpx solid #ffffff;
+}

@@ -1,0 +1,17 @@
+/* pages/WNTSSharePage/WNTSSharePage.wxss */
+.backBox{
+  margin: 60rpx;
+  font-size: 25rpx;
+  line-height: 40rpx;
+  display: block;
+}
+.order-copy {
+  position: absolute;
+  font-size: 24rpx;
+  right: 60rpx;
+  color: #484649;
+   width: 68rpx; 
+  line-height: 44rpx;
+  text-align: center;
+  border: 1rpx solid #484649;
+}

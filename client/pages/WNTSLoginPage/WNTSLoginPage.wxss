@@ -1,0 +1,68 @@
+/* pages/WNTSLoginPage/WNTSLoginPage.wxss */
+
+.background {
+  background: white;
+}
+
+.backgroundImage {
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  width: 170rpx;
+  height: 170rpx;
+  display: flex;
+  flex-direction: column;
+  margin-top: 270rpx;
+  margin-left: 290rpx;
+  justify-content: center;
+  align-items: center;
+}
+
+.wxClose {
+  position: absolute;
+  right: 80rpx;
+  top: 80rpx;
+  width: 38rpx;
+  height: 38rpx;
+}
+
+.wxloginbtn {
+  display: flex;
+  position: absolute;
+  width: 664rpx;
+  height: 150rpx;
+  left: 0rpx;
+  bottom: 0rpx;
+}
+
+.wxLogin {
+  position:absolute;
+  color: white;
+  font-size: 32rpx;
+  line-height: 44rpx;
+  position: absolute;
+  text-align: center;
+  left: 313rpx;
+  bottom: 61rpx;
+}
+
+.hide {
+  display: none;
+}
+.background .tip_button {
+  position: relative;
+  border: 0rpx solid #ffffff;
+  display: inline-block;
+  width: 664rpx;
+  height: 150rpx;
+  margin-left: 43rpx;
+  margin-top:378rpx;
+  border-radius:0rpx;
+  background-color: #ffffff;
+}
+.background button::after{
+border: none;
+}

@@ -1,0 +1,44 @@
+<!--pages/WNTSExpress/WNTSExpress.wxml-->
+<view class='parent-layout' wx:if="{{expressData}}">
+  <view class='express-goods-layut'>
+    <view class='goods-imgNum-layout'>
+      <image class='goods-img' src='{{goodsImg}}' mode="aspectFit"></image>
+      <view class='goods-num'>共{{goodsNum}}件商品</view>
+    </view>
+    <view class="express-status-layout">
+      <view class='express-status'>{{expressData.status}}</view>
+      <view class='goods-name'>{{goodsTitle}}</view>
+      <view class='express-opreation-layout'>
+        <view class='express-company'>{{expressData.company}}:{{expressData.number}}</view>
+        <view class='express-copy-no' data-no='{{expressData.number}}' bindtap='copy'>复制</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='line'></view>
+
+  <view class='address-layout'>
+    <image class='icon' src='../WANTSImages/userinfo_address.png'></image>
+    <view class='address'>[收货地址]{{expressData.to}}</view>
+  </view>
+
+  <view class='express-layout' wx:for="{{expressList}}" wx:key="index">
+    <view class='time'>
+      <view class="{{(index == 0) ? 'a' : 'a1'}}">{{item.date_hour}}</view>
+      <view class="{{(index == 0 )? 'b' : 'b1'}}">{{item.date_time}}</view>
+    </view>
+    <!--线布局  -->
+    <view class='line-layout'>
+      <image class="{{(index == 0) ? 'ciclr':'ciclr-gray'}}" src="{{(index == 0) ? '../WANTSImages/logistics_yellow.png' : '../WANTSImages/logistics_gray.png'}}"></image>
+      <view class='line'></view>
+    </view>
+    <!--详情布局  -->
+    <view class='status-layout'>
+      <view class=" {{(index==0 ) ? 'status-orange': 'hide'}}">{{item.status}}</view>
+      <view class=" {{(index==0 ) ? 'detail-orange': 'detail-gray'}}">{{item.context}}</view>
+    </view>
+  </view>
+</view>
+<view class=" no_express " wx:else>
+  暂时还没有相关物流信息，请稍后再次查询。
+</view>

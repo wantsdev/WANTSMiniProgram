@@ -1,0 +1,10 @@
+<!--取消弹窗  -->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">{{dialog_title}}</view>
+  <view class="{{dialog_content?'modal-content' : 'hide'}}">{{dialog_content}} </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">{{dialog_cancel}}</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">{{dialog_ok}}</view>
+  </view>
+</view>

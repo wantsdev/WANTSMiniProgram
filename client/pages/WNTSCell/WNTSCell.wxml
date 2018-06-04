@@ -1,0 +1,30 @@
+<!--pages/WNTSCell/WNTSCell.wxml-->
+<view class="{{showNoData ? 'hide' :'data-parent'}}">
+  <view class='dataList' wx:for="{{dataList}}" wx:key="{{index}}">
+    <view bindtap='goods_item' data-item='{{item}}'>
+      <view class="dataPicContainer">
+        <image class="dataPic" style="background-image: {{'url('+((item.small_img)?(item.small_img):(item.imgs[0]))+')'}}; background-repeat:no-repeat; background-size:115% 85%; background-position: top center;" mode="" binderror="" bindload="">
+          <view class="{{item.showTips ? 'dataIcons' :'hide'}}" style="position: relative;">
+            <text class="text" style="position:absolute; "> {{item.tips}} </text>
+            <image class='tip-background' style=" width:116rpx; height: 40rpx;" mode="" src="{{item.tip_background}}" binderror="" bindload=""></image>
+            <image class='tip-icon' style=" width:20rpx; height: 20rpx; position: absolute; top: 10rpx; left: 10rpx;" mode="" src="{{item.tip_icon}}" binderror="" bindload=""></image>
+          </view>
+        </image>
+      </view>
+      <view class="dataPrice">
+        <text class="name"> {{ item.title }}</text>
+        <text class="changed"> {{'￥'+ item.price/100 }} </text>
+        <view class="change">
+          <view class="a"> </view>
+          <text class="b"> {{ '￥'+item.tag_price/100 }} </text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="{{showNoData ? 'no_coll_layout' :'hide'}}">
+  <image class='no_coll_icon' src='../WANTSImages/coll_nor.png'></image>
+  <view class='no_coll'>暂时没有相关收藏</view>
+  <view class='go_shop' bindtap='go_shop'>逛一逛</view>
+  <include src="../../utils/WNTSRecommend.wxml" />
+</view>

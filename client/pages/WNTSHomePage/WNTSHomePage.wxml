@@ -1,0 +1,26 @@
+<view>
+  <view class="SearchModule">
+    <image style="" class="wantsLogo" mode="" src="../WANTSImages/logo.png" binderror="" bindload=""></image>
+    <view class="searchBox" catchtap="search_touch">
+      <image class="searchIcon" style="" mode="" src="../WANTSImages/search.png" binderror="" bindload=""></image>
+      <text class="searchText"> {{ '潮流新品特卖' }} </text>
+    </view>
+    <button class='tip_button' open-type="{{hasLogin?'contact':''}}" session-from='weapp' bindtap='serviceMsg'>
+      <image style="" class="searchMsg" mode="" src="{{tipsSrc}}" binderror="" bindload=""></image>
+    </button>
+  </view>
+  <!--标题栏⬇️ -->
+  <view class="swiperContainer" wx:if="{{tabs.length>1}}">
+    <scroll-view scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap; position: {{position}};top: {{top+'rpx'}};z-index: {{zIndex}}" class="swiper-tab">
+      <view wx:for="{{tabs}}" wx:key="{{index}}" class="swiper-tab-list" data-current="{{index}}" style="background:white; width:{{(item.id==2||item.id==5)?(((750-24*1*2-24*2*4)/tabs.length+24*1)+'rpx'):(((750-24*1*2-24*2*4)/tabs.length+24*2)+'rpx')}};" bindtap="swichNav">
+        <text data-current="{{index}}" class="{{(currentIndex==index) ? 'on' : ''}}" style="width:{{(item.id==2||item.id==5)?(24*1+'rpx'):(24*2+'rpx')}};padding-top:2rpx;display: inline-block;" bindtap="swichNav"> {{item.name}}</text>
+      </view>
+    </scroll-view>
+  </view>
+  <!--标题栏⬆️-->
+  <!--blocks板块配置  -->
+  <block wx:for="{{blockArrNew}}" wx:key="{{index}}">
+    <include src="../../utils/HomePageItem.wxml" />
+  </block>
+  <!--blocks板块配置  -->
+</view>

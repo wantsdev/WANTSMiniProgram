@@ -1,0 +1,521 @@
+/* pages/WNTSHomePage/WNTSHomePage.wxss */
+@import '../utils/WNTSRecommend.wxss';
+@import '../utils/WNTSLoadIcon.wxss';
+
+.SearchModule {
+  display: flex;
+  background: white;
+  flex-direction: row;
+  width: 750rpx;
+  height: 88rpx;
+  align-items: center;
+}
+
+.SearchModule .tip_button {
+  background-color: white;
+  border: 0px;
+  display: inline-block;
+  height: 38rpx;
+  width: 75rpx;
+  margin-left: 4rpx;
+}
+
+.SearchModule .tip_button:after {
+  border: 0px;
+}
+
+.wantsLogo {
+  display: block;
+  height: 42rpx;
+  width: 44rpx;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+
+.searchBox {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  height: 52rpx;
+  width: 542rpx;
+  background: #eaebed;
+}
+
+.searchMsg {
+  display: block;
+  height: 38rpx;
+  width: 44rpx;
+}
+
+.searchText {
+  display: block;
+  height: 34rpx;
+  position: absolute;
+  left: 214rpx;
+  top: 10rpx;
+  line-height: 34rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 180rpx;
+  top: 14rpx;
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.popBand {
+  width: 750rpx;
+  height: 119rpx;
+  background: #fff;
+  line-height: 129rpx;
+  font-size: 26rpx;
+  color: #646464;
+  font-weight: bold;
+  font-family: "Microsoft YaHei";
+  position: relative;
+  flex-direction: row;
+}
+
+.popBandText {
+  position: absolute;
+  left: 31rpx;
+}
+
+.popBandStyle {
+  display: inline-block;
+  margin-top: 10rpx;
+  width: 190rpx;
+  height: 186rpx;
+}
+
+.scrollPop {
+  background: white;
+  height: 196rpx;
+  width: 750rpx;
+}
+
+.scrollBot {
+  width: 750rpx;
+  height: 20rpx;
+  background: #fcfcfc;
+}
+
+.fiveBlock {
+  width: 750rpx;
+  height: 548rpx;
+  display: flex;
+  border-bottom: 20rpx solid #fcfcfc;
+  border-top: 20rpx solid #fcfcfc;
+  flex-direction: row;
+  background: #fff;
+  justify-content: space-between;
+}
+
+.fiveBlock .left {
+  position: relative;
+  width: 374rpx;
+  height: 548rpx;
+  background: white;
+}
+
+.fiveBlock .right {
+  position: relative;
+  width: 374rpx;
+  height: 548rpx;
+  background: white;
+}
+
+.swiperContainer {
+  width: 750rpx;
+  height: 79rpx;
+  display: block;
+}
+
+.swiper-tab {
+  width: 750rpx;
+  height: 78rpx;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: space-between;
+  background: white;
+}
+
+.swiper-tab-list {
+  display: inline-block;
+  font-size: 26rpx;
+  color: #484649;
+  height: 78rpx;
+  line-height: 76rpx;
+}
+
+.swiper-tab-list .on {
+  display: inline-block;
+  height: 74rpx;
+  color: red;
+  border-bottom: 2rpx solid red;
+}
+
+.swiper-box {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+/*.swiper-box view{  
+    text-align: center;  
+}  */
+
+.subjectCover {
+ 
+   width: 100%; 
+  height: 376rpx;
+  margin-top: 20rpx;
+
+}
+
+.seeMoreSubject {
+  position: absolute;
+  margin-top: 300rpx;
+  margin-left:321rpx; 
+  font-size: 23rpx;
+  color: white;
+  width: 108rpx; 
+  /* background: lightgray;
+  opacity: 0.6; */
+  padding: 3px;
+  border-radius: 5rpx;
+  border-color: white;
+  border-width: 2rpx;
+  border-style: solid; 
+}
+
+/**轮播图**/
+
+.swiper-container-one {
+  position: relative;
+  height: 376rpx;
+}
+
+.swiper-container-one .swiper {
+  height: 376rpx;
+  background-color: gainsboro;
+}
+
+.swiper-container-one .swiper .img {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-container-one .dots {
+  position: absolute;
+  right: 290rpx;
+  bottom: 20rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.swiper-container-one .dots .dot {
+  margin: 0 10rpx;
+  width: 15rpx;
+  height: 15rpx;
+  background: #fff;
+  border-radius: 50%;
+  transition: all 0.6s;
+  font: 300 0rpx/0rpx "microsoft yahei";
+  text-align: center;
+}
+
+.swiper-container-one .dots .dot.active {
+  background: yellow;
+  color: yellow;
+}
+
+.swiper-container-one .dots.on {
+  position: absolute;
+  right: 290rpx;
+  bottom: 20rpx;
+  display: flex;
+  color: red;
+  justify-content: center;
+}
+
+.swiper-container-one .dots .dot {
+  margin: 0 10rpx;
+  width: 15rpx;
+  height: 15rpx;
+  background: #fff;
+  border-radius: 50%;
+  transition: all 0.6s;
+  font: 300 0rpx/0rpx "microsoft yahei";
+  text-align: center;
+}
+
+.swiper-container-one .dots .dot.active {
+  background: yellow;
+  color: yellow;
+}
+
+.swiper-container-one .dots.on {
+  position: absolute;
+  right: 290rpx;
+  bottom: 20rpx;
+  display: flex;
+  justify-content: center;
+}
+/* 轮播图布局二 */
+.swiper-container-two {
+  position: relative;
+  height: 376rpx;
+}
+
+.swiper-container-two .swiper {
+  height: 376rpx;
+  background-color: gainsboro;
+}
+
+.swiper-container-two .swiper .img {
+  width: 100%;
+  height: 100%;
+}
+.swiper-container-two .wx-swiper-dots.wx-swiper-dots-horizontal{
+     margin-left: 280rpx;
+}
+.swiper-container-two .dots {
+  position: absolute;
+  right: 290rpx;
+  bottom: 20rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.swiper-container-two .dots .dot {
+  margin: 0 10rpx;
+  width: 15rpx;
+  height: 15rpx;
+  background: #fff;
+  border-radius: 50%;
+  transition: all 0.6s;
+  font: 300 0rpx/0rpx "microsoft yahei";
+  text-align: center;
+}
+
+.swiper-container-two .dots .dot.active {
+  background: yellow;
+  color: yellow;
+}
+
+.swiper-container-two .dots.on {
+  position: absolute;
+  right: 290rpx;
+  bottom: 20rpx;
+  display: flex;
+  color: red;
+  justify-content: center;
+}
+
+.swiper-container-two .dots .dot {
+  margin: 0 10rpx;
+  width: 15rpx;
+  height: 15rpx;
+  background: #fff;
+  border-radius: 50%;
+  transition: all 0.6s;
+  font: 300 0rpx/0rpx "microsoft yahei";
+  text-align: center;
+}
+
+.swiper-container-two .dots .dot.active {
+  background: yellow;
+  color: yellow;
+}
+
+.swiper-container-two .dots.on {
+  position: absolute;
+  right: 290rpx;
+  bottom: 20rpx;
+  display: flex;
+  justify-content: center;
+}
+/*爆品补货|数量有限*/
+
+.detailBlockOne {
+  width: 690rpx;
+  /*  width: 750rpx;
+*//*  height: 32rpx;
+*//*display: block;*/
+  display: flex;
+  flex-direction: row;
+  margin-left: 30rpx;
+  margin-top: 50rpx;
+  /*background: yellow;*/
+  justify-content: space-between;
+}
+
+.detailBlockOne .left {
+  display: block;
+  height: 32rpx;
+  width: 576rpx;
+  /*  background: red;
+*/
+  overflow: hidden;
+}
+
+.detailBlockOne .right {
+  display: block;
+  height: 32rpx;
+  width: 114rpx;
+  /*  background: green;
+*/
+  position: relative;
+}
+
+.detailBlockOne .left .a {
+  display: block;
+  float: left;
+  height: 32rpx;
+  width: 464rpx;
+  font-size: 28rpx;
+  color: #484649;
+  line-height: 32rpx;
+}
+
+.detailBlockOne .left .middle {
+  display: block;
+  float: left;
+  margin-left: 20rpx;
+  height: 32rpx;
+  width: 2rpx;
+  background: #484649;
+}
+
+.detailBlockOne .left .b {
+  height:28rpx;
+  display: block;
+  float: left;
+  height: 28rpx;
+  font-size: 20rpx;
+  color: rgba(185,188,191,1);
+  line-height: 28rpx;
+}
+
+.detailBlockOne .right .a {
+  font-size: 24rpx;
+  color: #d1d1d1;
+  display: block;
+  position: absolute;
+  left: 0rpx;
+  height: 32rpx;
+  width: 114rpx;
+  line-height: 32rpx;
+}
+
+.columnStyle {
+  display: inline-block;
+  width: 150rpx;
+  height: 200rpx;
+  /*z-index: 5;*/
+}
+
+.scrollColumn {
+  margin-top: 30rpx;
+  /* background: blue; */
+  height: 284rpx;
+  width: 750rpx;
+padding-bottom: 30rpx;
+}
+
+.subjectDetail {
+  display: inline-block;
+  margin-left: 30rpx;
+}
+
+.subjectPriceTitle {
+  display: block;
+  width: 196rpx;
+  height: 76rpx;
+  margin-left: 4rpx;
+  position: relative;
+  overflow: hidden;
+}
+
+.subjectPriceTitle .name {
+  position: absolute;
+  display: block;
+  width: 186rpx;
+  height: 52rpx;
+  font-size: 20rpx;
+  line-height: 52rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.subjectPriceTitle .changed {
+  /*  position: absolute;
+  display: block;
+  width: 96rpx;
+  height: 24rpx;
+  background: blue;
+  bottom: 0rpx;
+  left: 0rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color:#eb5160;*//*q*/
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 96rpx;
+  height: 26rpx;
+  bottom: 0rpx;
+  left: -5rpx;
+}
+
+.subjectPriceTitle .changed .a {
+  display: inline-block;
+  width: 1%;
+  height: 24rpx;
+  background: #fff;
+}
+
+.subjectPriceTitle .changed .b {
+  display: inline;
+  height: 24rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #eb5160;
+}
+
+.subjectPriceTitle .change {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100rpx;
+  height: 24rpx;
+  bottom: 0rpx;
+  right: 0rpx;
+}
+
+.subjectPriceTitle .change .tagPrice {
+  display: inline-block;
+  width: 1%;
+  height: 24rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  background: #fff;
+}
+
+.subjectPriceTitle .change .b {
+  display: inline;
+  
+  margin-right: 19rpx;
+  height: 24rpx;
+  font-size: 20rpx;
+  line-height: 24rpx;
+  color: #a8abaf;
+}

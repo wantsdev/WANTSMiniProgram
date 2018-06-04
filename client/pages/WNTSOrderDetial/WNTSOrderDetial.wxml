@@ -1,0 +1,112 @@
+<!--pages/WNTSOrderDetial/WNTSOrderDetial.wxml-->
+<scroll-view class='view-layout'>
+  <!--物流信息  -->
+  <view class="{{expressData? 'express-layout':'hide'}}">
+    <image class='express-icon' src='../WANTSImages/express_icon.png'></image>
+    <view class='express-detail'>
+      <view class='text'>{{expressData.detail}}</view>
+      <view class='time'>{{expressData.created}}</view>
+    </view>
+
+
+  </view>
+  <!--收货地址  -->
+  <view class='address-layout'>
+    <image class='image-location' src='../WANTSImages/userinfo_address.png' />
+    <view class='address-layout2'>
+      <view class='reciver-info'>
+        <text class='address-name'>收货人:{{detailData.receiver_name}}</text>
+        <text class='address-phone'>{{detailData.receiver_phone}}</text>
+      </view>
+      <text class='address-detail'>{{detailData.receiver_address}}</text>
+    </view>
+  </view>
+
+  <!--商品列表  -->
+  <view class='goods-layout'>
+    <view class="seller-title ">
+      <image class="seller-iamge " src="../WANTSImages/seller.png "></image>
+      <text class="seller-title-name ">{{sellerName}}</text>
+      <text class="seller-status">{{detailData.status_descp}}</text>
+    </view>
+    <view wx:for="{{detailData.products}}" wx:key="{{index}}">
+      <view class="horizontal-line "></view>
+      <view class=" goods-list " bindtap='goods_item' data-item="{{item}}">
+        <image class="goods-img " src="{{item.product_img}}" mode="aspectFit"></image>
+        <view class="goods-desc ">
+          <view class="goods-title ">{{item.product_title}}</view>
+          <view class="goods-stock ">{{item.stock_descp}}</view>
+          <view class="goods-bottom ">
+            <view class="goods-price ">¥{{item.price/100}}</view>
+            <view class="goods-num ">x{{item.num}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="{{showOpreation ? 'opreation-change-layout' : 'hide'}}">
+        <view class="orderDetial-line "></view>
+        <view class="opreation-change-item">
+          <button class='opreation-change' open-type='contact' show-message-card='true' send-message-title='换货' send-message-path="{{'../WNTSSharePage/WNTSSharePage?orderId='+detailData.id+'&receiver_name='+detailData.receiver_name+'&receiver_phone='+detailData.receiver_phone+'&totalPrice='+detailData.sum/100+'&receiver_address='+detailData.receiver_address+'&title='+'换货'}}">
+            <text class="{{showChange? 'change':'hide' }}">换货</text>
+          </button>
+          <button class='opreation-back' open-type='contact' show-message-card='true' send-message-title='退货' send-message-path="{{'../WNTSSharePage/WNTSSharePage?orderId='+detailData.id+'&receiver_name='+detailData.receiver_name+'&receiver_phone='+detailData.receiver_phone+'&totalPrice='+detailData.sum/100+'&receiver_address='+detailData.receiver_address+'&title='+'退货'}}">
+            <text class='back'>退货</text>
+          </button>
+        </view>
+      </view>
+    </view>
+
+  </view>
+  <!--客服  -->
+  <view class='service-layout'>
+    <button open-type='contact' class='service-online-layout' show-message-card='true' send-message-title='订单信息' send-message-path="{{'../WNTSSharePage/WNTSSharePage?orderId='+detailData.id+'&receiver_name='+detailData.receiver_name+'&receiver_phone='+detailData.receiver_phone+'&totalPrice='+detailData.sum/100+'&receiver_address='+detailData.receiver_address+'&title='+'订单咨询'}}">
+      <image class='service-online-icon' src='../WANTSImages/service_online.png'></image>
+      <view class='service-online-text'>联系商家</view>
+    </button>
+    <view class='service-line'></view>
+    <view class='service-phone' bindtap='service_phone'>
+      <image class='service-phone-icon' src='../WANTSImages/service_phone.png'></image>
+      <view class='service-phone-text'>拨打电话</view>
+    </view>
+  </view>
+
+  <!--订单详情  -->
+  <view class='orderDetial-layout'>
+    <view class='order-no-layout'>
+      <view class='order-no'>单编号：{{detailData.id}}</view>
+      <view class='order-copy' bindtap='copy_no' data-no='{{detailData.id}}'>复制</view>
+    </view>
+    <view class='order-creat-time'>下单时间：{{detailData.created_time}}</view>
+    <view class="{{ detailData.pay_time? 'order-pay-time':'hide'}}">付款时间：{{detailData.pay_time}}</view>
+    <view class='orderDetial-line'></view>
+    <view class='order-pay-type'>支付方式：微信</view>
+    <view class='order-total-price'>商品金额：¥{{detailData.sum/100}}</view>
+    <text decode="{{true}}" class='order-delivery'>运费：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{detailData.express == 0 ? "包邮" :"¥"+detailData.express/100}}</text>
+    <view class='orderDetial-line'></view>
+    <view class='order-real-price'>实付总额：¥{{(detailData.sum/100) + (detailData.express/100)}}</view>
+
+
+    <view class='msg-layout' wx:if="{{detailData.message}}">
+      <view class='orderDetial-line'></view>
+      <view class='msg-layout-item'>
+        <image class='msg-icon' src='../WANTSImages/liuyan_msg.png'></image>
+        <view class='msg-text'>{{detailData.message}}</view>
+      </view>
+    </view>
+  </view>
+
+</scroll-view>
+<!--opreation  -->
+<view class="{{showBottom ? 'opreation-layout' : 'hide'}}">
+  <view class='line'></view>
+  <view class='opreation'>
+ <!-- <button class="{{bottomOpreationText1 ? 'contact_button' :'hide'}}" open-type='contact' send-message-title='提醒发货' show-message-card='true' send-message-path="{{'../WNTSSharePage/WNTSSharePage?orderId='+detailData.id+'&receiver_name='+detailData.receiver_name+'&receiver_phone='+detailData.receiver_phone+'&totalPrice='+detailData.sum/100+'&receiver_address='+detailData.receiver_address+'&title='+'提醒发货'}}">
+        <view class='opreation3'>提醒发货</view>
+      </button>  -->
+     <view class="{{bottomOpreationText1?'opreation_1':'hide'}} " bindtap='opreation_1' data-text='{{bottomOpreationText1}}'>{{bottomOpreationText1}}</view>
+    <view class="{{bottomOpreationText2?'opreation_2':'hide'}}" bindtap='opreation_2' data-text="{{bottomOpreationText2}}">{{bottomOpreationText2}}</view> 
+    <button class="{{bottomOpreationText3 ? 'contact_button' :'hide'}}" open-type='contact' show-message-card='true' send-message-title='提醒发货' send-message-path="{{'../WNTSSharePage/WNTSSharePage?orderId='+detailData.id+'&receiver_name='+detailData.receiver_name+'&receiver_phone='+detailData.receiver_phone+'&totalPrice='+detailData.sum/100+'&receiver_address='+detailData.receiver_address+'&title='+'提醒发货'}}">
+      <view class='opreation3'>提醒发货</view>
+    </button>
+  </view>
+</view>
+<include src="../../utils/WNTSAlertView.wxml" />

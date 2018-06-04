@@ -1,0 +1,239 @@
+/*猜你喜欢*/
+
+.guessYouLike {
+  display: flex;
+  flex-direction: row;
+  width: 690rpx;
+  height: 32rpx;
+  margin-left: 30rpx;
+  margin-top: 50rpx;
+  /*  background: yellow;
+*/
+  justify-content: space-between;
+}
+
+.guessYouLike .a {
+  display: inline-block;
+  font-size: 28rpx;
+  height: 32rpx;
+  color: #484649;
+  line-height: 32rpx;
+  /*  background: red;
+*/
+}
+
+.guessYouLikeDetailLayout {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 750rpx;
+  height: 100%;
+  margin-top: 30rpx;
+  /*  background: green;
+*/
+}
+
+.guessYouLike-items {
+  display: inline-block;
+  width: 250rpx;
+  height: 500rpx;
+  /*  background: yellow;
+*/
+}
+
+.guessLikeLayout {
+  width: 250rpx;
+  height: 360rpx;
+  display: block;
+  overflow: hidden;
+  /*background-color: red;*/
+}
+
+.guessYouLikePic {
+  width: 250rpx;
+  height: 400rpx;
+  display: block;
+  position: relative;
+  /*flex-direction: row;*/
+}
+
+.guessYouLikePrice {
+  width: 250rpx;
+  height: 110rpx;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  /*background:red;*/
+
+}
+
+.guessYouLikeTipLayout {
+  display: inline-block;
+  width: 116rpx;
+  height: 40rpx;
+  background: red;
+  margin-right: 134rpx;
+  position: absolute;
+  left: 0rpx;
+  top: 0rpx;
+}
+
+.guessYouLike-tips {
+  display: block;
+  height: 40rpx;
+  width: 83rpx;
+  left: 33rpx;
+  color: #fff;
+  font-size: 20rpx;
+  line-height: 40rpx;
+  text-align: center;
+}
+
+.guessYouLikePrice .name {
+  position: absolute;
+  display: block;
+  width: 226rpx;
+  height: 24rpx;
+  /*  background: yellow;
+*/
+  left: 16rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.guessYouLikePrice .changed {
+  position: absolute;
+  display: block;
+  width: 78rpx;
+  height: 32rpx;
+  /*  background: blue;
+*/
+  bottom: 24rpx;
+  left: 11rpx;
+  font-size: 32rpx;
+  line-height: 32rpx;
+  color: #eb5160;
+}
+
+.guessYouLikePrice .change {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 250rpx;
+  height: 24rpx;
+  /*  background: red;
+*/
+  bottom: 24rpx;
+  right: 14rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #a8abaf;
+}
+
+.guessYouLikePrice .change .a {
+  display: block;
+  width: 125rpx;
+  height: 24rpx;
+  /*  background: red;
+*/
+}
+
+.guessYouLikePrice .change .b {
+  display: block;
+  text-decoration: line-through;
+}
+
+.loading {
+  width: 750rpx;
+  font-size: 28rpx;
+  color: #666;
+  line-height: 40rpx;
+  
+  text-align: center;
+}
+.tip-background{
+  margin: 0px;
+  padding:0px;
+  display:block;
+  width:116rpx; 
+  height: 40rpx;
+}
+.noshow {
+  display: none;
+}
+
+
+.detailBlockOne {
+  width: 690rpx;
+  /*  width: 750rpx;
+*//*  height: 32rpx;
+*//*display: block;*/
+  display: flex;
+  flex-direction: row;
+  margin-left: 30rpx;
+  margin-top: 50rpx;
+  /*background: yellow;*/
+  justify-content: space-between;
+}
+
+.guessYouLike .left {
+  display: block;
+  height: 32rpx;
+  width: 576rpx;
+  /*  background: red;
+*/
+  overflow: hidden;
+}
+
+.guessYouLike .right {
+  display: block;
+  height: 32rpx;
+  width: 114rpx;
+  /*  background: green;
+*/
+  position: relative;
+}
+
+.guessYouLike .left .a {
+  display: block;
+  float: left;
+  height: 32rpx;
+  width: 464rpx;
+  font-size: 28rpx;
+  color: #484649;
+  line-height: 32rpx;
+}
+
+.guessYouLike .left .middle {
+  display: block;
+  float: left;
+  margin-left: 20rpx;
+  height: 32rpx;
+  width: 2rpx;
+  background: #484649;
+}
+
+.guessYouLike .left .b {
+  height:28rpx;
+  display: block;
+  float: left;
+  height: 28rpx;
+  font-size: 20rpx;
+  color: rgba(185,188,191,1);
+  line-height: 28rpx;
+}
+
+.guessYouLike .right .a {
+  font-size: 24rpx;
+  color: #d1d1d1;
+  display: block;
+  position: absolute;
+  left: 0rpx;
+  height: 32rpx;
+  width: 114rpx;
+  line-height: 32rpx;
+}

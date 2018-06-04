@@ -1,0 +1,193 @@
+/* pages/WNTSConfirmPaymentPage/WNTSConfirmPaymentPage.wxss */
+
+.order-layout {
+  width: 710rpx;
+  display: flex;
+  flex-direction: row;
+  height: 154rpx;
+  background: #fcfcfc;
+  border-top: 10rpx solid #fff;
+  border-left: 20rpx solid #fff;
+  border-right: 20rpx solid #fff;
+}
+
+.order-price {
+  font-size: 28rpx;
+  color: #f23030;
+  margin-left: 28rpx;
+}
+
+.address-layout {
+  width: 710rpx;
+  display: flex;
+  flex-direction: row;
+  height: 178rpx;
+  background: #fcfcfc;
+  border-top: 20rpx solid #fff;
+  border-left: 20rpx solid #fff;
+  border-right: 20rpx solid #fff;
+}
+
+.image-location {
+  width: 32rpx;
+  height: 41rpx;
+  align-items: center;
+  margin-left: 30rpx;
+  margin-top: 68rpx;
+}
+
+.address-layout2 {
+  width: 608rpx;
+  background: #fcfcfc;
+  margin-top: 30rpx;
+  margin-bottom: 10rpx;
+  flex-direction: column;
+}
+
+.reciver-info {
+  display: flex;
+  flex-direction: row;
+}
+
+.address-name1 {
+  font-size: 28rpx;
+  color: #484649;
+  margin-left: 30rpx;
+  text-align: center;
+}
+
+.address-name2 {
+  font-size: 28rpx;
+  color: #484649;
+  margin-left: 26rpx;
+  text-align: center;
+}
+
+.address-name3 {
+  font-size: 28rpx;
+  color: #484649;
+  margin-left: 16rpx;
+  text-align: center;
+  line-height: 40rpx;
+}
+
+.address-phone {
+  font-size: 28rpx;
+  color: #484649;
+  margin-left: 30rpx;
+}
+
+.address-detail {
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 24rpx;
+  color: #484649;
+  width: 528rpx;
+  height: 68rpx;
+  background: transparent;
+  padding-top: 20rpx;
+  margin-left: 30rpx;
+  margin-right: 90rpx;
+  line-height: 33rpx;
+  /* text-align: center; */
+}
+
+.address-righe {
+  width: 21rpx;
+  height: 33rpx;
+  position: absolute;
+  right: 50rpx;
+  margin-top: 14rpx;
+}
+
+.seller-line {
+  height: 1px;
+  background: #f5f5f5;
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}
+
+.address-layout_wechat {
+  width: 710rpx;
+  display: flex;
+  flex-direction: row;
+  height: 92rpx;
+  align-items: center;
+  background: #fcfcfc;
+  border-top: 20rpx solid #fff;
+  border-left: 20rpx solid #fff;
+  border-right: 20rpx solid #fff;
+}
+
+.image-location_wechat {
+  width: 42rpx;
+  height: 32rpx;
+  align-items: center;
+  margin-left: 30rpx;
+}
+
+.address-layout2_wechat {
+  width: 608rpx;
+  background: #fcfcfc;
+  align-items: center;
+  flex-direction: column;
+}
+
+.address-layout_tips {
+  width: 710rpx;
+  display: flex;
+  height: auto;
+  flex-direction: row;
+  background: #fcfcfc;
+  border-top: 20rpx solid #fff;
+  border-left: 20rpx solid #fff;
+  border-right: 20rpx solid #fff;
+}
+
+.image-location_tips {
+  width: 34rpx;
+  height: 34rpx;
+  background: #fcfcfc;
+  margin-left: 30rpx;
+  margin-top: 36rpx;
+}
+
+.address-layout2_tips {
+  width: 608rpx;
+  height: auto;
+  background: #fcfcfc;
+  margin-right: 50rpx;
+  margin-left: 24rpx;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+}
+
+.address-tips {
+  font-size: 28rpx;
+  color: #666;
+  line-height: 40rpx;
+  margin-right: 50rpx;
+}
+
+.bottom_views {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  
+  font-size: 32rpx;
+  
+  box-sizing: border-box;
+  background: #333;
+  color: white;
+}
+
+.wechatPay {
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+}

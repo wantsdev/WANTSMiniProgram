@@ -1,0 +1,21 @@
+<!--pages/WNTSAddressManager/WNTSAddressManager.wxml-->
+<view class='address-layout' wx:for="{{addressList}}" wx:key="{{index}}">
+  <image wx:if="{{item.selected}}" class="{{showSelected?'addressSelect':'hide'}}" src="../WANTSImages/check_selected.png" data-index="{{index}}" data-item="{{item}}" bindtap="addressSelect"></image>
+  <image wx:else class="{{showSelected?'addressSelect':'hide'}}" src="../WANTSImages/check_unselected.png" data-index="{{index}}" data-item="{{item}}" bindtap="addressSelect"></image>
+  <view class='address-detail-layout'>
+    <view class='address-detail-user'>
+      <view class='name'>{{item.name}}</view>
+      <view class='phone'>{{item.phone}}</view>
+      <view class="{{item.def ? 'default' : 'hide'}}">默认</view>
+      <view class='address-edit-layout' bindtap='address_edit' data-item="{{item}}">
+        <image class='address-edit' src='../WANTSImages/address_edit.png'></image>
+      </view>
+      <view class='address-detele-layout' bindtap='address_detel' data-item="{{item}}">
+        <image class='address-delete' src='../WANTSImages/delete.png'></image>
+      </view>
+    </view>
+    <view class='address'>{{item.province}}\t{{item.city}}\t{{item.region}}\t{{item.address}}</view>
+  </view>
+</view>
+<include src="../../utils/WNTSAlertView.wxml" />
+<view class='add-address' bindtap='add_address'>新增地址</view>

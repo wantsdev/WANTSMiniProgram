@@ -1,0 +1,175 @@
+/* pages/WNTSBandDetail/WNTSBandDetail.wxss */
+
+.band_detail {
+  width: 750rpx;
+  display: block;
+}
+
+.band_detail .band_detail_img {
+  width: 750rpx;
+  height: 375rpx;
+  display: block;
+}
+
+.band_detail .band_detail_txt {
+  width: 688rpx;
+  line-height: 52rpx;
+  display: block;
+  font-size: 26rpx;
+  color: #402e34;
+  margin-top: 13rpx;
+  padding-left: 31rpx;
+  padding-right: 31rpx;
+  margin-bottom: 13rpx;
+}
+
+.band_detail .guessYouLikeDetail {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 750rpx;
+  height: 100%;
+  /*margin-top: 80rpx;*/
+  /*  background: green;
+*/
+}
+
+.band_detail .guessYouLikeItems {
+  display: inline-block;
+  width: 250rpx;
+  height: 500rpx;
+  /*  background: yellow;
+*/
+}
+
+.band_detail .guessYouLikePicContainer {
+  width: 250rpx;
+  height: 360rpx;
+  display: block;
+  overflow: hidden;
+  /*background-color: red;*/
+}
+
+.band_detail .guessYouLikePic {
+/*  width: 250rpx;
+  height: 400rpx;
+  display: flex;
+  flex-direction: row;
+*/  width: 250rpx;
+  height: 400rpx;
+  display: block;
+  position: relative;
+
+}
+
+.band_detail .guessYouLikePrice {
+  /*width: 250rpx;
+  height: 110rpx;
+  display: block;
+  position: absolute;
+  overflow: hidden;*/
+  width: 250rpx;
+  height: 110rpx;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  
+}
+
+.band_detail .guessYouLikeIcons {
+  display: inline-block;
+  width: 116rpx;
+  height: 40rpx;
+  background: white;
+  margin-right: 134rpx;
+  position: absolute;
+  left: 0rpx;
+  top: 0rpx;
+
+  /*  margin-bottom: 360rpx;
+*/
+}
+
+.band_detail .guessYouLikeIcons .tips {
+  /*display: block;
+  color: #fff;
+  right: 8rpx;
+  font-size: 20rpx;
+  line-height: 40rpx;
+*/
+  display: block;
+  height: 40rpx;
+  width: 83rpx;
+  left: 33rpx;
+  color: #fff;
+  font-size: 20rpx;
+  line-height: 40rpx;
+  text-align: center;
+}
+
+.band_detail .guessYouLikePrice .name {
+  position: absolute;
+  display: block;
+  width: 213rpx;
+  height: 24rpx;
+  /*  background: yellow;
+*/
+  left: 20rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.band_detail .guessYouLikePrice .changed {
+  position: absolute;
+  display: block;
+  width: 78rpx;
+  height: 32rpx;
+  /*  background: blue;
+*/
+  bottom: 24rpx;
+  left: 20rpx;
+  font-size: 32rpx;
+  line-height: 32rpx;
+  color: #eb5160;
+}
+
+.band_detail .guessYouLikePrice .change {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 250rpx;
+  height: 24rpx;
+  /*  background: red;
+*/
+  bottom: 24rpx;
+  right: 22rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #a8abaf;
+}
+
+.band_detail .guessYouLikePrice .change .a {
+  display: block;
+  width: 125rpx;
+  height: 24rpx;
+  /*  background: red;
+*/
+}
+
+.band_detail .guessYouLikePrice .change .b {
+  display: block;
+  text-decoration: line-through;
+}
+
+.tip-background {
+  width: 116rpx;
+  height: 40rpx;
+}
+
+.noshow {
+  display: none;
+}

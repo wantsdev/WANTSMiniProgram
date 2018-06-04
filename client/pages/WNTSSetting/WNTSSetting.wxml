@@ -1,0 +1,17 @@
+<!--pages/WNTSSetting/WNTSSetting.wxml-->
+
+
+<view class="setting_about_parent" bindtap='about'>
+  <text class="setting_about">关于我们</text>
+  <image class="setting_about_right" style="" mode="" src="../WANTSImages/right.png" binderror="" bindload=""></image>
+</view>
+<!-- <view class ='line'></view> -->
+<!-- <view class="setting_privacy_parent" bindtap='privacy'>
+  <text class="setting_privacy">隐私协议</text>
+  <image class="setting_privacy_right" style="" mode="" src="../WANTSImages/right.png" binderror="" bindload=""></image>
+</view> -->
+<view class="setting_logout" bindtap="logout">
+  <text class="setting_logout_text">退出登录</text>
+</view>
+
+ <include src="../../utils/WNTSAlertView.wxml" />

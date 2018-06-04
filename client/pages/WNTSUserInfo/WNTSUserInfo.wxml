@@ -1,0 +1,100 @@
+<!--pages/WNTSUserInfo/WNTSUserInfo.wxml-->
+<!-- <scroll-view scroll-y="true" style="height:{{winHeight}}px;" bindscrolltolower="loadMore"> -->
+<view class="userinfo_parent">
+  <!--顶部设置，消息-->
+  <view class="userinfo_title">
+    <image style="" class="wantsSetting" mode="" src="../WANTSImages/setting.png" binderror="" bindload="" bindtap="opration_setting"></image>
+    <button class='msg_button' open-type='contact'>
+      <image style="" class="wantsMsg" mode="" src="../WANTSImages/tipsOff.png" binderror="" bindload=""></image>
+    </button>
+  </view>
+
+  <!--用户信息-->
+  <view class="userinfo_context" data-userInfo='{{userInfo}}' bindtap="go_personInfo">
+    <image class="{{userInfo.head ? 'user_head' : 'hide' }}" style="" mode="" src="{{userInfo.head}}" binderror="" bindload=""></image>
+    <image class="{{userInfo.head ? 'hide' : 'user_head' }}" style="" mode="" src='../WANTSImages/buy_user.png' binderror="" bindload=""></image>
+    <text class="user_name">{{userInfo.name}}</text>
+  </view>
+
+  <!--我的订单-->
+  <view class="userinfo_order" bindtap="go_order">
+    <text class="my_order">我的订单</text>
+    <text class="order_all">查看全部 ></text>
+  </view>
+  <view class='line'></view>
+  <!--订单状态-->
+  <view class="userinfo_order_status">
+    <view bindtap="go_pay">
+      <image class="order_no_pay" style="" mode="" src="../WANTSImages/order_no_pay.png" binderror="" bindload="">
+      </image>
+      <text class="order_no_pay_text">待付款</text>
+      <text class="{{payNum ==0 ? 'hide' : 'order_no_pay_num'}} ">{{payNum}}</text>
+    </view>
+    <view bindtap="go_send">
+      <image class="order_no_send" style="" mode="" src="../WANTSImages/order_no_send.png" binderror="" bindload="">
+      </image>
+      <text class="order_no_send_text">待发货</text>
+      <text class="{{sendNum ==0 ? 'hide' : 'order_no_send_num'}} ">{{sendNum}}</text>
+    </view>
+    <view bindtap="go_recived">
+      <image class="order_no_received" style="" mode="" src="../WANTSImages/order_no_received.png" binderror="" bindload="">
+      </image>
+      <text class="order_no_received_text">待收货</text>
+      <text class="{{reciviedNum ==0 ? 'hide' : 'order_no_received_num'}}">{{reciviedNum}}</text>
+    </view>
+  </view>
+</view>
+<!--工具栏-->
+<view class="user_grids_1">
+  <view class="util_address" bindtap="util_address">
+    <image class="address_icon" style="" mode="" src="../WANTSImages/userinfo_address.png" binderror="" bindload=""></image>
+    <text class="address_name">收货地址</text>
+  </view>
+  <view class="util_history" bindtap="util_history">
+    <image class="history_icon" style="" mode="" src="../WANTSImages/userinfo_history.png" binderror="" bindload=""></image>
+    <text class="history_name">浏览记录</text>
+  </view>
+  <view class="util_cell" bindtap="util_cell">
+    <image class="cell_icon" style="" mode="" src="../WANTSImages/userinfo_cell.png" binderror="" bindload=""></image>
+    <text class="cell_name">我的收藏</text>
+  </view>
+  <!-- <view class="hide" bindtap="util_enter">
+      <image class="enter_icon" style="" mode="" src="../WANTSImages/userinfo_enter.png" binderror="" bindload=""></image>
+      <text class="enter_name">商家入驻</text>
+    </view> -->
+  <!-- <button class='hide' open-type='contact' session-from='weapp'>
+      <image class="online_icon" style="" mode="" src="../WANTSImages/userinfo_online.png" binderror="" bindload=""></image>
+      <text class="online_name">在线客服</text>
+    </button> -->
+
+</view>
+<!--工具栏第二层-->
+<!-- <view class="hide">
+    <view class="util_phone" bindtap="util_phone">
+      <image class="phone_icon" style="" mode="" src="../WANTSImages/userinfo_phone.png" binderror="" bindload=""></image>
+      <text class="phone_name">热线客服</text>
+    </view>
+
+    <view class="hide" bindtap="util_about">
+      <image class="about_icon" style="" mode="" src="../WANTSImages/userinfo_about.png" binderror="" bindload=""></image>
+      <text class="about_name">关于我们</text>
+    </view>
+    <view class="hide" bindtap="util_feedback">
+      <image class="feedback_icon" style="" mode="" src="../WANTSImages/userinfo_about.png" binderror="" bindload=""></image>
+      <text class="feedback_name">意见反馈</text>
+    </view>
+  </view> -->
+<include src="../../utils/WNTSRecommend.wxml" />
+<!-- </scroll-view> -->
+<view style="width:100%;height:26rpx;box-sizing:border-box;color:black;background:white;display:block;">
+</view>
+<!--在线客服弹窗-->
+<view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">联系客服</view>
+  <view class="modal-content">400****951</view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">拨打</view>
+  </view>
+</view>

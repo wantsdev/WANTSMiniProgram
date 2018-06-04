@@ -1,0 +1,142 @@
+/* pages/WNTSHistory/WNTSHistory.wxss */
+@import '../../utils/WNTSRecommend.wxss';
+
+.data-parent {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 750rpx;
+  height: 100%;
+  margin-top: 30rpx;
+}
+
+.dataList {
+  display: inline-block;
+  width: 250rpx;
+  height: 500rpx;
+}
+
+.dataPicContainer {
+  width: 250rpx;
+  height: 360rpx;
+  display: block;
+  overflow: hidden;
+}
+
+.dataPic {
+  width: 250rpx;
+  height: 400rpx;
+  display: flex;
+  flex-direction: row;
+}
+
+.dataPrice {
+  width: 250rpx;
+  height: 110rpx;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.dataIcons {
+  display: inline-block;
+  width: 116rpx;
+  height: 40rpx;
+  background: white;
+  margin-right: 134rpx;
+}
+
+.dataIcons .text {
+  display: block;
+  right: 8rpx;
+  color: #fff;
+  font-size: 20rpx;
+  line-height: 40rpx;
+}
+
+.dataPrice .name {
+  position: absolute;
+  display: block;
+  width: 166rpx;
+  height: 24rpx;
+  left: 20rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dataPrice .changed {
+  position: absolute;
+  display: block;
+  width: 78rpx;
+  height: 32rpx;
+  bottom: 24rpx;
+  left: 20rpx;
+  font-size: 32rpx;
+  line-height: 32rpx;
+  color: #eb5160;
+}
+
+.dataPrice .change {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 250rpx;
+  height: 24rpx;
+  bottom: 24rpx;
+  right: 22rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #a8abaf;
+}
+
+.dataPrice .change .a {
+  display: block;
+  width: 125rpx;
+  height: 24rpx;
+  color: #eb5160;
+}
+
+.dataPrice .change .b {
+  display: block;
+  text-decoration: line-through;
+}
+
+.no_history_layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+}
+
+.no_history_icon {
+  width: 184rpx;
+  height: 184rpx;
+  text-align: center;
+  margin-top: 100rpx;
+}
+
+.no_history {
+  font-size: 32rpx;
+  color: #666;
+  margin-top: 48rpx;
+}
+
+.go_shop {
+  width: 146rpx;
+  height: 56rpx;
+  background: #333;
+  font-size: 32rpx;
+  color: white;
+  text-align: center;
+  line-height: 56rpx;
+  margin-top: 56rpx;
+}
+
+.hide {
+  display: none;
+}
+

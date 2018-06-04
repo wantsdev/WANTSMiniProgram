@@ -1,0 +1,10 @@
+  <view class='parent_layout'>
+    <image class='no_history_icon' src='../WANTSImages/success_pay.png'></image>
+    <view class='no_history'>交易成功</view>
+    <view class='seller_message'>商家将尽快为你发货</view>
+    <view class='opreation_layout'>
+      <view class='seeOrder' bindtap='go_order'>查看订单</view>
+      <view class='go_shop' bindtap='go_shop'>继续逛逛</view>
+    </view>
+  </view>
+  <include src="../../utils/WNTSRecommend.wxml" />

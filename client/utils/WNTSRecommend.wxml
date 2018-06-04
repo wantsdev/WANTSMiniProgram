@@ -1,0 +1,30 @@
+<!-- 猜你喜欢新版-->
+
+<view class="guessYouLike" style="margin-left:42rpx;margin-top:-45rpx;"> 
+  <view class="left" style="height:84rpx;margin-top:40rpx;">
+    <text class="a" style="height:56rpx;display: block;float: left;height: 56rpx;width: 464rpx;font-size: 40rpx;color: rgba(25,25,25,1);line-height: 56rpx;"> {{ '猜你喜欢' }} </text>
+    <text class="b"> {{ '你可能喜欢这些衣服' }} </text>
+  </view>
+</view>
+<view class="guessYouLikeDetailLayout" style="margin-top:110rpx;margin-left:44rpx;width:670rpx;">
+  <view class="guessYouLike-items" wx:for="{{guessLike}}" wx:key="{{index}}" style="width:210rpx;height:286rpx;margin-bottom:40rpx;margin-right:{{(index%3==1)?(20+'rpx'):(0+'rpx')}};margin-left:{{(index%3==1)?(20+'rpx'):(0+'rpx')}};">
+    <view bindtap='guessLike_item' data-item='{{item}}'>
+       <view class="guessLikeLayout" style='height:222rpx;width:211rpx;position:relative;'> 
+        <image style="width:210rpx;height:210rpx;display：block;position:absolute;top:0rpx;left:0rpx;" class="guessYouLikePic" mode="aspectFit" src="{{(item.small_img)?(item.small_img):(item.imgs[0])}}" binderror="" bindload="imageLoad">
+          <view class="{{item.showTips ? 'guessYouLikeTipLayout' :'noshow'}}">
+             <text class="guessYouLike-tips" style="position:absolute;"> {{item.tips}} </text> 
+            <image class='tip-background' mode="" src="{{item.tip_background}}" binderror="" bindload=""></image>
+            <image class='tip-icon' style="display:block; width:20rpx; height: 20rpx; position: absolute; top: 10rpx; left: 10rpx;" mode="" src="{{item.tip_icon}}" binderror="" bindload=""></image>
+          </view>
+        </image>
+        <image wx:if="{{backgroundColorStatus}}" style="width:210rpx;height:210rpx;display：block;position:absolute;top:0rpx;left:0rpx;z-index：22rpx;{{'background:'+randomBackgroundColor[index%8]}};" class="guessYouLikePic" mode="aspectFit" binderror="" bindload="imageLoad">
+        </image>
+        </view>  
+      <view class="guessYouLikePrice" style="height:64rpx;width:211rpx;">
+        <text class="name" style="width:194rpx;color:#B9BCBF;font-size:23rpx;"> {{ item.title }}</text>
+        <text class="changed" style="width:210rpx;height:25rpx;text-align:center;color:#484649;font-size:25rpx;line-height:25rpx;position:absolute;bottom:0rpx;left:0rpx;"> {{'￥'+ item.price/100 }} </text>
+      </view> 
+    </view>
+  </view>
+</view>
+<view class='loading' style="margin-bottom:20rpx;">{{loaddingContext}}</view>

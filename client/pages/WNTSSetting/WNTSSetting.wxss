@@ -1,0 +1,98 @@
+/* pages/WNTSSetting/WNTSSetting.wxss */
+@import '../../utils/WNTSAlertView.wxss';
+
+.setting_about_parent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 90rpx;
+  width: 710rpx;
+  background: #fcfcfc;
+  border-top: 10rpx solid #fff;
+  border-left: 20rpx solid #fff;
+  border-right: 20rpx solid #fff;
+}
+
+.setting_privacy_parent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 90rpx;
+  width: 710rpx;
+  background: #fcfcfc;
+  border-left: 20rpx solid #fff;
+  border-right: 20rpx solid #fff;
+}
+
+.setting_about {
+  display: block;
+  font-size: 28rpx;
+  color: #484649;
+  margin-left: 30rpx;
+}
+
+.line {
+  height: 2rpx;
+  width: 710rpx;
+  background: #f5f5f5;
+  border-left: 20rpx solid #fff;
+  border-right: 20rpx solid #fff;
+}
+
+.setting_privacy {
+  display: block;
+  font-size: 28rpx;
+  color: #484649;
+  margin-left: 30rpx;
+}
+
+.setting_about_right {
+  display: block;
+  position: fixed;
+  right: 50rpx;
+  width: 21rpx;
+  height: 33rpx;
+}
+
+.setting_privacy_right {
+  display: block;
+  position: fixed;
+  right: 50rpx;
+  width: 21rpx;
+  height: 33rpx;
+}
+
+.setting_logout {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 90rpx;
+  width: 710rpx;
+  background: #fcfcfc;
+  border-top: 10rpx solid #fff;
+  border-left: 20rpx solid #fff;
+  border-right: 20rpx solid #fff;
+  border-bottom: 20rpx solid #fff;
+}
+
+.setting_logout_text {
+  font-size: 28rpx;
+  width: 710rpx;
+  text-align: center;
+  color: #484649;
+}
+
+.btn-cancel {
+  width: 50%;
+  color: #484649;
+  text-align: center;
+  border-right: 2px solid #f5f5f5;
+  font-size: 32rpx;
+}
+
+.btn-confirm {
+  width: 50%;
+  color: #484649;
+  text-align: center;
+  font-size: 32rpx;
+}
