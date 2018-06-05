@@ -152,7 +152,6 @@
   font-size: 28rpx;
   color: #666;
   line-height: 40rpx;
-  
   text-align: center;
 }
 .tip-background{

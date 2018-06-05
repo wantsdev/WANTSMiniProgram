@@ -28,7 +28,7 @@
     </view>
   </view>
 
-<!-- <view class="containerTwoSection">
+ <view class="containerTwoSection" wx:if="{{shop_show}}">
   <text class="seller"> {{ '在售商家' }} </text>
   <view class="sellerBottom"></view>
   <view class="sellerDetailInfo">
@@ -45,7 +45,7 @@
       <text class="intoInfo"> {{ '进入店铺' }} </text>
     </view>
   </view>
-</view> -->
+</view> 
 <text class="imgTxtDetailTitle"> {{ '图文详情' }} </text>
 <view class="imgTxtDetail">
   <image class="imgTxtDetailItems" wx:for="{{subject_item_arr}}" wx:key="{{index}}" style="" mode="widthFix" src="{{item}}" binderror="" bindload="">

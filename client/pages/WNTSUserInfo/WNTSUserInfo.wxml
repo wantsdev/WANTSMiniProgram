@@ -3,9 +3,9 @@
 <view class="userinfo_parent">
   <!--顶部设置，消息-->
   <view class="userinfo_title">
-    <image style="" class="wantsSetting" mode="" src="../WANTSImages/setting.png" binderror="" bindload="" bindtap="opration_setting"></image>
+    <image style="" class="wantsSetting" mode="widthFix" src="../WANTSImages/setting.png" binderror="" bindload="" bindtap="opration_setting"></image>
     <button class='msg_button' open-type='contact'>
-      <image style="" class="wantsMsg" mode="" src="../WANTSImages/tipsOff.png" binderror="" bindload=""></image>
+      <image style="" class="wantsMsg" mode="widthFix" src="../WANTSImages/tipsOff.png" binderror="" bindload=""></image>
     </button>
   </view>
 

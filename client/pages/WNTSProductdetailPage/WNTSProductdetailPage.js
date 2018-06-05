@@ -72,6 +72,7 @@ Page({
     iPhoneX:false,
     randomBackgroundColor:[],
     sendmessagepath:'',
+    shop_show:false,
     shareProductDetail:null
   },
   configShoppingCarTotalNumber() {
@@ -119,6 +120,7 @@ Page({
     if (option) {
 
       var product_detail = option.subject;
+      console.log(option);
       that.setData({
         shareProductDetail: option.subject,
         sendmessagepath:'../WNTSProductdetailPage/WNTSProductdetailPage?subject='+ option.subject
@@ -136,6 +138,7 @@ Page({
       });
       that.setData({
         subject_product: product_detail,
+        shop_show: !product_detail.shop_show,
         subject_product_data: product_detail,
         currentTabAuto: 0,
         productDetail: [
@@ -149,7 +152,6 @@ Page({
           }
         ]
       });
-
     }
     // 获取设备信息
     wx.getSystemInfo({
@@ -181,12 +183,13 @@ Page({
       subject_product_all.product_title = data.title;
       subject_product_all.product_price = data.price;
       subject_product_all.product_tag_price = data.tag_price;
-      subject_product_all.product_tag_price = data.tag_price;
+      subject_product_all.shop_show = data.shop_show;
       that.setData({
         subject_product: subject_product_all,
         subject_product_data: data
       })
     });
+    console.log(that.data.subject_product);
     that.getGussLikeData();
   },
   loadMore() {
@@ -301,6 +304,7 @@ Page({
   purchase_off: function (e) {
     var that = this;
     var timer = null;
+    number = 1;
     selected_item_detail_out_arr = [];
     animation_one.bottom((that.data.iPhoneX)?(-1042+'rpx'):(-992 + 'rpx')).step();
     that.setData({
@@ -487,7 +491,7 @@ Page({
   add_shopping_car_buy_now: function (e) {
     var that = this;
     util.checkLoginStatus(function (isLogined) {
-      n = 0;
+      
       animation_one.bottom(0).step();
       that.setData({
         animationData: animation_one.export()
@@ -540,6 +544,7 @@ Page({
       for (var k = 0; k < stocks.length; k++) {
         var stocks_obj = {};
         var stock_arr = stocks[k].descp;
+        n = 0;
         for (var p = 0; p < selected_items_detail.length; p++) {
           var index = stock_arr.indexOf(selected_items_detail[p]);
           if (index >= 0) {
@@ -591,7 +596,13 @@ Page({
 
     if (number < that.data.current_stock) {
       number++;
-    }
+    }else{
+      wx.showToast({
+        title: '此商品仅剩余'+that.data.current_stock+'件',
+        duration: 1500,
+        icon: 'none',
+      });
+    };
     that.setData({
       num: number
     });
@@ -737,6 +748,7 @@ Page({
    */
   onUnload: function () {
     selected_item_detail_out_arr = [];
+    number = 1;
   },
 
   /**

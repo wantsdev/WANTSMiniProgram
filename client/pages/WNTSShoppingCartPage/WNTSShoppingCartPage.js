@@ -34,7 +34,8 @@ Page({
     page: 0,
     limit: 15,
     loadMoreBool: true,
-    randomBackgroundColor:[]
+    randomBackgroundColor:[],
+    guessLikeShow:false
   },
 
 
@@ -321,13 +322,19 @@ Page({
       var showNoData = false;
       if (!seller_list || (seller_list.length <= 0)) {
         showNoData = true;
-      }
+      };
       that.setData({
         showNoData: showNoData
-      })
+      });
       that.configCart(seller_list);
+      if(seller_list.length > 0){
+        that.getGussLikeData();
+        that.setData({
+          guessLikeShow: true
+        });
+      };
     });
-    that.getGussLikeData();
+    
   },
   //猜你喜欢获取数据
   getGussLikeData() {
