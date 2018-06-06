@@ -101,6 +101,7 @@ var login = function login(options) {
     var header = {};
 
     options.data = { code, user_info_json_string, device_id };
+    console.log(options.data);
     // header[constants.WX_HEADER_CODE] = code;
     // header[constants.WX_HEADER_ENCRYPTED_DATA] = encryptedData;
     // header[constants.WX_HEADER_IV] = iv;

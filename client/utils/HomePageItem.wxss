@@ -1,10 +1,21 @@
 /* pages/WNTSHomePage/WNTSHomePage.wxss */
 @import '../utils/WNTSRecommend.wxss';
 @import '../utils/WNTSLoadIcon.wxss';
-
+.navBarOne{
+  width:750rpx;
+  height:128rpx;
+  background: #fff034;
+  position:fixed;
+  z-index: 2;
+}
+.navBarTwo{
+  width:750rpx;
+  height:128rpx;
+  background: #ffffff;
+}
 .SearchModule {
   display: flex;
-  background: white;
+  background: #fff034;
   flex-direction: row;
   width: 750rpx;
   height: 88rpx;
@@ -12,7 +23,7 @@
 }
 
 .SearchModule .tip_button {
-  background-color: white;
+  background-color: #fff034;
   border: 0px;
   display: inline-block;
   height: 38rpx;
@@ -38,7 +49,7 @@
   overflow: hidden;
   height: 52rpx;
   width: 542rpx;
-  background: #eaebed;
+  background: #ffffff;
 }
 
 .searchMsg {

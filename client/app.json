@@ -25,11 +25,12 @@
     "pages/WNTSSharePage/WNTSSharePage"
   ],
   "window": {
-    "backgroundColor": "#FFFFFF",
+    "backgroundColor": "#ffffff",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#FFFFFF",
-    "navigationBarTitleText": "販賣東西",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "WANTS好物",
+    "navigationBarTextStyle": "black",
+    "navigationStyle":"default"
   },
   "tabBar": {
     "color": "#A8ABAF",
