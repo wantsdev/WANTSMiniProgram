@@ -1,2 +1,2 @@
 # WANTSMiniProgram
-wants好物小程序
+WANTS好物小程序
