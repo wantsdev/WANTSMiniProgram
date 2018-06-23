@@ -1,2 +1,2 @@
 # WANTSMiniProgram
-WANTS好物小程序
+販賣東西小程序
