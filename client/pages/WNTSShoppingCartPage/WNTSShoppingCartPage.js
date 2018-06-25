@@ -328,12 +328,12 @@ Page({
         showNoData: showNoData
       });
       that.configCart(seller_list);
-      if(seller_list.length > 0){
+      // if(seller_list.length > 0){
         that.getGussLikeData();
         that.setData({
           guessLikeShow: true
         });
-      };
+      // };
     });
     
   },
