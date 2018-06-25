@@ -393,6 +393,7 @@ var getShoppingCartSellerList = (callBack) => {
   });
 }
 var getProductsTotalThenSetTabBarBadgeWithSellerList = (sellerList) => {
+  if(sellerList ==null) return;
   //判断小程序的API，回调，参数，组件等是否在当前版本可用。https://developers.weixin.qq.com/miniprogram/dev/api/api-caniuse.html
   if (wx.canIUse('setTabBarBadge') == false) return;
   var shoppingcarProductsTotal = 0;
