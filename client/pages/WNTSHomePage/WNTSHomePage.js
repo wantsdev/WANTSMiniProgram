@@ -16,7 +16,6 @@ var l = 0;
 var blocksIdArr = [];
 var blockArrNew = [];
 var subjectArrayItems = [];
-//除了主题和商品详情页其余页面的转发都是分享路径都是主页
 /*
 跳转种类
 */
@@ -55,7 +54,7 @@ var getSubjectDataRequest1 = (arr, callback) => {
     array = [];
   };
   i++;
-  if (i > arr.length || i > 45) {
+  if (i > arr.length || i > 50) {
     callback(array);
     return;
   };
@@ -159,7 +158,6 @@ var get_list = function (that) {
     //请求整个页面的数据（轮播图、热门品牌、layout、主题）
     util.requestGet(currentTabUrl, function (data) {
       var data = data;
-      console.log(data);
       var blocksArr = data.blocks;
       var blockIdArr = [];
       for (var a = 0; a < blocksArr.length; a++) {
@@ -243,6 +241,7 @@ var get_list = function (that) {
                     newProductEntity.imgs = "";
                     newProductEntity.small_img = "";
                     newProductEntity.title = "";
+                    newProductEntity.shop_show = "";
                     itemData.push(newProductEntity);
                   }
                   subjectArrayItems[m].itemData = itemData;
@@ -258,6 +257,7 @@ var get_list = function (that) {
                     newProductEntity.imgs = "";
                     newProductEntity.small_img = "";
                     newProductEntity.title = "";
+                    newProductEntity.shop_show = "";
                     itemData.push(newProductEntity);
                   }
                   subjectArrayItem[m].itemData = itemData;
@@ -284,6 +284,7 @@ var get_list = function (that) {
                     newProductEntity.tag_price = productEntity.tag_price;
                     newProductEntity.title = productEntity.title;
                     newProductEntity.id = productEntity.id;
+                    newProductEntity.shop_show = that.data.checkOutMiniProgramDataBool;
                     itemData.push(newProductEntity);
                   }
                   subjectBlock[i].itemData = itemData;
@@ -325,6 +326,7 @@ var get_list = function (that) {
                   newProductEntity.small_img = "";
                   newProductEntity.tag_price = "";
                   newProductEntity.title = "";
+                  newProductEntity.shop_show = "";
                   itemData.push(newProductEntity);
                 }
                 subjectArray[m].itemData = itemData;
@@ -350,6 +352,7 @@ var get_list = function (that) {
                     newProductEntity.tag_price = productEntity.tag_price;
                     newProductEntity.title = productEntity.title;
                     newProductEntity.id = productEntity.id;
+                    newProductEntity.shop_show = that.data.checkOutMiniProgramDataBool;
                     itemData.push(newProductEntity);
                   }
                   SubjectBlock_double[i].itemData = itemData;
@@ -373,6 +376,7 @@ var get_list = function (that) {
                   newProductEntity.small_img = "";
                   newProductEntity.tag_price = "";
                   newProductEntity.title = "";
+                  newProductEntity.shop_show = "";
                   itemData.push(newProductEntity);
                 }
                 subjectArray[m].itemData = itemData;
@@ -399,6 +403,7 @@ var get_list = function (that) {
                     newProductEntity.tag_price = productEntity.tag_price;
                     newProductEntity.title = productEntity.title;
                     newProductEntity.id = productEntity.id;
+                    newProductEntity.shop_show = that.data.checkOutMiniProgramDataBool;
                     itemData.push(newProductEntity);
                   }
                   SubjectBlock_three_left[i].itemData = itemData;
@@ -424,6 +429,7 @@ var get_list = function (that) {
                   //newProductEntity.price = "";
                   newProductEntity.tag_price = "";
                   newProductEntity.title = "";
+                  newProductEntity.shop_show = "";
                   itemData.push(newProductEntity);
                 }
                 subjectArray[m].itemData = itemData;
@@ -449,6 +455,7 @@ var get_list = function (that) {
                     newProductEntity.tag_price = productEntity.tag_price;
                     newProductEntity.title = productEntity.title;
                     newProductEntity.id = productEntity.id;
+                    newProductEntity.shop_show = that.data.checkOutMiniProgramDataBool;
                     itemData.push(newProductEntity);
                   }
                   SubjectBlock_three_top[i].itemData = itemData;
@@ -641,7 +648,7 @@ Page({
     subject_product_all.product_title = util.stringWithAndCode(subject_product.title);
     subject_product_all.product_price = subject_product.price;
     subject_product_all.product_tag_price = subject_product.tag_price;
-    subject_product_all.product_tag_price = subject_product.tag_price;
+    subject_product_all.shop_show = subject_product.shop_show;
     var json_string = JSON.stringify(subject_product_all);
     this.navigateToProductDetail(json_string);
   },

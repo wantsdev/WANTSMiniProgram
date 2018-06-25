@@ -222,6 +222,7 @@ Page({
       transformOrigin: "50% 50%",
       timingFunction: 'ease',
     })
+    console.log(options);
     this.animation = animation;
     // 默认联动显示北京
     var id = address.provinces[0].id
@@ -236,6 +237,7 @@ Page({
         title: '编辑地址',
       })
       var addressData = JSON.parse(options.addressData);
+      console.log(addressData);
       var that = this;
       that.setData({
         addressInfo: addressData,

@@ -73,7 +73,9 @@ Page({
   },
   // 编辑地址
   address_edit(e) {
+    console.log(e);
     var addressData = JSON.stringify(e.currentTarget.dataset.item);
+    console.log(addressData);
     wx.navigateTo({
       url: '../WNTSCreatAddress/WNTSCreatAddress?addressData=' + addressData,
     })

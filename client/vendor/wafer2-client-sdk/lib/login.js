@@ -101,8 +101,13 @@ var login = function login(options) {
     // var iv = wxLoginResult.iv;
     var header = {};
 
+<<<<<<< HEAD
     options.data = { code, user_info_json_string, device_id, app_id};
 
+=======
+    options.data = { code, user_info_json_string, device_id };
+    console.log(options.data);
+>>>>>>> refs/remotes/origin/master
     // header[constants.WX_HEADER_CODE] = code;
     // header[constants.WX_HEADER_ENCRYPTED_DATA] = encryptedData;
     // header[constants.WX_HEADER_IV] = iv;

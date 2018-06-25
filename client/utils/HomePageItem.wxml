@@ -1,5 +1,5 @@
 <!--pages/WNTSHomePage/WNTSHomePage.wxml-->
-<view wx:if="{{true}}">
+<view wx:if="{{false}}">
   <!--轮播图布局三⬇️ -->
   <view class="swiper-container-two" wx:if="{{(blockArrNew[index]=='BannerBlock')?(true):(false)}}">
     <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
@@ -216,7 +216,7 @@
 <!-- WNTSGOODSMiniProgram -->
 
 
-<view wx:if="{{false}}" class="WNTSGOODSMiniProgram">
+<view wx:if="{{true}}" class="WNTSGOODSMiniProgram">
   <!--轮播图布局一⬇️ -->
   <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock')?(true):(false)}}">
     <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
@@ -296,7 +296,7 @@
       </view>
     </view>
   </view>
-  <view class='loading' wx:if="{{(blockArrNew[index]=='RecommendBlock')?(true):(false)}}">{{loaddingContext}}</view>
+  <view class='loading' style="width: 750rpx;height:40rpx;display:block; font-size: 28rpx; color: #666; line-height: 40rpx; text-align: center; margin-bottom:40rpx;" wx:if="{{(blockArrNew[index]=='RecommendBlock')?(true):(false)}}">{{loaddingContext}}</view>
 </view>
 <!--热门品牌⬇️ -->
 <view wx:if="{{(blockArrNew[index]=='HotBrandBlock')?(true):(false)}}">
@@ -311,10 +311,9 @@
     </block>
   </scroll-view>
 </view>
-<view wx:if="{{(blockArrNew[index]=='HotBrandBlock')?(true):(false)}}" class="scrollBot"></view>
 <!--热门品牌⬆️--->
 <!--五大块layout⬇️-->
-<view class="fiveBlock" wx:if="{{(blockArrNew[index]=='GoodsBlock')?(true):(false)}}">
+<view class="fiveBlock" style="margin-top:40rpx;" wx:if="{{(blockArrNew[index]=='GoodsBlock')?(true):(false)}}">
   <view class="left">
     <image style="position:absolute;top: 0rpx; left:0rpx; width: 374rpx; height: 364rpx; background-image: {{'url('+GoodsBlock[0].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{GoodsBlock[0]}}" catchtap="popBandClick"
       mode="" src="" binderror="" bindload=""></image>

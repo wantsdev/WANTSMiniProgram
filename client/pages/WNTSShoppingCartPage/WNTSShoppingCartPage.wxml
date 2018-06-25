@@ -3,7 +3,7 @@
 <!-- <view> -->
 <!-- <scroll-view scroll-y="true" style="height:{{winHeight}}px;" bindscrolltolower="loadMore"> -->
 <!-- <view class="main"> -->
-<view class="{{showNoData?'hide':'cart-box'}}" wx:for="{{seller_list}}" wx:key="{{index}}">
+<view class="{{showNoData?'hide':'cart-box'}}" wx:for="{{seller_list}}" wx:key="{{index}}" style="">
   <!--商家-->
   <view class="sellerView">
     <!--选择店铺的所有商品按钮-->
@@ -42,7 +42,9 @@
   </view>
 </view>
 <!-- </view> -->
+<view wx:if="{{guessLikeShow}}">
 <include src="../../utils/WNTSRecommend.wxml" />
+</view>
 <!-- </scroll-view> -->
 <!-- </view> -->
 <include src="../../utils/WNTSAlertView.wxml" />
