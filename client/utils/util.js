@@ -1,6 +1,7 @@
 
 var version = "1.0"
 var name = "FanMaiDongXi-MiniProgram"
+var App_id = "ok6kktqewulxr73roo"
 var randomColorArr = ['2F4C52','414D65','A3A093','8F5B56','DDE8DE','F2E6F7','D0F6F9','F4F6B6','EFADCD']
 var randomNum = Math.floor(Math.random() * 8)
 const formatTime = date => {
@@ -79,6 +80,7 @@ var requestGet = (url, callback, failCallBack) => {
     header: {
       'content-Type': 'application/json',
       'token': WNTSToken.get(),
+      'app_id': App_id,
     },
 
     success: function (res) {
@@ -97,13 +99,13 @@ var requestGet = (url, callback, failCallBack) => {
 var requestPost = (paraterm, url, callback, failCallBack) => {
   var index = url.indexOf("?");
   var new_url = index >= 0 ? (url + "&ua=" + ua()) : (url + "?ua=" + ua());
-
   wx.request({
     url: new_url,
     data: paraterm,
     method: "POST",
     header: {
       'content-Type': "application/x-www-form-urlencoded",
+      'app_id': App_id,
       'token': WNTSToken.get()
     },
     success: function (res) {
@@ -141,7 +143,9 @@ var requestPut = (url, callback) => {
     method: 'PUT',
     header: {
       'content-Type': 'application/json',
+      'app_id': App_id,
       'token': WNTSToken.get()
+
     },
     success: function (res) {
       if (res.statusCode == 200) {
@@ -175,6 +179,7 @@ var requestDelete = (url, callback) => {
     method: 'DELETE',
     header: {
       'content-Type': 'application/json',
+      'app_id': App_id,
       'token': WNTSToken.get()
     },
     success: function (res) {
@@ -205,6 +210,7 @@ var requestMethodWithParaterm = (method, paraterm, url, callback) => {
     method: method ? method : 'GET',
     header: {
       'content-Type': conten_type,
+      'app_id': App_id,
       'token': WNTSToken.get()
     },
     success: function (res) {
@@ -233,6 +239,7 @@ var pay = (orderId, success, fail, cancel) => {
     method: "POST",
     header: {
       'content-Type': "application/x-www-form-urlencoded",
+      'app_id': App_id,
       'token': WNTSToken.get()
     },
     success: function (res) {
@@ -711,6 +718,7 @@ module.exports = {
   sortArr: sortArr,
   ua: ua,
   name: name,
+  App_id: App_id,
   version: version,
   pay: pay,
   postErrorLog,
@@ -735,5 +743,7 @@ module.exports = {
   checkLoginStatus,
   getGessLikeDataTool,
   getShoppingCartSellerList,
-  stringWithAndCode
+  stringWithAndCode,
+  
+
 };

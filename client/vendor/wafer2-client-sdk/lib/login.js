@@ -96,11 +96,13 @@ var login = function login(options) {
     var code = wxLoginResult.code;
     var user_info_json_string = wxLoginResult.user_info_json_string;
     var device_id = wxLoginResult.device_id;
+    var app_id = 'ok6kktqewulxr73roo';
     // var encryptedData = wxLoginResult.encryptedData;
     // var iv = wxLoginResult.iv;
     var header = {};
 
-    options.data = { code, user_info_json_string, device_id };
+    options.data = { code, user_info_json_string, device_id, app_id};
+
     // header[constants.WX_HEADER_CODE] = code;
     // header[constants.WX_HEADER_ENCRYPTED_DATA] = encryptedData;
     // header[constants.WX_HEADER_IV] = iv;

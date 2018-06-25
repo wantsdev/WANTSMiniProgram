@@ -1,4 +1,4 @@
-var mainUrl = "https://api.wantscart.com";
+var mainUrl = "http://test.api.wantscart.com";
 var tabsUrl = mainUrl + "/app/layout/tabs";//获取tabs
 var tabIdUrl = mainUrl + '/app/layout/tab/';//获取某个tab数据
 var shoppingCartApi = mainUrl + "/cart2";//获取购物车商品列表
