@@ -242,6 +242,7 @@ Page({
   getShoppingCartTotalPrice() {
     var that = this;
     let seller_list = this.data.seller_list;
+    util.getProductsTotalThenSetTabBarBadgeWithSellerList(seller_list);
     var selectedProducts = [];
     var selectedNewProducts = [];
     var selectedNewProductsNum = 0;

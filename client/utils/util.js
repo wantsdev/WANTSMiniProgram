@@ -386,6 +386,27 @@ var getShoppingCartSellerList = (callBack) => {
     callBack(res);
   });
 }
+var getShoppingCartSellerList = (callBack) => {
+  if (!callBack) return;
+  requestMethodWithParaterm("GET", null, URL_ROOT + "/cart2", function (res) {
+    callBack(res);
+  });
+}
+var getProductsTotalThenSetTabBarBadgeWithSellerList = (sellerList) => {
+  //判断小程序的API，回调，参数，组件等是否在当前版本可用。https://developers.weixin.qq.com/miniprogram/dev/api/api-caniuse.html
+  if (wx.canIUse('setTabBarBadge') == false) return;
+  var shoppingcarProductsTotal = 0;
+  for (var i = 0; i < sellerList.length; i++) {
+    var products = sellerList[i].products;
+    for (let j = 0; j < products.length; j++) {
+      shoppingcarProductsTotal += products[j].num;
+    }
+  }
+  wx.setTabBarBadge({
+    index: 1,
+    text: String(shoppingcarProductsTotal)
+  })
+}
 var stringWithAndCode=(strings)=>{
   return strings.split('&').join(' ');
 }
@@ -744,6 +765,7 @@ module.exports = {
   getGessLikeDataTool,
   getShoppingCartSellerList,
   stringWithAndCode,
+  getProductsTotalThenSetTabBarBadgeWithSellerList
   
 
 };
