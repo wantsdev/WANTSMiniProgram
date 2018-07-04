@@ -232,7 +232,7 @@ var requestMethodWithParaterm = (method, paraterm, url, callback) => {
 var pay = (orderId, success, fail, cancel) => {
   var paraterm = {};
   paraterm.channel = "wx_lite";
-  var url = URL_ROOT + "/order/" + orderId + "/charge" + "?ua=" + ua();
+  var url = URL_ROOT + "/order/" + orderId + "/charge" + "?ua=" + ua() + "?app_id"+App_id;
   wx.request({
     url: url,
     data: paraterm,
