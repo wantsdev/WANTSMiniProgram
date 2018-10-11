@@ -2,7 +2,7 @@
 <view class="navBarTwo"></view> -->
 <view>
   <view class="SearchModule">
-    <image style="" class="wantsLogo" mode="" src="../WANTSImages/Page 1 Copy@3x.png" binderror="" bindload=""></image>
+    <image style="" class="wantsLogo" mode="" src="../WANTSImages/layout_logo@3x.png" binderror="" bindload=""></image>
     <view class="searchBox" catchtap="search_touch">
       <image class="searchIcon" style="" mode="" src="../WANTSImages/search.png" binderror="" bindload=""></image>
       <text class="searchText"> {{ '潮流新品特卖' }} </text>

@@ -59,6 +59,6 @@
   <text class='allSelected_text'>全选</text>
   <text class='heji'>合计：</text>
   <text class='totalPrice_text'>￥{{totalPrice}}</text>
-  <text class='allSelected_text'>(包邮)</text>
+  <text class='allSelected_text'>{{(expressPrice!==0)?('(含运费￥'+expressPrice+')'):('（ 包邮 ）')}}</text>
   <view class="JieSuan" bindtap="createOrderClick">结算({{selectedNewProductsNum}})</view>
 </view>

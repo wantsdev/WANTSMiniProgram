@@ -19,6 +19,7 @@ Page({
     deleteImage: "../WANTSImages/delete.png",
     hasList: false,          // 列表是否有数据
     totalPrice: 0,           // 总价，初始为0
+    expressPrice: 0,           // 邮价，初始为0
     selectAllStatus: true,    // 全选状态，默认全选
     obj: {
       name: "hello"
@@ -271,10 +272,20 @@ Page({
     });
     //获取价格接口
     util.requestMethodWithParaterm("GET", null, WNTSApi.shoppingCarPricetApi + "?order_product_id=" + selectedProducts, function (res) {
+      console.log(res);
       var price = res.data.pay / 100;
+      var express = res.data.express / 100;
       that.setData({
-        totalPrice: price
+        totalPrice: price,
+        expressPrice: express
+
       });
+      if(selectedProducts.length==0){
+        that.setData({
+          totalPrice: 0,
+          expressPrice: 0
+        });
+      }
     });
 
   },

@@ -88,7 +88,7 @@
     <view class="seller-line "></view>
     <view class='order-totalpay-layout'>
       <view class='order-totalpay'>运费：</view>
-      <view class='content'>包邮</view>
+      <view  wx:if="{{express!==undfined}}" class='content'>{{(express!==0)?('¥'+express):('包邮')}}</view>
     </view>
     <view class="seller-line "></view>
     <view class='order-totalpay-layout'>

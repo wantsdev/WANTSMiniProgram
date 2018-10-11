@@ -93,8 +93,10 @@ var that = this;
 
     util.requestMethodWithParaterm("GET", null, url, function (res) {
       var price = res.data.pay / 100;
+      var express = res.data.express / 100;
       that.setData({
-        totalPrice: price
+        totalPrice: price,
+        express: express,
       });
     });
 

@@ -170,6 +170,7 @@ Page({
       }
     })
     util.requestGet(util.URL_ROOT + '/product/' + subject_product_id, function (data) {
+      console.log(data);
       var item_arr = [];
       data.detail.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
         item_arr.push(capture);

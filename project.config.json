@@ -1,8 +1,8 @@
 {
-	"client": "./client",
-	"svr": "./server",
-	"miniprogramRoot": "./client",
-	"qcloudRoot": "./server",
+	"client": "client/",
+	"svr": "server/",
+	"miniprogramRoot": "client/",
+	"qcloudRoot": "server/",
 	"setting": {
 		"urlCheck": false,
 		"es6": true,
@@ -11,7 +11,7 @@
 		"newFeature": true
 	},
 	"libVersion": "2.0.9",
-	"appid": "wx74a29a2f9afbb4b0",
-	"projectname": "FMDX",
+	"appid": "wx656b10a76cfd71b2",
+	"projectname": "%E8%B4%A9%E5%8D%96%E4%B8%9C%E8%A5%BF",
 	"condition": {}
 }
