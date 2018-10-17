@@ -1,0 +1,2 @@
+<!--pages/WNTSDirectPage/WNTSDirectPage.wxml-->
+<web-view src="http://a.app.qq.com/o/simple.jsp?pkgname=com.wants"></web-view>

@@ -18,30 +18,26 @@ Page({
     fromTo: "",
     showModal: false,
     json_str: "",
-
-    loadingHidden:true,
-    iPhoneX:false
-
-
-
+    loadingHidden: true,
+    iPhoneX: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-var that = this;
-     // 获取设备信息
-      wx.getSystemInfo({
+    var that = this;
+    // 获取设备信息
+    wx.getSystemInfo({
 
-        success: function (res) {
-          if (res.screenHeight == 812) {
-            that.setData({
-              iPhoneX:true
-            });
-          }
+      success: function (res) {
+        if (res.screenHeight == 812) {
+          that.setData({
+            iPhoneX: true
+          });
         }
-      })
+      }
+    })
 
     var selectedProducts = JSON.parse(options.selectedProducts);
     this.setData({
@@ -69,12 +65,10 @@ var that = this;
           currentAddress: data[0]
         });
       }
-
       // that.setData({
       //   address_list: data,
       // })
     });
-
   },
   getShoppingCartTotalPrice() {
     var that = this;
@@ -92,18 +86,26 @@ var that = this;
     }
 
     util.requestMethodWithParaterm("GET", null, url, function (res) {
+      var addPriceArr = [];
+      var sum = 0;
       var price = res.data.pay / 100;
+      var express = res.data.express / 100;
+      for (var p = 0; p < selectedProducts.length; p++) {
+        addPriceArr.push(selectedProducts[p].num * selectedProducts[p].price / 100);
+      };
+      for (var s = 0; s < selectedProducts.length; s++) {
+        sum += addPriceArr[s];
+      };
       that.setData({
-        totalPrice: price
+        totalPrice: price,
+        express: express,
+        productTotalPrice: sum
       });
     });
-
   },
   //点击提交订单，到达“确认付款”界面
   submitOrderClick() {
-
     this.getOrder();
-
   },
   getOrder() {
     var that = this;
@@ -147,12 +149,14 @@ var that = this;
       });
       if (res.data.code) {
         wx.showToast({
-          title: res.data.detail + "\t" + res.data.msg,
-          icon: 'none'
+          title: res.data.msg,
+          icon: 'none',
+          duration: 5000
         })
         return
       }
       var orderRes_Data = res.data;
+      console.log(orderRes_Data);
       orderData.sum = orderRes_Data.sum / 100;
       orderData.pay = orderRes_Data.pay / 100;
       orderData.id = orderRes_Data.id;

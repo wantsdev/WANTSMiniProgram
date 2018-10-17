@@ -49,7 +49,6 @@ var showModel = (title, content) => {
 var getSubTarId = (arr) => {
   for (var j = 0; j < arr.length; j++) {
     var id = arr[j];
-
   };
 }
 var ua = () => {
@@ -61,8 +60,8 @@ var ua = () => {
 }
 var WNTSToken = require("../vendor/wafer2-client-sdk/lib/WNTSToken.js");
 var requestGet = (url, callback, failCallBack) => {
-  var new_url = (url.indexOf("?") >= 0) ? (url + "&ua=" + ua()) : (url + "?ua=" + ua());
-  
+  // var new_url = (url.indexOf("?") >= 0) ? (url + "&ua=" + ua()) : (url + "?ua=" + ua());
+  var new_url = url;
   wx.request({
     url: new_url,
     data: {
@@ -393,20 +392,32 @@ var getShoppingCartSellerList = (callBack) => {
   });
 }
 var getProductsTotalThenSetTabBarBadgeWithSellerList = (sellerList) => {
-  if(sellerList ==null) return;
   //判断小程序的API，回调，参数，组件等是否在当前版本可用。https://developers.weixin.qq.com/miniprogram/dev/api/api-caniuse.html
   if (wx.canIUse('setTabBarBadge') == false) return;
   var shoppingcarProductsTotal = 0;
+  if (sellerList == null) {
+    wx.removeTabBarBadge({
+      index: 1
+    })
+    return;
+  }
   for (var i = 0; i < sellerList.length; i++) {
     var products = sellerList[i].products;
     for (let j = 0; j < products.length; j++) {
       shoppingcarProductsTotal += products[j].num;
     }
-  }
-  wx.setTabBarBadge({
-    index: 1,
-    text: String(shoppingcarProductsTotal)
-  })
+  };
+  if (shoppingcarProductsTotal == 0) {
+    wx.removeTabBarBadge({
+      index: 1
+    })
+  } else {
+    wx.setTabBarBadge({
+      index: 1,
+      text: String(shoppingcarProductsTotal)
+    })
+  };
+
 }
 var stringWithAndCode=(strings)=>{
   return strings.split('&').join(' ');

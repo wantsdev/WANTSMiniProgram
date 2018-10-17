@@ -3,9 +3,11 @@ var WNTSApi = require('../../utils/WNTSApi.js');
 var unSeletedImage = "../WANTSImages/check_unselected.png"
 var seletedImage = "../WANTSImages/check_selected.png"
 var isLoading = false;
+var express = 0;
+var appId = util.App_id;
 Page({
 
-  /**
+  /**we
    * 页面的初始数据
    */
   data: {
@@ -29,13 +31,14 @@ Page({
     selectedNewProducts: null,
     selectedNewProductsNum: 0,
     showNoData: false,
-
+    express: 0,
     offset: 0,
     page: 0,
     limit: 15,
     loadMoreBool: true,
-    randomBackgroundColor:[],
-    guessLikeShow:false
+    randomBackgroundColor: [],
+    guessLikeShow: false,
+    cartBottomHeight: false
   },
 
 
@@ -230,7 +233,7 @@ Page({
       } else {
         //增加失败
         wx.showToast({
-          title: '增加失败 - ' + res.data.msg,
+          title: res.data.msg,
           icon: 'none'
         })
       };
@@ -240,12 +243,15 @@ Page({
    * 更新价格
    */
   getShoppingCartTotalPrice() {
+
     var that = this;
     let seller_list = this.data.seller_list;
+    let selectAllStatus = this.data.selectAllStatus;
     util.getProductsTotalThenSetTabBarBadgeWithSellerList(seller_list);
     var selectedProducts = [];
     var selectedNewProducts = [];
     var selectedNewProductsNum = 0;
+
     for (let i = 0; i < seller_list.length; i++) {
       var products = seller_list[i].products;
       for (let j = 0; j < products.length; j++) {
@@ -270,13 +276,24 @@ Page({
       selectedNewProductsNum
     });
     //获取价格接口
+    console.log(WNTSApi.shoppingCarPricetApi + "?order_product_id=" + selectedProducts + "&app_id=" + appId);
     util.requestMethodWithParaterm("GET", null, WNTSApi.shoppingCarPricetApi + "?order_product_id=" + selectedProducts, function (res) {
-      var price = res.data.pay / 100;
-      that.setData({
-        totalPrice: price
-      });
+      console.log(res);
+      var express = res.data.express;
+      var price = res.data.sum / 100;
+      console.log(price);
+      if (selectAllStatus == false) {
+        that.setData({
+          totalPrice: price,
+          express: 0
+        });
+      } else {
+        that.setData({
+          totalPrice: price,
+          express: express
+        });
+      };
     });
-
   },
   //创建订单
   createOrderClick(e) {
@@ -301,7 +318,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     that.setData({
-      randomBackgroundColor:['#2F4C52','#414D65','#A3A093','#8F5B56','#DDE8DE','#F2E6F7','#D0F6F9','#F4F6B6','#EFADCD']
+      randomBackgroundColor: ['#2F4C52', '#414D65', '#A3A093', '#8F5B56', '#DDE8DE', '#F2E6F7', '#D0F6F9', '#F4F6B6', '#EFADCD']
     });
     wx.getSystemInfo({
       success: function (res) {
@@ -311,6 +328,7 @@ Page({
         });
       }
     });
+    this.loadData();
   },
 
 
@@ -319,23 +337,35 @@ Page({
     util.getShoppingCartSellerList(function (res) {
       wx.stopPullDownRefresh();
       var seller_list = res.data.seller_list;
+
       //配置数据
       var showNoData = false;
       if (!seller_list || (seller_list.length <= 0)) {
         showNoData = true;
+        that.setData({
+          cartBottomHeight: false
+        });
       };
       that.setData({
         showNoData: showNoData
       });
       that.configCart(seller_list);
-      // if(seller_list.length > 0){
+      util.getProductsTotalThenSetTabBarBadgeWithSellerList(seller_list);
+      if (seller_list == null) {
         that.getGussLikeData();
         that.setData({
-          guessLikeShow: true
+          guessLikeShow: true,
+          cartBottomHeight: false
         });
-      // };
+      };
+      if (seller_list !== null && seller_list.length > 0) {
+        that.getGussLikeData();
+        that.setData({
+          guessLikeShow: true,
+          cartBottomHeight: true
+        });
+      };
     });
-    
   },
   //猜你喜欢获取数据
   getGussLikeData() {
@@ -364,7 +394,7 @@ Page({
           guessLike: guessLike
         });
       }, function (data) {
-        
+
       });
   },
   //上拉加载
@@ -554,12 +584,16 @@ Page({
           //没有东西了
         }
         var showNoData = false;
+        var cartBottomHeight = false;
+        util.getProductsTotalThenSetTabBarBadgeWithSellerList(seller_list);
         if (seller_list.length == 0) {
           showNoData = true;
+          cartBottomHeight = false;
         }
         that.setData({
           seller_list: seller_list,
-          showNoData: showNoData
+          showNoData: showNoData,
+          cartBottomHeight: false
         });
       } else {
       }

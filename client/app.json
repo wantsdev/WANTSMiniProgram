@@ -22,7 +22,8 @@
     "pages/WNTSBandDetail/WNTSBandDetail",
     "pages/WNTSShopPage/WNTSShopPage",
     "pages/WNTSPaySuccessPage/WNTSPaySuccessPage",
-    "pages/WNTSSharePage/WNTSSharePage"
+    "pages/WNTSSharePage/WNTSSharePage",
+    "pages/WNTSDirectPage/WNTSDirectPage"
   ],
   "window": {
     "backgroundColor": "#ffffff",

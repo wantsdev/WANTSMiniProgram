@@ -1,5 +1,6 @@
 /* pages/WNTSProductdetailPage/WNTSProductdetailPage.wxss */
 @import '../../utils/WNTSRecommend.wxss';
+@import '../../utils/WNTSAlertView.wxss';
 
 /*  {
   width: 750rpx;
@@ -440,12 +441,12 @@
 */
   margin-left: 18rpx;
   margin-right: 16rpx;
+  margin-bottom: 50rpx;
 }
 
 .imgTxtDetailItems {
   width: 716rpx;
   display: inline-block;
-  margin-bottom: 19rpx;
 }
 
 .bottomfixed {
@@ -464,7 +465,7 @@
   border: 0px;
   display: inline-block;
   height: 100rpx;
-  width: 156rpx;
+  width: 119rpx;
 }
 
 .bottomfixed .tip_button:after {
@@ -472,6 +473,35 @@
 }
 
 .bottomfixed .left {
+  width: 158rpx;
+  height: 100rpx;
+  display: inline-block;
+  position: relative;
+  background: #fff;
+}
+
+.bottomfixed .left .shoppingCar {
+  width: 32rpx;
+  height: 38rpx;
+  display: block;
+  position: absolute;
+  top: 20rpx;
+  left: 64rpx;
+  /**/
+}
+
+.bottomfixed .left .shoppingCarTxt {
+  color: #535154;
+  width: 56rpx;
+  height: 26rpx;
+  display: block;
+  font-size: 18rpx;
+  position: absolute;
+  line-height: 26rpx;
+  left: 56rpx;
+  bottom: 14rpx;
+}
+.bottomfixed .middle {
   width: 156rpx;
   height: 100rpx;
   display: inline-block;
@@ -480,7 +510,7 @@
 
 }
 
-.bottomfixed .left .customService {
+.bottomfixed .middle .customService {
   width: 40rpx;
   height: 40rpx;
   display: block;
@@ -489,7 +519,7 @@
   left: 59rpx;
 }
 
-.bottomfixed .left .customServiceTxt {
+.bottomfixed .middle .customServiceTxt {
   color: #535154;
   width: 50rpx;
   height: 26rpx;
@@ -741,6 +771,7 @@
   background: #f0eff4;
   text-align: center;
   margin-top: 24rpx;
+  display: inline-block;
 }
 
 .sectionOne {
@@ -992,7 +1023,7 @@
   border-radius: 0px;
   display: inline-block;
   height: 80rpx;
-  width: 80rpx;
+  width: 78rpx;
 }
 
 .customService .tip_button:after {

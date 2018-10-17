@@ -6,7 +6,7 @@ Page({
   data: {
     orderData: null,
     debug: false,
-    iPhoneX:false,
+    iPhoneX: false,
   },
 
   /**
@@ -14,16 +14,16 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-     // 获取设备信息
-      wx.getSystemInfo({
-        success: function (res) {
-          if (res.screenHeight == 812) {
-            that.setData({
-              iPhoneX:true
-            });
-          }
+    // 获取设备信息
+    wx.getSystemInfo({
+      success: function (res) {
+        if (res.screenHeight == 812) {
+          that.setData({
+            iPhoneX: true
+          });
         }
-      })
+      }
+    })
     var orderData = JSON.parse(options.orderData);
     this.setData({
       orderData

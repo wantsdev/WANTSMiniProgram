@@ -4,7 +4,7 @@
   <view class='address-layout2'>
     <view class='reciver-info'>
       <text class='address-name1'>商品总额:</text>
-      <text class='order-price'>￥{{orderData.sum}}</text>
+      <text class='order-price'>￥{{orderData.pay}}</text>
     </view>
     <text class='address-detail'>订单号：{{orderData.id}}</text>
   </view>
@@ -37,6 +37,6 @@
 
 
 <view class='bottom_views'>
-  <view class='wechatPay' bindtap='wechatPayClick' data-id="{{orderData.id}}">微信支付 ￥{{orderData.sum}}</view>
+  <view class='wechatPay' bindtap='wechatPayClick' data-id="{{orderData.id}}">微信支付 ￥{{orderData.pay}}</view>
   <view style="display: block;width: 750rpx;height: 68rpx;background: #ffffff;" wx:if="{{iPhoneX}}"></view>
 </view>

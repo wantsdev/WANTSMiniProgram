@@ -4,7 +4,7 @@
 
   <view class='backgroundImage' style="height:{{screenHeight}}px;width:{{screenWidth}}px;background-size:cover;" mode="aspectFit">
     
-    <image class='logo' src='../WANTSImages/icon_1024.png'></image>
+    <image class='logo' src='../WANTSImages/ic_logo.png'></image>
     <image class="{{closeHiden?'hide':'wxClose'}}" src='../WANTSImages/login_close.png' bindtap='wxclose'> </image>
     <button class='tip_button' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="wxloginClick">
       <image class='wxloginbtn' src='../WANTSImages/wx_btn.png' ></image>

@@ -15,7 +15,7 @@
 }
 .SearchModule {
   display: flex;
-  background: #fff034;
+  background: #ffffff;
   flex-direction: row;
   width: 750rpx;
   height: 88rpx;
@@ -23,7 +23,7 @@
 }
 
 .SearchModule .tip_button {
-  background-color: #fff034;
+  background-color: #ffffff;
   border: 0px;
   display: inline-block;
   height: 38rpx;
@@ -49,7 +49,7 @@
   overflow: hidden;
   height: 52rpx;
   width: 542rpx;
-  background: #ffffff;
+  background: #EAEBED 100%;
 }
 
 .searchMsg {

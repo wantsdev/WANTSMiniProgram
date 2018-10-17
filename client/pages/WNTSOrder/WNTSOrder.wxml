@@ -46,8 +46,7 @@
       </button>
     </view>
   </view>
-  <view class='loading'>{{loaddingContext}}</view>
-
+  <view class='loading' style="margin-top:30rpx;">{{loaddingContext}}</view>
 </view>
 
 <view wx:else class='order-no-data-layout'>

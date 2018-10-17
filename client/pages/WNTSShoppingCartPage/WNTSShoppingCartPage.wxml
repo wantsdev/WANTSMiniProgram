@@ -51,7 +51,7 @@
 <!-- <view style='height:50rpx'></view> -->
 
 
-<view style="width:100%;height:116rpx;box-sizing:border-box;color:black;background:white;display:block;">
+<view style="width:100%;height:20rpx;box-sizing:border-box;color:black;background:white;display:block;">
 </view>
 <view class="{{showNoData?'hide':'cart-footer'}}">
   <image wx:if="{{selectAllStatus}}" class="total-select" src="{{seletedBtnImage}}" bindtap="shoppingCartSelectAll"></image>
@@ -59,6 +59,6 @@
   <text class='allSelected_text'>全选</text>
   <text class='heji'>合计：</text>
   <text class='totalPrice_text'>￥{{totalPrice}}</text>
-  <text class='allSelected_text'>(包邮)</text>
-  <view class="JieSuan" bindtap="createOrderClick">结算({{selectedNewProductsNum}})</view>
+  <text wx:if="{{express!==undefined}}" class='allSelected_text'>{{(express!==0)?('含运费'+express/100+'元'):('包邮')}}</text>
+  <view class="JieSuan" style="width:29%;" bindtap="createOrderClick">结算({{selectedNewProductsNum}})</view>
 </view>

@@ -7,8 +7,6 @@
       <view class='text'>{{expressData.detail}}</view>
       <view class='time'>{{expressData.created}}</view>
     </view>
-
-
   </view>
   <!--收货地址  -->
   <view class='address-layout'>
@@ -58,7 +56,8 @@
   </view>
   <!--客服  -->
   <view class='service-layout'>
-    <button open-type='contact' class='service-online-layout' show-message-card='true' send-message-title='订单信息' send-message-path="{{'../WNTSSharePage/WNTSSharePage?orderId='+detailData.id+'&receiver_name='+detailData.receiver_name+'&receiver_phone='+detailData.receiver_phone+'&totalPrice='+detailData.sum/100+'&receiver_address='+detailData.receiver_address+'&title='+'订单咨询'}}">
+    <!-- <button open-type='contact' class='service-online-layout' show-message-card='true' send-message-title='订单信息' send-message-path="{{'../WNTSSharePage/WNTSSharePage?orderId='+detailData.id+'&receiver_name='+detailData.receiver_name+'&receiver_phone='+detailData.receiver_phone+'&totalPrice='+detailData.sum/100+'&receiver_address='+detailData.receiver_address+'&title='+'订单咨询'}}"> -->
+     <button class='service-online-layout' bindtap='opreation_3'> 
       <image class='service-online-icon' src='../WANTSImages/service_online.png'></image>
       <view class='service-online-text'>联系商家</view>
     </button>
@@ -79,12 +78,10 @@
     <view class="{{ detailData.pay_time? 'order-pay-time':'hide'}}">付款时间：{{detailData.pay_time}}</view>
     <view class='orderDetial-line'></view>
     <view class='order-pay-type'>支付方式：微信</view>
-    <view class='order-total-price'>商品金额：¥{{detailData.sum/100}}</view>
-    <text decode="{{true}}" class='order-delivery'>运费：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{detailData.express == 0 ? "包邮" :"¥"+detailData.express/100}}</text>
+    <view class='order-total-price'>商品总额：¥{{detailData.sum/100}}</view>
+    <text decode="{{true}}" class='order-delivery'>运费：{{detailData.express == 0 ? "包邮" :"¥"+detailData.express/100}}</text>
     <view class='orderDetial-line'></view>
-    <view class='order-real-price'>实付总额：¥{{(detailData.sum/100) + (detailData.express/100)}}</view>
-
-
+    <view class='order-real-price'>{{payStatus+'：¥'+((detailData.sum/100) + (detailData.express/100))}}</view>
     <view class='msg-layout' wx:if="{{detailData.message}}">
       <view class='orderDetial-line'></view>
       <view class='msg-layout-item'>
@@ -108,5 +105,6 @@
       <view class='opreation3'>提醒发货</view>
     </button>
   </view>
+  <view style="width:750rpx;height:{{(iPhoneX)?(66+'rpx'):(0+'rpx')}};display:block;background:#ffffff;"></view>
 </view>
 <include src="../../utils/WNTSAlertView.wxml" />

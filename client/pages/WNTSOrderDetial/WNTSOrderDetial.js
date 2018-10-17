@@ -28,15 +28,35 @@ Page({
     dilaogType: "",
     expressData: null,
     sellerName: "",
-    status_descp:""
+    iPhoneX: false,
+    status_descp: "",
+    url: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.wants'
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this;
     orderId = options.orderId;
     this.getOrderDetail(orderId);
+    // 获取设备信息
+    wx.getSystemInfo({
+
+      success: function (res) {
+        if (res.screenHeight == 812) {
+
+          that.setData({
+            iPhoneX: true
+          });
+        }
+        that.setData({
+          winWidth: res.windowWidth,
+          winHeight: res.windowHeight
+        });
+      }
+    })
   },
   /**
      * 获取商户名称
@@ -80,9 +100,11 @@ Page({
       var bottomOpreationText1 = "";
       var bottomOpreationText2 = "";
       var bottomOpreationText3 = "";
+      var payStatus = "";
       detailData = data;
       detailData.created_time = creatTime;
       detailData.pay_time = pay_time;
+      console.log(detailData);
       switch (detailData.status) {
         case 10: // 待付款
 
@@ -90,6 +112,7 @@ Page({
           showOpreation = false;
           bottomOpreationText1 = "取消订单";
           bottomOpreationText2 = "立即付款";
+          payStatus = '需付金额';
           break;
         case 30:
           if (detailData.express_company == 0) {//待发货
@@ -97,7 +120,8 @@ Page({
               showBottom = true;
             }
             showOpreation = false;
-            bottomOpreationText3 = "提醒发货"
+            payStatus = '实付金额';
+            bottomOpreationText3 = "提醒发货";
           } else {//待收货
             if (detailData.express_id) {
               showBottom = true;
@@ -106,10 +130,12 @@ Page({
             showOpreation = true;
             bottomOpreationText1 = "查看物流";
             bottomOpreationText2 = "确认收货";
+            payStatus = '实付金额';
           }
           break;
         case 35: //申请退款
           showOpreation = false;
+          payStatus = '实付金额';
           break;
         case 43:  //结束-申请退款
         case 44:  //结束-申请换货
@@ -123,6 +149,7 @@ Page({
         case 40:  //结束
           if (detailData.express_id) {
             showBottom = true;
+            payStatus = '实付金额';
           }
           showChange = true;
           showOpreation = true;
@@ -130,12 +157,15 @@ Page({
           bottomOpreationText2 = "查看物流";
           break;
         case 11: //完成付款，等待系统确认
+          payStatus = '实付金额';
         case 41: //结束-主动取消
+          payStatus = '实付金额';
         case 42:  //结束-异常取消
           showBottom = false;
           showOpreation = false;
           bottomOpreationText1 = "";
           bottomOpreationText2 = "";
+          payStatus = '实付金额';
           break;
 
       }
@@ -150,7 +180,8 @@ Page({
         showChange,
         bottomOpreationText1,
         bottomOpreationText2,
-        bottomOpreationText3
+        bottomOpreationText3,
+        payStatus
       })
       if (!that.data.sellerName) {
         if (data.products.length == 1) {
@@ -165,7 +196,7 @@ Page({
           }
           if (!same) {
             that.setData({
-              sellerName: "販賣東西",
+              sellerName: "贩卖东西",
               phone: "4009933951"
             })
           } else {
@@ -211,6 +242,21 @@ Page({
     })
   },
 
+  connectSellerMsg() {
+    var that = this;
+    util.checkLoginStatus(function (isLogined) {
+      //联系商家
+      that.setData({
+        showModal: true,
+        dialog_title: '请下载APP与商家客服沟通',
+        dialog_cancel: '残忍放弃',
+        dialog_ok: '我要下载',
+        dilaogType: "3"
+      })
+    }, function (isNotLogin) {
+      that.toLogin();
+    });
+  },
 
 
   /**
@@ -263,8 +309,8 @@ Page({
   /* 对话框确认按钮点击事件*/
   onConfirm: function (e) {
     var that = this;
-    this.hideModal();
-    var dilaogType = this.data.dilaogType;
+    that.hideModal();
+    var dilaogType = that.data.dilaogType;
     if (dilaogType == "1") {
       var url = util.URL_ROOT + "/order/" + orderId + "/cancel"
       util.requestPut(url, function (data) {
@@ -278,11 +324,28 @@ Page({
           duration: 2000
         })
       });
-    } else {
+    } else if(dilaogType == "2"){
       var phone = that.data.phone;
       wx.makePhoneCall({
         phoneNumber: phone,
         success: function () {
+        }
+      })
+    }else if(dilaogType == "3") {
+      console.log(3)
+      wx.setClipboardData({
+        data: that.data.url,
+        success: function (res) {
+          wx.getClipboardData({
+            success: function (res) {
+              console.log(res.data)
+              wx.showToast({
+                title: '下载链接已复制',
+                icon: 'success',
+                duration: 2000
+              })
+            }
+          })
         }
       })
     }
@@ -326,6 +389,9 @@ Page({
           })
         });
     }
+  },
+  opreation_3(e){
+    this.connectSellerMsg();
   },
 
   //查看物流
@@ -433,7 +499,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

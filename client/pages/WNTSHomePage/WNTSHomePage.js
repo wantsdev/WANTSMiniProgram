@@ -158,6 +158,7 @@ var get_list = function (that) {
     //请求整个页面的数据（轮播图、热门品牌、layout、主题）
     util.requestGet(currentTabUrl, function (data) {
       var data = data;
+      console.log(data);
       var blocksArr = data.blocks;
       var blockIdArr = [];
       for (var a = 0; a < blocksArr.length; a++) {
@@ -500,7 +501,7 @@ Page({
   data: {
     MiniProgramDataWithParterm: "?app=miniapp",
     debug: false,//false布局跟线上一致 true布局2
-    checkOutMiniProgramDataBool: false,//true小程序数据，falseWANTS数据
+    checkOutMiniProgramDataBool: true,//true小程序数据，falseWANTS数据
     display_style: 1,//主题布局种类
     RecommendBlock_idShow: false,//默认不显示猜你喜欢
     indicatorDots: true,

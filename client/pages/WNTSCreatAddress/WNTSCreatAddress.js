@@ -85,7 +85,7 @@ Page({
   cityChange: function (e) {
     var value = e.detail.value
     var provinces = this.data.provinces
-    var citys = this.data.citysda
+    var citys = this.data.citys
     var areas = this.data.areas
     var provinceNum = value[0]
     var cityNum = value[1]

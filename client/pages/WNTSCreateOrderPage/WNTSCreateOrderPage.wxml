@@ -24,7 +24,6 @@
         <image class='address-righe' src='../WANTSImages/right.png' />
       </view>
       <text class='address-detail'>还没有地址，请添加地址</text>
-
     </view>
   </view>
 </view>
@@ -33,12 +32,12 @@
   <!--当一商品时 start  -->
   <view wx:if="{{selectedProducts.length == 1}}">
     <view class="goods-list ">
-      <image class="goods-img " src="{{selectedProducts[0].product_img}}"></image>
-      <view class="goods-desc ">
+      <image class="goods-img" mode="aspectFill" src="{{selectedProducts[0].product_img}}"></image>
+      <view class="goods-desc">
         <view class="goods-title ">{{selectedProducts[0].product_title}}</view>
         <view class="goods-stock ">{{selectedProducts[0].stock_descp}}</view>
         <view class="goods-bottom ">
-          <view class="goods-price ">¥{{selectedProducts[0].price/100}}</view>
+          <view class="goods-price">¥{{selectedProducts[0].price/100}}</view>
           <view class="goods-num ">x{{selectedProducts[0].num}}</view>
         </view>
         <view class="quit-bottom ">
@@ -60,8 +59,8 @@
     <view wx:for="{{selectedProducts}}" wx:key="{{index}}">
       <view class='seller-line'></view>
       <view class=" goods-list ">
-        <image class="goods-img " src="{{item.product_img}}"></image>
-        <view class="goods-desc ">
+        <image class="goods-img" mode="aspectFill" src="{{item.product_img}}"></image>
+        <view class="goods-desc">
           <view class="goods-title ">{{item.product_title}}</view>
           <view class="goods-stock ">{{item.stock_descp}}</view>
           <view class="goods-bottom ">
@@ -83,12 +82,12 @@
     <view class="seller-line "></view>
     <view class='order-totalpay-layout'>
       <view class='order-totalpay'>商品总额：</view>
-      <view class='content'>¥{{totalPrice}}</view>
+      <view class='content'>¥{{productTotalPrice}}</view>
     </view>
     <view class="seller-line "></view>
     <view class='order-totalpay-layout'>
       <view class='order-totalpay'>运费：</view>
-      <view class='content'>包邮</view>
+      <view wx:if="{{express!==undfined}}" class='content'>{{(express!==0)?('¥'+express):('包邮')}}</view>
     </view>
     <view class="seller-line "></view>
     <view class='order-totalpay-layout'>
@@ -105,9 +104,12 @@
   <!--2 end  -->
 
 </view>
-<view class='bottom_view' style="height:{{(iPhoneX)?(168+'rpx'):(100+'rpx')}};">
+<view wx:if="{{iPhoneX}}" style="width:100%;height:70rpx;box-sizing:border-box;color:black;background:white;display:block;">
+</view>
+
+<view class='bottom_view' style="height:{{(iPhoneX)?(166+'rpx'):(98+'rpx')}};">
   <view class='funPay'>实付款：￥{{totalPrice}}</view>
-  <view class='submitOrder' bindtap='submitOrderClick'>提交订单</view>
+  <view class='submitOrder' style="background:#333 100%;color:#ffffff;" bindtap='submitOrderClick'>提交订单</view>
   <view style="display: block;width: 750rpx;height: 68rpx;background: #ffffff;" wx:if="{{iPhoneX}}"></view>
 </view>
  <include src="../../utils/WNTSAlertView.wxml" />

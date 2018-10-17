@@ -15,6 +15,7 @@ Page({
     loadMoreBool: true,
     randomBackgroundColor:[],
     sendmessagepath:'',
+    url:'http://a.app.qq.com/o/simple.jsp?pkgname=com.wants'
   },
 
   /**

@@ -13,6 +13,12 @@ var current_selected_item = '';
 var current_selected_item_arr = [];
 var current_item_type = [];
 var n = 0;
+var f = 0;
+var turn = true;
+var product_detail;
+var categoryId;
+var bandName;
+var subCategoryName;
 var animation_one = wx.createAnimation({
   delay: 0,
   timingFunction: 'linear',
@@ -39,6 +45,8 @@ Page({
     winWidth: 0,
     winHeight: 0,
     productDetail: [],
+    productImg: '',
+    productPrice: '',
     guessLike: [],
     subject_product: null,
     subject_product_data: null,
@@ -69,21 +77,24 @@ Page({
     offset: 0,
     page: 0,
     limit: 15,
-    iPhoneX:false,
-    randomBackgroundColor:[],
-    sendmessagepath:'',
-    shop_show:false,
-    shareProductDetail:null
+    iPhoneX: false,
+    randomBackgroundColor: [],
+    sendmessagepath: '',
+    shop_show: false,
+    shareProductDetail: null,
+    nickName: '',
+    avatarUrl: '',
+    url: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.wants'
   },
   configShoppingCarTotalNumber() {
     var that = this;
     util.getShoppingCartSellerList(function (res) {
       var seller_list = res.data.seller_list;
-      if (seller_list==null) return;
+      if (seller_list == null) return;
       var productsNum = 0;
       for (let i = 0; i < seller_list.length; i++) {
         var products = seller_list[i].products;
-          for (let j = 0;j < products.length; j++) {
+        for (let j = 0; j < products.length; j++) {
           productsNum += products[j].num;
         }
       }
@@ -105,12 +116,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
+    var that = this;
     wx.showShareMenu({
       withShareTicket: true
     });
-    var that = this;
+    wx.getUserInfo({
+      success: function (res) {
+        that.setData({
+          nickName: res.userInfo.nickName,
+          avatarUrl: res.userInfo.avatarUrl
+        })
+      },
+    });
+
     that.setData({
-      randomBackgroundColor:['#2F4C52','#414D65','#A3A093','#8F5B56','#DDE8DE','#F2E6F7','#D0F6F9','#F4F6B6','#EFADCD']
+      randomBackgroundColor: ['#2F4C52', '#414D65', '#A3A093', '#8F5B56', '#DDE8DE', '#F2E6F7', '#D0F6F9', '#F4F6B6', '#EFADCD']
     });
     util.checkLoginStatus(function (isLogined) {
       that.configShoppingCarTotalNumber();
@@ -119,19 +139,17 @@ Page({
     });
     if (option) {
 
-      var product_detail = option.subject;
-      console.log(option);
+      product_detail = option.subject;
       that.setData({
         shareProductDetail: option.subject,
-        sendmessagepath:'../WNTSProductdetailPage/WNTSProductdetailPage?subject='+ option.subject
+        sendmessagepath: '../WNTSProductdetailPage/WNTSProductdetailPage?subject=' + option.subject
       });
       var get_commit_price_info_selected_key = wx.getStorageSync('commit_price_info_selected_key');
       product_detail = JSON.parse(product_detail);
       var subject_product_id = product_detail.product_id;
       commit_price_info_selected_key.detail_info = product_detail;
 
-     
-        //获取缓存信息
+      //获取缓存信息
 
       that.setData({
         commit_price_info_selected: get_commit_price_info_selected_key
@@ -139,7 +157,7 @@ Page({
       that.setData({
         subject_product: product_detail,
         shop_show: !product_detail.shop_show,
-        subject_product_data: product_detail,
+        //subject_product_data: product_detail,
         currentTabAuto: 0,
         productDetail: [
           {
@@ -158,7 +176,6 @@ Page({
 
       success: function (res) {
         if (res.screenHeight == 812) {
-
           that.setData({
             iPhoneX: true
           });
@@ -171,6 +188,13 @@ Page({
     })
     util.requestGet(util.URL_ROOT + '/product/' + subject_product_id, function (data) {
       var item_arr = [];
+      categoryId = data.category.id;
+      bandName = data.brand.name;
+      subCategoryName = data.sub_category.name;
+      console.log(data);
+      console.log(categoryId);
+      console.log(bandName);
+      console.log(subCategoryName);
       data.detail.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi, function (match, capture) {
         item_arr.push(capture);
         that.setData({
@@ -189,7 +213,7 @@ Page({
         subject_product_data: data
       })
     });
-    console.log(that.data.subject_product);
+
     that.getGussLikeData();
   },
   loadMore() {
@@ -244,7 +268,7 @@ Page({
           guessLike: guessLike
         });
       }, function (data) {
-        
+
       });
   },
 
@@ -253,7 +277,12 @@ Page({
     var that = this;
     util.checkLoginStatus(function (isLogined) {
       //联系商家
-
+      that.setData({
+        showModal: true,
+        dialog_title: '请下载APP与商家客服沟通',
+        dialog_cancel: '残忍放弃',
+        dialog_ok: '我要下载'
+      })
     }, function (isNotLogin) {
       that.toLogin();
     });
@@ -271,23 +300,23 @@ Page({
     var that = this;
     util.checkLoginStatus(function (isLogined) {
       //联系商家
-
+      that.onShareAppMessage();
     }, function (isNotLogin) {
       that.toLogin();
     });
   },
   into_seller: function (e) {
     var that = this;
-      // 进入店铺
-      var seller_detail_obj = e.currentTarget.dataset.seller_detail;
-      var seller_detail_all = {};
-      seller_detail_all.seller_name = seller_detail_obj.name;
-      seller_detail_all.seller_head = seller_detail_obj.head;
-      seller_detail_all.seller_id = seller_detail_obj.id;
-      var json_string = JSON.stringify(seller_detail_all);
-      wx.navigateTo({
-        url: '../WNTSShopPage/WNTSShopPage?seller_detail=' + json_string
-      })
+    // 进入店铺
+    var seller_detail_obj = e.currentTarget.dataset.seller_detail;
+    var seller_detail_all = {};
+    seller_detail_all.seller_name = seller_detail_obj.name;
+    seller_detail_all.seller_head = seller_detail_obj.head;
+    seller_detail_all.seller_id = seller_detail_obj.id;
+    var json_string = JSON.stringify(seller_detail_all);
+    wx.navigateTo({
+      url: '../WNTSShopPage/WNTSShopPage?seller_detail=' + json_string
+    })
   },
   toLogin() {
     wx.navigateTo({
@@ -304,15 +333,15 @@ Page({
   purchase_off: function (e) {
     var that = this;
     var timer = null;
-    number = 1;
-    selected_item_detail_out_arr = [];
-    animation_one.bottom((that.data.iPhoneX)?(-1042+'rpx'):(-992 + 'rpx')).step();
+    // number = 1;
+    // selected_item_detail_out_arr = [];
+    animation_one.bottom((that.data.iPhoneX) ? (-1042 + 'rpx') : (-992 + 'rpx')).step();
     that.setData({
       turn: 'off',
       isScroll: false,
-      num: 1,
-      current_index_one: 0,
-      current_index_two: 0,
+      num: number,
+      // current_index_one: 0,
+      // current_index_two: 0,
       animationData: animation_one.export()
     });
   },
@@ -340,6 +369,7 @@ Page({
     var type_item_id = e.target.dataset.attributes.id;
     current_type_arr.push(current_type_name);
     var subject_product_attributes = that.data.subject_product_data.attributes;
+
     for (var s = 0; s < subject_product_attributes.length; s++) {
       if (subject_product_attributes[s].type.name) {
 
@@ -362,7 +392,19 @@ Page({
       selected_item_detail_out: selected_item_detail_out_arr,
       selected_item_detail: selected_item_detail.detail,
     });
-
+    var selectedItemDetailOut = that.data.selected_item_detail_out;
+    var subjectProductData = that.data.subject_product_data.stocks;
+    for (var d = 0; d < subjectProductData.length; d++) {
+      var subjectProductDataArr = subjectProductData[d].descp.split(' ');
+      for (var e = 0; e < selectedItemDetailOut.length; e++) {
+        if (subjectProductDataArr.indexOf(selectedItemDetailOut[0].detail) !== -1 && subjectProductDataArr.indexOf(selectedItemDetailOut[selectedItemDetailOut.length - 1].detail) !== -1) {
+          that.setData({
+            productImg: subjectProductData[d].img,
+            productPrice: subjectProductData[d].price
+          });
+        };
+      };
+    };
     //判断点击“立即购买”时默认商品的库存量，并setData到data对象中，以备后期调用。
     for (var j = 0; j < selected_item_detail_out_arr.length; j++) {
       selected_items_detail.push(selected_item_detail_out_arr[j].detail);
@@ -411,9 +453,10 @@ Page({
   },
 
   attribute_selected_one: function (e) {
-
     var that = this;
     var subject_product_attributes = that.data.subject_product_data.attributes;
+    turn = false;
+    f = 0;
     for (var s = 0; s < subject_product_attributes.length; s++) {
       for (var d = 0; d < subject_product_attributes[s].attribute.length; d++) {
         if (subject_product_attributes[s].attribute[d].name == e.currentTarget.dataset.attributes.name) {
@@ -422,15 +465,6 @@ Page({
             current_type: current_type
           });
           current_item_type.push(subject_product_attributes[s].type.name);
-          if (current_item_type[current_item_type.length - 1] !== current_item_type[current_item_type.length - 2]) {
-            that.setData({
-              s_s: 'on'
-            });
-          } else {
-            that.setData({
-              s_s: 'off'
-            });
-          };
         };
       }
     }
@@ -447,9 +481,10 @@ Page({
   },
 
   attribute_selected_two: function (e) {
-
     var that = this;
     var subject_product_attributes = that.data.subject_product_data.attributes;
+    turn = false;
+    f = 0;
     for (var s = 0; s < subject_product_attributes.length; s++) {
       for (var d = 0; d < subject_product_attributes[s].attribute.length; d++) {
         if (subject_product_attributes[s].attribute[d].name == e.currentTarget.dataset.attributes.name) {
@@ -458,15 +493,6 @@ Page({
             current_type: current_type
           });
           current_item_type.push(subject_product_attributes[s].type.name);
-          if (current_item_type[current_item_type.length - 1] !== current_item_type[current_item_type.length - 2]) {
-            that.setData({
-              s_s: 'on'
-            });
-          } else {
-            that.setData({
-              s_s: 'off'
-            });
-          };
         };
       }
     }
@@ -490,8 +516,9 @@ Page({
   },
   add_shopping_car_buy_now: function (e) {
     var that = this;
+
     util.checkLoginStatus(function (isLogined) {
-      
+
       animation_one.bottom(0).step();
       that.setData({
         animationData: animation_one.export()
@@ -501,8 +528,9 @@ Page({
       var click_type = e.target.dataset.type;
       selected_items_detail = [];
       stocks_obj_into_arr = [];
-      selected_item_detail_out_arr = [];
-
+      if (turn == true) {
+        selected_item_detail_out_arr = [];
+      };
       if (click_type == 'shopping_car') {
         that.setData({
           shopping_car_z_index: 5,
@@ -521,11 +549,11 @@ Page({
         } else {
           subject_product_attributes[i].attribute = subject_product_attributes[i].sub_attribute_alias;
 
-          for (var m = 0; m < subject_product_attributes[i].attribute.length;m++){
+          for (var m = 0; m < subject_product_attributes[i].attribute.length; m++) {
             var name = subject_product_attributes[i].attribute[m];
-            if(name == ''){
+            if (name == '') {
               subject_product_attributes[i].attribute[m] = subject_product_attributes[i].sub_attribute[m].name;
-            }else{
+            } else {
 
             }
 
@@ -533,8 +561,11 @@ Page({
 
         };
         selected_item_detail.type = subject_product_attributes[i].type.name;
-        selected_item_detail.detail = (subject_product_attributes[i].attribute[0].name) ? (subject_product_attributes[i].attribute[0].name) : (subject_product_attributes[i].attribute[0]);
-        selected_item_detail_out_arr.push(selected_item_detail)
+        if (turn == true) {
+          selected_item_detail.detail = (subject_product_attributes[i].attribute[0].name) ? (subject_product_attributes[i].attribute[0].name) : (subject_product_attributes[i].attribute[0]);
+          selected_item_detail_out_arr.push(selected_item_detail)
+        };
+
       };
       for (var j = 0; j < selected_item_detail_out_arr.length; j++) {
         selected_items_detail.push(selected_item_detail_out_arr[j].detail);
@@ -575,6 +606,19 @@ Page({
         subject_product_attributes_arr: subject_product_attributes,
         selected_item_detail_out: selected_item_detail_out_arr
       });
+      var selectedItemDetailOut = that.data.selected_item_detail_out;
+      var subjectProductData = that.data.subject_product_data.stocks;
+      for (var y = 0; y < subjectProductData.length; y++) {
+        var subjectProductDataArr = subjectProductData[y].descp.split(' ');
+        for (var z = 0; z < selectedItemDetailOut.length; z++) {
+          if (subjectProductDataArr.indexOf(selectedItemDetailOut[0].detail) !== -1 && subjectProductDataArr.indexOf(selectedItemDetailOut[selectedItemDetailOut.length - 1].detail) !== -1) {
+            that.setData({
+              productImg: subjectProductData[y].img,
+              productPrice: subjectProductData[y].price
+            });
+          };
+        };
+      };
     }, function (isNotLogin) {
       that.toLogin();
     });
@@ -596,9 +640,9 @@ Page({
 
     if (number < that.data.current_stock) {
       number++;
-    }else{
+    } else {
       wx.showToast({
-        title: '此商品仅剩余'+that.data.current_stock+'件',
+        title: '此商品仅剩余' + that.data.current_stock + '件',
         duration: 1500,
         icon: 'none',
       });
@@ -625,14 +669,14 @@ Page({
       //传数据到订单确认
       var commit_price_info = get_commit_price_info_selected_key;
       var commit_price_info_all = {};
-      animation_one.bottom((that.data.iPhoneX)?(-1042+'rpx'):(-992 + 'rpx')).step();
+      animation_one.bottom((that.data.iPhoneX) ? (-1042 + 'rpx') : (-992 + 'rpx')).step();
       that.setData({
         animationData: animation_one.export()
       });
       commit_price_info_all.product_id = commit_price_info.detail_info.product_id;
-      commit_price_info_all.product_img = commit_price_info.detail_info.product_imgs[0];
+      commit_price_info_all.product_img = (commit_price_info.detail_info.product_imgs) ? (commit_price_info.detail_info.product_imgs) : (that.data.productImg);
       commit_price_info_all.product_title = commit_price_info.detail_info.product_title;
-      commit_price_info_all.price = commit_price_info.detail_info.product_price;
+      commit_price_info_all.price = (commit_price_info.detail_info.product_price) ? (commit_price_info.detail_info.product_price) : (that.data.productPrice);
       commit_price_info_all.product_tag_price = commit_price_info.detail_info.product_tag_price;
       commit_price_info_all.stock_descp = commit_price_info.type;
       commit_price_info_all.id = commit_price_info.stock_id;
@@ -642,8 +686,8 @@ Page({
       var json_string = JSON.stringify(commit_price_info_selected_arr);
       that.setData({
         turn: 'off',
-        current_index_one: 0,
-        current_index_two: 0
+        // current_index_one: 0,
+        // current_index_two: 0
       });
 
       wx.navigateTo({
@@ -664,6 +708,17 @@ Page({
     });
   },
 
+  nav_to_homePage: function (e) {
+    var that = this;
+    util.checkLoginStatus(function (isLogined) {
+      wx.switchTab({
+        url: '../WNTSHomePage/WNTSHomePage'
+      })
+    }, function (isNotLogin) {
+      that.toLogin();
+    });
+  },
+
   add_shopping_car: function () {
     var that = this;
     commit_price_info_selected = [];
@@ -674,27 +729,28 @@ Page({
       var add_num = get_commit_price_info_selected_key.number;
       var add_stock_id = get_commit_price_info_selected_key.stock_id;
       var add_shopping_car_url = util.URL_ROOT + '/cart';
-      animation_one.bottom((that.data.iPhoneX)?(-1042+'rpx'):(-992 + 'rpx')).step();
+      animation_one.bottom((that.data.iPhoneX) ? (-1042 + 'rpx') : (-992 + 'rpx')).step();
       that.setData({
         animationData: animation_one.export()
       });
-      util.requestPost({ stock_id: add_stock_id, product_id: add_product_id, num: add_num }, add_shopping_car_url, 
-      function (data) {
-        that.setData({
-          turn: 'off',
-          current_index_one: 0,
-          current_index_two: 0
+      util.requestPost({ stock_id: add_stock_id, product_id: add_product_id, num: add_num }, add_shopping_car_url,
+        function (data) {
+          that.setData({
+            turn: 'off',
+            // current_index_one: 0,
+            // current_index_two: 0
+          });
+          wx.showToast({
+            title: '成功加入购物车，请在购物车中查看',
+            duration: 1500,
+            icon: 'none'
+          });
+          //在这里请求购物车列表，获取总个数
+          that.configShoppingCarTotalNumber();
+
+        }, function (fail) {
+
         });
-        wx.showToast({
-          title: '成功加入购物车，请在购物车中查看',
-          duration: 1500,
-          icon: 'none'
-        });
-        //在这里请求购物车列表，获取总个数
-        that.configShoppingCarTotalNumber();
-      }, function (fail) {
-        
-      });
 
     };
   },
@@ -749,6 +805,7 @@ Page({
   onUnload: function () {
     selected_item_detail_out_arr = [];
     number = 1;
+    turn = true;
   },
 
   /**
@@ -770,12 +827,112 @@ Page({
    */
   onShareAppMessage: function () {
     var that = this;
+    var sharePic;
+    var keyWordOne;
+    var keyWordTwo;
+    var imgUrl = that.data.subject_product.product_imgs[0];
+    var indexNumOne;
+    var indexNumTwo;
+    switch (categoryId) {
+      //鞋类
+      case 1398:
+        keyWordOne = 'GUCCI DIY个性定制运动鞋';
+        keyWordTwo = 'GUCCI GG Supreme运动鞋';
+        indexNumOne = that.data.subject_product_data.title.indexOf(keyWordOne);
+        indexNumTwo = that.data.subject_product_data.title.indexOf(keyWordTwo);
+        if (indexNumOne !== -1 || indexNumTwo !== -1) {
+          sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a320';
+        } else {
+          if (subCategoryName == '凉鞋' || '拖鞋') {
+            sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a500';
+          } else {
+            sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a425';
+          };
+        }
+        break;
+      //T恤
+      case 1334:
+        sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a300';
+        break;
+      //裤子
+      case 1392:
+        sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a300';
+        break;
+      //包
+      case 1416:
+        if (subCategoryName == '旅行箱包') {
+          sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a180';
+        } else {
+          sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a300';
+        };
+        break;
+      //首饰
+      case 1437:
+        sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a300';
+        break;
+      //钱包/小物/数码
+      case 1468:
+        sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a300';
+        break;
+      //帽子
+      case 1430:
+        if (bandName == 'draconite') {
+          sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a270';
+        } else {
+          sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a400';
+        };
+        break;
+      //夹克/外套
+      case 1349:
+        sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a300';
+        break;
+      //连衣裙
+      case 1371:
+        sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a150';
+        break;
+      //裙子
+      case 1389:
+        if (subCategoryName == '半身裙') {
+          sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a330';
+        } else if (subCategoryName == '牛仔裙') {
+          sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a400';
+        } else {
+          sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a300';
+        };
+        break;
+      //家纺
+      case 23163:
+        sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a320';
+        break;
+      //时尚配件
+      case 1455:
+        if (subCategoryName == '太阳镜') {
+          sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a400';
+        } else {
+          sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a300';
+        };
+        break;
+      //水杯
+      case 23192:
+        sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a200';
+        break;
+      //内衣
+      case 1493:
+        sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a300';
+        break;
+      //头饰
+      case 1448:
+        sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a350';
+        break;
+      //其他
+      case 1581:
+        sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a320';
+        break;
+    }
     return {
-
-      title: that.data.subject_product.product_title,// 转发标题（默认：当前小程序名称）
-
+      title: '￥' + that.data.subject_product.product_price / 100 + ' | ' + that.data.subject_product.product_title,// 转发标题（默认：当前小程序名称）
       path: 'pages/WNTSProductdetailPage/WNTSProductdetailPage?subject=' + that.data.shareProductDetail,// 转发路径（当前页面 path ），必须是以 / 开头的完整路径
-
+      imageUrl: sharePic,
       success(e) {
 
       },
@@ -787,5 +944,52 @@ Page({
       complete() { }
 
     }
+
+  },
+
+  /*弹出框蒙层截断touchmove事件*/
+  preventTouchMove: function () {
+
+  },
+
+  /* 隐藏模态对话框*/
+  hideModal: function () {
+    this.setData({
+      showModal: false
+    });
+  },
+
+  /*对话框取消按钮点击事件*/
+  onCancel: function () {
+    this.hideModal();
+  },
+
+  /* 对话框确认按钮点击事件*/
+  onConfirm: function () {
+    var that = this;
+    this.hideModal();
+    wx.setClipboardData({
+      data: that.data.url,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            console.log(res.data)
+            wx.showToast({
+              title: '下载链接已复制',
+              icon: 'success',
+              duration: 2000
+            })
+          }
+        })
+      }
+    })
+  },
+  // 预览图片
+  previewImage: function (e) {
+    var current = e.target.dataset.url;
+    wx.previewImage({
+      current: current, // 当前显示图片的http链接
+      urls: this.data.subject_item_arr // 需要预览的图片http链接列表
+    })
   }
 })

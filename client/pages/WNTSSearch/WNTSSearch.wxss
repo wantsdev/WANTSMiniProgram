@@ -80,7 +80,7 @@
   flex-direction: row;
   align-content: flex-start;
   flex-wrap: wrap;
-  margin-left: 33rpx;
+  margin-left: 66rpx;
   margin-top: 147rpx;
 }
 

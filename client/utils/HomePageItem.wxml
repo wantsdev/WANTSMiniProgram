@@ -1,5 +1,5 @@
 <!--pages/WNTSHomePage/WNTSHomePage.wxml-->
-<view wx:if="{{false}}">
+<view wx:if="{{true}}">
   <!--轮播图布局三⬇️ -->
   <view class="swiper-container-two" wx:if="{{(blockArrNew[index]=='BannerBlock')?(true):(false)}}">
     <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
@@ -90,7 +90,7 @@
   </view>
 
   <!-- 单图主题一 -->
-  <image wx:if="{{(blockArrNew[index]=='SubjectBlock_single')?(true):(false)}}" style="width: 750rpx; height: 596rpx;display:block;" data-pop_item="{{SubjectBlock_single[0]}}" bindtap="popBandClick" mode="widthFix" src="{{SubjectBlock_single[0].item_image}}"
+  <image wx:if="{{(blockArrNew[index]=='SubjectBlock_single')?(true):(false)}}" style="width: 750rpx; height: 596rpx;display:block;padding-top:30rpx;" data-pop_item="{{SubjectBlock_single[0]}}" bindtap="popBandClick" mode="widthFix" src="{{SubjectBlock_single[0].item_image}}"
     binderror="" bindload=""></image>
   <!-- 双主题图布局 -->
   <view wx:if="{{(blockArrNew[index]=='SubjectBlock_double')?(true):(false)}}" style="width:670rpx;height:440rpx;margin-left:40rpx;display:flex;flex-direction:column;flex-wrap:wrap;">
@@ -216,7 +216,7 @@
 <!-- WNTSGOODSMiniProgram -->
 
 
-<view wx:if="{{true}}" class="WNTSGOODSMiniProgram">
+<view wx:if="{{false}}" class="WNTSGOODSMiniProgram">
   <!--轮播图布局一⬇️ -->
   <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock')?(true):(false)}}">
     <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">

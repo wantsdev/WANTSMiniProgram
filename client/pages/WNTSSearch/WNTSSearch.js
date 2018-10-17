@@ -127,6 +127,7 @@ Page({
     search_subject_all.product_price = search_subject.price;
     search_subject_all.product_tag_price = search_subject.tag_price;
     var json_string = JSON.stringify(search_subject_all);
+    json_string = util.stringWithAndCode(json_string);
     wx.navigateTo({
       url:'../WNTSProductdetailPage/WNTSProductdetailPage?subject=' + json_string
     })
