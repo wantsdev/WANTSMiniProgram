@@ -960,17 +960,17 @@ Page({
       //登录过 Nothing to do ...
     }, function (isNotLogin) {
       //未登录 
-      var source = option.source;
-      var sourceValidityBool = util.checkSourceValidityBoolWithSource(source);
-      if (sourceValidityBool) {
-        WNTSSource.set(option.source);
-        //登录 + source
-        wx.redirectTo({
-          url: '../WNTSLoginPage/WNTSLoginPage?fromTo=' + "home",
-        })
-      } else {
-        WNTSSource.clear(); //如果没有source清空本地source
-      }
+      // var source = option.source;
+      // var sourceValidityBool = util.checkSourceValidityBoolWithSource(source);
+      // if (sourceValidityBool) {
+      //   WNTSSource.set(option.source);
+      //   //登录 + source
+      //   wx.redirectTo({
+      //     url: '../WNTSLoginPage/WNTSLoginPage?fromTo=' + "home",
+      //   })
+      // } else {
+      //   WNTSSource.clear(); //如果没有source清空本地source
+      // }
     });
 
     // var codeNum = getApp().globalData.code;
