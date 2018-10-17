@@ -21,6 +21,7 @@ Page({
     deleteImage: "../WANTSImages/delete.png",
     hasList: false,          // 列表是否有数据
     totalPrice: 0,           // 总价，初始为0
+    expressPrice: 0,           // 邮价，初始为0
     selectAllStatus: true,    // 全选状态，默认全选
     obj: {
       name: "hello"

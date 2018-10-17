@@ -187,6 +187,7 @@ Page({
       }
     })
     util.requestGet(util.URL_ROOT + '/product/' + subject_product_id, function (data) {
+      console.log(data);
       var item_arr = [];
       categoryId = data.category.id;
       bandName = data.brand.name;

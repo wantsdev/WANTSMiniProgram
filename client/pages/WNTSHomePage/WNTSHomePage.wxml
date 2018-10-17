@@ -1,8 +1,9 @@
 <!-- <view class="navBarOne"></view>
 <view class="navBarTwo"></view> -->
 <view>
-  <view class="SearchModule">
-    <image style="" class="wantsLogo" mode="" src="../WANTSImages/logo.png" binderror="" bindload=""></image>
+  <!-- <view style="width:750rpx;height:166rpx;display:block;position:fixed;top:0rpx;z-index:1000;background:red;"></view> -->
+  <view class="SearchModule" wx:if="{{(factoryTurn==false)?(true):(false)}}">
+    <image class="wantsLogo" mode="" src="../WANTSImages/logo.png" binderror="" bindload=""></image>
     <view class="searchBox" catchtap="search_touch">
       <image class="searchIcon" style="" mode="" src="../WANTSImages/search.png" binderror="" bindload=""></image>
       <text class="searchText"> {{ '潮流新品特卖' }} </text>
@@ -12,14 +13,15 @@
     </button>
   </view>
   <!--标题栏⬇️ -->
-  <view class="swiperContainer" wx:if="{{tabs.length>1}}">
-    <scroll-view scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap; position: {{position}};top: {{top+'rpx'}};z-index: {{zIndex}}" class="swiper-tab">
-      <view wx:for="{{tabs}}" wx:key="{{index}}" class="swiper-tab-list" data-current="{{index}}" style="background:white; width:{{(item.id==2||item.id==5)?(((750-24*1*2-24*2*4)/tabs.length+24*1)+'rpx'):(((750-24*1*2-24*2*4)/tabs.length+24*2)+'rpx')}};" bindtap="swichNav">
-        <text data-current="{{index}}" class="{{(currentIndex==index) ? 'on' : ''}}" style="width:{{(item.id==2||item.id==5)?(24*1+'rpx'):(24*2+'rpx')}};padding-top:2rpx;display: inline-block;" bindtap="swichNav"> {{item.name}}</text>
+  <view class="swiperContainer" wx:if="{{(tabs.length>1&&factoryTurn==false)?(true):(false)}}">
+    <scroll-view scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap; position:fixed;top:88rpx;z-index:999" class="swipers-tab">
+      <view wx:for="{{tabs}}" wx:key="{{index}}" class="swiper-tab-list" data-current="{{index}}" style="background:white;margin-right:{{(index==tabs.length-1)?(0+'rpx'):(70+'rpx')}};margin-left:{{(index==0)?(45+'rpx'):(0+'rpx')}};" bindtap="swichNav">
+        <text data-current="{{index}}" class="{{(currentIndex==index) ? 'on' : ''}}" style=""> {{item.name}}</text>
       </view>
     </scroll-view>
   </view>
   <!--标题栏⬆️-->
+
   <!--blocks板块配置  -->
   <block wx:for="{{blockArrNew}}" wx:key="{{index}}">
     <include src="../../utils/HomePageItem.wxml" />

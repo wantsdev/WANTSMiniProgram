@@ -1,1 +1,147 @@
 @import '../../utils/HomePageItem.wxss';
+.productScrollX{
+  width: 750rpx;
+  height: 298rpx;
+  display: flex;
+  flex-direction: row;
+  background: #F9F9F9;
+  justify-content: space-between;
+  white-space:nowrap;
+}
+
+.productScrollX .items{
+  width: 676rpx;
+  height: 200rpx;
+  display: inline-block;
+  background: #ffffff;
+  margin-top:30rpx;
+  margin-left:37rpx;
+} 
+.fourBlocks{
+  width: 750rpx;
+  height: 482rpx;
+  display:flex;
+  flex-direction: column;
+  flex-wrap:wrap;
+  overflow: hidden;
+}
+.fourBlocks .fourBlocksItem{
+  width: 376rpx;
+  height: 250rpx;
+  display: block;
+}
+.fourBlocks .fourBlocksItemOn{
+  width: 377rpx;
+  height: 250rpx;
+  display: block;
+  margin-right:0rpx;
+}
+
+.fiveBlocks{
+  width: 750rpx;
+  height: 482rpx;
+  display:flex;
+  flex-direction: column;
+  flex-wrap:wrap;
+}
+.fiveBlocksItem{
+  width: 375rpx;
+  height: 250rpx;
+  display: inline-block;
+  background: #ffffff;
+}
+.fiveBlocks .fiveBlocksMini{
+   width: 375rpx;
+   height: 250rpx;
+   display: inline-block;
+   position:relative;
+}
+.sixBlocks{
+  width: 750rpx;
+  height: 500rpx;
+  display:flex;
+  flex-direction: column;
+  flex-wrap:wrap;
+  overflow: hidden;
+  margin-top:0rpx;
+}
+.sixBlocksItemOne{
+  width: 376rpx;
+  height: 250rpx;
+  display: block;
+}
+.sixBlocksItemTwo{
+  width: 376rpx;
+  height: 250rpx;
+  display: block;
+}
+.sixBlocks .sixBlocksMiniOne{
+   width: 375rpx;
+   height: 250rpx;
+   display: inline-block;
+   position:relative;
+}
+.sixBlocks .sixBlocksMiniTwo{
+   width: 375rpx;
+   height: 250rpx;
+   display: inline-block;
+   position:relative;
+}
+.sevenBlocks{
+  width: 750rpx;
+  height: 750rpx;
+  display:flex;
+  flex-direction: column;
+  flex-wrap:wrap;
+}
+.sevenBlocksItem{
+  width: 375rpx;
+  height: 250rpx;
+  display: inline-block;
+  background: #ffffff;
+}
+.sevenBlocks .sevenBlocksMini{
+   width: 375rpx;
+   height: 250rpx;
+   display: inline-block;
+   position:relative;
+}
+.eightBlocks{
+  width: 750rpx;
+  height: 750rpx;
+  display:flex;
+  flex-direction: column;
+  flex-wrap:wrap;
+  overflow: hidden;
+}
+.eightBlocksItem{
+  width: 376rpx;
+  height: 250rpx;
+  display: inline-block;
+  background: #ffffff;
+}
+.eightBlocks .eightBlocksMiniOne{
+   width: 376rpx;
+   height: 250rpx;
+   display: inline-block;
+   position:relative;
+}
+.eightBlocks .eightBlocksMiniTwo{
+   width: 376rpx;
+   height: 250rpx;
+   display: inline-block;
+   position:relative;
+}
+.nineBlocks{
+  width: 750rpx;
+  height: 740rpx;
+  display:flex;
+  flex-direction: column;
+  flex-wrap:wrap;
+}
+.nineBlocks .nineBlocksItem{
+  width: 250rpx;
+  height: 240rpx;
+  display: inline-block;
+  background: #ffffff;
+} 

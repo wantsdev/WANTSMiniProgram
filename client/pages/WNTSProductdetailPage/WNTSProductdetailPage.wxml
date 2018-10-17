@@ -32,15 +32,15 @@
   <text class="seller"> {{ '在售商家' }} </text>
   <view class="sellerBottom"></view>
   <view class="sellerDetailInfo">
-    <image style="" mode="" src="{{subject_product_data.creator.head}}" binderror="" bindload="" class="sellerBand"></image>
-    <text class="sellerName"> {{subject_product_data.creator.name}} </text>
+    <image style="" mode="" src="{{subject_product_data.provider.head}}" binderror="" bindload="" class="sellerBand"></image>
+    <text class="sellerName"> {{subject_product_data.provider.name}} </text>
   </view>
   <view class="sellerDetailBoard">
-    <button class="sellerDetailCall" bindtap='connectSellerMsg'>
+    <button class="sellerDetailCall" open-type="{{hasLogin?'contact':''}}" session-from='weapp' data-Seller='{{subject_product_data.provider}}' bindtap='connectSellerMsg'  show-message-card='true' send-message-path="{{sendmessagepath}}">
       <image class="image" style="" mode="" src="../WANTSImages/service@2x.png" binderror="" bindload=""></image>
       <text class="imageInfo"> {{ '联系商家' }} </text>
     </button>
-    <view class="intoSeller" catchtap="into_seller" data-seller_detail="{{subject_product_data.creator}}">
+    <view class="intoSeller" catchtap="into_seller" data-seller_detail="{{subject_product_data.provider}}">
       <image class="into" style="" mode="" src="../WANTSImages/seller.png" binderror="" bindload=""></image>
       <text class="intoInfo"> {{ '进入店铺' }} </text>
     </view>
