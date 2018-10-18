@@ -74,48 +74,47 @@
 }
 
 .wantsSearchPage .hotTags {
-  width: 680rpx;
-  height: 800rpx;
-  display: flex;
-  flex-direction: row;
-  align-content: flex-start;
-  flex-wrap: wrap;
-  margin-left: 66rpx;
-  margin-top: 147rpx;
+width: 680rpx;
+height: 800rpx;
+display: flex;
+flex-direction: row;
+align-content: flex-start;
+flex-wrap: wrap;
+margin-left: 66rpx;
+margin-top: 147rpx;
 }
 
 .wantsSearchPage .hotTag {
-  height: 45rpx;
-  overflow: hidden;
-  display: block;
-  margin-right: 20rpx;
-  margin-bottom: 46rpx;
+height: 45rpx;
+overflow: hidden;
+display: block;
+margin-right: 20rpx;
+margin-bottom: 46rpx;
 }
 
 .wantsSearchPage .tagText {
-  display: block;
-  float: left;
-  font-size: 25rpx;
-  line-height: 45rpx;
-  padding-right: 20rpx;
-  padding-left: 8rpx;
-  color: white;
-  border-radius: 0rpx;
-  background: #666;
+display: block;
+float: left;
+font-size: 25rpx;
+line-height: 45rpx;
+padding-right: 20rpx;
+padding-left: 8rpx;
+color: white;
+border-radius: 0rpx;
+background: #666;
 }
 
 .wantsSearchPage .Triangle {
-  width: 0rpx;
-  height: 0rpx;
-  display: block;
-  float: left;
-  border-left: 0rpx solid #fff;
-  border-top: 22.5rpx solid #fff;
-  border-bottom: 22.5rpx solid #fff;
-  border-right: 23rpx solid #666;
-  border-radius: 0rpx;
+width: 0rpx;
+height: 0rpx;
+display: block;
+float: left;
+border-left: 0rpx solid #fff;
+border-top: 22.5rpx solid #fff;
+border-bottom: 22.5rpx solid #fff;
+border-right: 23rpx solid #666;
+border-radius: 0rpx;
 }
-
 .wantsSearchPage .guessYouLikeDetail {
   display: flex;
   flex-direction: row;
@@ -129,34 +128,52 @@
 
 .wantsSearchPage .guessYouLikeItems {
   display: inline-block;
-  width: 250rpx;
-  height: 500rpx;
-  /*  background: yellow;
-*/
+  width: 375rpx;
+   /* background: yellow; */
+
 }
 
 .wantsSearchPage .guessYouLikePicContainer {
-  width: 250rpx;
-  height: 360rpx;
+  width: 330rpx;
+  height: 524rpx;
   display: block;
   overflow: hidden;
-  /*background-color: red;*/
+  margin-left:30rpx;
+  margin-right:15rpx;
+  /* background-color: red; */
 }
-
+.wantsSearchPage .guessYouLikePicContainerOn {
+  width: 330rpx;
+  height: 524rpx;
+  display: block;
+  margin-left:15rpx;
+  overflow: hidden;
+  /* background-color: red; */
+}
 .wantsSearchPage .guessYouLikePic {
-  width: 250rpx;
-  height: 400rpx;
+  width: 330rpx;
+  height: 528rpx;
   display: flex;
+  margin-left:0rpx;
   flex-direction: row;
 }
 
 .wantsSearchPage .guessYouLikePrice {
-  width: 250rpx;
+  width: 330rpx;
   height: 110rpx;
   display: block;
-  /*  background: purple;
-*/
+  /* background: purple; */
   position: relative;
+  margin-left:30rpx;
+  overflow: hidden;
+}
+.wantsSearchPage .guessYouLikePriceOn {
+  width: 330rpx;
+  height: 110rpx;
+  display: block;
+  /* background: purple; */
+  position: relative;
+  margin-left:15rpx;
   overflow: hidden;
 }
 
@@ -177,61 +194,64 @@
   font-size: 20rpx;
   line-height: 40rpx;
 }
-
-.wantsSearchPage .guessYouLikePrice .name {
+.wantsSearchPage .title_prefix_url_label {
   position: absolute;
   display: block;
-  width: 214rpx;
+  width: 84rpx;
+  height: 26rpx;
+  left: 0rpx;
+}
+
+.wantsSearchPage .name {
+  position: absolute;
+  display: block;
+  width: 330rpx;
   height: 24rpx;
   /*  background: yellow;
 */
-  left: 20rpx;
   font-size: 24rpx;
   line-height: 24rpx;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-
-.wantsSearchPage .guessYouLikePrice .changed {
+.wantsSearchPage .nameOn {
   position: absolute;
   display: block;
-  width: 78rpx;
-  height: 32rpx;
+  width: 240rpx;
+  height: 24rpx;
+  /*  background: yellow;
+*/
+  font-size: 24rpx;
+  left:90rpx;
+  line-height: 24rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.searchOutView{
+  width:330rpx;
+  height:32rpx;
+  display: block;
+  position: absolute;
+  bottom:34rpx;
+}
+.wantsSearchPage .changed {
+  display: inline;
   /*  background: blue;
 */
-  bottom: 24rpx;
-  left: 20rpx;
+  margin-left: -8rpx;
   font-size: 32rpx;
   line-height: 32rpx;
   color: #eb5160;
+  margin-right:8rpx;
 }
 
-.wantsSearchPage .guessYouLikePrice .change {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 250rpx;
-  height: 24rpx;
-  /*  background: red;
-*/
-  bottom: 24rpx;
-  right: 22rpx;
+.wantsSearchPage .b {
+  display: inline;
+  text-decoration: line-through;
   font-size: 24rpx;
   line-height: 24rpx;
   color: #a8abaf;
-}
-
-.wantsSearchPage .guessYouLikePrice .change .a {
-  display: block;
-  width: 125rpx;
-  height: 24rpx;
-  /*  background: red;
-*/
-}
-
-.wantsSearchPage .guessYouLikePrice .change .b {
-  display: block;
-  text-decoration: line-through;
 }

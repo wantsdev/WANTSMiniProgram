@@ -1,92 +1,117 @@
 <!--pages/WNTSProductdetailPage/WNTSProductdetailPage.wxml-->
 
 <view style="{{(turn=='on')?('top:'+0+'rpx;left:'+0+'rpx;width:'+100+'%;position:fixed;z-index:'+0+';'):('')}}">
-<scroll-view style="height:100%;" scroll-y="false" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" overflow-y="hidden" class="productdetailContainer">
-  <view class="{{(turn=='on')?('blockOn'):('blockOff')}}" bindtap="purchase_off"></view>
-  <view class="containerOneSection">
-    <view class="swiper-container">
-      <swiper autoplay="auto" indicator-dots="true" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" interval="3000" duration="500" current="{{currentTab}}" bindchange="swiperChange" duration="300" style="height:1000rpx; width: 750rpx;" class="swiper">
-       <swiper-item class='img_parent' wx:for="{{subject_product.product_imgs}}" wx:key="{{item.id}}">
-          <image style="" mode="widthFix" src="{{item}}" binderror="" bindload="" class="img"></image>
-        </swiper-item>
-      </swiper>
-      <view class="swiperPages">
-        <text class="swiperPage">{{(currentTab+1)+'/'+subject_product.product_imgs.length}}</text>
+  <scroll-view style="height:100%;" scroll-y="false" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" overflow-y="hidden" class="productdetailContainer">
+    <view class="{{(turn=='on')?('blockOn'):('blockOff')}}" bindtap="purchase_off"></view>
+    <view class="containerOneSection">
+      <view class="swiper-container">
+        <swiper autoplay="auto" indicator-dots="true" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" interval="3000" duration="500" current="{{currentTab}}" bindchange="swiperChange" duration="300" style="height:1000rpx; width: 750rpx;" class="swiper">
+          <swiper-item class='img_parent' wx:for="{{subject_product.product_imgs}}" wx:key="{{item.id}}">
+            <image style="" mode="widthFix" src="{{item}}" binderror="" bindload="" class="img"></image>
+          </swiper-item>
+        </swiper>
+        <view class="swiperPages">
+          <text class="swiperPage">{{(currentTab+1)+'/'+subject_product.product_imgs.length}}</text>
+        </view>
+      </view>
+      <text class="productName" bindlongtap="productNameBingLongTap" data-product_id='{{subject_product.product_id}}'> {{ subject_product.product_title }} </text>
+      <text wx:if="{{false}}" class="promotionTitle" style="width:652rpx;height:40rpx;display:block;margin-top:20rpx;margin-left:28rpx;line-height:40rpx;color:#F78129;font-size:28rpx;">{{promotion.entry_guide_text}}</text>
+      <view class="pageStyleContainer">
+        <view class="pageStyle">
+          <text class="left"> {{ '￥'+subject_product.product_price/100}} </text>
+          <text class="right"> {{ '￥'+subject_product.product_tag_price/100 }} </text>
+          <!-- onShareAppMessage -->
+          <button class="share_button" open-type="{{hasLogin?'share':''}}" bindtap='share_button'>
+            <image style="" mode="" src="../WANTSImages/share.png" binderror="" bindload="" class="share" data-shareData='{{subject_product}}'></image>
+          </button>
+        </view>
+      </view>
+      <view class="promotion" wx:if="{{false}}">
+        <view class="promotionOne">
+          <text class="promotionTit" style="width:50rpx;height:92rpx;line-height:92rpx;font-size:24rpx;margin-left:28rpx;display:inline-block;color:#BFBFBF;">{{'促销'}}</text>
+          <image class="promotionLable" mode="scaleToFill" style="width:78rpx;height:40rpx;display:inline-block;margin-left:20rpx;margin-right:20rpx;margin-top:24rpx;" src="{{promotion.label_image}}"></image>
+          <text class="promotionLableText" style="width:48%;height:92rpx;display:inline-block;font-size:24rpx;line-height:92rpx;color:#484649;">{{promotion.label}}</text>
+        </view>
+        <view class="promotionTwo" style="width:100rpx;height:92rpx;position:absolute;top:0rpx;right:0rpx;display:block;" catchtap='promotionShow'>
+          <image class="promotionTwoImg" style="width:42rpx;height:10rpx;display:block;margin-left:30rpx;margin-top:41rpx;" src="../WANTSImages/ellipsis_btn@3x.png" mode="widthFix"></image>
+        </view>
+      </view>
+      <view class="label" style="width:750rpx;height:172rpx;display:block;margin-top:0rpx;" wx:if="{{tagsKeywords.length>0}}">
+        <view class="labelOne" style="width:750rpx;height:34rpx;display:block;margin-top:28rpx;">
+          <text style="width:50rpx;height:34rpx;line-height:34rpx;display:block;font-size:24rpx;color:#bfbfbf;margin-left:28rpx;">{{'标签'}}</text>
+        </view>
+        <view class="labelTwo">
+          <text class="labelTwoItem" wx:for="{{tagsKeywords}}" catchtap="hot_tap_touch" wx:key="index" data-hot_word="{{item}}">{{item}}</text>
+        </view>
       </view>
     </view>
-    <text class="productName"> {{ subject_product.product_title }} </text>
-    <view class="pageStyleContainer">
-      <view class="pageStyle">
-        <text class="left"> {{ '￥'+subject_product.product_price/100}} </text>
-        <text class="right"> {{ '￥'+subject_product.product_tag_price/100 }} </text>
-        <!-- onShareAppMessage -->
-        <button class="share_button" open-type="{{hasLogin?'share':''}}" bindtap='share_button'>
-          <image style="" mode="" src="../WANTSImages/share.png" binderror="" bindload="" class="share" data-shareData='{{subject_product}}'></image>
+
+    <view class="containerTwoSection" style="height:300rpx;">
+      <text class="seller"> {{ '在售商家' }} </text>
+      <view class="sellerBottom"></view>
+      <view class="sellerDetailInfo">
+        <image style="" mode="" src="{{subject_product_data.provider.head}}" binderror="" bindload="" class="sellerBand"></image>
+        <text class="sellerName"> {{subject_product_data.provider.name}} </text>
+      </view>
+      <view class="sellerDetailBoard">
+        <button class="sellerDetailCall" bindtap='connectSellerMsg'>
+          <image class="image" style="" mode="" src="../WANTSImages/service@2x.png" binderror="" bindload=""></image>
+          <text class="imageInfo"> {{ '联系商家' }} </text>
         </button>
-
+        <view class="intoSeller" catchtap="into_seller" data-seller_detail="{{subject_product_data.provider}}">
+          <image class="into" style="" mode="" src="../WANTSImages/seller.png" binderror="" bindload=""></image>
+          <text class="intoInfo"> {{ '进入店铺' }} </text>
+        </view>
       </view>
     </view>
-  </view>
-
- <view class="containerTwoSection" wx:if="{{shop_show}}">
-  <text class="seller"> {{ '在售商家' }} </text>
-  <view class="sellerBottom"></view>
-  <view class="sellerDetailInfo">
-    <image style="" mode="" src="{{subject_product_data.provider.head}}" binderror="" bindload="" class="sellerBand"></image>
-    <text class="sellerName"> {{subject_product_data.provider.name}} </text>
-  </view>
-  <view class="sellerDetailBoard">
-    <button class="sellerDetailCall" open-type="{{hasLogin?'contact':''}}" session-from='weapp' data-Seller='{{subject_product_data.provider}}' bindtap='connectSellerMsg'  show-message-card='true' send-message-path="{{sendmessagepath}}">
-      <image class="image" style="" mode="" src="../WANTSImages/service@2x.png" binderror="" bindload=""></image>
-      <text class="imageInfo"> {{ '联系商家' }} </text>
-    </button>
-    <view class="intoSeller" catchtap="into_seller" data-seller_detail="{{subject_product_data.provider}}">
-      <image class="into" style="" mode="" src="../WANTSImages/seller.png" binderror="" bindload=""></image>
-      <text class="intoInfo"> {{ '进入店铺' }} </text>
+    <text class="imgTxtDetailTitle"> {{ '图文详情' }} </text>
+    <view class="imgTxtDetail">
+      <image class="imgTxtDetailItems" wx:for="{{subject_item_arr}}" wx:key="{{index}}" data-url="{{item}}" style="" mode="widthFix" src="{{item}}" binderror="" bindload="" bindtap="previewImage">
+      </image>
     </view>
-  </view>
-</view> 
-<text class="imgTxtDetailTitle"> {{ '图文详情' }} </text>
-<view class="imgTxtDetail">
-  <image class="imgTxtDetailItems" wx:for="{{subject_item_arr}}" wx:key="{{index}}" data-url="{{item}}" style="" mode="widthFix" src="{{item}}" binderror="" bindload="" bindtap="previewImage">
-  </image>
-</view>
-<!-- 猜你喜欢⬇️ -->
-<include src="../../utils/WNTSRecommend.wxml" />
-<view style="width:100%;height:126rpx;box-sizing:border-box;color:black;background:white;display:block;"></view>
-</scroll-view>
-</view>
-<view wx:if="{{iPhoneX}}" style="width:100%;height:70rpx;box-sizing:border-box;color:black;background:white;display:block;">
+    <view style="width:750rpx;height:50rpx;display:block;"></view>
+    <!-- 猜你喜欢⬇️ -->
+    <include src="../../utils/WNTSRecommend.wxml" />
+    <view style="width:100%;height:126rpx;box-sizing:border-box;color:black;background:white;display:block;"></view>
+  </scroll-view>
 </view>
 <!-- 猜你喜欢⤴️-->
-<view class="bottomfixed" style="height:{{(iPhoneX)?(168+'rpx'):(100+'rpx')}};">
-  <view style="width:14%;overflow:hidden;" class="left" catchtap="nav_to_homePage">
-    <image style="left:30rpx;top:2rpx;width:56rpx;height:56rpx;" mode="scaleToFill" src="../WANTSImages/tab_home_focus.png" binderror="" bindload="" class="shoppingCar"></image>
-    <text class="shoppingCarTxt" style="font-size:20rpx;left:37rpx;bottom:17.5rpx;"> {{ '首页' }} </text>
-  </view>
-  <view class='vertical-line'></view>
+<view wx:if="{{iPhoneX}}" style="width:100%;height:70rpx;box-sizing:border-box;color:black;background:white;display:block;">
+</view>
 
-  <view class="middle"  style="width:14%;overflow:hidden;" bindtap='serviceMsg'>
+<view class="bottomfixed" style="height:{{(iPhoneX)?(166+'rpx'):(96+'rpx')}};">
+  <view class="left" catchtap="nav_to_homePage">
+    <image style="left:30rpx;top:2rpx;width:56rpx;height:56rpx;" mode="scaleToFill" src="../WANTSImages/tab_cart_focuss_two.png" binderror="" bindload="" class="shoppingCar"></image>
+    <text class="shoppingCarTxt" style="left:38rpx;bottom:17.8rpx;font-size:20rpx;"> {{ '首页' }} </text>
+  </view>
+
+  <view class="middle" bindtap='serviceMsg'>
     <button class='tip_button' bindtap='connectSellerMsg'>
-      <image style="left:34rpx;" mode="" src="../WANTSImages/service@3x.png" binderror="" bindload="" class="customService"></image>
-      <text class="customServiceTxt" style="left:28rpx;"> {{ '客服' }} </text>
+      <image style="left:32rpx;" mode="" src="../WANTSImages/service@3x.png" binderror="" bindload="" class="customService"></image>
+      <text class="customServiceTxt" style="left:24rpx;"> {{ '客服' }} </text>
     </button>
   </view>
-  <view class='vertical-line' style="margin-right:2rpx;"></view>
+  <!-- <view class='vertical-line'></view> -->
 
-  <view class="right" style="width:14%;overflow:hidden;" catchtap="nav_to_shoppingcar">
-    <image style="width:40rpx;top:11rpx;left:28rpx;" mode="widthFix" src="../WANTSImages/btn_shoppingcar@3x.png" binderror="" bindload="" class="shoppingCar"></image>
-    <text class="shoppingCarTxt" style="font-size:20rpx;left:22rpx;width:60rpx;"> {{ '购物车' }} </text>
+  <view class="right" catchtap="nav_to_shoppingcar">
+    <image style="" mode="widthFix" src="../WANTSImages/btn_shoppingcar@3x.png" binderror="" bindload="" class="shoppingCar" style="left:28rpx;top:10rpx;width:40rpx;height:42rpx;"></image>
+    <text class="shoppingCarTxt" style='width:60rpx;font-size:20rpx;line-height:24rpx;left:20rpx;'> {{ '购物车' }} </text>
     <view class="bubble" wx:if="{{bubbleTurn}}" style="left:52rpx;">
       <text class="bubbleNum"> {{ shoppingCarTotalNumber }} </text>
     </view>
   </view>
-  <view class='vertical-line'></view>
-  <text class="intoShoppingCar" style="width:29%;" data-type="{{'shopping_car'}}" bindtap="add_shopping_car_buy_now"> {{ '加入购物车' }} </text>
-  <text class="purchase" style="width:29%;" data-type="{{'buy_now'}}" bindtap="add_shopping_car_buy_now"> {{ '立即购买' }} </text>
+  <!-- <view class='vertical-line'></view> -->
+  <form report-submit bindsubmit='add_shopping_cars' style="width:29%;" data-type="{{'shopping_car'}}">
+    <button class="intoShoppingCar" style="width:100%;background:#333333 100%;color:#ffffff;" form-type="submit"> {{ '加入购物车' }} </button>
+  </form>
+  <!-- <text class="purchase" style="width:29%;background:#FFF467 100%;color:#535154;" data-type="{{'buy_now'}}" bindtap="buy_now"> {{ '立即购买' }} </text> -->
+  <form report-submit bindsubmit='buy_now' style="width:29%;" data-type="{{'buy_now'}}">
+    <button class="purchase" style="width:100%;background:#FFF467 100%;color:#535154;" form-type="submit"> {{ '立即购买' }} </button>
+  </form>
 </view>
-<view class="purchaseModel" style="height:{{(iPhoneX)?(980+'rpx'):(910+'rpx')}}; bottom:{{(iPhoneX)?(-1046+'rpx'):(-992+'rpx')}};"  animation="{{animationData}}" catchtap="selected_item_datas">
-  <view class="purchaseModelSectionOne" >
+
+<view class="purchaseModel" style="height:{{(iPhoneX)?(980+'rpx'):(910+'rpx')}}; bottom:{{(iPhoneX)?(-1046+'rpx'):(-992+'rpx')}};" animation="{{animationDataOne}}" catchtap="selected_item_datas">
+  <view class="purchaseModelSectionOne">
     <view class="sectionOne">
       <image wx:key="{{index}}" class="productImg" style="" mode="aspectFit" src="{{(productImg)?(productImg):(subject_product.product_imgs[0])}}" binderror="" bindload=""></image>
       <text wx:key="{{index}}" class="purchaseModelPrice"> {{'￥'+productPrice/100}} </text>
@@ -100,7 +125,6 @@
       <view class="sectionTwo" data-detail_attribute_item="{{subject_product_attributes_arr[0]}}" catchtap="attributes_selected_out">
         <text class="sizeText"> {{ subject_product_attributes_arr[0].type.name }} </text>
         <view class="sizeItem">
-          <!-- subject_product_data.attributes -->
           <text style="font-size: 28rpx;" wx:for="{{subject_product_attributes_arr[0].attribute}}" wx:key="{{index}}" wx:for-item="detail_attribute_item" wx:for-index="index" bindtap="attribute_selected_one" data-attributes="{{detail_attribute_item}}" data-selected="{{'background_status'}}"
             data-item_index_one="{{index}}" class="{{(current_index_one==index)?('sizeItemTextSelectedOne'):('sizeItemTextSelectingOne')}}"> {{(detail_attribute_item.name)?(detail_attribute_item.name):(detail_attribute_item)}}</text>
         </view>
@@ -108,7 +132,6 @@
       <view class="sectionTwo" data-detail_attribute_item="{{subject_product_attributes_arr[1]}}" catchtap="attributes_selected_out">
         <text class="sizeText"> {{ subject_product_attributes_arr[1].type.name }} </text>
         <view class="sizeItem">
-
           <text style="font-size: 28rpx;" wx:for="{{subject_product_attributes_arr[1].attribute}}" wx:key="{{index}}" wx:for-item="detail_attribute_item" wx:for-index="index" bindtap="attribute_selected_two" data-attributes="{{detail_attribute_item}}" data-selected="{{'background_status'}}"
             data-item_index_two="{{index}}" class="{{(current_index_two==index)?('sizeItemTextSelectedTwo'):('sizeItemTextSelectingTwo')}}"> {{(detail_attribute_item.name)?(detail_attribute_item.name):(detail_attribute_item)}}</text>
         </view>
@@ -123,16 +146,38 @@
       </view>
     </scroll-view>
     <view class="customService" style="bottom:{{(iPhoneX)?(196+'rpx'):(130+'rpx')}};">
-      <button class='tip_button' bindtap='connectSellerMsg' style="">
-        <image class="customServiceImg" style="" mode="widthFix" src="../WANTSImages/service@3x_white.png" binderror="" bindload=""></image>
-        <text class="customServiceText"> {{ '客服' }} </text>
+      <button class='tip_button' style="background:#FFF467 100%;color:#535154;" bindtap='connectSellerMsg'>
+        <image class="customServiceImg" style="" mode="widthFix" src="../WANTSImages/service_Button@3x.png" binderror="" bindload=""></image>
+        <text class="customServiceText" style="background:#FFF467 100%;color:#535154;"> {{ '客服' }} </text>
       </button>
     </view>
-    <text class="confirm" style="z-index: {{buy_now_z_index}};bottom:{{(iPhoneX)?(68+'rpx'):(0+'rpx')}};" bindtap="commit_price_info" data-selectedProducts="{{commit_price_info_selected}}"> {{ current_status }} </text>
-    
-    <text class="confirm" style="z-index: {{shopping_car_z_index}};bottom:{{(iPhoneX)?(68+'rpx'):(0+'rpx')}};" bindtap="add_shopping_car"> {{ current_status }} </text>
-    <!-- <view style="z-index: 5; display: block;width: 750rpx;height: 68rpx;background: red;" wx:if="{{iPhoneX}}"></view> -->
+    <form report-submit bindsubmit='commit_price_info' class="confirmOut" style="width:750rpx;border-radius:0rpx;border:0rpx;z-index: {{buy_now_z_index}};">
+      <button class="confirm" style="background:#FFF467 100%;color:#535154;bottom:{{(iPhoneX)?(68+'rpx'):(0+'rpx')}};" form-type="submit" data-selectedProducts="{{commit_price_info_selected}}"> {{ current_status }} </button>
+    </form>
+    <form report-submit bindsubmit='add_shopping_car' class="confirmOut" style="width:750rpx;border-radius:0rpx;border:0rpx;z-index: {{shopping_car_z_index}};">
+      <button class="confirm" style="background:#FFF467 100%;color:#535154;bottom:{{(iPhoneX)?(68+'rpx'):(0+'rpx')}};" form-type="submit"> {{ current_status }} </button>
+    </form>
   </view>
   <image style="" mode="" src="" binderror="" bindload="" class="toTop"></image>
 </view>
- <include src="../../utils/WNTSAlertView.wxml" />
+
+<!-- <view class="purchaseModelTwo" style="height:{{(iPhoneX)?(980+'rpx'):(910+'rpx')}}; bottom:{{(iPhoneX)?(-1046+'rpx'):(-992+'rpx')}};" animation="{{animationDataTwo}}" catchtap="selected_item_datas">
+  <view class="purchaseModelSectionTwo">
+    <view class="title">
+      <text class="titleTxt">{{'促销'}}</text>
+      <image class="off" src="../WANTSImages/off.png" mode="widthFix" bindtap="purchase_off"></image>
+    </view>
+    <view class="items" wx:for="{{[1,2]}}">
+      <view class="contents">
+        <image class="bable" src="" mode=""></image>
+        <text class="content">{{' 【品牌大促】 满100元减20元'}}</text>
+      </view>
+      <image class="nav" src="../WANTSImages/right.png" mode="widthFix"></image>
+      <text class="date">{{'2018.02.27-2018.03.12'}}</text>
+    </view>
+  </view>
+  <image style="" mode="" src="" binderror="" bindload="" class="toTop"></image>
+</view> -->
+
+<include src="../../utils/WNTSAlertView.wxml" />
+<!-- <canvas canvas-id="shareCanvas" style="width:500rpx;height:400rpx"></canvas> -->

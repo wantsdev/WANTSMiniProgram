@@ -1,14 +1,11 @@
 <!--pages/WNTSSearch/WNTSSearch.wxml-->
 <view class="wantsSearchPage">
   <view class="upContainer">
-    <!-- 		<image class="searchBack" style="" mode="widthFix" src="../WANTSImages/back.png" binderror="" bindload="" catchtap="search_back" wx:if="{{(current_product_info_arr.length!==0)}}"></image>
- -->
     <view class="searchContainer">
       <image class="searchIcon" style="" mode="widthFix" src="../WANTSImages/search.png" binderror="" bindload=""></image>
       <input class="searchInput" placeholder="搜索商品" value="{{(value_key)?(value_key):(name)}}" bindinput="searchProduct" bindconfirm="search_start" confirm-type="完成" />
     </view>
   </view>
-  <!-- <text class="hotSearch" wx:if="{{(current_product_info_arr.length==0)}}"> {{ '热门搜索' }} </text>		 -->
   <view class="hotTags" wx:if="{{(current_product_info_arr.length==0)}}">
     <view class="hotTag" catchtap="hot_tap_touch" wx:for="{{hotwords}}" wx:key="index" data-hot_word="{{item}}">
       <view class="Triangle"></view>
@@ -16,21 +13,16 @@
     </view>
   </view>
   <view class="guessYouLikeDetail" wx:if="{{(current_product_info_arr.length!==0)}}">
-    <view class="guessYouLikeItems" wx:for="{{current_product_info_arr}}" wx:key="{{index}}" data-search_subject="{{item}}" class="subjectDetail" bindtap="search_subject_touch">
-      <view class="guessYouLikePicContainer">
-        <image class="guessYouLikePic" style="background-image: {{'url('+((item.small_img)?(item.small_img):(item.imgs[0]))+')'}}; background-repeat:no-repeat; background-size:115% 85%; background-position: top center;" mode="" binderror="" bindload="">
-          <view class="guessYouLikeIcons" style="position: relative; display:{{ (item.discount_info=='')?('none'):('block')}};">
-            <text class="text" style="position:absolute; "> {{ (item.discount_info=='')?(''):('限'+item.discount_info) }} </text>
-            <image style="display:{{ (item.discount_info=='')?('none'):('block')}}; width:116rpx; height: 40rpx;" mode="" src="../WANTSImages/discount_icon_yellow.png" binderror="" bindload=""></image>
-            <image style="display:{{ (item.discount_info=='')?('none'):('block')}}; width:20rpx; height: 20rpx; position: absolute; top: 10rpx; left: 10rpx;" mode="" src="../WANTSImages/discount_icon_tips.png" binderror="" bindload=""></image>
-          </view>
+    <view class="guessYouLikeItems" wx:for="{{current_product_info_arr}}" wx:key="{{index}}" data-search_subject="{{item}}" bindtap="search_subject_touch">
+      <view class="{{(index%2==0)?('guessYouLikePicContainer'):('guessYouLikePicContainerOn')}}">
+        <image class="guessYouLikePic" src="{{(item.small_img)?(item.small_img):(item.imgs[0])}}" mode="aspectFit" binderror="" bindload="">
         </image>
       </view>
-      <view class="guessYouLikePrice">
-        <text class="name"> {{ item.title }}</text>
-        <text class="changed"> {{'￥'+ item.price/100 }} </text>
-        <view class="change">
-          <view class="a"> </view>
+      <view class="{{(index%2==0)?('guessYouLikePrice'):('guessYouLikePriceOn')}}">
+        <image wx:if="{{(item.title_prefix_url_label==null)?(false):(true)}}" class="title_prefix_url_label" mode="widthFix" src="{{item.title_prefix_url_label}}"></image>
+        <text class="{{(item.title_prefix_url_label==null)?('name'):('nameOn')}}"> {{ item.title }}</text>
+        <view class="searchOutView">
+          <text class="changed"> {{'￥'+ item.price/100 }} </text>
           <text class="b"> {{ '￥'+item.tag_price/100 }} </text>
         </view>
       </view>

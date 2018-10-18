@@ -23,7 +23,7 @@
   <!--标题栏⬆️-->
 
   <!--blocks板块配置  -->
-  <block wx:for="{{blockArrNew}}" wx:key="{{index}}">
+  <block wx:for="{{blockArrNew}}" wx:key="{{outIndex}}" wx:for-index="outIndex">
     <include src="../../utils/HomePageItem.wxml" />
   </block>
   <!--blocks板块配置  -->

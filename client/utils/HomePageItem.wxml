@@ -1,7 +1,7 @@
 <!--pages/WNTSHomePage/WNTSHomePage.wxml-->
 <view wx:if="{{false}}">
   <!--轮播图布局三⬇️ -->
-  <view class="swiper-container-two" wx:if="{{(blockArrNew[index]=='BannerBlock')?(true):(false)}}">
+  <view class="swiper-container-two" wx:if="{{(blockArrNew[outIndex]=='BannerBlock')?(true):(false)}}">
     <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
       <block wx:for="{{BannerBlock}}" wx:key="{{item.item_id}}">
         <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
@@ -14,7 +14,7 @@
 
   <!--轮播图布局三⬆️-->
   <!--热门品牌⬇️ -->
-  <view wx:if="{{(blockArrNew[index]=='HotBrandBlock')?(true):(false)}}">
+  <view wx:if="{{(blockArrNew[outIndex]=='HotBrandBlock')?(true):(false)}}">
     <view class="popBand">
       <text class="popBandText"> {{ '热门品牌' }} </text>
     </view>
@@ -26,10 +26,10 @@
       </block>
     </scroll-view>
   </view>
-  <view wx:if="{{(blockArrNew[index]=='HotBrandBlock')?(true):(false)}}" class="scrollBot"></view>
+  <view wx:if="{{(blockArrNew[outIndex]=='HotBrandBlock')?(true):(false)}}" class="scrollBot"></view>
   <!--热门品牌⬆️--->
   <!--五大块layout⬇️-->
-  <view class="fiveBlock" wx:if="{{(blockArrNew[index]=='GoodsBlock')?(true):(false)}}">
+  <view class="fiveBlock" wx:if="{{(blockArrNew[outIndex]=='GoodsBlock')?(true):(false)}}">
     <view class="left">
       <image style="position:absolute;top: 0rpx; left:0rpx; width: 376rpx; height: 362rpx; background-image: {{'url('+GoodsBlock[0].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;border-bottom:2rpx solid #f6f6f6;" data-pop_item="{{GoodsBlock[0]}}"
         catchtap="popBandClick" mode="" src="" binderror="" bindload=""></image>
@@ -56,10 +56,10 @@
   <!-- 主题列表⬆️-->
   <block wx:for="{{blockIdArr}}" wx:for-index="idx" wx:key="{{idx}}">
     <!-- 主题图 -->
-    <image wx:if="{{(blockArrNew[index]=='SubjectBlock'&&index==blockIdArr[idx]&&SubjectBlock[idx].display_style==2)?(true):(false)}}" style="width: 750rpx; height: 596rpx;display:block;margin-top:50rpx;" data-pop_item="{{SubjectBlock[idx]}}" bindtap="popBandClick"
+    <image wx:if="{{(blockArrNew[outIndex]=='SubjectBlock'&&outIndex==blockIdArr[idx]&&SubjectBlock[idx].display_style==2)?(true):(false)}}" style="width: 750rpx; height: 596rpx;display:block;margin-top:50rpx;" data-pop_item="{{SubjectBlock[idx]}}" bindtap="popBandClick"
       mode="widthFix" src="{{SubjectBlock[idx].item_image}}" binderror="" bindload=""></image>
     <!--主题列表⬇️布局三⬇️  -->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock'&&index==blockIdArr[idx])?(true):(false)}}">
+    <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock'&&outIndex==blockIdArr[idx])?(true):(false)}}">
       <view data-target="{{SubjectBlock[idx].item_target.target_id}}" data-item_title="{{SubjectBlock[idx].item_title}}" catchtap="band_touch" class="detailBlockOne" wx:index="{{SubjectBlock[idx].index}}" style="height:84rpx;margin-left:40rpx;margin-top:0rpx;">
         <view class="left" style="height:84rpx;margin-top:40rpx;">
           <text class="a" style="height:56rpx;display: block;float: left;height: 56rpx;width: 464rpx;font-size: 40rpx;color: rgba(25,25,25,1);line-height: 56rpx;"> {{SubjectBlock[idx].item_title}} </text>
@@ -94,17 +94,17 @@
   </block>
 
   <!-- 猜你喜欢⬇️ -->
-  <view wx:if="{{(blockArrNew[index]=='RecommendBlock')?(true):(false)}}">
+  <view wx:if="{{(blockArrNew[outIndex]=='RecommendBlock')?(true):(false)}}">
     <include src="../utils/WNTSRecommend.wxml" />
     <view style="width:100%;height:26rpx;box-sizing:border-box;color:black;background:white;display:block;"></view>
     <include src="../utils/WNTSLoadIcon.wxml" />
   </view>
 
   <!-- 单图主题一 -->
-  <image wx:if="{{(blockArrNew[index]=='SubjectBlock_single')?(true):(false)}}" style="width: 750rpx; height: 596rpx;display:block;" data-pop_item="{{SubjectBlock_single[0]}}" bindtap="popBandClick" mode="widthFix" src="{{SubjectBlock_single[0].item_image}}"
+  <image wx:if="{{(blockArrNew[outIndex]=='SubjectBlock_single')?(true):(false)}}" style="width: 750rpx; height: 596rpx;display:block;" data-pop_item="{{SubjectBlock_single[0]}}" bindtap="popBandClick" mode="widthFix" src="{{SubjectBlock_single[0].item_image}}"
     binderror="" bindload=""></image>
   <!-- 双主题图布局 -->
-  <view wx:if="{{(blockArrNew[index]=='SubjectBlock_double')?(true):(false)}}" style="width:670rpx;height:440rpx;margin-left:40rpx;display:flex;flex-direction:column;flex-wrap:wrap;">
+  <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock_double')?(true):(false)}}" style="width:670rpx;height:440rpx;margin-left:40rpx;display:flex;flex-direction:column;flex-wrap:wrap;">
     <image style="width: 314rpx; height: 440rpx; background-image: {{'url('+SubjectBlock_double[0].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-target="{{SubjectBlock_double[0].item_target.target_id}}" data-item_title="{{SubjectBlock_double[0].item_title}}"
       catchtap="band_touch" mode="" src="" binderror="" bindload=""></image>
     <image style="width: 314rpx; height: 440rpx; background-image: {{'url('+SubjectBlock_double[1].item_image+')'}}; margin-left:40rpx;background-repeat:no-repeat; background-size: 100% 100%;" data-target="{{SubjectBlock_double[1].item_target.target_id}}"
@@ -113,7 +113,7 @@
   <!--主题列表⬇️布局三⬇️  -->
   <view>
     <view style="display:block;">
-      <scroll-view wx:if="{{(blockArrNew[index]=='SubjectBlock_double')?(true):(false)}}" scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap;" class="scrollColumn">
+      <scroll-view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock_double')?(true):(false)}}" scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap;" class="scrollColumn">
         <block wx:for="{{SubjectBlock_double[0].itemData}}" wx:for-item="itemDatas" wx:key="{{index}}">
           <view data-subject="{{itemDatas}}" class="subjectDetail" bindtap="columnClick" style="margin-right:{{(index==9)?(20+'rpx'):(0+'rpx')}}; margin-left:{{(index==0)?(40+'rpx'):(0+'rpx')}};">
             <view style="width:200rpx;height:200rpx;position:relative;">
@@ -134,7 +134,7 @@
     </view>
   </view>
   <!-- 三个主题图的主题（面积最大块的主题图在左边） -->
-  <view wx:if="{{(blockArrNew[index]=='SubjectBlock_three_left')?(true):(false)}}" style="width:670rpx;height:440rpx;margin-left:40rpx; margin-top:40rpx;display:flex;flex-direction:column;flex-wrap:wrap;">
+  <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock_three_left')?(true):(false)}}" style="width:670rpx;height:440rpx;margin-left:40rpx; margin-top:40rpx;display:flex;flex-direction:column;flex-wrap:wrap;">
     <image style="width: 314rpx; height: 440rpx; background-image: {{'url('+SubjectBlock_three_left[0].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{SubjectBlock_three_left[0]}}" bindtap="popBandClick" mode=""
       src="" binderror="" bindload=""></image>
     <image style="width: 316rpx; height: 200rpx; background-image: {{'url('+SubjectBlock_three_left[1].item_image+')'}}; margin-left:40rpx;margin-bottom:40rpx;background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{SubjectBlock_three_left[1]}}"
@@ -143,7 +143,7 @@
       mode="" src="" binderror="" bindload=""></image>
   </view>
   <!--主题列表⬇️布局三⬇️ (三左) -->
-  <view wx:if="{{(blockArrNew[index]=='SubjectBlock_three_left')?(true):(false)}}">
+  <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock_three_left')?(true):(false)}}">
     <view style="display:block;padding-top:30rpx;">
       <scroll-view scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap;" class="scrollColumn">
         <block wx:for="{{SubjectBlock_three_left[0].itemData}}" wx:for-item="itemDatas" wx:key="{{index}}">
@@ -167,7 +167,7 @@
     </view>
   </view>
   <!-- 三个主题图的主题（面积最大块的主题图在上边） -->
-  <view wx:if="{{(blockArrNew[index]=='SubjectBlock_three_top')?(true):(false)}}" style="width:670rpx;height:440rpx;margin-left:40rpx;">
+  <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock_three_top')?(true):(false)}}" style="width:670rpx;height:440rpx;margin-left:40rpx;">
     <image style="width: 670rpx; height: 200rpx; margin-bottom:35rpx;margin-right:40rpx;background-image: {{'url('+SubjectBlock_three_top[0].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;" data-pop_item="{{SubjectBlock_three_top[0]}}"
       bindtap="popBandClick" mode="" src="" binderror="" bindload=""></image>
     <view style="width:670rpx;height:440rpx;display:flex;flex-direction:row;">
@@ -178,7 +178,7 @@
     </view>
   </view>
   <!--主题列表⬇️布局三⬇️  -->
-  <view wx:if="{{(blockArrNew[index]=='SubjectBlock_three_top')?(true):(false)}}">
+  <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock_three_top')?(true):(false)}}">
     <view style="display:block;padding-top:30rpx;">
       <scroll-view scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap;" class="scrollColumn">
         <block wx:for="{{SubjectBlock_three_top[0].itemData}}" wx:for-item="itemDatas" wx:key="{{index}}">
@@ -202,7 +202,7 @@
     </view>
   </view>
   <!-- 为您推荐(n*2) -->
-  <view wx:if="{{(blockArrNew[index]=='SubjectBlock_n_two')?(true):(false)}}" style="margin-bottom:30rpx;">
+  <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock_n_two')?(true):(false)}}" style="margin-bottom:30rpx;">
     <view data-target="{{SubjectBlock_n_two[1].item_target.block_def_item_id}}" data-item_title="{{SubjectBlock_n_two[1].item_target.target_title}}" class="detailBlockOne" wx:index="{{SubjectBlock_n_two[1].index}}" style="height:84rpx;margin-left:40rpx;margin-top:0rpx;">
       <view class="left" style="height:84rpx;margin-top:40rpx;">
         <text class="a" style="height:56rpx;display: block;float: left;height: 56rpx;width: 464rpx;font-size: 40rpx;color: rgba(25,25,25,1);line-height: 56rpx;"> {{(block_title!=='')?(block_title):(SubjectBlock_n_two.block_title)}} </text>
@@ -233,7 +233,7 @@
   <!--新模板-->
   <view>
     <!--高度可浮动的banner-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_11')?(true):(false)}}">
+    <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock_new_11')?(true):(false)}}">
       <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_11.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_11.block_space_bgcolor}};"></view>
       <swiper autoplay="{{true}}" duration="{{500}}" interval="{{3000}}" circular="{{true}}">
         <block wx:for="{{SubjectBlock_new_11.block_items}}" wx:key="index">
@@ -243,64 +243,22 @@
         </block>
       </swiper>
     </view>
-    <!--四块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_12'&&index==1)?(true):(false)}}">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_12_1.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_12_1.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_12_1.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_12_1.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="fourBlocks">
-        <image wx:for="{{SubjectBlock_new_12_1.block_items}}" wx:key="index" wx:if="{{(index==0)?(false):(true)}}" src='{{item.item_image}}' mode="{{(index==0)?('widthFix'):('widthFix')}}" data-pop_item="{{SubjectBlock_new_12_1.block_items[index]}}" bindtap="popBandClick"
-          class="{{(index!==0)?('fourBlocksItem'):('fourBlocksItemOn')}}"></image>
-      </view>
-    </view>
-    <!--四块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_12'&&index==2)?(true):(false)}}">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_12_2.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_12_2.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_12_2.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_12_2.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="fourBlocks">
-        <image wx:for="{{SubjectBlock_new_12_2.block_items}}" wx:key="index" wx:if="{{(index==0)?(false):(true)}}" src='{{item.item_image}}' mode="{{(index==0)?('widthFix'):('widthFix')}}" data-pop_item="{{SubjectBlock_new_12_2.block_items[index]}}" bindtap="popBandClick"
-          class="{{(index!==0)?('fourBlocksItem'):('fourBlocksItemOn')}}"></image>
-      </view>
-    </view>
-    <!--四块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_12'&&index==5)?(true):(false)}}">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_12_5.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_12_5.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_12_5.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_12_5.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="fourBlocks">
-        <image wx:for="{{SubjectBlock_new_12_5.block_items}}" wx:key="index" wx:if="{{(index==0)?(false):(true)}}" src='{{item.item_image}}' mode="{{(index==0)?('widthFix'):('widthFix')}}" data-pop_item="{{SubjectBlock_new_12_5.block_items[index]}}" bindtap="popBandClick"
-          class="{{(index==1)?('fourBlocksItemOn'):('fourBlocksItem')}}"></image>
-      </view>
-    </view>
-    <!--四块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_12'&&index==6)?(true):(false)}}" style="margin-top:-2rpx;">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_12_6.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_12_6.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_12_6.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_12_6.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="fourBlocks">
-        <image wx:for="{{SubjectBlock_new_12_6.block_items}}" wx:key="index" wx:if="{{(index==0)?(false):(true)}}" src='{{item.item_image}}' mode="{{(index==0)?('widthFix'):('widthFix')}}" data-pop_item="{{SubjectBlock_new_12_6.block_items[index]}}" bindtap="popBandClick"
-          class="{{(index==1)?('fourBlocksItemOn'):('fourBlocksItem')}}"></image>
-      </view>
-    </view>
-    <!--四块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_12'&&index==9)?(true):(false)}}">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_12_9.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_12_9.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_12_9.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_12_9.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="fourBlocks">
-        <image wx:for="{{SubjectBlock_new_12_9.block_items}}" wx:key="index" wx:if="{{(index==0)?(false):(true)}}" src='{{item.item_image}}' mode="{{(index==0)?('widthFix'):('widthFix')}}" data-pop_item="{{SubjectBlock_new_12_9.block_items[index]}}" bindtap="popBandClick"
-          class="{{(index==1)?('fourBlocksItemOn'):('fourBlocksItem')}}"></image>
-      </view>
-    </view>
 
     <!--四块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_12'&&index==10)?(true):(false)}}">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_12_10.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_12_10.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_12_10.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_12_10.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="fourBlocks">
-        <image wx:for="{{SubjectBlock_new_12_10.block_items}}" wx:key="index" wx:if="{{(index==0)?(false):(true)}}" src='{{item.item_image}}' mode="{{(index==0)?('widthFix'):('widthFix')}}" data-pop_item="{{SubjectBlock_new_12_10.block_items[index]}}" bindtap="popBandClick"
-          class="{{(index==1)?('fourBlocksItemOn'):('fourBlocksItem')}}"></image>
-      </view>
+    <view wx:if="{{blockArrNew[outIndex]=='SubjectBlock_new_12'}}">
+      <block wx:for="{{SubjectBlock_new_12}}" wx:key="block_location">
+        <view wx:if="{{(outIndex==(item.block_location-1))?(true):(false)}}">
+          <view style="height:30rpx;width:750rpx;display:{{(item.block_space_show==1)?('block'):('none')}};background:{{item.block_space_bgcolor}}"></view>
+          <image src='{{item.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{item.block_items[0]}}" bindtap="popBandClick"></image>
+          <view class="fourBlocks">
+            <image wx:for="{{item.block_items}}" wx:key="index" wx:if="{{(index==0)?(false):(true)}}" src='{{item.item_image}}' mode="{{(index==0)?('widthFix'):('widthFix')}}" data-pop_item="{{item.block_items[index]}}" bindtap="popBandClick" class="{{(index!==0)?('fourBlocksItem'):('fourBlocksItemOn')}}"></image>
+          </view>
+        </view>
+      </block>
     </view>
 
     <!--五块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_13')?(true):(false)}}">
+    <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock_new_13')?(true):(false)}}">
       <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_13.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_13.block_space_bgcolor}}"></view>
       <image src='{{SubjectBlock_new_13.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_13.block_items[0]}}" bindtap="popBandClick"></image>
       <view class="fiveBlocks">
@@ -312,130 +270,31 @@
         </view>
       </view>
     </view>
-    <!--六块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_14'&&index==2)?(true):(false)}}" style="overflow:hidden;">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_14_2.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_14_2.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_14_2.block_items[0].item_image}}' mode="widthFix" style='width:751rpx;height:88rpx;display:block;margin-bottom:-1rpx;' data-pop_item="{{SubjectBlock_new_14_2.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="sixBlocks">
-        <image src='{{SubjectBlock_new_14_2.block_items[1].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_2.block_items[1]}}" bindtap="popBandClick" class="sixBlocksItemOne" style="height:{{(index==0)?(60+'rpx'):(250+'rpx')}};margin-right:-1rpx;"></image>
-        <view class="sixBlocksMiniOne">
-          <image src='{{SubjectBlock_new_14_2.block_items[2].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_2.block_items[2]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_2.block_items[3].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_2.block_items[3]}}" bindtap="popBandClick"></image>
-        </view>
-        <image src='{{SubjectBlock_new_14_2.block_items[4].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_2.block_items[4]}}" bindtap="popBandClick" class="sixBlocksItemTwo" style="height:{{(index==0)?(60+'rpx'):(250+'rpx')}};" style="margin-left:0rpx;"></image>
-        <view class="sixBlocksMiniTwo">
-          <image src='{{SubjectBlock_new_14_2.block_items[5].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_2.block_items[5]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_2.block_items[6].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_2.block_items[6]}}" bindtap="popBandClick"></image>
-        </view>
-      </view>
-    </view>
 
     <!--六块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_14'&&index==3)?(true):(false)}}" style="overflow:hidden;">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_14_3.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_14_3.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_14_3.block_items[0].item_image}}' mode="widthFix" style='width:751rpx;height:88rpx;display:block;margin-bottom:-1rpx;' data-pop_item="{{SubjectBlock_new_14_3.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="sixBlocks">
-        <image src='{{SubjectBlock_new_14_3.block_items[1].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_3.block_items[1]}}" bindtap="popBandClick" class="sixBlocksItemOne" style="height:{{(index==0)?(60+'rpx'):(250+'rpx')}};margin-right:-1rpx;"></image>
-        <view class="sixBlocksMiniOne">
-          <image src='{{SubjectBlock_new_14_3.block_items[2].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_3.block_items[2]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_3.block_items[3].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_3.block_items[3]}}" bindtap="popBandClick"></image>
+    <view wx:if="{{blockArrNew[outIndex]=='SubjectBlock_new_14'}}">
+      <block wx:for="{{SubjectBlock_new_14}}" wx:key="block_location">
+        <view wx:if="{{(outIndex==(item.block_location-1))?(true):(false)}}" style="overflow:hidden;">
+          <view style="height:30rpx;width:750rpx;display:{{(item.block_space_show==1)?('block'):('none')}};background:{{item.block_space_bgcolor}}"></view>
+          <image src='{{item.block_items[0].item_image}}' mode="widthFix" style='width:751rpx;height:88rpx;display:block;margin-bottom:-1rpx;' data-pop_item="{{item.block_items[0]}}" bindtap="popBandClick"></image>
+          <view class="sixBlocks">
+            <image src='{{item.block_items[1].item_image}}' mode='widthFix' data-pop_item="{{item.block_items[1]}}" bindtap="popBandClick" class="sixBlocksItemOne" style="height:{{(index==0)?(60+'rpx'):(250+'rpx')}};margin-right:-1rpx;"></image>
+            <view class="sixBlocksMiniOne">
+              <image src='{{item.block_items[2].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{item.block_items[2]}}" bindtap="popBandClick"></image>
+              <image src='{{item.block_items[3].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{item.block_items[3]}}" bindtap="popBandClick"></image>
+            </view>
+            <image src='{{item.block_items[4].item_image}}' mode='widthFix' data-pop_item="{{item.block_items[4]}}" bindtap="popBandClick" class="sixBlocksItemTwo" style="height:{{(index==0)?(60+'rpx'):(250+'rpx')}};" style="margin-left:0rpx;"></image>
+            <view class="sixBlocksMiniTwo">
+              <image src='{{item.block_items[5].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{item.block_items[5]}}" bindtap="popBandClick"></image>
+              <image src='{{item.block_items[6].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{item.block_items[6]}}" bindtap="popBandClick"></image>
+            </view>
+          </view>
         </view>
-        <image src='{{SubjectBlock_new_14_3.block_items[4].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_3.block_items[4]}}" bindtap="popBandClick" class="sixBlocksItemTwo" style="height:{{(index==0)?(60+'rpx'):(250+'rpx')}};margin-left:0rpx;"></image>
-        <view class="sixBlocksMiniTwo">
-          <image src='{{SubjectBlock_new_14_3.block_items[5].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_3.block_items[5]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_3.block_items[6].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_3.block_items[6]}}" bindtap="popBandClick"></image>
-        </view>
-      </view>
-    </view>
-    <!--六块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_14'&&index==5)?(true):(false)}}" style="overflow:hidden;">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_14_5.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_14_5.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_14_5.block_items[0].item_image}}' mode="widthFix" style='width:751rpx;height:88rpx;display:block;margin-bottom:-1rpx;' data-pop_item="{{SubjectBlock_new_14_5.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="sixBlocks">
-        <image src='{{SubjectBlock_new_14_5.block_items[1].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_5.block_items[1]}}" bindtap="popBandClick" class="sixBlocksItemOne" style="height:{{(index==0)?(60+'rpx'):(250+'rpx')}};margin-right:-1rpx;"></image>
-        <view class="sixBlocksMiniOne">
-          <image src='{{SubjectBlock_new_14_5.block_items[2].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_5.block_items[2]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_5.block_items[3].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_5.block_items[3]}}" bindtap="popBandClick"></image>
-        </view>
-        <image src='{{SubjectBlock_new_14_5.block_items[4].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_5.block_items[4]}}" bindtap="popBandClick" class="sixBlocksItemTwo" style="height:{{(index==0)?(60+'rpx'):(250+'rpx')}};margin-left:0rpx;"></image>
-        <view class="sixBlocksMiniTwo">
-          <image src='{{SubjectBlock_new_14_5.block_items[5].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_5.block_items[5]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_5.block_items[6].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_5.block_items[6]}}" bindtap="popBandClick"></image>
-        </view>
-      </view>
-    </view>
-
-    <!--六块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_14'&&index==6)?(true):(false)}}" style="overflow:hidden;">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_14_6.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_14_6.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_14_6.block_items[0].item_image}}' mode="widthFix" style='width:751rpx;height:88rpx;display:block;margin-bottom:-1rpx;' data-pop_item="{{SubjectBlock_new_14_6.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="sixBlocks">
-        <image src='{{SubjectBlock_new_14_6.block_items[1].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_6.block_items[1]}}" bindtap="popBandClick" class="sixBlocksItemOne" style="height:{{(index==0)?(60+'rpx'):(250+'rpx')}};margin-right:-1rpx;"></image>
-        <view class="sixBlocksMiniOne">
-          <image src='{{SubjectBlock_new_14_6.block_items[2].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_6.block_items[2]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_6.block_items[3].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_6.block_items[3]}}" bindtap="popBandClick"></image>
-        </view>
-        <image src='{{SubjectBlock_new_14_6.block_items[4].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_6.block_items[4]}}" bindtap="popBandClick" class="sixBlocksItemTwo" style="width:height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
-        <view class="sixBlocksMiniTwo">
-          <image src='{{SubjectBlock_new_14_6.block_items[5].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_6.block_items[5]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_6.block_items[6].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_6.block_items[6]}}" bindtap="popBandClick"></image>
-        </view>
-      </view>
-    </view>
-    <!--六块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_14'&&index==7)?(true):(false)}}" style="overflow:hidden;">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_14_7.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_14_7.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_14_7.block_items[0].item_image}}' mode="widthFix" style='width:751rpx;display:block;margin-bottom:-1rpx;' data-pop_item="{{SubjectBlock_new_14_7.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="sixBlocks">
-        <image src='{{SubjectBlock_new_14_7.block_items[1].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_7.block_items[1]}}" bindtap="popBandClick" class="sixBlocksItemOne" style="height:{{(index==0)?(60+'rpx'):(250+'rpx')}};margin-right:-1rpx;"></image>
-        <view class="sixBlocksMiniOne">
-          <image src='{{SubjectBlock_new_14_7.block_items[2].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_7.block_items[2]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_7.block_items[3].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_7.block_items[3]}}" bindtap="popBandClick"></image>
-        </view>
-        <image src='{{SubjectBlock_new_14_7.block_items[4].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_7.block_items[4]}}" bindtap="popBandClick" class="sixBlocksItemTwo" style="width:height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
-        <view class="sixBlocksMiniTwo">
-          <image src='{{SubjectBlock_new_14_7.block_items[5].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_7.block_items[5]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_7.block_items[6].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_7.block_items[6]}}" bindtap="popBandClick"></image>
-        </view>
-      </view>
-    </view>
-    <!--六块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_14'&&index==8)?(true):(false)}}" style="overflow:hidden;">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_14_8.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_14_8.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_14_8.block_items[0].item_image}}' mode="widthFix" style='width:751rpx;display:block;margin-bottom:-1rpx;' data-pop_item="{{SubjectBlock_new_14_8.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="sixBlocks">
-        <image src='{{SubjectBlock_new_14_8.block_items[1].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_8.block_items[1]}}" bindtap="popBandClick" class="sixBlocksItemOne" style="height:{{(index==0)?(60+'rpx'):(250+'rpx')}};margin-right:-1rpx;"></image>
-        <view class="sixBlocksMiniOne">
-          <image src='{{SubjectBlock_new_14_8.block_items[2].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_8.block_items[2]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_8.block_items[3].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_8.block_items[3]}}" bindtap="popBandClick"></image>
-        </view>
-        <image src='{{SubjectBlock_new_14_8.block_items[4].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_8.block_items[4]}}" bindtap="popBandClick" class="sixBlocksItemTwo" style="width:height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
-        <view class="sixBlocksMiniTwo">
-          <image src='{{SubjectBlock_new_14_8.block_items[5].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_8.block_items[5]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_8.block_items[6].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_8.block_items[6]}}" bindtap="popBandClick"></image>
-        </view>
-      </view>
-    </view>
-    <!--六块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_14'&&index==9)?(true):(false)}}" style="overflow:hidden;">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_14_9.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_14_9.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_14_9.block_items[0].item_image}}' mode="widthFix" style='width:751rpx;display:block;margin-bottom:-1rpx;' data-pop_item="{{SubjectBlock_new_14_9.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="sixBlocks">
-        <image src='{{SubjectBlock_new_14_9.block_items[1].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_9.block_items[1]}}" bindtap="popBandClick" class="sixBlocksItemOne" style="height:{{(index==0)?(60+'rpx'):(250+'rpx')}};margin-right:-1rpx;"></image>
-        <view class="sixBlocksMiniOne">
-          <image src='{{SubjectBlock_new_14_9.block_items[2].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_9.block_items[2]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_9.block_items[3].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_9.block_items[3]}}" bindtap="popBandClick"></image>
-        </view>
-        <image src='{{SubjectBlock_new_14_9.block_items[4].item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_14_9.block_items[4]}}" bindtap="popBandClick" class="sixBlocksItemTwo" style="width:height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
-        <view class="sixBlocksMiniTwo">
-          <image src='{{SubjectBlock_new_14_9.block_items[5].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_14_9.block_items[5]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_14_9.block_items[6].item_image}}' mode="scaleToFill" style='width:187rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_14_9.block_items[6]}}" bindtap="popBandClick"></image>
-        </view>
-      </view>
+      </block>
     </view>
 
     <!--七块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_15')?(true):(false)}}">
+    <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock_new_15')?(true):(false)}}">
       <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_15.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_15.block_space_bgcolor}}"></view>
       <image src='{{SubjectBlock_new_15.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_15.block_items[0]}}" bindtap="popBandClick"></image>
       <view class="sevenBlocks">
@@ -447,49 +306,34 @@
         </view>
       </view>
     </view>
-    <!--八块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_16'&&index==1)?(true):(false)}}">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_16_1.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_16_1.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_16_1.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_16_1.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="eightBlocks">
-        <image src='{{SubjectBlock_new_16_1.block_items[1].item_image}}' mode='scaleToFill' data-pop_item="{{SubjectBlock_new_16_1.block_items[1]}}" bindtap="popBandClick" class="eightBlocksItem" style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
-        <image src='{{SubjectBlock_new_16_1.block_items[2].item_image}}' mode='scaleToFill' data-pop_item="{{SubjectBlock_new_16_1.block_items[2]}}" bindtap="popBandClick" class="eightBlocksItem" style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
-        <view class="eightBlocksMiniOne">
-          <image src='{{SubjectBlock_new_16_1.block_items[3].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_16_1.block_items[3]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_16_1.block_items[4].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_16_1.block_items[4]}}" bindtap="popBandClick"></image>
-        </view>
-        <image src='{{SubjectBlock_new_16_1.block_items[5].item_image}}' mode='scaleToFill' data-pop_item="{{SubjectBlock_new_16_1.block_items[5]}}" bindtap="popBandClick" class="eightBlocksItem" style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
-        <image src='{{SubjectBlock_new_16_1.block_items[6].item_image}}' mode='scaleToFill' data-pop_item="{{SubjectBlock_new_16_1.block_items[6]}}" bindtap="popBandClick" class="eightBlocksItem" style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
-        <view class="eightBlocksMiniTwo">
-          <image src='{{SubjectBlock_new_16_1.block_items[7].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_16_1.block_items[7]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_16_1.block_items[8].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_16_1.block_items[8]}}" bindtap="popBandClick"></image>
-        </view>
-      </view>
-    </view>
 
     <!--八块精品-->
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_16'&&index==8)?(true):(false)}}">
-      <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_16_8.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_16_8.block_space_bgcolor}}"></view>
-      <image src='{{SubjectBlock_new_16_8.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_16_8.block_items[0]}}" bindtap="popBandClick"></image>
-      <view class="eightBlocks">
-        <image src='{{SubjectBlock_new_16_8.block_items[1].item_image}}' mode='scaleToFill' data-pop_item="{{SubjectBlock_new_16_8.block_items[1]}}" bindtap="popBandClick" class="eightBlocksItem" style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
-        <image src='{{SubjectBlock_new_16_8.block_items[2].item_image}}' mode='scaleToFill' data-pop_item="{{SubjectBlock_new_16_8.block_items[2]}}" bindtap="popBandClick" class="eightBlocksItem" style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
-        <view class="eightBlocksMiniOne">
-          <image src='{{SubjectBlock_new_16_8.block_items[3].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_16_8.block_items[3]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_16_8.block_items[4].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_16_8.block_items[4]}}" bindtap="popBandClick"></image>
+    <view wx:if="{{blockArrNew[outIndex]=='SubjectBlock_new_16'}}">
+      <block wx:for="{{SubjectBlock_new_16}}" wx:key="block_location">
+        <view wx:if="{{(outIndex==(item.block_location-1))?(true):(false)}}">
+          <view style="height:30rpx;width:750rpx;display:{{(item.block_space_show==1)?('block'):('none')}};background:{{item.block_space_bgcolor}}"></view>
+          <image src='{{item.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{item.block_items[0]}}" bindtap="popBandClick"></image>
+          <view class="eightBlocks">
+            <image src='{{item.block_items[1].item_image}}' mode='scaleToFill' data-pop_item="{{item.block_items[1]}}" bindtap="popBandClick" class="eightBlocksItem" style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
+            <image src='{{item.block_items[2].item_image}}' mode='scaleToFill' data-pop_item="{{item.block_items[2]}}" bindtap="popBandClick" class="eightBlocksItem" style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
+            <view class="eightBlocksMiniOne">
+              <image src='{{item.block_items[3].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{item.block_items[3]}}" bindtap="popBandClick"></image>
+              <image src='{{item.block_items[4].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{item.block_items[4]}}" bindtap="popBandClick"></image>
+            </view>
+            <image src='{{item.block_items[5].item_image}}' mode='scaleToFill' data-pop_item="{{item.block_items[5]}}" bindtap="popBandClick" class="eightBlocksItem" style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
+            <image src='{{item.block_items[6].item_image}}' mode='scaleToFill' data-pop_item="{{item.block_items[6]}}" bindtap="popBandClick" class="eightBlocksItem" style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
+            <view class="eightBlocksMiniTwo">
+              <image src='{{item.block_items[7].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{item.block_items[7]}}" bindtap="popBandClick"></image>
+              <image src='{{item.block_items[8].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{item.block_items[8]}}" bindtap="popBandClick"></image>
+            </view>
+          </view>
         </view>
-        <image src='{{SubjectBlock_new_16_8.block_items[5].item_image}}' mode='scaleToFill' data-pop_item="{{SubjectBlock_new_16_8.block_items[5]}}" bindtap="popBandClick" class="eightBlocksItem" style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
-        <image src='{{SubjectBlock_new_16_8.block_items[6].item_image}}' mode='scaleToFill' data-pop_item="{{SubjectBlock_new_16_8.block_items[6]}}" bindtap="popBandClick" class="eightBlocksItem" style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
-        <view class="eightBlocksMiniTwo">
-          <image src='{{SubjectBlock_new_16_8.block_items[7].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_16_8.block_items[7]}}" bindtap="popBandClick"></image>
-          <image src='{{SubjectBlock_new_16_8.block_items[8].item_image}}' mode="scaleToFill" style='width:190rpx;height:250rpx;display:block; position:absolute;top:0rpx;right:0rpx;' data-pop_item="{{SubjectBlock_new_16_8.block_items[8]}}" bindtap="popBandClick"></image>
-        </view>
-      </view>
+      </block>
     </view>
 
     <!--九块精品-->
 
-    <view wx:if="{{(blockArrNew[index]=='SubjectBlock_new_17')?(true):(false)}}">
+    <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock_new_17')?(true):(false)}}">
       <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_17.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_17.block_space_bgcolor}}"></view>
       <image src='{{SubjectBlock_new_17.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_17.block_items[0]}}" bindtap="popBandClick"></image>
       <view class="nineBlocks">
@@ -499,194 +343,25 @@
     </view>
   </view>
   <!--新模板-->
-  <!--轮播图布局一⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==0)?(true):(false)}}" style="margin-top:84rpx;">
-    <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{BannerBlock_0.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
+  <!-- 轮播图布局 -->
+  <view wx:if="{{blockArrNew[outIndex]=='BannerBlock'}}">
+    <block wx:for="{{BannerBlockArr}}" wx:key="block_location">
+      <view class="swiper-container-one" wx:if="{{(outIndex==(item.block_location-1))?(true):(false)}}" style="{{(outIndex==0)?('margin-top:84rpx;'):('margin-top:0rpx;')}}">
+        <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+          <block wx:for="{{item.block_items}}" wx:for-item="sonItem" wx:key="{{sonItem.item_id}}">
+            <swiper-item data-pop_item="{{sonItem}}" catchtap="popBandClick">
+              <image mode="widthFix" src="{{sonItem.item_image}}" class="img" />
+            </swiper-item>
+          </block>
+        </swiper>
+      </view>
+    </block>
   </view>
-  <!--轮播图布局一⬆️-->
+  <!-- 轮播图布局 -->
 
-  <!--轮播图布局二⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==1)?(true):(false)}}">
-    <swiper class="swiper">
-      <block wx:for="{{BannerBlock_1.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局二⬆️-->
-  <!--轮播图布局三⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==2)?(true):(false)}}">
-    <swiper class="swiper">
-      <block wx:for="{{BannerBlock_2.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局三⬆️-->
-  <!--轮播图布局一⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==3)?(true):(false)}}" style="margin-top:84rpx;">
-    <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{BannerBlock_3.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局一⬆️-->
-
-  <!--轮播图布局二⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==4)?(true):(false)}}">
-    <swiper class="swiper">
-      <block wx:for="{{BannerBlock_4.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局二⬆️-->
-  <!--轮播图布局三⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==5)?(true):(false)}}">
-    <swiper class="swiper">
-      <block wx:for="{{BannerBlock_5.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局三⬆️-->
-  <!--轮播图布局一⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==6)?(true):(false)}}" style="margin-top:84rpx;">
-    <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{BannerBlock_6.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局一⬆️-->
-
-  <!--轮播图布局二⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==7)?(true):(false)}}">
-    <swiper class="swiper">
-      <block wx:for="{{BannerBlock_7.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局二⬆️-->
-  <!--轮播图布局三⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==8)?(true):(false)}}">
-    <swiper class="swiper">
-      <block wx:for="{{BannerBlock_8.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局三⬆️-->
-  <!--轮播图布局一⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==9)?(true):(false)}}" style="margin-top:84rpx;">
-    <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{BannerBlock_9.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局一⬆️-->
-
-  <!--轮播图布局二⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==10)?(true):(false)}}">
-    <swiper class="swiper">
-      <block wx:for="{{BannerBlock_10.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局二⬆️-->
-  <!--轮播图布局三⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==11)?(true):(false)}}">
-    <swiper class="swiper">
-      <block wx:for="{{BannerBlock_11.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局三⬆️-->
-  <!--轮播图布局一⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==12)?(true):(false)}}" style="margin-top:84rpx;">
-    <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{BannerBlock_12.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局一⬆️-->
-
-  <!--轮播图布局二⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==13)?(true):(false)}}">
-    <swiper class="swiper">
-      <block wx:for="{{BannerBlock_13.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局二⬆️-->
-  <!--轮播图布局三⬇️ -->
-  <view class="swiper-container-one" wx:if="{{(blockArrNew[index]=='BannerBlock'&&index==14)?(true):(false)}}">
-    <swiper class="swiper">
-      <block wx:for="{{BannerBlock_14.block_items}}" wx:key="{{item.item_id}}">
-        <swiper-item data-pop_item="{{item}}" catchtap="popBandClick">
-          <!--src="{{item.item_image'?imageView2/2/w/800'}}"-->
-          <image mode="widthFix" src="{{item.item_image}}" class="img" />
-        </swiper-item>
-      </block>
-    </swiper>
-  </view>
-  <!--轮播图布局三⬆️-->
 
   <!-- 主题列表⬇️ -->
-  <view wx:if="{{(blockArrNew[index]=='SubjectBlock')?(true):(false)}}">
+  <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock')?(true):(false)}}">
     <block wx:for="{{SubjectBlock}}" wx:key="{{index}}">
       <!--主题列表⬇️布局一⬇️  -->
       <view class="detailBlockOne" wx:index="{{item.index}}" data-target="{{item.item_target.target_id}}" data-item_title="{{item.item_title}}" catchtap="band_touch">
@@ -718,16 +393,16 @@
         </view>
       </scroll-view>
     </block>
-    <view class='loading' style="width: 750rpx;height:40rpx;display:block; font-size: 28rpx; color: #666; line-height: 40rpx; text-align: center;margin-bottom:30rpx;" wx:if="{{SubjectBlockShow&&(blockArrNew[index]=='SubjectBlock')?(true):(false)}}">{{'加载更多...'}}</view>
+    <view class='loading' style="width: 750rpx;height:40rpx;display:block; font-size: 28rpx; color: #666; line-height: 40rpx; text-align: center;margin-bottom:30rpx;" wx:if="{{SubjectBlockShow&&(blockArrNew[outIndex]=='SubjectBlock')?(true):(false)}}">{{'加载更多...'}}</view>
     <view class='loading' style="width: 750rpx;height:40rpx;display:block; font-size: 28rpx; color: #666; line-height: 40rpx; text-align: center;margin-bottom:30rpx;" wx:if="{{!SubjectBlockShow}}"></view>
   </view>
 
 
   <!-- 猜你喜欢 -->
-  <view class="guessYouLike" wx:if="{{((blockArrNew[index]=='RecommendBlock'||guessLikeStartLoading==ture)&&startLoading==true)?(true):(false)}}" style="margin-top:50rpx;">
+  <view class="guessYouLike" wx:if="{{((blockArrNew[outIndex]=='RecommendBlock'||guessLikeStartLoading==ture)&&startLoading==true)?(true):(false)}}" style="margin-top:50rpx;">
     <text class="a" style="width:{{(28*5+'rpx')}};"> {{ '猜你喜欢' }} </text>
   </view>
-  <view class="guessYouLikeDetailLayout" wx:if="{{startLoading==true&&(blockArrNew[index]=='RecommendBlock')?(true):(false)}}">
+  <view class="guessYouLikeDetailLayout" wx:if="{{startLoading==true&&(blockArrNew[outIndex]=='RecommendBlock')?(true):(false)}}">
     <view class="{{((index+1)%2==0)?('guessYouLike-items-right'):('guessYouLike-items')}}" wx:for="{{guessLike}}" wx:key="{{item.id}}">
       <view bindtap='guessLike_item' data-item='{{item}}'>
         <view class="guessLikeLayout">
@@ -752,10 +427,10 @@
       </view>
     </view>
   </view>
-  <view class='loading' style="width: 750rpx;height:40rpx;display:block; font-size: 28rpx; color: #666; line-height: 40rpx; text-align: center; margin-bottom:40rpx;" wx:if="{{startLoading==true&&(blockArrNew[index]=='RecommendBlock')?(true):(false)}}">{{loaddingContext}}</view>
+  <view class='loading' style="width: 750rpx;height:40rpx;display:block; font-size: 28rpx; color: #666; line-height: 40rpx; text-align: center; margin-bottom:40rpx;" wx:if="{{startLoading==true&&(blockArrNew[outIndex]=='RecommendBlock')?(true):(false)}}">{{loaddingContext}}</view>
 </view>
 <!--热门品牌⬇️ -->
-<view wx:if="{{(blockArrNew[index]=='HotBrandBlock')?(true):(false)}}">
+<view wx:if="{{(blockArrNew[outIndex]=='HotBrandBlock')?(true):(false)}}">
   <view class="popBand">
     <text class="popBandText"> {{ '热门品牌' }} </text>
   </view>
@@ -771,9 +446,9 @@
 <!-- 主题列表⬆️-->
 <!-- <block wx:for="{{blockIdArr}}" wx:for-index="idx" wx:key="{{idx}}"> -->
 <!-- 主题图 -->
-<!-- <image wx:if="{{(blockArrNew[index]=='SubjectBlock'&&index==blockIdArr[idx]&&SubjectBlock[idx].display_style==2)?(true):(false)}}" style="width: 750rpx; height: 596rpx;display:block;margin-top:50rpx;" data-pop_item="{{SubjectBlock[idx]}}" bindtap="popBandClick" mode="widthFix" src="{{SubjectBlock[idx].item_image}}" binderror="" bindload=""></image> -->
+<!-- <image wx:if="{{(blockArrNew[outIndex]=='SubjectBlock'&&outIndex==blockIdArr[idx]&&SubjectBlock[idx].display_style==2)?(true):(false)}}" style="width: 750rpx; height: 596rpx;display:block;margin-top:50rpx;" data-pop_item="{{SubjectBlock[idx]}}" bindtap="popBandClick" mode="widthFix" src="{{SubjectBlock[idx].item_image}}" binderror="" bindload=""></image> -->
 <!--主题列表⬇️布局三⬇️ -->
-<!-- <view wx:if="{{(blockArrNew[index]=='SubjectBlock'&&index==blockIdArr[idx])?(true):(false)}}">
+<!-- <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock'&&outIndex==blockIdArr[idx])?(true):(false)}}">
       <view data-target="{{SubjectBlock[idx].item_target.target_id}}" data-item_title="{{SubjectBlock[idx].item_title}}" catchtap="band_touch" class="detailBlockOne" wx:index="{{SubjectBlock[idx].index}}" style="height:84rpx;margin-left:40rpx;margin-top:0rpx;">
         <view class="left" style="height:84rpx;margin-top:40rpx;">
           <text class="a" style="height:56rpx;display: block;float: left;height: 56rpx;width: 464rpx;font-size: 40rpx;color: rgba(25,25,25,1);line-height: 56rpx;"> {{SubjectBlock[idx].item_title}} </text>
@@ -809,8 +484,8 @@
 
 <!--五大块layout布局一⬇️-->
 <!-- <block wx:for="{{blockIdArr}}" wx:for-index="idx" wx:key="{{idx}}"> -->
-<view wx:if="{{(blockArrNew[index]=='GoodsBlock'&&index==blockIdArr[0])?(true):(false)}}" style="height:30rpx;width:750rpx;display:{{(GoodsBlockObjArr[0].block_space_show==1)?('block'):('none')}};background:{{GoodsBlockObjArr[0].block_space_bgcolor}}"></view>
-<view class="fiveBlock" wx:if="{{(blockArrNew[index]=='GoodsBlock'&&index==blockIdArr[0])?(true):(false)}}">
+<view wx:if="{{(blockArrNew[outIndex]=='GoodsBlock'&&outIndex==blockIdArr[0])?(true):(false)}}" style="height:30rpx;width:750rpx;display:{{(GoodsBlockObjArr[0].block_space_show==1)?('block'):('none')}};background:{{GoodsBlockObjArr[0].block_space_bgcolor}}"></view>
+<view class="fiveBlock" wx:if="{{(blockArrNew[outIndex]=='GoodsBlock'&&outIndex==blockIdArr[0])?(true):(false)}}">
   <view class="left">
     <image style="position:absolute;top: 0rpx; left:0rpx; width: 376rpx; height: 364rpx; background-image: {{'url('+GoodsBlockArrOne[0].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;border-bottom：2rpx solid #f6f6f6;" data-pop_item="{{GoodsBlockArrOne[0]}}"
       catchtap="popBandClick" mode="" src="" binderror="" bindload=""></image>
@@ -834,8 +509,8 @@
 <!--五大块layout⬆️-->
 <!--五大块layout布局二⬇️-->
 <!-- <block wx:for="{{blockIdArr}}" wx:for-index="idx" wx:key="{{idx}}"> -->
-<view wx:if="{{((blockArrNew[index]=='GoodsBlock'&&index==blockIdArr[0])?(true):(false))&&goodBlocksTurn}}" style="height:30rpx;width:750rpx;display:{{(GoodsBlockObjArr[1].block_space_show==1)?('block'):('none')}};background:{{GoodsBlockObjArr[1].block_space_bgcolor}}"></view>
-<view class="fiveBlock" wx:if="{{((blockArrNew[index]=='GoodsBlock'&&index==blockIdArr[0])?(true):(false))&&goodBlocksTurn}}">
+<view wx:if="{{((blockArrNew[outIndex]=='GoodsBlock'&&outIndex==blockIdArr[0])?(true):(false))&&goodBlocksTurn}}" style="height:30rpx;width:750rpx;display:{{(GoodsBlockObjArr[1].block_space_show==1)?('block'):('none')}};background:{{GoodsBlockObjArr[1].block_space_bgcolor}}"></view>
+<view class="fiveBlock" wx:if="{{((blockArrNew[outIndex]=='GoodsBlock'&&outIndex==blockIdArr[0])?(true):(false))&&goodBlocksTurn}}">
   <view class="left">
     <image style="position:absolute;top: 0rpx; left:0rpx; width: 376rpx; height: 364rpx; background-image: {{'url('+GoodsBlockArrTwo[0].item_image+')'}}; background-repeat:no-repeat; background-size: 100% 100%;border-bottom：2rpx solid #f6f6f6;" data-pop_item="{{GoodsBlockArrTwo[0]}}"
       catchtap="popBandClick" mode="" src="" binderror="" bindload=""></image>

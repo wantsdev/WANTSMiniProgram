@@ -7,8 +7,8 @@ Page({
     band_descp: '',
     band_img: '',
     entitySubjectList: null,
-    randomBackgroundColor:[],
-    subjectItem:null
+    randomBackgroundColor: [],
+    subjectItem: null
   },
 
   /**
@@ -18,9 +18,10 @@ Page({
     var that = this;
     console.log(options);
     var subjectItem = JSON.parse(options.subjectItem);
+    console.log(subjectItem);
     that.setData({
       subjectItem,
-      randomBackgroundColor:['#2F4C52','#414D65','#A3A093','#8F5B56','#DDE8DE','#F2E6F7','#D0F6F9','#F4F6B6','#EFADCD']
+      randomBackgroundColor: ['#2F4C52', '#414D65', '#A3A093', '#8F5B56', '#DDE8DE', '#F2E6F7', '#D0F6F9', '#F4F6B6', '#EFADCD']
     });
     var themeId = subjectItem.themeId;
     var target_title = subjectItem.target_title;
@@ -29,10 +30,10 @@ Page({
         title: target_title,
       })
     }
-    util.requestGet('https://api.wantscart.com/subject/' + themeId, function (data) {
-      console.log(data);
-      var band_descp = data.descp;
-      var band_img = data.imgs[0] || data.cover;
+    util.requestGet('https://api.wantscart.com/subject/' + themeId, function (res) {
+      console.log(res);
+      var band_descp = res.data.descp;
+      var band_img = res.data.imgs[0] || res.data.cover;
       that.setData({
         band_descp: band_descp,
         band_img: band_img
@@ -41,15 +42,47 @@ Page({
     });
 
   },
+  band_descpBingLongTap(e) {
+    console.log(e);
+    var themeId = JSON.stringify(this.data.subjectItem.themeId);
+    wx.showModal({
+      title: '这都被你发现了😀',
+      content: '这个主题的ID是' + themeId + ',复制？',
+      success: function (res) {
+        if (res.confirm) {
+          console.log('用户点击确定')
+          wx.setClipboardData({
+            data: themeId,
+            success: function (res) {
+              wx.getClipboardData({
+                success: function (res) {
+                  wx.showToast({
+                    title: '已复制',
+                    icon: 'success',
+                    duration: 2000
+                  })
+                }
+              })
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
+      }
+    })
+
+  },
   //获取主题下边的商品列表
   getEntityDataWithBand_target_id(band_target_id) {
     var that = this;
     var entitySubjectList = [];
     util.requestGet(util.URL_ROOT + '/aggregator/' + band_target_id + '/41/entity?limit=100', function (res) {
       var dataList = res;
-      for (var i = 0; i < dataList.length; i++) {
+      for (var i = 0; i < dataList.data.length; i++) {
         var entity = {};
-        var product = dataList[i].entity;
+        var product = dataList.data[i].entity;
+        console.log(product);
+        entity.title_prefix_url_label = product.title_prefix_url_label;
         entity.imgs = product.imgs;
         entity.price = product.price;
         entity.small_img = product.small_img;

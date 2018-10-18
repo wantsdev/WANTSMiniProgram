@@ -35,7 +35,11 @@ var PageScroll;
 var s = 0;
 var App_id = "h6ybil3f9xuqws98h4";
 var WNTSToken = require("../../vendor/wafer2-client-sdk/lib/WNTSToken.js");
-var init = function () {
+var BannerBlockArr;
+var SubjectBlock_new_16;
+var SubjectBlock_new_14;
+var SubjectBlock_new_12;
+var init = function() {
   app = getApp();
   blockStatus = {};
   array = [];
@@ -61,6 +65,10 @@ var init = function () {
   subjectArrayItemChunkTotal = [];
   PageScroll;
   s = 0;
+  BannerBlockArr = [];
+  SubjectBlock_new_16 = [];
+  SubjectBlock_new_14 = [];
+  SubjectBlock_new_12 = [];
 };
 /*
 跳转种类
@@ -124,11 +132,11 @@ var getSubjectDataRequest1 = (arr, num, max, callback) => {
     return;
   };
   var subject_target_id_url = util.URL_ROOT + '/aggregator/' + arr[i - 1].item_target.target_id + '/41/entity?limit=10';
-  util.requestGet(subject_target_id_url, function (res) {
+  util.requestGet(subject_target_id_url, function(res) {
     array.push(res);
     turn = 'off';
     getSubjectDataRequest1(arr, num, max, callback);
-  }, function (res) { })
+  }, function(res) {})
 };
 
 var getSubjectDataRequest2 = (arr, callback) => {
@@ -142,11 +150,11 @@ var getSubjectDataRequest2 = (arr, callback) => {
     return;
   };
   var subject_target_id_url = util.URL_ROOT + '/aggregator/' + arr[j - 1].item_target.target_id + '/41/entity?limit=10';
-  util.requestGet(subject_target_id_url, function (res) {
+  util.requestGet(subject_target_id_url, function(res) {
     array2.push(res);
     turn = 'off';
     getSubjectDataRequest2(arr, callback);
-  }, function (res) { })
+  }, function(res) {})
 };
 
 var getSubjectDataRequest3 = (arr, callback) => {
@@ -160,11 +168,11 @@ var getSubjectDataRequest3 = (arr, callback) => {
     return;
   };
   var subject_target_id_url = util.URL_ROOT + '/aggregator/' + arr[k - 1].item_target.target_id + '/41/entity?limit=10';
-  util.requestGet(subject_target_id_url, function (res) {
+  util.requestGet(subject_target_id_url, function(res) {
     array3.push(res);
     turn = 'off';
     getSubjectDataRequest3(arr, callback);
-  }, function (res) { })
+  }, function(res) {})
 };
 
 
@@ -179,23 +187,23 @@ var getSubjectDataRequest4 = (arr, callback) => {
     return;
   };
   var subject_target_id_url = util.URL_ROOT + '/aggregator/' + arr[l - 1].item_target.target_id + '/41/entity?limit=10';
-  util.requestGet(subject_target_id_url, function (res) {
+  util.requestGet(subject_target_id_url, function(res) {
     array4.push(res);
     turn = 'off';
     getSubjectDataRequest4(arr, callback);
-  }, function (res) { })
+  }, function(res) {})
 };
 
 //首页各栏目名数据请求 
-var get_list = function (that) {
-  WNTSLoadIcon.loading(function (res) {
+var get_list = function(that) {
+  WNTSLoadIcon.loading(function(res) {
     that.setData({
       animationData: res,
       show: true
     });
   });
   wx.getSystemInfo({
-    success: function (res) {
+    success: function(res) {
       that.setData({
         winWidth: res.windowWidth,
         winHeight: res.windowHeight
@@ -224,7 +232,7 @@ var get_list = function (that) {
   var miniParterm = that.data.checkOutMiniProgramDataBool ? that.data.MiniProgramDataWithParterm : "";
   var tabUrl = WNTSApi.tabsUrl + miniParterm;
   var newTabUrl = encodeURI(tabUrl);
-  util.requestGet(WNTSApi.tabsUrl + miniParterm, function (res) {
+  util.requestGet(WNTSApi.tabsUrl + miniParterm, function(res) {
     //工厂店的tabName加入
     // var factoryTabName = {
     //   id: 99999,
@@ -238,7 +246,7 @@ var get_list = function (that) {
     var currentTabUrl = WNTSApi.tabIdUrl + (that.data.currentTabId ? that.data.currentTabId : 1) + miniParterm;
     var currentTabUrlNew = util.trim(currentTabUrl);
     //请求整个页面的数据（轮播图、热门品牌、layout、主题）
-    util.requestGet(currentTabUrlNew, function (res) {
+    util.requestGet(currentTabUrlNew, function(res) {
       var data = res.data;
       console.log(data);
       var blocksArr = data.blocks;
@@ -267,7 +275,7 @@ var get_list = function (that) {
         // });
       };
       blocksIdArr = [];
-      WNTSLoadIcon.hidden(function (res) {
+      WNTSLoadIcon.hidden(function(res) {
         that.setData({
           animationData: res,
           show: false
@@ -309,84 +317,7 @@ var get_list = function (that) {
               //判断内容
               var location = blockData.block_location;
               var locationIndex = location - 1;
-              if (location == 1) {
-                that.setData({
-                  BannerBlock_0: blocksArr[locationIndex],
-                });
-              };
-              if (location == 2) {
-                that.setData({
-                  BannerBlock_1: blocksArr[locationIndex],
-                });
-              };
-              if (location == 3) {
-                that.setData({
-                  BannerBlock_2: blocksArr[locationIndex],
-                });
-              };
-              if (location == 4) {
-                that.setData({
-                  BannerBlock_3: blocksArr[locationIndex],
-                });
-              };
-
-              if (location == 5) {
-                that.setData({
-                  BannerBlock_4: blocksArr[locationIndex],
-                });
-              };
-              if (location == 6) {
-                that.setData({
-                  BannerBlock_5: blocksArr[locationIndex],
-                });
-              };
-              if (location == 7) {
-                that.setData({
-                  BannerBlock_6: blocksArr[locationIndex],
-                });
-              };
-
-              if (location == 8) {
-                that.setData({
-                  BannerBlock_7: blocksArr[locationIndex],
-                });
-              };
-              if (location == 9) {
-                that.setData({
-                  BannerBlock_8: blocksArr[locationIndex],
-                });
-              };
-              if (location == 10) {
-                that.setData({
-                  BannerBlock_9: blocksArr[locationIndex],
-                });
-              };
-              if (location == 11) {
-                that.setData({
-                  BannerBlock_10: blocksArr[locationIndex],
-                });
-              };
-              if (location == 12) {
-                that.setData({
-                  BannerBlock_11: blocksArr[locationIndex],
-                });
-              };
-
-              if (location == 13) {
-                that.setData({
-                  BannerBlock_12: blocksArr[locationIndex],
-                });
-              };
-              if (location == 14) {
-                that.setData({
-                  BannerBlock_13: blocksArr[locationIndex],
-                });
-              };
-              if (location == 15) {
-                that.setData({
-                  BannerBlock_14: blocksArr[locationIndex],
-                });
-              };
+              BannerBlockArr.push(blocksArr[locationIndex]);
             }
             break;
           case HotBrandBlock_id:
@@ -408,7 +339,7 @@ var get_list = function (that) {
                 GoodsBlockArrTwo: GoodsBlockArr[1],
                 GoodsBlockObjArr: GoodsBlockObjArr
               });
-              var goodBlocksDataType = typeof (that.data.GoodsBlockArrTwo);
+              var goodBlocksDataType = typeof(that.data.GoodsBlockArrTwo);
               if (goodBlocksDataType == 'undefined') {
                 that.setData({
                   goodBlocksTurn: false
@@ -426,15 +357,50 @@ var get_list = function (that) {
               //主题
               subjectArray = [];
               console.log(blockData);
-              // var location = blockData.block_location;
-              // var locationIndex = location - 1;
-              // if (location == 2) {
-              //   that.setData({
-              //     SubjectBlock_new_12_1: blocksArr[locationIndex],
-              //   });
-              // };
+              var location = blockData.block_location;
+              var locationIndex = location - 1;
+              if (location == 2) {
+                blockData = blocksArr[locationIndex];
+                console.log(blockData);
+                that.setData({});
+              } else if (location == 4) {
+                blockData = blocksArr[locationIndex];
+
+                that.setData({
+                  SubjectBlock_new_3: blocksArr[locationIndex],
+                });
+
+              } else if (location == 6) {
+                blockData = blocksArr[locationIndex];
+
+                that.setData({
+                  SubjectBlock_new_5: blocksArr[locationIndex],
+                });
+              } else if (location == 8) {
+                blockData = blocksArr[locationIndex];
+
+                that.setData({
+                  SubjectBlock_new_7: blocksArr[locationIndex],
+                });
+              } else if (location == 10) {
+                blockData = blocksArr[locationIndex];
+
+                that.setData({
+                  SubjectBlock_new_9: blocksArr[locationIndex],
+                });
+              } else if (location == 11){
+                blockData = blocksArr[locationIndex];
+
+              }else if (location == 12) {
+                blockData = blocksArr[locationIndex];
+
+                that.setData({
+                  SubjectBlock_new_11: blocksArr[locationIndex],
+                });
+              };
 
               subjectArrayItem = blockData.block_items;
+              console.log(subjectArrayItem);
               if (that.data.checkOutMiniProgramDataBool == true) {
                 subjectArrayItems.push(subjectArrayItem[0]);
                 for (var m = 0; m < subjectArrayItems.length; m++) {
@@ -457,7 +423,7 @@ var get_list = function (that) {
                 that.setData({
                   SubjectBlock: subjectArrayItems,
                 });
-
+                console.log(that.data.SubjectBlock);
               } else {
                 for (var m = 0; m < subjectArrayItem.length; m++) {
                   var itemData = [];
@@ -484,42 +450,97 @@ var get_list = function (that) {
               if (!subjectBlock) {
                 return;
               }
+              console.log(subjectArrayItem);
+              // if (subjectArrayItem.length = 1) {
+                // for (var m = 0; m < subjectArrayItems.length; m++) {
+                  // getSubjectDataRequest1(subjectArrayItems[m], 0, subjectArrayItems[m].length, function(res) {
+                  //   for (var i = 0; i < res.length; i++) {
+                  //     var subjectItems = res[i];
+                  //     var itemData = [];
+                  //     for (var j = 0; j < subjectItems.data.length; j++) {
+                  //       var productEntity = subjectItems.data[j].entity;
+                  //       // console.log(productEntity);
+                  //       var newProductEntity = {}; //精简的
+                  //       newProductEntity.title_prefix_url_label = productEntity.title_prefix_url_label;
+                  //       newProductEntity.imgs = productEntity.imgs;
+                  //       newProductEntity.small_img = productEntity.small_img;
+                  //       newProductEntity.price = productEntity.price;
+                  //       newProductEntity.tag_price = productEntity.tag_price;
+                  //       newProductEntity.title = productEntity.title;
+                  //       newProductEntity.id = productEntity.id;
+                  //       newProductEntity.category_id = productEntity.category_id;
+                  //       newProductEntity.promotion = productEntity.promotion;
+                  //       newProductEntity.promotion_id = productEntity.promotion_id;
+                  //       newProductEntity.promotion_label = productEntity.promotion_label;
+                  //       newProductEntity.promotional = productEntity.promotional;
+                  //       newProductEntity.shop_show = that.data.checkOutMiniProgramDataBool;
+                  //       itemData.push(newProductEntity);
+                  //     }
+                  //     subjectArrayItems[m][i].itemData = itemData;
+                  //     subjectArrayItems[m][i].display_style = parseFloat(subjectArrayItems[m][i].display_style);
+                  //   };
+                    // that.guessLikeLoadMore();
+                    //主题列表（set子列表进去）
+                    // that.setData({
+                    //   SubjectBlock: subjectArrayItems[m],
+                    //   SubjectBlockShow: true
+                    // });
+                    // console.log(that.data.SubjectBlock);
+                  // });
+                // };
+                // console.log(subjectArrayItems);
+              // } else {
+                getSubjectDataRequest1(subjectArrayItem, 0, subjectArrayItem.length, function (res) {
+                  for (var i = 0; i < res.length; i++) {
+                    var subjectItems = res[i];
+                    var itemData = [];
+                    for (var j = 0; j < subjectItems.data.length; j++) {
+                      var productEntity = subjectItems.data[j].entity;
+                      // console.log(productEntity);
+                      var newProductEntity = {}; //精简的
+                      newProductEntity.title_prefix_url_label = productEntity.title_prefix_url_label;
+                      newProductEntity.imgs = productEntity.imgs;
+                      newProductEntity.small_img = productEntity.small_img;
+                      newProductEntity.price = productEntity.price;
+                      newProductEntity.tag_price = productEntity.tag_price;
+                      newProductEntity.title = productEntity.title;
+                      newProductEntity.id = productEntity.id;
+                      newProductEntity.category_id = productEntity.category_id;
+                      newProductEntity.promotion = productEntity.promotion;
+                      newProductEntity.promotion_id = productEntity.promotion_id;
+                      newProductEntity.promotion_label = productEntity.promotion_label;
+                      newProductEntity.promotional = productEntity.promotional;
+                      newProductEntity.shop_show = that.data.checkOutMiniProgramDataBool;
+                      itemData.push(newProductEntity);
+                    }
+                    subjectArrayItem[i].itemData = itemData;
+                    subjectArrayItem[i].display_style = parseFloat(subjectArrayItem[i].display_style);
+                  };
+                  that.guessLikeLoadMore();
+                  //主题列表（set子列表进去）
+                  console.log(subjectArrayItem);
+                  var subjectArrayItemChunk = util.chunk(subjectArrayItem, 5)
+                  subjectArrayItemChunkTotal = subjectArrayItemChunkTotal.concat(subjectArrayItemChunk[0]);
+                  if (location == 2) {
 
-              getSubjectDataRequest1(subjectArrayItem, 0, subjectArrayItem.length, function (res) {
-                for (var i = 0; i < res.length; i++) {
-                  var subjectItems = res[i];
-                  var itemData = [];
-                  for (var j = 0; j < subjectItems.data.length; j++) {
-                    var productEntity = subjectItems.data[j].entity;
-                    // console.log(productEntity);
-                    var newProductEntity = {}; //精简的
-                    newProductEntity.title_prefix_url_label = productEntity.title_prefix_url_label;
-                    newProductEntity.imgs = productEntity.imgs;
-                    newProductEntity.small_img = productEntity.small_img;
-                    newProductEntity.price = productEntity.price;
-                    newProductEntity.tag_price = productEntity.tag_price;
-                    newProductEntity.title = productEntity.title;
-                    newProductEntity.id = productEntity.id;
-                    newProductEntity.category_id = productEntity.category_id;
-                    newProductEntity.promotion = productEntity.promotion;
-                    newProductEntity.promotion_id = productEntity.promotion_id;
-                    newProductEntity.promotion_label = productEntity.promotion_label;
-                    newProductEntity.promotional = productEntity.promotional;
-                    newProductEntity.shop_show = that.data.checkOutMiniProgramDataBool;
-                    itemData.push(newProductEntity);
-                  }
-                  subjectArrayItem[i].itemData = itemData;
-                  subjectArrayItem[i].display_style = parseFloat(subjectArrayItem[i].display_style);
-                };
-                that.guessLikeLoadMore();
-                //主题列表（set子列表进去）
-                var subjectArrayItemChunk = util.chunk(subjectArrayItem, 5)
-                subjectArrayItemChunkTotal = subjectArrayItemChunkTotal.concat(subjectArrayItemChunk[0]);
-                that.setData({
-                  SubjectBlock: subjectArrayItemChunkTotal,
-                  SubjectBlockShow: true
+                  } else if (location == 4) {
+
+                  } else if (location == 6) {
+
+                  } else if (location == 8) {
+                  } else if (location == 10) {
+                  } else if (location == 11) {
+                    that.setData({
+                      SubjectBlock_new_10: subjectArrayItemChunkTotal,
+                      SubjectBlockShow: true
+                    });
+
+                  } else if (location == 12) {
+                  };
+
+                  console.log(that.data.SubjectBlock);
                 });
-              });
+              // }
             }
             break;
           case RecommendBlock_id:
@@ -562,7 +583,7 @@ var get_list = function (that) {
               if (!SubjectBlock_double) {
                 return;
               }
-              getSubjectDataRequest4(SubjectBlock_double, function (res) {
+              getSubjectDataRequest4(SubjectBlock_double, function(res) {
                 for (var i = 0; i < res.length; i++) {
                   var subjectItems = res[i];
                   var itemData = [];
@@ -613,7 +634,7 @@ var get_list = function (that) {
               if (!SubjectBlock_three_left) {
                 return;
               }
-              getSubjectDataRequest2(SubjectBlock_three_left, function (res) {
+              getSubjectDataRequest2(SubjectBlock_three_left, function(res) {
                 for (var i = 0; i < res.length; i++) {
                   var subjectItems = res[i];
                   var itemData = [];
@@ -665,7 +686,7 @@ var get_list = function (that) {
               if (!SubjectBlock_three_top) {
                 return;
               }
-              getSubjectDataRequest3(SubjectBlock_three_top, function (res) {
+              getSubjectDataRequest3(SubjectBlock_three_top, function(res) {
                 for (var i = 0; i < res.length; i++) {
                   var subjectItems = res[i];
                   var itemData = [];
@@ -720,41 +741,7 @@ var get_list = function (that) {
               //判断内容
               var location = blockData.block_location;
               var locationIndex = location - 1;
-              if (location == 2) {
-                that.setData({
-                  SubjectBlock_new_12_1: blocksArr[locationIndex],
-                });
-              };
-              if (location == 3) {
-                that.setData({
-                  SubjectBlock_new_12_2: blocksArr[locationIndex],
-                });
-              };
-              if (location == 6) {
-                that.setData({
-                  SubjectBlock_new_12_5: blocksArr[locationIndex],
-                });
-              };
-              if (location == 7) {
-                that.setData({
-                  SubjectBlock_new_12_6: blocksArr[locationIndex],
-                });
-              };
-              if (location == 10) {
-                that.setData({
-                  SubjectBlock_new_12_9: blocksArr[locationIndex],
-                });
-              };
-              if (location == 11) {
-                that.setData({
-                  SubjectBlock_new_12_10: blocksArr[locationIndex],
-                });
-              };
-
-              that.setData({
-                SubjectBlock_new_12: blockData
-              });
-              blockStatus.SubjectBlock_new_12 = that.data.SubjectBlock_new_12;
+              SubjectBlock_new_12.push(blocksArr[locationIndex]);
             }
             break;
           case SubjectBlock_new_13_id:
@@ -771,49 +758,7 @@ var get_list = function (that) {
               //判断内容
               var location = blockData.block_location;
               var locationIndex = location - 1;
-              if (location == 3) {
-                that.setData({
-                  SubjectBlock_new_14_2: blocksArr[locationIndex],
-                  location: 2
-                });
-              };
-
-              if (location == 4) {
-                that.setData({
-                  SubjectBlock_new_14_3: blocksArr[locationIndex],
-                  location: 3
-                });
-              };
-              if (location == 6) {
-                that.setData({
-                  SubjectBlock_new_14_5: blocksArr[locationIndex],
-                  location: 5
-                });
-              };
-              if (location == 7) {
-                that.setData({
-                  SubjectBlock_new_14_6: blocksArr[locationIndex],
-                  location: 6
-                });
-              };
-              if (location == 8) {
-                that.setData({
-                  SubjectBlock_new_14_7: blocksArr[locationIndex],
-                  location: 7
-                });
-              };
-              if (location == 9) {
-                that.setData({
-                  SubjectBlock_new_14_8: blocksArr[locationIndex],
-                  location: 8
-                });
-              };
-              if (location == 10) {
-                that.setData({
-                  SubjectBlock_new_14_9: blocksArr[locationIndex],
-                  location: 9
-                });
-              };
+              SubjectBlock_new_14.push(blocksArr[locationIndex]);
             }
             break;
           case SubjectBlock_new_15_id:
@@ -830,24 +775,7 @@ var get_list = function (that) {
               //判断内容
               var location = blockData.block_location;
               var locationIndex = location - 1;
-              if (location == 2) {
-                that.setData({
-                  SubjectBlock_new_16_1: blocksArr[locationIndex],
-                  location: 1
-                });
-              };
-
-              if (location == 9) {
-                that.setData({
-                  SubjectBlock_new_16_8: blocksArr[locationIndex],
-                  location: 8
-                });
-              };
-
-              that.setData({
-                SubjectBlock_new_16: blockData
-              });
-              blockStatus.SubjectBlock_new_16 = that.data.SubjectBlock_new_16;
+              SubjectBlock_new_16.push(blocksArr[locationIndex]);
             }
             break;
           case SubjectBlock_new_17_id:
@@ -870,10 +798,17 @@ var get_list = function (that) {
             break;
           default:
             break;
-        }
+        };
+        console.log(SubjectBlock_new_12);
+        that.setData({
+          BannerBlockArr,
+          SubjectBlock_new_16,
+          SubjectBlock_new_14,
+          SubjectBlock_new_12,
+        });
       };
-    }, function (res) { });
-  }, function (res) { });
+    }, function(res) {});
+  }, function(res) {});
 };
 
 
@@ -952,13 +887,13 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (option) {
+  onLoad: function(option) {
     var that = this;
     var formIdArr = getApp().globalData.formIdArr;
     //检测是否登录
-    util.checkLoginStatus(function (isLogined) {
+    util.checkLoginStatus(function(isLogined) {
       //登录过 Nothing to do ...
-    }, function (isNotLogin) {
+    }, function(isNotLogin) {
       //未登录 
       // var source = option.source;
       // var sourceValidityBool = util.checkSourceValidityBoolWithSource(source);
@@ -1032,7 +967,7 @@ Page({
     var subjectBlockChunk = util.chunk(subjectArrayItem, 5);
     optionNum = optionNum + 5;
     i = i - 1;
-    getSubjectDataRequest1(subjectArrayItem, optionNum, subjectArrayItem.length, function (res) {
+    getSubjectDataRequest1(subjectArrayItem, optionNum, subjectArrayItem.length, function(res) {
       for (var i = 0; i < res.length; i++) {
         var subjectItems = res[i];
         var itemData = [];
@@ -1132,13 +1067,13 @@ Page({
     };
     var recommendUrl = WNTSApi.recommendApi + '?scene=0&offset=' + that.data.offset +
       '&limit=' + that.data.limit + '&tabId=' + that.data.currentTabId + cuttTags;
-    util.requestGet(recommendUrl, function (res) {
+    util.requestGet(recommendUrl, function(res) {
       // console.log(res.data);
       var temp = util.getGessLikeDataTool(res.data);
       if (res.data.length == 0) {
-        util.requestGet(recommendUrl, function (res) {
+        util.requestGet(recommendUrl, function(res) {
 
-        }, function (res) { });
+        }, function(res) {});
         that.setData({
           loaddingContext: "没有更多啦～"
         });
@@ -1147,9 +1082,9 @@ Page({
       that.setData({
         guessLike: guessLike
       });
-    }, function (data) { });
+    }, function(data) {});
   },
-  imageLoad: function (ev) {
+  imageLoad: function(ev) {
     var that = this;
     // console.log(ev);
     that.setData({
@@ -1158,7 +1093,7 @@ Page({
     });
   },
   //进入商品详情页
-  columnClick: function (event) {
+  columnClick: function(event) {
     var subject_product = event.currentTarget.dataset.subject;
     var subject_product_all = {};
     subject_product_all.title_prefix_url_label = subject_product.title_prefix_url_label;
@@ -1176,7 +1111,7 @@ Page({
     this.navigateToProductDetail(json_string);
   },
   //跳转主题点击更多
-  band_touch: function (e) {
+  band_touch: function(e) {
     var subjectItem = {};
     subjectItem.themeId = e.currentTarget.dataset.target;
     subjectItem.target_title = e.currentTarget.dataset.item_title;
@@ -1247,17 +1182,17 @@ Page({
   },
   serviceMsg(e) {
     var that = this;
-    util.checkLoginStatus(function (isLogined) {
+    util.checkLoginStatus(function(isLogined) {
       //联系商家
 
-    }, function (isNotLogin) {
+    }, function(isNotLogin) {
       wx.navigateTo({
         url: '../WNTSLoginPage/WNTSLoginPage?fromTo=home'
       })
     });
   },
   //单纯跳转搜索界面
-  search_touch: function (e) {
+  search_touch: function(e) {
     this.navigateToSerchPage();
   },
   navigateToSerchPage(keywoeds) {
@@ -1281,7 +1216,7 @@ Page({
       url: '../WNTSProductdetailPage/WNTSProductdetailPage?subject=' + product
     })
   },
-  popBandClick: function (e) {
+  popBandClick: function(e) {
     var that = this;
     that.fiveJumpToPageWithItemType(e.currentTarget.dataset.pop_item);
   },
@@ -1290,22 +1225,22 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
     var that = this;
     //init();
-    util.checkLoginStatus(function (isLogined) {
+    util.checkLoginStatus(function(isLogined) {
       //联系商家
       that.setData({
         hasLogin: true
       })
-    }, function (isNotLogin) {
+    }, function(isNotLogin) {
       that.setData({
         hasLogin: false
       })
@@ -1315,21 +1250,21 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
     var that = this;
     var newPage = 0;
     var loadType = 0;
@@ -1346,7 +1281,7 @@ Page({
       startLoading: false
     });
   },
-  onReachBottom: function () {
+  onReachBottom: function() {
     var that = this;
     if (optionNum < subjectArrayItem.length) {
       that.subjectBlockLoadMore();
@@ -1369,14 +1304,14 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   },
 
   /** 
    * 点击tab切换 
    */
-  swichNav: function (e) {
+  swichNav: function(e) {
     init();
     // if (e.target.dataset.current == 1) {
     //   wx.navigateTo({
