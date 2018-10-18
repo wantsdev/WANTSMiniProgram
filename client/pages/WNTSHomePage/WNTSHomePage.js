@@ -39,6 +39,8 @@ var BannerBlockArr;
 var SubjectBlock_new_16;
 var SubjectBlock_new_14;
 var SubjectBlock_new_12;
+var subjectArrayNew;
+
 var init = function() {
   app = getApp();
   blockStatus = {};
@@ -69,6 +71,7 @@ var init = function() {
   SubjectBlock_new_16 = [];
   SubjectBlock_new_14 = [];
   SubjectBlock_new_12 = [];
+  subjectArrayNew = [];
 };
 /*
 跳转种类
@@ -355,49 +358,50 @@ var get_list = function(that) {
           case SubjectBlock_id:
             {
               //主题
-              subjectArray = [];
               console.log(blockData);
               var location = blockData.block_location;
               var locationIndex = location - 1;
-              if (location == 2) {
-                blockData = blocksArr[locationIndex];
-                console.log(blockData);
-                that.setData({});
-              } else if (location == 4) {
-                blockData = blocksArr[locationIndex];
+              subjectArrayNew.push(blocksArr[locationIndex]);
+              // if (location == 2) {
+              //   blockData = blocksArr[locationIndex];
+              //   console.log(blockData);
+              //   that.setData({});
+              // } else if (location == 4) {
+              //   blockData = blocksArr[locationIndex];
 
-                that.setData({
-                  SubjectBlock_new_3: blocksArr[locationIndex],
-                });
+              //   that.setData({
+              //     SubjectBlock_new_3: blocksArr[locationIndex],
+              //   });
 
-              } else if (location == 6) {
-                blockData = blocksArr[locationIndex];
+              // } else if (location == 6) {
+              //   blockData = blocksArr[locationIndex];
 
-                that.setData({
-                  SubjectBlock_new_5: blocksArr[locationIndex],
-                });
-              } else if (location == 8) {
-                blockData = blocksArr[locationIndex];
+              //   that.setData({
+              //     SubjectBlock_new_5: blocksArr[locationIndex],
+              //   });
+              // } else if (location == 8) {
+              //   blockData = blocksArr[locationIndex];
 
-                that.setData({
-                  SubjectBlock_new_7: blocksArr[locationIndex],
-                });
-              } else if (location == 10) {
-                blockData = blocksArr[locationIndex];
+              //   that.setData({
+              //     SubjectBlock_new_7: blocksArr[locationIndex],
+              //   });
+              // } else if (location == 10) {
+              //   blockData = blocksArr[locationIndex];
 
-                that.setData({
-                  SubjectBlock_new_9: blocksArr[locationIndex],
-                });
-              } else if (location == 11){
-                blockData = blocksArr[locationIndex];
+              //   that.setData({
+              //     SubjectBlock_new_9: blocksArr[locationIndex],
+              //   });
+              // } else if (location == 11){
+              //   blockData = blocksArr[locationIndex];
 
-              }else if (location == 12) {
-                blockData = blocksArr[locationIndex];
+              // }else if (location == 12) {
+              //   blockData = blocksArr[locationIndex];
 
-                that.setData({
-                  SubjectBlock_new_11: blocksArr[locationIndex],
-                });
-              };
+              //   that.setData({
+              //     SubjectBlock_new_11: blocksArr[locationIndex],
+              //   });
+              // };
+              console.log(subjectArrayNew);
 
               subjectArrayItem = blockData.block_items;
               console.log(subjectArrayItem);
