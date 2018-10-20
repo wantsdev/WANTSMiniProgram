@@ -40,7 +40,7 @@ var SubjectBlock_new_16;
 var SubjectBlock_new_14;
 var SubjectBlock_new_12;
 var subjectArrayNew;
-
+var originArrItems;
 var init = function() {
   app = getApp();
   blockStatus = {};
@@ -126,16 +126,20 @@ let block_id_obj = {};
 //递归取主题商品列表
 var getSubjectDataRequest1 = (arr, num, max, callback) => {
   if (turn == 'on') {
+    console.log('清空数组');
     i = num;
     array = [];
   };
   i++;
   if (i > num + 5 || i > max) {
+    console.log(array);
     callback(array);
     return;
   };
   var subject_target_id_url = util.URL_ROOT + '/aggregator/' + arr[i - 1].item_target.target_id + '/41/entity?limit=10';
+  console.log(subject_target_id_url);
   util.requestGet(subject_target_id_url, function(res) {
+    console.log(res);
     array.push(res);
     turn = 'off';
     getSubjectDataRequest1(arr, num, max, callback);
@@ -150,7 +154,7 @@ var getSubjectDataRequest2 = (arr, callback) => {
   j++;
   if (j > arr.length || j > 40) {
     callback(array2);
-    return;
+    return;ddddddd
   };
   var subject_target_id_url = util.URL_ROOT + '/aggregator/' + arr[j - 1].item_target.target_id + '/41/entity?limit=10';
   util.requestGet(subject_target_id_url, function(res) {
@@ -312,7 +316,6 @@ var get_list = function(that) {
           blockArrNew: blockArrNew,
           locationId: locationId
         });
-        console.log(blockArrNew);
         switch (blockData.block_id) {
 
           case BannerBlock_id:
@@ -362,189 +365,7 @@ var get_list = function(that) {
               var location = blockData.block_location;
               var locationIndex = location - 1;
               subjectArrayNew.push(blocksArr[locationIndex]);
-              // if (location == 2) {
-              //   blockData = blocksArr[locationIndex];
-              //   console.log(blockData);
-              //   that.setData({});
-              // } else if (location == 4) {
-              //   blockData = blocksArr[locationIndex];
-
-              //   that.setData({
-              //     SubjectBlock_new_3: blocksArr[locationIndex],
-              //   });
-
-              // } else if (location == 6) {
-              //   blockData = blocksArr[locationIndex];
-
-              //   that.setData({
-              //     SubjectBlock_new_5: blocksArr[locationIndex],
-              //   });
-              // } else if (location == 8) {
-              //   blockData = blocksArr[locationIndex];
-
-              //   that.setData({
-              //     SubjectBlock_new_7: blocksArr[locationIndex],
-              //   });
-              // } else if (location == 10) {
-              //   blockData = blocksArr[locationIndex];
-
-              //   that.setData({
-              //     SubjectBlock_new_9: blocksArr[locationIndex],
-              //   });
-              // } else if (location == 11){
-              //   blockData = blocksArr[locationIndex];
-
-              // }else if (location == 12) {
-              //   blockData = blocksArr[locationIndex];
-
-              //   that.setData({
-              //     SubjectBlock_new_11: blocksArr[locationIndex],
-              //   });
-              // };
               console.log(subjectArrayNew);
-
-              subjectArrayItem = blockData.block_items;
-              console.log(subjectArrayItem);
-              if (that.data.checkOutMiniProgramDataBool == true) {
-                subjectArrayItems.push(subjectArrayItem[0]);
-                for (var m = 0; m < subjectArrayItems.length; m++) {
-                  var itemData = [];
-                  for (var j = 0; j < 9; j++) {
-                    var newProductEntity = {}; //精简的
-                    newProductEntity.imgs = "";
-                    newProductEntity.small_img = "";
-                    newProductEntity.title = "";
-                    newProductEntity.shop_show = "";
-                    newProductEntity.promotion = "";
-                    newProductEntity.promotion_id = "";
-                    newProductEntity.promotion_label = "";
-                    newProductEntity.promotional = "";
-                    itemData.push(newProductEntity);
-                  }
-                  subjectArrayItems[m].itemData = itemData;
-                };
-
-                that.setData({
-                  SubjectBlock: subjectArrayItems,
-                });
-                console.log(that.data.SubjectBlock);
-              } else {
-                for (var m = 0; m < subjectArrayItem.length; m++) {
-                  var itemData = [];
-                  for (var j = 0; j < 9; j++) {
-                    var newProductEntity = {}; //精简的
-                    newProductEntity.imgs = "";
-                    newProductEntity.small_img = "";
-                    newProductEntity.title = "";
-                    newProductEntity.shop_show = "";
-                    newProductEntity.promotion = "";
-                    newProductEntity.promotion_id = "";
-                    newProductEntity.promotion_label = "";
-                    newProductEntity.promotional = "";
-                    itemData.push(newProductEntity);
-                  }
-                  subjectArrayItem[m].itemData = itemData;
-                  subjectArrayItem[m].lookMore = '查看更多>';
-                };
-                that.setData({
-                  SubjectBlock: subjectArrayItem[0],
-                });
-              };
-              var subjectBlock = that.data.SubjectBlock; //主题列表（暂时不包括子列表）
-              if (!subjectBlock) {
-                return;
-              }
-              console.log(subjectArrayItem);
-              // if (subjectArrayItem.length = 1) {
-                // for (var m = 0; m < subjectArrayItems.length; m++) {
-                  // getSubjectDataRequest1(subjectArrayItems[m], 0, subjectArrayItems[m].length, function(res) {
-                  //   for (var i = 0; i < res.length; i++) {
-                  //     var subjectItems = res[i];
-                  //     var itemData = [];
-                  //     for (var j = 0; j < subjectItems.data.length; j++) {
-                  //       var productEntity = subjectItems.data[j].entity;
-                  //       // console.log(productEntity);
-                  //       var newProductEntity = {}; //精简的
-                  //       newProductEntity.title_prefix_url_label = productEntity.title_prefix_url_label;
-                  //       newProductEntity.imgs = productEntity.imgs;
-                  //       newProductEntity.small_img = productEntity.small_img;
-                  //       newProductEntity.price = productEntity.price;
-                  //       newProductEntity.tag_price = productEntity.tag_price;
-                  //       newProductEntity.title = productEntity.title;
-                  //       newProductEntity.id = productEntity.id;
-                  //       newProductEntity.category_id = productEntity.category_id;
-                  //       newProductEntity.promotion = productEntity.promotion;
-                  //       newProductEntity.promotion_id = productEntity.promotion_id;
-                  //       newProductEntity.promotion_label = productEntity.promotion_label;
-                  //       newProductEntity.promotional = productEntity.promotional;
-                  //       newProductEntity.shop_show = that.data.checkOutMiniProgramDataBool;
-                  //       itemData.push(newProductEntity);
-                  //     }
-                  //     subjectArrayItems[m][i].itemData = itemData;
-                  //     subjectArrayItems[m][i].display_style = parseFloat(subjectArrayItems[m][i].display_style);
-                  //   };
-                    // that.guessLikeLoadMore();
-                    //主题列表（set子列表进去）
-                    // that.setData({
-                    //   SubjectBlock: subjectArrayItems[m],
-                    //   SubjectBlockShow: true
-                    // });
-                    // console.log(that.data.SubjectBlock);
-                  // });
-                // };
-                // console.log(subjectArrayItems);
-              // } else {
-                getSubjectDataRequest1(subjectArrayItem, 0, subjectArrayItem.length, function (res) {
-                  for (var i = 0; i < res.length; i++) {
-                    var subjectItems = res[i];
-                    var itemData = [];
-                    for (var j = 0; j < subjectItems.data.length; j++) {
-                      var productEntity = subjectItems.data[j].entity;
-                      // console.log(productEntity);
-                      var newProductEntity = {}; //精简的
-                      newProductEntity.title_prefix_url_label = productEntity.title_prefix_url_label;
-                      newProductEntity.imgs = productEntity.imgs;
-                      newProductEntity.small_img = productEntity.small_img;
-                      newProductEntity.price = productEntity.price;
-                      newProductEntity.tag_price = productEntity.tag_price;
-                      newProductEntity.title = productEntity.title;
-                      newProductEntity.id = productEntity.id;
-                      newProductEntity.category_id = productEntity.category_id;
-                      newProductEntity.promotion = productEntity.promotion;
-                      newProductEntity.promotion_id = productEntity.promotion_id;
-                      newProductEntity.promotion_label = productEntity.promotion_label;
-                      newProductEntity.promotional = productEntity.promotional;
-                      newProductEntity.shop_show = that.data.checkOutMiniProgramDataBool;
-                      itemData.push(newProductEntity);
-                    }
-                    subjectArrayItem[i].itemData = itemData;
-                    subjectArrayItem[i].display_style = parseFloat(subjectArrayItem[i].display_style);
-                  };
-                  that.guessLikeLoadMore();
-                  //主题列表（set子列表进去）
-                  console.log(subjectArrayItem);
-                  var subjectArrayItemChunk = util.chunk(subjectArrayItem, 5)
-                  subjectArrayItemChunkTotal = subjectArrayItemChunkTotal.concat(subjectArrayItemChunk[0]);
-                  if (location == 2) {
-
-                  } else if (location == 4) {
-
-                  } else if (location == 6) {
-
-                  } else if (location == 8) {
-                  } else if (location == 10) {
-                  } else if (location == 11) {
-                    that.setData({
-                      SubjectBlock_new_10: subjectArrayItemChunkTotal,
-                      SubjectBlockShow: true
-                    });
-
-                  } else if (location == 12) {
-                  };
-
-                  console.log(that.data.SubjectBlock);
-                });
-              // }
             }
             break;
           case RecommendBlock_id:
@@ -803,14 +624,15 @@ var get_list = function(that) {
           default:
             break;
         };
-        console.log(SubjectBlock_new_12);
-        that.setData({
-          BannerBlockArr,
-          SubjectBlock_new_16,
-          SubjectBlock_new_14,
-          SubjectBlock_new_12,
-        });
       };
+      that.setData({
+        BannerBlockArr,
+        SubjectBlock_new_16,
+        SubjectBlock_new_14,
+        SubjectBlock_new_12,
+        subjectArrayNew,
+      });
+      that.subjectBlockFilter(that.data.subjectArrayNew);
     }, function(res) {});
   }, function(res) {});
 };
@@ -963,6 +785,112 @@ Page({
     //     });
     //   }
     // };
+  },
+  //主题页商品信息简化处理
+  subjectBlockFilter(originArr) {
+    var that = this;
+    console.log(originArr);
+    for (var s = 0; s < originArr.length; s++) {
+      originArrItems = originArr[s].block_items;
+      console.log(originArrItems);
+      if (that.data.checkOutMiniProgramDataBool == true) {
+        // subjectArrayItems.push(subjectArrayItem[0]);
+        // console.log(subjectArrayItems);
+
+        for (var m = 0; m < originArrItems.length; m++) {
+          var itemData = [];
+          for (var j = 0; j < 9; j++) {
+            var newProductEntity = {}; //精简的
+            newProductEntity.imgs = "";
+            newProductEntity.small_img = "";
+            newProductEntity.title = "";
+            newProductEntity.shop_show = "";
+            newProductEntity.promotion = "";
+            newProductEntity.promotion_id = "";
+            newProductEntity.promotion_label = "";
+            newProductEntity.promotional = "";
+            itemData.push(newProductEntity);
+          }
+          originArrItems[m].itemData = itemData;
+        };
+
+        that.setData({
+          SubjectBlock: originArrItems,
+        });
+        console.log(that.data.SubjectBlock);
+      } else {
+        for (var m = 0; m < originArrItems.length; m++) {
+          var itemData = [];
+          for (var j = 0; j < 9; j++) {
+            var newProductEntity = {}; //精简的
+            newProductEntity.imgs = "";
+            newProductEntity.small_img = "";
+            newProductEntity.title = "";
+            newProductEntity.shop_show = "";
+            newProductEntity.promotion = "";
+            newProductEntity.promotion_id = "";
+            newProductEntity.promotion_label = "";
+            newProductEntity.promotional = "";
+            itemData.push(newProductEntity);
+          }
+          originArrItems[m].itemData = itemData;
+          originArrItems[m].lookMore = '查看更多>';
+        };
+        that.setData({
+          SubjectBlock: originArrItems[0],
+        });
+      };
+      var subjectBlock = that.data.SubjectBlock; //主题列表（暂时不包括子列表）
+      if (!subjectBlock) {
+        return;
+      }
+      console.log(subjectBlock);
+
+      //console.log(originArr);
+      getSubjectDataRequest1(subjectBlock, 0, subjectBlock.length, function(res) {
+        console.log(res);
+        for (var i = 0; i < res.length; i++) {
+          var subjectItems = res[i];
+          var itemData = [];
+          console.log(subjectItems);
+          for (var j = 0; j < subjectItems.data.length; j++) {
+            var productEntity = subjectItems.data[j].entity;
+            // console.log(productEntity);
+            var newProductEntity = {}; //精简的
+            newProductEntity.title_prefix_url_label = productEntity.title_prefix_url_label;
+            newProductEntity.imgs = productEntity.imgs;
+            newProductEntity.small_img = productEntity.small_img;
+            newProductEntity.price = productEntity.price;
+            newProductEntity.tag_price = productEntity.tag_price;
+            newProductEntity.title = productEntity.title;
+            newProductEntity.id = productEntity.id;
+            newProductEntity.category_id = productEntity.category_id;
+            newProductEntity.promotion = productEntity.promotion;
+            newProductEntity.promotion_id = productEntity.promotion_id;
+            newProductEntity.promotion_label = productEntity.promotion_label;
+            newProductEntity.promotional = productEntity.promotional;
+            newProductEntity.shop_show = that.data.checkOutMiniProgramDataBool;
+            itemData.push(newProductEntity);
+          }
+          subjectBlock[i].itemData = itemData;
+          subjectBlock[i].display_style = parseFloat(subjectBlock[i].display_style);
+          console.log(subjectBlock[i]);
+        };
+        that.guessLikeLoadMore();
+        //主题列表（set子列表进去）
+        console.log(subjectBlock);
+        var subjectArrayItemChunk = util.chunk(subjectBlock, 5)
+        subjectArrayItemChunkTotal = subjectArrayItemChunkTotal.concat(subjectArrayItemChunk[0]);
+
+        that.setData({
+          SubjectBlockNew: subjectArrayItemChunkTotal,
+          SubjectBlockShow: true
+        });
+
+      });
+    };
+    console.log(that.data.SubjectBlockNew);
+
   },
   //主题数据加载更多
   subjectBlockLoadMore() {
