@@ -41,6 +41,7 @@ var SubjectBlock_new_14;
 var SubjectBlock_new_12;
 var subjectArrayNew;
 var originArrItems;
+var subjectBlockArrNew;
 var init = function() {
   app = getApp();
   blockStatus = {};
@@ -789,10 +790,12 @@ Page({
   //主题页商品信息简化处理
   subjectBlockFilter(originArr) {
     var that = this;
+    subjectBlockArrNew= [];
     console.log(originArr);
-    for (var s = 0; s < originArr.length; s++) {
+    for (var s = 0; s < originArr.length; s++) {//
       originArrItems = originArr[s].block_items;
       console.log(originArrItems);
+    
       if (that.data.checkOutMiniProgramDataBool == true) {
         // subjectArrayItems.push(subjectArrayItem[0]);
         // console.log(subjectArrayItems);
@@ -812,12 +815,19 @@ Page({
             itemData.push(newProductEntity);
           }
           originArrItems[m].itemData = itemData;
+          originArrItems[m].block_location = originArr[s].block_location;
         };
 
         that.setData({
           SubjectBlock: originArrItems,
         });
         console.log(that.data.SubjectBlock);
+        console.log(that.data.SubjectBlock.length);
+        if (that.data.SubjectBlock.length<=1){
+          subjectBlockArrNew.push(originArrItems[0]);
+        }else{
+          subjectBlockArrNew = originArrItems;
+        };
       } else {
         for (var m = 0; m < originArrItems.length; m++) {
           var itemData = [];
@@ -845,14 +855,19 @@ Page({
         return;
       }
       console.log(subjectBlock);
+    };
+    console.log(subjectBlockArrNew);
 
       //console.log(originArr);
-      getSubjectDataRequest1(subjectBlock, 0, subjectBlock.length, function(res) {
+    getSubjectDataRequest1(subjectBlockArrNew, 0, subjectBlockArrNew.length, function(res) {
         console.log(res);
-        for (var i = 0; i < res.length; i++) {
-          var subjectItems = res[i];
+        // if(){
+
+        // };
+        for (var g = 0; g < res.length; g++) {
+          var subjectItems = res[g];
           var itemData = [];
-          console.log(subjectItems);
+          console.log(res[g]);
           for (var j = 0; j < subjectItems.data.length; j++) {
             var productEntity = subjectItems.data[j].entity;
             // console.log(productEntity);
@@ -872,14 +887,15 @@ Page({
             newProductEntity.shop_show = that.data.checkOutMiniProgramDataBool;
             itemData.push(newProductEntity);
           }
-          subjectBlock[i].itemData = itemData;
-          subjectBlock[i].display_style = parseFloat(subjectBlock[i].display_style);
-          console.log(subjectBlock[i]);
+          subjectBlockArrNew[g].itemData = itemData;
+          subjectBlockArrNew[g].display_style = parseFloat(subjectBlockArrNew[g].display_style);
+          console.log(subjectBlockArrNew[g]);
         };
-        that.guessLikeLoadMore();
+        //that.guessLikeLoadMore();
         //主题列表（set子列表进去）
-        console.log(subjectBlock);
-        var subjectArrayItemChunk = util.chunk(subjectBlock, 5)
+      console.log(subjectBlockArrNew);
+      var subjectArrayItemChunk = util.chunk(subjectBlockArrNew, 5);
+        console.log(subjectArrayItemChunk);
         subjectArrayItemChunkTotal = subjectArrayItemChunkTotal.concat(subjectArrayItemChunk[0]);
 
         that.setData({
@@ -888,7 +904,6 @@ Page({
         });
 
       });
-    };
     console.log(that.data.SubjectBlockNew);
 
   },
