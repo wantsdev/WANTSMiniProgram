@@ -156,7 +156,7 @@ var getSubjectDataRequest2 = (arr, callback) => {
   if (j > arr.length || j > 40) {
     callback(array2);
     return;
-    ddddddd
+    
   };
   var subject_target_id_url = util.URL_ROOT + '/aggregator/' + arr[j - 1].item_target.target_id + '/41/entity?limit=10';
   util.requestGet(subject_target_id_url, function(res) {
