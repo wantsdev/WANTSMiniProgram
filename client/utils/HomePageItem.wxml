@@ -361,10 +361,11 @@
 
 
   <!-- 主题列表⬇️ -->
+
   <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock')?(true):(false)}}">
-    <block wx:for="{{SubjectBlock}}" wx:key="{{index}}">
+    <block wx:for="{{SubjectBlock}}" wx:key="block_location">
       <!--主题列表⬇️布局一⬇️  -->
-      <view class="detailBlockOne" wx:index="{{item.index}}" data-target="{{item.item_target.target_id}}" data-item_title="{{item.item_title}}" catchtap="band_touch">
+      <view class="detailBlockOne" wx:index="{{item.index}}"  wx:if="{{(outIndex==(item.block_location-1))?(true):(false)}}" data-target="{{item.item_target.target_id}}" data-item_title="{{item.item_title}}" catchtap="band_touch">
         <view class="left">
           <text class="a" style=""> {{item.item_title}} </text>
         </view>
@@ -374,11 +375,11 @@
       </view>
       <!--主题列表⬇️布局一⬆️  -->
       <!--主题列表⬇️布局二⬇️  -->
-      <view wx:if="{{item.display_style==2}}" data-target="{{item.item_target.block_def_item_id}}" data-item_title="{{item.item_title}}" catchtap="band_touch" class="subjectCover" style="background: url({{item.item_image?item.item_image:'http://static.wantscart.com/product/1520825796736_1000_500'}}) no-repeat;background-size:cover;">
+      <view wx:if="{{item.display_style==2&&outIndex==(item.block_location-1)}}" data-target="{{item.item_target.block_def_item_id}}" data-item_title="{{item.item_title}}" catchtap="band_touch" class="subjectCover" style="background: url({{item.item_image?item.item_image:'http://static.wantscart.com/product/1520825796736_1000_500'}}) no-repeat;background-size:cover;">
         <text class="seeMoreSubject">{{'查看更多>'}}</text>
       </view>
       <!--主题列表⬇️布局二⬆️  -->
-      <scroll-view scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap;" class="scrollColumn">
+      <scroll-view scroll-x="true" bindscrolltoupper="" bindscrolltolower="" bindscroll="" scroll-into-view="" scroll-top="" style="white-space:nowrap;"  wx:if="{{(outIndex==(item.block_location-1))?(true):(false)}}" class="scrollColumn">
         <view wx:for="{{item.itemData}}" wx:for-item="itemDatas" wx:key="{{itemDatas.id}}" data-subject="{{itemDatas}}" class="subjectDetail" bindtap="columnClick">
           <image mode="aspectFill" src="{{(itemDatas.small_img)?(itemDatas.small_img):(itemDatas.imgs[0])}}" style="{{'background:'+randomBackgroundColor[index%8]}}; margin-left:34rpx; margin-right:0rpx;" class="columnStyle">
           </image>
@@ -393,14 +394,14 @@
         </view>
       </scroll-view>
     </block>
-    <view class='loading' style="width: 750rpx;height:40rpx;display:block; font-size: 28rpx; color: #666; line-height: 40rpx; text-align: center;margin-bottom:30rpx;" wx:if="{{SubjectBlockShow&&(blockArrNew[outIndex]=='SubjectBlock')?(true):(false)}}">{{'加载更多...'}}</view>
-    <view class='loading' style="width: 750rpx;height:40rpx;display:block; font-size: 28rpx; color: #666; line-height: 40rpx; text-align: center;margin-bottom:30rpx;" wx:if="{{!SubjectBlockShow}}"></view>
+    <view class='loading' style="width: 750rpx;height:40rpx;display:block; font-size: 28rpx; color: #666; line-height: 40rpx; text-align: center;margin-bottom:30rpx;" wx:if="{{loadingMoreShow&&SubjectBlockShow&&(blockArrNew[outIndex]=='SubjectBlock')?(true):(false)}}">{{'加载更多...'}}</view>
+    <view class='loading' style="width: 750rpx;height:40rpx;display:block; font-size: 28rpx; color: #666; line-height: 40rpx; text-align: center;margin-bottom:30rpx;" wx:if="{{!SubjectBlockShow&&loadingMoreShow}}"></view>
   </view>
 
 
   <!-- 猜你喜欢 -->
   <view class="guessYouLike" wx:if="{{((blockArrNew[outIndex]=='RecommendBlock'||guessLikeStartLoading==ture)&&startLoading==true)?(true):(false)}}" style="margin-top:50rpx;">
-    <text class="a" style="width:{{(28*5+'rpx')}};"> {{ '猜你喜欢' }} </text>
+    <text class="a" style="width:{{(28*5+'rpx')}};"> {{guessLikeTitle}} </text>
   </view>
   <view class="guessYouLikeDetailLayout" wx:if="{{startLoading==true&&(blockArrNew[outIndex]=='RecommendBlock')?(true):(false)}}">
     <view class="{{((index+1)%2==0)?('guessYouLike-items-right'):('guessYouLike-items')}}" wx:for="{{guessLike}}" wx:key="{{item.id}}">
@@ -427,7 +428,7 @@
       </view>
     </view>
   </view>
-  <view class='loading' style="width: 750rpx;height:40rpx;display:block; font-size: 28rpx; color: #666; line-height: 40rpx; text-align: center; margin-bottom:40rpx;" wx:if="{{startLoading==true&&(blockArrNew[outIndex]=='RecommendBlock')?(true):(false)}}">{{loaddingContext}}</view>
+  <!-- <view class='loading' style="width: 750rpx;height:40rpx;display:block; font-size: 28rpx; color: #666; line-height: 40rpx; text-align: center; margin-bottom:40rpx;" wx:if="{{startLoading==true&&(blockArrNew[outIndex]=='RecommendBlock')?(true):(false)}}">{{loaddingContext}}</view> -->
 </view>
 <!--热门品牌⬇️ -->
 <view wx:if="{{(blockArrNew[outIndex]=='HotBrandBlock')?(true):(false)}}">

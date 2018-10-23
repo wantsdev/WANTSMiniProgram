@@ -445,6 +445,68 @@ var sortArr = (arr) => {
 }
 var getGessLikeDataTool = (data) => {
   var guessLikes = [];
+  console.log(data);
+  for (var i = 0; i < data.length; i++) {
+    var subject_product = data[i].entity;
+    var temp = {};
+    var tip_background;
+    var tip_icon;
+    var tips;
+    var showTips;
+    var currentTime = Date.parse(new Date());
+    var twoDayTime = 48 * 3600 * 1000;
+    var time = currentTime - subject_product.created;
+    var showTips = false;
+    temp.title_prefix_url_label = subject_product.title_prefix_url_label;
+    temp.imgs = subject_product.imgs;
+    temp.id = subject_product.id;
+    temp.title = subject_product.title;
+    temp.price = subject_product.price;
+    temp.tag_price = subject_product.tag_price;
+    temp.promotion = subject_product.sales_promotion;
+    temp.promotion_id = subject_product.sales_promotion_id;
+    temp.promotion_label = subject_product.promotion_text_label;
+    temp.promotional = subject_product.sales_promotional;
+    // if (subject_product.total_stock < 500 & subject_product.total_stock > 0) {
+    //   showTips = true;
+    //   tips = "仅剩" + subject_product.total_stock + "件";
+    //   tip_background = "../WANTSImages/discount_icon_red.png";
+    //   tip_icon = "../WANTSImages/discount_icon_clock.png";
+    // } else if (time <= twoDayTime) {
+    //   showTips = true;
+    //   tips = "最新潮品";
+    //   tip_background = "../WANTSImages/discount_icon_blue.png";
+    //   tip_icon = "../WANTSImages/discount_icon_new.png";
+    // }
+
+    var rateDouble = subject_product.price / subject_product.tag_price;
+    var rate = rateDouble * 100;
+    var discount = rate / 10;
+    // if (discount <= 2) {
+    //   showTips = true;
+    //   tip_background = "../WANTSImages/discount_icon_yellow.png";
+    //   tip_icon = "../WANTSImages/discount_icon_tips.png";
+    //   if (discount < 1) {
+    //     tips = "限0.1折";
+    //   } else {
+    //     if (parseInt(discount.toFixed(1).split(".")[1]) == 0) {
+    //       tips = "限" + discount.toFixed(1).split(".")[0] + "折";
+    //     } else {
+    //       tips = "限" + discount.toFixed(1) + "折";
+    //     }
+    //   }
+    // }
+    // temp.tip_background = tip_background;
+    // temp.tip_icon = tip_icon;
+    // temp.tips = tips;
+    // temp.showTips = showTips;
+    guessLikes.push(temp);
+  }
+  return guessLikes;
+
+}
+var getGessLikeMoreDataTool = (data) => {
+  var guessLikes = [];
   for (var i = 0; i < data.length; i++) {
     var subject_product = data[i];
     var temp = {};
@@ -504,6 +566,7 @@ var getGessLikeDataTool = (data) => {
   return guessLikes;
 
 }
+
 var getOngoingPromotionList = (callBack) => {
   if (!callBack) return
   requestMethodWithParaterm("GET", null, encodeURI(URL_ROOT + "/promotion"), function (res) {
@@ -1110,6 +1173,7 @@ module.exports = {
   NEW_MODULE_DATA,
   checkLoginStatus,
   getGessLikeDataTool,
+  getGessLikeMoreDataTool,
   getOngoingPromotionList,
   getShoppingCartSellerList,
   stringWithAndCode,

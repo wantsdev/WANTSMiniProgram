@@ -91,7 +91,7 @@ let BannerBlock_id = 1; //轮播
 let HotBrandBlock_id = 2; //热门品牌
 let GoodsBlock_id = 3; //优选精品
 let SubjectBlock_id = 4 || 19; //主题
-let RecommendBlock_id = 5; //推荐
+let RecommendBlock_id = 20; //推荐
 let SubjectBlock_single_id = 6; //单个主题图的主题
 let SubjectBlock_double_id = 7; //两个主题图的主题
 let SubjectBlock_three_left_id = 8; //三个主题图的主题（面积最大块的主题图在左边）
@@ -156,7 +156,7 @@ var getSubjectDataRequest2 = (arr, callback) => {
   if (j > arr.length || j > 40) {
     callback(array2);
     return;
-    
+
   };
   var subject_target_id_url = util.URL_ROOT + '/aggregator/' + arr[j - 1].item_target.target_id + '/41/entity?limit=10';
   util.requestGet(subject_target_id_url, function(res) {
@@ -274,7 +274,12 @@ var get_list = function(that) {
         if (blocksArr[a].block_id == 3) {
           blockIdArr.push(a);
           that.setData({
-            blockIdArr: blockIdArr,
+            blockIdArr: blockIdArr
+          });
+        };
+        if (blocksArr[a].block_id == 20){
+          that.setData({
+            blockType: true
           });
         };
         var locationIndex = blocksArr[a].block_location - 1;
@@ -372,9 +377,20 @@ var get_list = function(that) {
             break;
           case RecommendBlock_id:
             {
-              console.log(RecommendBlock_id);
+              // console.log(RecommendBlock_id);
+              // that.setData({
+              //   RecommendBlock_idShow: true, //走到这说明需要显示猜你喜欢
+              // });
+              console.log(blockData);
+              var location = blockData.block_location;
+              var locationIndex = location - 1;
+              var RecommendBlockTargetId = blocksArr[locationIndex].block_items[0].item_target.target_id;
+              var RecommendBlockTargetTitle = blocksArr[locationIndex].block_items[0].item_target.target_title;
+              console.log(RecommendBlockTargetId);
+              console.log(RecommendBlockTargetTitle);
               that.setData({
-                RecommendBlock_idShow: true, //走到这说明需要显示猜你喜欢
+                RecommendBlockTargetId,
+                RecommendBlockTargetTitle
               });
             }
             break;
@@ -710,7 +726,8 @@ Page({
     location_one: false,
     location_two: false,
     location_three: false,
-    guessLikeStartLoading: false
+    guessLikeStartLoading: false,
+    blockType:false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -859,12 +876,7 @@ Page({
     };
     console.log(subjectBlockArrNew);
 
-    //console.log(originArr);
     getSubjectDataRequest1(subjectBlockArrNew, 0, subjectBlockArrNew.length, function(res) {
-      console.log(res);
-      // if(){
-
-      // };
       for (var g = 0; g < res.length; g++) {
         var subjectItems = res[g];
         var itemData = [];
@@ -890,7 +902,6 @@ Page({
         }
         subjectBlockArrNew[g].itemData = itemData;
         subjectBlockArrNew[g].display_style = parseFloat(subjectBlockArrNew[g].display_style);
-        console.log(subjectBlockArrNew[g]);
       };
       that.guessLikeLoadMore();
       //主题列表（set子列表进去）
@@ -898,27 +909,37 @@ Page({
       var subjectArrayItemChunk = util.chunk(subjectBlockArrNew, 5);
       console.log(subjectArrayItemChunk);
       subjectArrayItemChunkTotal = subjectArrayItemChunkTotal.concat(subjectArrayItemChunk[0]);
-
       that.setData({
         SubjectBlock: subjectArrayItemChunkTotal,
         SubjectBlockShow: true
       });
       console.log(subjectArrayItemChunkTotal);
-      console.log(that.data.SubjectBlock);
-
+      for (var t = 0; t < subjectArrayItemChunkTotal.length; t++) {
+        if (t < subjectArrayItemChunkTotal.length - 1) {
+          if (subjectArrayItemChunkTotal[t].block_location !== subjectArrayItemChunkTotal[t + 1].block_location) {
+            that.setData({
+              loadingMoreShow: false
+            });
+          } else {
+            that.setData({
+              loadingMoreShow: true
+            });
+          }
+        };
+      };
     });
-
   },
   //主题数据加载更多
   subjectBlockLoadMore() {
     wx.stopPullDownRefresh();
     var that = this;
     var subjectBlockChunk = util.chunk(subjectBlockArrNew, 5);
+    console.log(subjectBlockArrNew);
     optionNum = optionNum + 5;
     i = i - 1;
     getSubjectDataRequest1(subjectBlockArrNew, optionNum, subjectBlockArrNew.length, function(res) {
-      for (var i = 0; i < res.length; i++) {
-        var subjectItems = res[i];
+      for (var r = 0; r < res.length; r++) {
+        var subjectItems = res[r];
         var itemData = [];
         for (var j = 0; j < subjectItems.data.length; j++) {
           var productEntity = subjectItems.data[j].entity;
@@ -938,8 +959,8 @@ Page({
           newProductEntity.shop_show = that.data.checkOutMiniProgramDataBool;
           itemData.push(newProductEntity);
         }
-        subjectBlockArrNew[i].itemData = itemData;
-        subjectBlockArrNew[i].display_style = parseFloat(subjectBlockArrNew[i].display_style);
+        subjectBlockArrNew[r].itemData = itemData;
+        subjectBlockArrNew[r].display_style = parseFloat(subjectBlockArrNew[r].display_style);
       }
       //主题列表（set子列表进去）
       var subjectArrayItemChunk = util.chunk(subjectBlockArrNew, 5)
@@ -959,41 +980,45 @@ Page({
           SubjectBlock: subjectArrayItemChunkTotal,
           guessLikeLoadShow: false
         });
+        console.log(that.data.SubjectBlock);
       } else {
         that.setData({
           startLoading: true,
           guessLikeLoadShow: true
         })
-        that.guessLikeLoadMore(true);
+        //that.guessLikeLoadMore(true);
       };
     });
   },
   //猜你喜欢数据加载更多
   guessLikeLoadMore(loadMoreBool) {
-    wx.stopPullDownRefresh();
     var that = this;
-    if (that.data.RecommendBlock_idShow == false) return;
-    var loadType = 0; //none
-    var offset = 0;
-    that.setData({
-      guessLikeTitle: '猜你喜欢'
-    });
-
-    if (loadMoreBool) {
-      var newPage = that.data.page;
-      newPage++;
-      loadType = 1 << 1; //2 loadmore
-      offset = newPage * that.data.limit;
+    if (that.data.blockType){
+      wx.stopPullDownRefresh();
+      var that = this;
+      if (that.data.RecommendBlock_idShow == false) return;
+      var loadType = 0; //none
+      var offset = 0;
+      var guessLikeTitle = that.data.RecommendBlockTargetTitle;
       that.setData({
-        page: newPage,
-        offset: offset,
+        guessLikeTitle
       });
-    } else {
-      loadType = 1 << 0; //1 refresh
-      offset = 0;
-    };
 
-    that.getGussLikeData();
+      if (loadMoreBool) {
+        var newPage = that.data.page;
+        newPage++;
+        loadType = 1 << 1; //2 loadmore
+        offset = newPage * that.data.limit;
+        that.setData({
+          page: newPage,
+          offset: offset,
+        });
+      } else {
+        loadType = 1 << 0; //1 refresh
+        offset = 0;
+      };
+      that.getGussLikeData();
+    };
   },
   //猜你喜欢获取数据
   getGussLikeData() {
@@ -1014,10 +1039,9 @@ Page({
     if (that.data.cuttentTab_tags) {
       cuttTags = '&target=' + that.data.cuttentTab_tags;
     };
-    var recommendUrl = WNTSApi.recommendApi + '?scene=0&offset=' + that.data.offset +
-      '&limit=' + that.data.limit + '&tabId=' + that.data.currentTabId + cuttTags;
+    var recommendUrl = WNTSApi.mainUrl + '/aggregator/' + that.data.RecommendBlockTargetId +'/41/entity';
     util.requestGet(recommendUrl, function(res) {
-      // console.log(res.data);
+      console.log(res.data);
       var temp = util.getGessLikeDataTool(res.data);
       if (res.data.length == 0) {
         util.requestGet(recommendUrl, function(res) {
@@ -1027,6 +1051,8 @@ Page({
           loaddingContext: "没有更多啦～"
         });
       };
+      console.log(guessLike);
+      console.log(temp);
       guessLike = guessLike.concat(temp);
       that.setData({
         guessLike: guessLike
@@ -1232,9 +1258,8 @@ Page({
   },
   onReachBottom: function() {
     var that = this;
-    if (optionNum < subjectArrayItem.length) {
+    if (optionNum < subjectBlockArrNew.length) {
       that.subjectBlockLoadMore();
-
       // subjectArrayItemChunkTotal = subjectArrayItemChunkTotal.concat(subjectArrayItemChunk[time]);
       // that.setData({
       //   SubjectBlock: subjectArrayItemChunkTotal,
@@ -1245,10 +1270,8 @@ Page({
       //   startLoading: true,
       //   guessLikeLoadShow: true
       // })
-      that.guessLikeLoadMore(true);
+      //that.guessLikeLoadMore(true);
     };
-
-    //that.guessLikeLoadMore(true);
   },
   /**
    * 用户点击右上角分享

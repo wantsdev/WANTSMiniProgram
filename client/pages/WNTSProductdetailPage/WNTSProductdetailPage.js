@@ -312,7 +312,7 @@ Page({
     util.requestGet(util.URL_ROOT + '/product/recommend?scene=1&productId=' + that.data.subject_product.product_id + '&offset=' + that.data.offset +
       '&limit=' + that.data.limit,
       function (res) {
-        var temp = util.getGessLikeDataTool(res.data);
+        var temp = util.getGessLikeMoreDataTool(res.data);
         if (res.data.length == 0) {
           that.setData({
             loaddingContext: "没有更多啦～"
@@ -1276,7 +1276,7 @@ Page({
       case 1581:
         sharePic = that.data.subject_product.product_imgs[0] + '?imageMogr2/crop/!4000x1000a0a320';
         break;
-    }
+    };
     return {
       title: '￥' + that.data.subject_product.product_price / 100 + ' | ' + that.data.subject_product.product_title, // 转发标题（默认：当前小程序名称）
       path: 'pages/WNTSProductdetailPage/WNTSProductdetailPage?subject=' + that.data.shareProductDetail, // 转发路径（当前页面 path ），必须是以 / 开头的完整路径
