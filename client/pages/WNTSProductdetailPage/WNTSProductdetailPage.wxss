@@ -1037,7 +1037,7 @@
 }
 
 .customService .tip_button {
-  background-color: #000;
+  background-color: #333;
   border: 0px;
   padding-left: 0rpx;
   border-radius: 0px;

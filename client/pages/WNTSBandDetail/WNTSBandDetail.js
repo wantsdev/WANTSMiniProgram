@@ -93,7 +93,7 @@ Page({
         entity.created = product.created;
         entitySubjectList.push(entity);
       };
-      var temp = util.getGessLikeDataTool(entitySubjectList);
+      var temp = util.getGessLikeMoreDataTool(entitySubjectList);
       that.setData({
         entitySubjectList: temp
       });

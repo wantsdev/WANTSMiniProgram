@@ -5,17 +5,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    seller_detail:[],
-    seller_name:'',
-    seller_head:'',
-    seller_id:'',
+    seller_detail: [],
+    share_seller_detail: null,
+    seller_name: '',
+    seller_head: '',
+    seller_id: '',
     offset: 0,
     page: 0,
-    limit: 15,
+    limit: 16,
     loadMoreBool: true,
-    randomBackgroundColor:[],
-    sendmessagepath:'',
-    url:'http://a.app.qq.com/o/simple.jsp?pkgname=com.wants'
+    randomBackgroundColor: [],
+    sendmessagepath: '',
+    url: 'http://a.app.qq.com/o/simple.jsp?pkgname=com.wants'
   },
 
   /**
@@ -23,19 +24,34 @@ Page({
    */
   onLoad: function (option) {
     var that = this;
-    var seller_detail_all=option.seller_detail;
-    
+    var seller_detail_all = option.seller_detail;
+
     that.setData({
       sendmessagepath: '../WNTSShopPage/WNTSShopPage?seller_detail=' + seller_detail_all,
-      randomBackgroundColor:['#2F4C52','#414D65','#A3A093','#8F5B56','#DDE8DE','#F2E6F7','#D0F6F9','#F4F6B6','#EFADCD']
+      randomBackgroundColor: ['#2F4C52', '#414D65', '#A3A093', '#8F5B56', '#DDE8DE', '#F2E6F7', '#D0F6F9', '#F4F6B6', '#EFADCD']
     });
     seller_detail_all = JSON.parse(seller_detail_all);
     that.setData({
-      seller_name:seller_detail_all.seller_name,
-      seller_head:seller_detail_all.seller_head,
-      seller_id:seller_detail_all.seller_id
+      seller_name: seller_detail_all.seller_name,
+      seller_head: seller_detail_all.seller_head,
+      seller_id: seller_detail_all.seller_id,
+      share_seller_detail: option.seller_detail
     });
     that.getSellerProducts();
+  },
+  connectSellerMsg(e) {
+    var that = this;
+    util.checkLoginStatus(function (isLogined) {
+      //联系商家
+      that.setData({
+        showModal: true,
+        dialog_title: '请下载APP与商家客服沟通',
+        dialog_cancel: '残忍放弃',
+        dialog_ok: '我要下载'
+      })
+    }, function (isNotLogin) {
+      that.toLogin();
+    });
   },
   serviceMsg(e) {
     var that = this;
@@ -47,7 +63,7 @@ Page({
       })
     });
   },
-  getSellerProducts(){
+  getSellerProducts() {
     var that = this;
     var seller_detail = that.data.seller_detail;
     //数据量超过1m导致无法显示数据，最大量在75左右，考虑字段长度不一，故限定为70
@@ -62,13 +78,14 @@ Page({
     });
     util.requestGet(util.URL_ROOT + '/product/seller/' + that.data.seller_id + '?offset=' + that.data.offset + '&limit=' + that.data.limit, function (data) {
       wx.stopPullDownRefresh();
-      if (!data.length) {
+      if (!data.data.length) {
         that.setData({
           loaddingContext: "没有更多啦～"
         });
         return
+
       }
-      var temp = util.getGessLikeDataTool(data);
+      var temp = util.getGessLikeMoreDataTool(data.data);
       seller_detail = seller_detail.concat(temp);
       that.setData({
         seller_detail: seller_detail
@@ -108,7 +125,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-  
+
   },
 
   /**
@@ -132,14 +149,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+
   },
 
   /**
@@ -164,6 +181,59 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-  
+    var that = this;
+    return {
+
+      title: that.data.seller_name,// 转发标题（默认：当前小程序名称）
+
+      path: 'pages/WNTSShopPage/WNTSShopPage?seller_detail=' + that.data.share_seller_detail,// 转发路径（当前页面 path ），必须是以 / 开头的完整路径
+
+      success(e) {
+
+      },
+
+      fail(e) {
+
+      },
+
+      complete() { }
+
+    }
+  },
+  /*弹出框蒙层截断touchmove事件*/
+  preventTouchMove: function () {
+
+  },
+
+  /* 隐藏模态对话框*/
+  hideModal: function () {
+    this.setData({
+      showModal: false
+    });
+  },
+
+  /*对话框取消按钮点击事件*/
+  onCancel: function () {
+    this.hideModal();
+  },
+
+  /* 对话框确认按钮点击事件*/
+  onConfirm: function () {
+    var that = this;
+    this.hideModal();
+    wx.setClipboardData({
+      data: that.data.url,
+      success: function (res) {
+        wx.getClipboardData({
+          success: function (res) {
+            wx.showToast({
+              title: '下载链接已复制',
+              icon: 'success',
+              duration: 2000
+            })
+          }
+        })
+      }
+    })
   }
 })

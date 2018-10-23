@@ -1,5 +1,6 @@
 /* pages/WNTSShopPage/WNTSShopPage.wxss */
-@import '../../utils/WNTSRecommend.wxss';
+/* @import '../../utils/WNTSRecommend.wxss'; */
+@import '../../utils/WNTSAlertView.wxss';
 .shopDetailInfo {
   width: 750rpx;
   display: block;
@@ -77,12 +78,12 @@
     display: flex;
     flex-direction: row;
 	align-items: center;
-	background: yellow;
+	/* background: yellow; */
     position: absolute;
 	left: 340rpx;
 	top: 32rpx;
+  background: #fcfcfc;
 	border-radius: 0rpx;
-	background: #fcfcfc;
 	padding-left: 0rpx;
 }
 .shopDetailInfo .intoSeller:after{
@@ -170,35 +171,61 @@
 
 .shopDetailInfo .guessYouLikeItems {
   display: inline-block;
-  width: 250rpx;
-  height: 500rpx;
-  /*  background: yellow;
-*/
+  width: 375rpx;
+  height: 565rpx;
+  margin-bottom:30rpx;
+   /* background: yellow; */
 }
 
 .shopDetailInfo .guessYouLikePicContainer {
-  width: 250rpx;
-  height: 360rpx;
+  width: 330rpx;
+  /* height: 528rpx; */
   display: block;
   overflow: hidden;
-  /*background-color: red;*/
-}
+  margin-left:17rpx;
+  /* background-color: red; */
 
+}
+.shopDetailInfo .guessYouLikePicContainerOn{
+  width: 330rpx;
+  /* height: 528rpx; */
+  display: block;
+  overflow: hidden;
+  margin-left:30rpx;
+  background-color: red;
+
+}
 .shopDetailInfo .guessYouLikePic {
-  width: 250rpx;
-  height: 400rpx;
+  width: 330rpx;
+  height: 528rpx;
   display: flex;
   flex-direction: row;
+  margin-left:0rpx;
 }
 
 .shopDetailInfo .guessYouLikePrice {
-  width: 250rpx;
+  width: 332rpx;
   height: 110rpx;
   display: block;
   /*  
 */
   position: relative;
   overflow: hidden;
+  /* background:blue; */
+  margin-left:30rpx;
+  margin-top:30rpx;
+}
+.shopDetailInfo .guessYouLikePriceOn {
+  width: 332rpx;
+  height: 110rpx;
+  display: block;
+  /*  
+*/
+  position: relative;
+  overflow: hidden;
+  /* background:blue; */
+  margin-left:16rpx;
+  margin-top:30rpx;
 }
 
 .shopDetailInfo .guessYouLikeIcons {
@@ -210,7 +237,14 @@
   /*  margin-bottom: 360rpx;
 */
 }
-
+.shopOutView{
+  width:330rpx;
+  height:32rpx;
+  display: block;
+  position: absolute;
+  bottom:34rpx;
+  /* background: purple; */
+}
 .shopDetailInfo .guessYouLikeIcons .text {
   display: block;
   right: 8rpx;
@@ -218,16 +252,33 @@
   font-size: 20rpx;
   line-height: 40rpx;
 }
-
-.shopDetailInfo .guessYouLikePrice .name {
+.shopDetailInfo .title_prefix_url_label {
   position: absolute;
   display: block;
-  width: 166rpx;
-  height: 24rpx;
-  /*  background: yellow;
+  width: 84rpx;
+  height: 26rpx;
+  left: 0rpx;
+}
 
-*/
-  left: 20rpx;
+.shopDetailInfo .name {
+  position: absolute;
+  display: block;
+  width: 336rpx;
+  height: 24rpx;
+  /* background: yellow; */
+  font-size: 24rpx;
+  line-height: 24rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.shopDetailInfo .nameOn {
+  position: absolute;
+  display: block;
+  width: 246rpx;
+  height: 24rpx;
+  left:90rpx;
+  /* background: yellow; */
   font-size: 24rpx;
   line-height: 24rpx;
   overflow: hidden;
@@ -235,21 +286,16 @@
   text-overflow: ellipsis;
 }
 
-.shopDetailInfo .guessYouLikePrice .changed {
-  position: absolute;
-  display: block;
-  width: 78rpx;
-  height: 32rpx;
-  /*  background: blue;
-*/
-  bottom: 24rpx;
-  left: 20rpx;
+.shopDetailInfo .changed {
+  display: inline;
   font-size: 32rpx;
   line-height: 32rpx;
   color: #eb5160;
+  margin-left:-8rpx;
+  margin-right:8rpx;
 }
 
-.shopDetailInfo .guessYouLikePrice .change {
+.shopDetailInfo .change {
   position: absolute;
   display: flex;
   flex-direction: row;
@@ -260,12 +306,9 @@
 */
   bottom: 24rpx;
   right: 22rpx;
-  font-size: 24rpx;
-  line-height: 24rpx;
-  color: #a8abaf;
 }
 
-.shopDetailInfo .guessYouLikePrice .change .a {
+.shopDetailInfo .change .a {
   display: block;
   width: 125rpx;
   height: 24rpx;
@@ -274,8 +317,11 @@
 */
 }
 
-.shopDetailInfo .guessYouLikePrice .change .b {
-  display: block;
+.shopDetailInfo .b {
+  display: inline;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  color: #a8abaf;
   text-decoration: line-through;
 }
 .loading {

@@ -7,7 +7,7 @@
 	    </view>
 	
 	    <view class="sellerDetailBoard">
-	      <button class='sellerDetailCall' open-type="{{hasLogin?'contact':''}}" session-from='weapp' show-message-card='true' send-message-path="{{sendmessagepath}}">
+	      <button class='sellerDetailCall' bindtap='connectSellerMsg'>
 	        <image class="image" style="" mode="" src="../WANTSImages/service@2x.png" binderror="" bindload=""></image>
 	        <text class="imageInfo"> {{ '联系商家' }} </text>
 	      </button>
@@ -19,25 +19,20 @@
 	  </view>
 	  <view class="guessYouLikeDetail" >
 		  <view class="guessYouLikeItems" wx:for="{{seller_detail}}" wx:key="{{index}}" data-subject="{{item}}" bindtap="columnClick">
-		    <view class="guessYouLikePicContainer">
+		    <view class="{{(index%2==0)?('guessYouLikePicContainerOn'):('guessYouLikePicContainer')}}" >
 		      <image class="guessYouLikePic" style="{{'background:'+randomBackgroundColor[index%8]}}" src="{{(item.small_img)?(item.small_img):(item.imgs[0])}}" mode="widthFix" binderror="" bindload="">
-	
-	          <view class="{{item.showTips ? 'guessYouLikeTipLayout' :'noshow'}}">
-	            <text class="guessYouLike-tips" style="position:absolute; "> {{item.tips}} </text>
-	            <image class='tip-background' mode="" src="{{item.tip_background}}" binderror="" bindload=""></image>
-	            <image class='tip-icon' style=" display:block; width:20rpx; height: 20rpx; position: absolute; top: 10rpx; left: 10rpx;" mode="" src="{{item.tip_icon}}" binderror="" bindload=""></image>
-	          </view>
 	        </image>
 	      </view>
-	      <view class="guessYouLikePrice">
-	        <text class="name"> {{ item.title }}</text>
+	      <view class="{{(index%2==0)?('guessYouLikePrice'):('guessYouLikePriceOn')}}">
+            <image wx:if="{{(item.title_prefix_url_label==null)?(false):(true)}}" class="title_prefix_url_label" mode="widthFix" src="{{item.title_prefix_url_label}}"></image>
+	        <text class="{{(item.title_prefix_url_label==null)?('name'):('nameOn')}}"> {{ item.title }}</text>
+          <view class="shopOutView">
 	        <text class="changed"> {{'￥'+ item.price/100 }} </text>
-	        <view class="change">
-	          <view class="a"> </view>
 	          <text class="b"> {{ '￥'+item.tag_price/100 }} </text>
-	        </view>
+          </view>
 	      </view>
 	    </view>
 	  </view>
 	</view>
 	<view class='loading'  wx:if="{{seller_detail.length&&(loaddingContext != '没有更多啦～')}}">{{loaddingContext}}</view>
+   <include src="../../utils/WNTSAlertView.wxml" />

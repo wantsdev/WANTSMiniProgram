@@ -87,7 +87,7 @@
 
   <view class="middle" bindtap='serviceMsg'>
     <button class='tip_button' bindtap='connectSellerMsg'>
-      <image style="left:32rpx;" mode="" src="../WANTSImages/service@3x.png" binderror="" bindload="" class="customService"></image>
+      <image style="left:32rpx;" mode="" src="../WANTSImages/service_Button@3x.png" binderror="" bindload="" class="customService"></image>
       <text class="customServiceTxt" style="left:24rpx;"> {{ '客服' }} </text>
     </button>
   </view>
@@ -102,11 +102,11 @@
   </view>
   <!-- <view class='vertical-line'></view> -->
   <form report-submit bindsubmit='add_shopping_cars' style="width:29%;" data-type="{{'shopping_car'}}">
-    <button class="intoShoppingCar" style="width:100%;background:#333333 100%;color:#ffffff;" form-type="submit"> {{ '加入购物车' }} </button>
+    <button class="intoShoppingCar" style="width:100%;background:#ffffff 100%;color:#535154;border-top:1rpx solid #e2e2e2;border-left:1rpx solid #e2e2e2;" form-type="submit"> {{ '加入购物车' }} </button>
   </form>
   <!-- <text class="purchase" style="width:29%;background:#FFF467 100%;color:#535154;" data-type="{{'buy_now'}}" bindtap="buy_now"> {{ '立即购买' }} </text> -->
   <form report-submit bindsubmit='buy_now' style="width:29%;" data-type="{{'buy_now'}}">
-    <button class="purchase" style="width:100%;background:#FFF467 100%;color:#535154;" form-type="submit"> {{ '立即购买' }} </button>
+    <button class="purchase" style="width:100%;background:#333333 100%;color:#ffffff;" form-type="submit"> {{ '立即购买' }} </button>
   </form>
 </view>
 
@@ -146,16 +146,16 @@
       </view>
     </scroll-view>
     <view class="customService" style="bottom:{{(iPhoneX)?(196+'rpx'):(130+'rpx')}};">
-      <button class='tip_button' style="background:#FFF467 100%;color:#535154;" bindtap='connectSellerMsg'>
-        <image class="customServiceImg" style="" mode="widthFix" src="../WANTSImages/service_Button@3x.png" binderror="" bindload=""></image>
-        <text class="customServiceText" style="background:#FFF467 100%;color:#535154;"> {{ '客服' }} </text>
+      <button class='tip_button' style="background:#333333 100%;color:#ffffff;" bindtap='connectSellerMsg'>
+        <image class="customServiceImg" style="" mode="widthFix" src="../WANTSImages/service@3x_white.png" binderror="" bindload=""></image>
+        <text class="customServiceText" style="background:#333333 100%;color:#ffffff;"> {{ '客服' }} </text>
       </button>
     </view>
     <form report-submit bindsubmit='commit_price_info' class="confirmOut" style="width:750rpx;border-radius:0rpx;border:0rpx;z-index: {{buy_now_z_index}};">
-      <button class="confirm" style="background:#FFF467 100%;color:#535154;bottom:{{(iPhoneX)?(68+'rpx'):(0+'rpx')}};" form-type="submit" data-selectedProducts="{{commit_price_info_selected}}"> {{ current_status }} </button>
+      <button class="confirm" style="background:#333333 100%;color:#ffffff;bottom:{{(iPhoneX)?(68+'rpx'):(0+'rpx')}};" form-type="submit" data-selectedProducts="{{commit_price_info_selected}}"> {{ current_status }} </button>
     </form>
     <form report-submit bindsubmit='add_shopping_car' class="confirmOut" style="width:750rpx;border-radius:0rpx;border:0rpx;z-index: {{shopping_car_z_index}};">
-      <button class="confirm" style="background:#FFF467 100%;color:#535154;bottom:{{(iPhoneX)?(68+'rpx'):(0+'rpx')}};" form-type="submit"> {{ current_status }} </button>
+      <button class="confirm" style="background:#333333 100%;color:#ffffff;bottom:{{(iPhoneX)?(68+'rpx'):(0+'rpx')}};" form-type="submit"> {{ current_status }} </button>
     </form>
   </view>
   <image style="" mode="" src="" binderror="" bindload="" class="toTop"></image>
