@@ -342,6 +342,8 @@ var pay = (orderId, success, fail, cancel) => {
       'content-Type': "application/x-www-form-urlencoded"
     },
     success: function (res) {
+      console.log(res);
+
       if (res) {
         if (res.data.code == 60000) {
           wx.showToast({
@@ -385,6 +387,7 @@ var pay = (orderId, success, fail, cancel) => {
       }
     },
     fail: function (res) {
+      console.log(res);
       fail(res);
       postErrorLog.call(2, 2, "请求charge失败", encodeURI(url + "\n" + res));
     }

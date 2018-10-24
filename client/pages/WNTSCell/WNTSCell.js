@@ -12,11 +12,11 @@ Page({
     guessLike: [],
     offset: 0,
     page: 0,
-    limit: 15,
+    limit: 16,
     loadMoreBool: true,
     winWidth: 0,
     winHeight: 0,
-    
+
   },
   /**
      * 获取我的收藏列表
@@ -33,7 +33,8 @@ Page({
     }
     util.requestGet(url,
       function (data) {
-        var showNoData = (data.length <= 0);
+        console.log(data);
+        var showNoData = (data.data.length <= 0);
         for (var i = 0; i < data.length; i++) {
           var subject_product = data[i].entity;
           var subject_product_all = that.simpleData(subject_product);
@@ -49,7 +50,7 @@ Page({
         wx.stopPullDownRefresh();
       }, function (data) {
         wx.showToast({
-          title: data,
+          title: data.data,
           icon: "none",
           duration: 2000
         })
@@ -153,7 +154,7 @@ Page({
 
   },
 
- 
+
   //猜你喜欢获取数据
   getGussLikeData() {
     var that = this;
@@ -168,9 +169,9 @@ Page({
     that.setData({
       loaddingContext: "加载更多..."
     });
-    util.requestGet(util.URL_ROOT + '/product/recommend?scene=8&offset=' + that.data.offset + '&limit=15',
+    util.requestGet(util.URL_ROOT + '/product/recommend?scene=8&offset=' + that.data.offset + '&limit=16',
       function (data) {
-        var temp = util.getGessLikeDataTool(data);
+        var temp = util.getGessLikeMoreDataTool(data.data);
         guessLike = guessLike.concat(temp);
         that.setData({
           guessLike: guessLike

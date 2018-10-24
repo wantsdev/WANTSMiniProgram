@@ -6,7 +6,35 @@
 .main {
   background: white;
   width: 100%;
-  border-bottom: 10rpx solid #ffffff;
+  border-bottom: 10rpx solid #fff;
+}
+
+.subTitle {
+  width: 710rpx;
+  height: 52rpx;
+  display: flex;
+  margin-left: 20rpx;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #ffc700 100%;
+}
+
+.subTitle .text {
+  height: 52rpx;
+  display: inline-block;
+  margin-left: 10rpx;
+  font-size: 22rpx;
+  color: #fff;
+  line-height: 52rpx;
+}
+
+.subTitle .mergeOrder {
+  height: 52rpx;
+  display: inline-block;
+  margin-right: 20rpx;
+  font-size: 22rpx;
+  color: #fff;
+  line-height: 52rpx;
 }
 
 .sellerView {
@@ -20,7 +48,13 @@
   flex-direction: row;
   align-items: center;
 }
-
+.sellerViewOutView{
+    width: 80rpx;
+  height: 60rpx;
+display: block;
+/* background: red; */
+padding-top:20rpx;
+}
 .sellerSelect {
   margin-left: 30rpx;
   width: 30rpx;
@@ -45,6 +79,7 @@
   height: 20rpx;
   margin-left: 20rpx;
 }
+
 .cart-list {
   position: relative;
   padding: 20rpx 20rpx 20rpx 285rpx;
@@ -54,13 +89,19 @@
   border-left: 20rpx solid #fff;
   border-right: 20rpx solid #fff;
 }
-
+.cart-list .shoppingOutView{
+    position: absolute;
+  left: 0rpx;
+  top: 67rpx;
+  width: 90rpx;
+  height: 90rpx;
+}
 .cart-list .cart-pro-select {
-  position: absolute;
-  left: 30rpx;
-  top: 111rpx;
+  margin-left: 31rpx;
+  margin-top: 30rpx;
   width: 30rpx;
   height: 30rpx;
+  display:block;
 }
 
 .cart-list .cart-thumb {
@@ -163,10 +204,23 @@
   color: black;
   background: white;
   border: 1rpx solid #f2f2f2;
-  border-right:0rpx;
-  border-left:0rpx;
+  border-right: 0rpx;
+  border-left: 0rpx;
+  border-bottom: 0rpx;
 }
+.cartFooterOutView{
+  /* background:green; */
+}
+.cartBlock{
+  width:90rpx;
+  height:90rpx;
+  display:block;
+  position: absolute;
+  left: 0rpx;
+  top: 0rpx;
+  /* background:blue; */
 
+}
 .total-select {
   position: absolute;
   left: 50rpx;
@@ -196,14 +250,22 @@
   position: absolute;
   right: 0rpx;
   top: 0rpx;
-  width: 220rpx;
-  height: 102rpx;
+  width: 222rpx;
+  height: 100rpx;
+  line-height:90rpx;
+  /* margin-top: -1rpx; */
   background: #333;
   text-align: center;
+  border-radius:0rpx;
   font-size: 32rpx;
   color: #fff;
 }
-
+  .JieSuan :after{
+  border:0rpx;
+  }
+.JieSuanContain :after{
+  border:0rpx;
+}
 .order-icon image, .order-icon navigator {
   display: block;
   width: 45rpx;
@@ -271,6 +333,7 @@
   background: gray;
   margin-left: 240rpx;
 }
+
 .rightLine {
   display: block;
   width: 60rpx;
@@ -290,6 +353,7 @@
 .hide {
   display: none;
 }
+
 .loading {
   width: 750rpx;
   font-size: 28rpx;
@@ -297,4 +361,31 @@
   line-height: 40rpx;
   margin-bottom: 120rpx;
   text-align: center;
+}
+
+.shoppingCarTop {
+  width: 750rpx;
+  height: 60rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background: #ffc700 100%;
+}
+
+.shoppingCarTop .text {
+  height: 60rpx;
+  display: inline-block;
+  margin-left: 30rpx;
+  font-size: 28rpx;
+  color: #fff;
+  line-height: 60rpx;
+}
+
+.shoppingCarTop .nav {
+  height: 60rpx;
+  display: inline-block;
+  margin-right: 30rpx;
+  font-size: 28rpx;
+  color: #fff;
+  line-height: 60rpx;
 }

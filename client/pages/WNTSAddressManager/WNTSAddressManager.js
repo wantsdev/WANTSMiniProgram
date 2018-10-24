@@ -39,14 +39,14 @@ Page({
     }
     util.requestGet(util.URL_GET_ADDRESS,
       function (data) {
-        var addressList = data;
+        var addressList = data.data;
         if (addressId) {
           for (var i = 0; i < addressList.length; i++) {
             if (addressList[i].id == addressId) {
               addressList[i].selected = true;
             }
           }
-        }
+        };
         that.setData({
           addressList: addressList,
           showSelected: showSelected
@@ -54,7 +54,7 @@ Page({
 
       }, function (data) {
         wx.showToast({
-          title: data.errorMsg,
+          title: data.data.errorMsg,
           mask: true
         })
       })
@@ -135,18 +135,18 @@ Page({
    */
   onShow: function () {
     var refresh = this.data.refresh;
-    var that = this; 
+    var that = this;
     if (refresh) {
       util.requestGet(util.URL_GET_ADDRESS,
         function (data) {
-          var addressList = data;
+          var addressList = data.data;
           that.setData({
             addressList: addressList,
           })
 
         }, function (data) {
           wx.showToast({
-            title: data.errorMsg,
+            title: data.data.errorMsg,
             mask: true
           })
         })
@@ -186,7 +186,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

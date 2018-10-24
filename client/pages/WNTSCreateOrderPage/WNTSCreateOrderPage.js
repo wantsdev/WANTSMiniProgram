@@ -42,7 +42,6 @@ Page({
     var selectedProductsOptions = decodeURIComponent(options.selectedProducts);
     var selectedProducts = JSON.parse(selectedProductsOptions);
     var selectedProductsItemOne = selectedProducts.product[0];
-    console.log(selectedProducts.product);
     // 获取设备信息
     that.setData({
       modalShow: getApp().globalData.modalTurn
@@ -73,12 +72,15 @@ Page({
           selectedProducts,
           productImgUrl: productImg
         });
+        console.log(that.data.selectedProducts);
         that.createOrder();
         that.getShoppingCartTotalPrice();
       })
     } else {
       var productImgUrl = (typeof (selectedProductsItemOne.product_img) === 'object' && selectedProductsItemOne.product_img.length > 0) ? (selectedProductsItemOne.product_img[0]) : (selectedProductsItemOne.product_img);
       var orderId = selectedProductsItemOne.id;
+      selectedProducts = selectedProducts.product;
+      console.log(selectedProducts);
       that.setData({
         selectedProducts,
         productImgUrl
@@ -86,7 +88,6 @@ Page({
       that.createOrder();
       that.getShoppingCartTotalPrice();
     };
-
   },
   createOrder() {
     var that = this;
@@ -115,21 +116,22 @@ Page({
     var that = this;
     let selectedProducts = that.data.selectedProducts;
     var selectedProduct_id_array = [];
-    for (let i = 0; i < selectedProducts.product.length; i++) {
-      selectedProduct_id_array.push(selectedProducts.product[i].id);
-    }
+    console.log(selectedProducts);
+    for (let i = 0; i < selectedProducts.length; i++) {
+      selectedProduct_id_array.push(selectedProducts[i].id);
+    };
     var url = "";
-    if (selectedProducts.product[0].from == "productDetail") {
-      url = WNTSApi.price_by_stock_promotion_Api + "?stockId=" + selectedProducts.product[0].id + "&num=" + selectedProducts.product[0].num;
+    if (selectedProducts[0].from == "productDetail") {
+      url = WNTSApi.price_by_stock_promotion_Api + "?stockId=" + selectedProducts[0].id + "&num=" + selectedProducts[0].num;
       util.requestMethodWithParaterm("GET", null, url, function (res) {
         var addPriceArr = [];
         var sum = 0;
         var price = res.data.pay / 100;
         var express = res.data.express / 100;
-        for (var p = 0; p < selectedProducts.product.length; p++) {
-          addPriceArr.push(selectedProducts.product[p].num * selectedProducts.product[p].price / 100);
+        for (var p = 0; p < selectedProducts.length; p++) {
+          addPriceArr.push(selectedProducts[p].num * selectedProducts[p].price / 100);
         };
-        for (var s = 0; s < selectedProducts.product.length; s++) {
+        for (var s = 0; s < selectedProducts.length; s++) {
           sum += addPriceArr[s];
         };
         that.setData({
@@ -145,10 +147,10 @@ Page({
         var sum = 0;
         var price = res.data.pay / 100;
         var express = res.data.express / 100;
-        for (var p = 0; p < selectedProducts.product.length; p++) {
-          addPriceArr.push(selectedProducts.product[p].num * selectedProducts.product[p].price / 100);
+        for (var p = 0; p < selectedProducts.length; p++) {
+          addPriceArr.push(selectedProducts[p].num * selectedProducts[p].price / 100);
         };
-        for (var s = 0; s < selectedProducts.product.length; s++) {
+        for (var s = 0; s < selectedProducts.length; s++) {
           sum += addPriceArr[s];
         };
         that.setData({
@@ -181,7 +183,7 @@ Page({
 
   getOrder() {
     var that = this;
-    var products = that.data.selectedProducts.product;
+    var products = that.data.selectedProducts;
     var productidS = [];
 
     console.log(products);
@@ -211,7 +213,7 @@ Page({
       paraterm.address_id = that.data.currentAddress.id;
     }
 
-    paraterm.channel = "wx_lite";
+    // paraterm.channel = "wx_lite";
     orderData = {};
     that.setData({
       loadingHidden: false
@@ -219,6 +221,7 @@ Page({
     console.log(url);
     console.log(paraterm);
     util.requestMethodWithParaterm("POST", paraterm, url, function (res) {
+      console.log(res);
       that.setData({
         loadingHidden: true,
         created: res.data.created
@@ -241,7 +244,6 @@ Page({
       orderData.receiver_phone = orderRes_Data.receiver_phone;
       orderData.warning_message_on_confirm_order_page = orderRes_Data.warning_message_on_confirm_order_page;
       json_str = JSON.stringify(orderData);
-
       wx.navigateTo({
         url: '../WNTSConfirmPaymentPage/WNTSConfirmPaymentPage' + "?orderData=" + json_str,
       });

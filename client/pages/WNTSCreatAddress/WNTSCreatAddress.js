@@ -160,13 +160,13 @@ Page({
       })
     } else if (that.data.detailAddress.length == 0) {
       wx.showToast({
-        title: '详细地址不能为空为空',
+        title: '详细地址不能为空',
         icon: 'none',
         mask: true
       })
     } else if (that.data.province.length == 0 || that.data.city.length == 0 || that.data.area.length == 0) {
       wx.showToast({
-        title: '省市区不能为空为空',
+        title: '省市区不能为空',
         icon: 'none',
         mask: true
       })

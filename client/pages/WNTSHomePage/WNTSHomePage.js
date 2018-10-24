@@ -390,8 +390,11 @@ var get_list = function(that) {
               console.log(RecommendBlockTargetTitle);
               that.setData({
                 RecommendBlockTargetId,
-                RecommendBlockTargetTitle
+                RecommendBlockTargetTitle,
+                blockType:true,
+                startLoading:true
               });
+              that.guessLikeLoadMore(true);
             }
             break;
           case SubjectBlock_single_id:
@@ -425,7 +428,7 @@ var get_list = function(that) {
               var SubjectBlock_double = that.data.SubjectBlock_double; //主题列表（暂时不包括子列表）
               if (!SubjectBlock_double) {
                 return;
-              }
+              };
               getSubjectDataRequest4(SubjectBlock_double, function(res) {
                 for (var i = 0; i < res.length; i++) {
                   var subjectItems = res[i];

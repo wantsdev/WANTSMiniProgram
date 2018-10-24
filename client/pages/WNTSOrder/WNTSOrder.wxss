@@ -253,6 +253,20 @@
   color: #ffc700;
 }
 
+.opreation4 {
+  display: flex;
+  width: 116rpx;
+  height: 50rpx;
+  border: 1rpx solid #e2e2e2;
+  align-items: center;
+  justify-content: center;
+  font-size: 24rpx;
+  position: absolute;
+  right: 344rpx;
+  color: #484649;
+}
+
+
 .hide {
   display: none;
 }
@@ -338,7 +352,7 @@
   border: 0px;
   display: block;
   height: 55rpx;
-  width: 150rpx;
+  width: 160rpx;
   position: absolute;
   right: 30rpx;
 }
@@ -367,4 +381,34 @@
   line-height: 40rpx;
   margin-bottom: 20rpx;
   text-align: center;
+}
+.guessYouLikePrice .name {
+  position: absolute;
+  display: block;
+  height: 24rpx;
+  width:234rpx;
+  /*  background: yellow;
+*/
+  top:0rpx;
+  left:90rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.guessYouLikePrice .nameOn {
+  position: absolute;
+  display: block;
+  height: 24rpx;
+  width:318rpx;
+  /*  background: yellow;
+*/
+  top:0rpx;
+  left:0rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }

@@ -46,44 +46,60 @@
 </view>
 <!--工具栏-->
 <view class="user_grids_1">
+  <!-- <view class="util_coupons" bindtap="util_coupons">
+    <view class="imgOut">
+      <image class="coupons_icon" style="" mode="widthFix" src="../WANTSImages/coupons@2x.png" binderror="" bindload=""></image>
+    </view>
+    <text class="coupons_name">优惠券</text>
+  </view> -->
   <view class="util_address" bindtap="util_address">
-    <image class="address_icon" style="" mode="" src="../WANTSImages/userinfo_address.png" binderror="" bindload=""></image>
+    <view class="imgOut">
+      <image class="address_icon" style="" mode="widthFix" src="../WANTSImages/userinfo_address.png" binderror="" bindload=""></image>
+    </view>
     <text class="address_name">收货地址</text>
   </view>
   <view class="util_history" bindtap="util_history">
-    <image class="history_icon" style="" mode="" src="../WANTSImages/userinfo_history.png" binderror="" bindload=""></image>
+    <view class="imgOut">
+      <image class="history_icon" style="" mode="widthFix" src="../WANTSImages/userinfo_history.png" binderror="" bindload=""></image>
+    </view>
     <text class="history_name">浏览记录</text>
   </view>
   <view class="util_cell" bindtap="util_cell">
-    <image class="cell_icon" style="" mode="" src="../WANTSImages/userinfo_cell.png" binderror="" bindload=""></image>
+    <view class="imgOut">
+      <image class="cell_icon" style="" mode="widthFix" src="../WANTSImages/userinfo_cell.png" binderror="" bindload=""></image>
+    </view>
     <text class="cell_name">我的收藏</text>
   </view>
-  <!-- <view class="hide" bindtap="util_enter">
-      <image class="enter_icon" style="" mode="" src="../WANTSImages/userinfo_enter.png" binderror="" bindload=""></image>
-      <text class="enter_name">商家入驻</text>
-    </view> -->
-  <!-- <button class='hide' open-type='contact' session-from='weapp'>
-      <image class="online_icon" style="" mode="" src="../WANTSImages/userinfo_online.png" binderror="" bindload=""></image>
-      <text class="online_name">在线客服</text>
-    </button> -->
+  <button class="util_enter" open-type="{{hasLogin?'contact':''}}" session-from='weapp' show-message-card='true' send-message-title='投诉' send-message-path="">
+      <view class="imgOut">
+    <image class="enter_icon" style="" mode="" src="../WANTSImages/onlineCustomer@2x.png" binderror="" bindload=""></image>
+        </view>
+    <text class="enter_name">线上投诉</text>
+  </button>
 
 </view>
-<!--工具栏第二层-->
-<!-- <view class="hide">
-    <view class="util_phone" bindtap="util_phone">
-      <image class="phone_icon" style="" mode="" src="../WANTSImages/userinfo_phone.png" binderror="" bindload=""></image>
-      <text class="phone_name">热线客服</text>
-    </view>
+<!-- 工具栏第二层 -->
+<view class="user_grids_2">
 
-    <view class="hide" bindtap="util_about">
+  <view class="util_phone" bindtap="util_phone">
+        <view class="imgOut">
+    <image class="phone_icon" style="" mode="" src="../WANTSImages/customer@2x.png" binderror="" bindload=""></image>
+        </view>
+    <text class="phone_name">电话投诉</text>
+  </view>
+
+  <!-- <view bindtap="util_about">
       <image class="about_icon" style="" mode="" src="../WANTSImages/userinfo_about.png" binderror="" bindload=""></image>
       <text class="about_name">关于我们</text>
-    </view>
-    <view class="hide" bindtap="util_feedback">
-      <image class="feedback_icon" style="" mode="" src="../WANTSImages/userinfo_about.png" binderror="" bindload=""></image>
-      <text class="feedback_name">意见反馈</text>
-    </view>
+    </view> -->
+  <!-- <view class="util_feedback" bindtap="util_feedback">
+        <view class="imgOut">
+    <image class="feedback_icon" style="" mode="" src="../WANTSImages/sellerInfo@2x.png" binderror="" bindload=""></image>
+        </view>
+    <text class="feedback_name">商家入驻</text>
   </view> -->
+</view>
+<view style="width:750rpx;height:40rpx;display:block;"></view>
 <include src="../../utils/WNTSRecommend.wxml" />
 <!-- </scroll-view> -->
 <view style="width:100%;height:26rpx;box-sizing:border-box;color:black;background:white;display:block;">
@@ -91,8 +107,8 @@
 <!--在线客服弹窗-->
 <view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
-  <view class="modal-title">联系客服</view>
-  <view class="modal-content">400****951</view>
+  <view class="modal-title">投诉电话</view>
+  <view class="modal-content">4009933951</view>
   <view class="modal-footer">
     <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
     <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">拨打</view>

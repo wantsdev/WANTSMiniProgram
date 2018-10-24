@@ -1,5 +1,6 @@
 // pages/WNTSHistory/WNTSHistory.js
 var util = require('../../utils/util.js');
+var WNTSUserInfo = require("../../vendor/wafer2-client-sdk/lib/WNTSUserInfo.js");
 Page({
 
   /**
@@ -12,7 +13,7 @@ Page({
     winHeight: 0,
     offset: 0,
     page: 0,
-    limit: 15,
+    limit: 16,
     loadMoreBool: true,
     guessLike: []
   },
@@ -31,15 +32,17 @@ Page({
       tempList = that.data.dataList;
     }
 
-    util.requestGet(util.URL_GET_HISTORY + '?limit=15&offset=' + offset,
+    util.requestGet(util.URL_GET_HISTORY + '?limit=16&offset=' + offset,
       function (data) {
-        var size = data.length;
+        console.log(data);
+        var size = data.data.length;
         var showNoData = (size <= 0);
         if (showNoData) {
           that.getGussLikeData();
         }
-        for (var i = 0; i < data.length; i++) {
-          var subject_product = data[i].target;
+        for (var i = 0; i < data.data.length; i++) {
+          var subject_product = data.data[i].target;
+          console.log(subject_product);
           var subject_product_all = that.simpleData(subject_product);
           tempList.push(subject_product_all);
         }
@@ -47,11 +50,12 @@ Page({
           dataList: tempList,
           showNoData: showNoData
         })
+        console.log(that.data.dataList);
         wx.hideLoading();
         wx.stopPullDownRefresh();
       }, function (data) {
         wx.showToast({
-          title: data,
+          title: data.data,
           icon: "none",
           duration: 2000
         })
@@ -76,6 +80,7 @@ Page({
     subject_product_all.tag_price = subject_product.tag_price;
     subject_product_all.small_img = subject_product.small_img;
     subject_product_all.discount_info = subject_product.discount_info;
+    subject_product_all.title_prefix_url_label = subject_product.title_prefix_url_label;
     if (subject_product.total_stock < 500 & subject_product.total_stock > 0) {
       showTips = true;
       tips = "仅剩" + subject_product.total_stock + "件";
@@ -117,6 +122,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // var userInfo = WNTSUserInfo.get();
+    // if (userInfo.id == 1155855) {
+    //   if (options.source == undefined) {
+    //   }else{
+    //      var source = options.source;
+    //     wx.showToast({
+    //       title: source,
+    //       duration: 1500,
+    //       icon: 'none'
+    //     });
+    //   }
+    // }
+    // return;
     /** 
      * 获取系统信息 
      */
@@ -142,6 +160,7 @@ Page({
   goods_item(e) {
     var subject_product = e.currentTarget.dataset.item;
     var subject_product_all = {};
+    console.log(subject_product);
     subject_product_all.product_imgs = subject_product.imgs;
     subject_product_all.product_id = subject_product.id;
     subject_product_all.product_title = util.stringWithAndCode(subject_product.title);
@@ -167,9 +186,9 @@ Page({
     that.setData({
       loaddingContext: "加载更多..."
     });
-    util.requestGet(util.URL_ROOT + '/product/recommend?scene=7&offset=' + that.data.offset + '&limit=15',
+    util.requestGet(util.URL_ROOT + '/product/recommend?scene=7&offset=' + that.data.offset + '&limit=16',
       function (data) {
-        var temp = util.getGessLikeDataTool(data);
+        var temp = util.getGessLikeDataTool(data.data);
         guessLike = guessLike.concat(temp);
         that.setData({
           guessLike: guessLike

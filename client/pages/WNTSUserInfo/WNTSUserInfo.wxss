@@ -234,23 +234,22 @@
   background: #fcfcfc;
   border-left: 20rpx solid #fff;
   border-right: 20rpx solid #fff;
-  border-bottom: 20rpx solid #fff;
 }
 
 .util_address {
   display: flex;
   height: 170rpx;
   flex-direction: column;
-  width: 33%;
-  margin-left: -10rpx;
+  width: 25%;
   align-items: center;
 }
 
 .address_icon {
   display: block;
-  margin-top: 40rpx;
-  margin-left: 40rpx;
-  margin-bottom: 10rpx;
+  position: absolute;
+  left: 50%;
+  bottom: 15rpx;
+  margin-left:-18rpx;
   width: 36rpx;
   height: 48rpx;
 }
@@ -259,23 +258,22 @@
   display: block;
   font-size: 24rpx;
   color: #484648;
-  margin-left: 40rpx;
 }
 
 .util_history {
   display: flex;
   height: 170rpx;
   flex-direction: column;
-  width: 33%;
-  margin-left: 10rpx;
+  width: 25%;
   align-items: center;
 }
 
 .history_icon {
   display: block;
-  margin-top: 44rpx;
-  margin-left: 40rpx;
-  margin-bottom: 10rpx;
+  position: absolute;
+  left: 50%;
+  bottom: 15rpx;
+  margin-left:-20rpx;
   width: 40rpx;
   height: 44rpx;
 }
@@ -284,22 +282,22 @@
   display: block;
   font-size: 24rpx;
   color: #484648;
-  margin-left: 40rpx;
 }
 
 .util_cell {
   display: flex;
   height: 170rpx;
-  width: 33%;
+  width: 25%;
   flex-direction: column;
   align-items: center;
 }
 
 .cell_icon {
   display: flex;
-  margin-top: 44rpx;
-  margin-left: 40rpx;
-  margin-bottom: 10rpx;
+  position: absolute;
+  left: 50%;
+  bottom: 15rpx;
+  margin-left: -21rpx;
   width: 42rpx;
   height: 44rpx;
 }
@@ -308,7 +306,6 @@
   display: block;
   font-size: 24rpx;
   color: #484648;
-  margin-left: 40rpx;
 }
 
 .cs_button {
@@ -357,9 +354,10 @@
 
 .phone_icon {
   display: block;
-  margin-top: 46rpx;
-  margin-left: 68rpx;
-  margin-bottom: 10rpx;
+  position: absolute;
+  margin-left: -20rpx;
+  left: 50%;
+  bottom: 15rpx;
   width: 40rpx;
   height: 42rpx;
 }
@@ -375,13 +373,21 @@
   display: block;
   height: 170rpx;
   width: 178rpx;
+  border-radius: 0rpx;
+	padding-left: 0rpx;
+  background:#fcfcfc;
+  margin-left:0rpx;
+  margin-right:0rpx;
 }
-
+.util_enter:after{
+	border:0rpx;
+}
 .enter_icon {
   display: block;
-  margin-top: 46rpx;
-  margin-left: 68rpx;
-  margin-bottom: 10rpx;
+  position: absolute;
+  left: 50%;
+  bottom: 15rpx;
+  margin-left:-9rpx;
   width: 40rpx;
   height: 42rpx;
 }
@@ -390,19 +396,20 @@
   display: block;
   font-size: 24rpx;
   color: #484648;
-  margin-left: 40rpx;
+  margin-left:22rpx;
+  margin-top:-13rpx;
 }
 
 .util_about {
   display: block;
   height: 170rpx;
   width: 178rpx;
+
 }
 
 .about_icon {
   display: block;
   margin-top: 46rpx;
-  margin-left: 68rpx;
   margin-bottom: 10rpx;
   width: 48rpx;
   height: 42rpx;
@@ -412,20 +419,20 @@
   display: block;
   font-size: 24rpx;
   color: #484648;
-  margin-left: 40rpx;
 }
 
 .util_feedback {
   display: block;
   height: 170rpx;
-  width: 176rpx;
+  width: 178rpx;
 }
 
 .feedback_icon {
   display: block;
-  margin-top: 46rpx;
-  margin-left: 68rpx;
-  margin-bottom: 10rpx;
+  position: absolute;
+  left: 50%;
+  margin-left: -24rpx;
+  bottom: 15rpx;
   width: 48rpx;
   height: 42rpx;
 }
@@ -495,7 +502,7 @@
 
 .btn-cancel {
   width: 50%;
-  color: #ffc700;
+  color: #333333;
   text-align: center;
   border-right: 2px solid #f5f5f5;
   font-size: 32rpx;
@@ -503,11 +510,41 @@
 
 .btn-confirm {
   width: 50%;
-  color: #ffc700;
+  color: #333333;
   text-align: center;
   font-size: 32rpx;
 }
 
 .hide {
   display: none;
+}
+.util_coupons{
+  display: flex;
+  height: 170rpx;
+  flex-direction: column;
+  width: 178rpx;
+  align-items: center;
+}
+.coupons_icon {
+  display: block;
+  position: absolute;
+  left: 50%;
+  bottom: 15rpx;
+  margin-left:-22rpx;
+  width: 44rpx;
+  height: 36rpx;
+}
+.coupons_name {
+  width:74rpx;
+  height:34rpx;
+  display: block;
+  font-size: 24rpx;
+  line-height:34rpx;
+  color: #484648;
+}
+.imgOut{
+  width:100%;
+  height:100rpx;
+  display: block;
+  position: relative;
 }

@@ -11,31 +11,53 @@
 }
 
 .dataList {
-  display: inline-block;
+  /* display: inline-block;
   width: 250rpx;
-  height: 500rpx;
+  height: 500rpx; */
+  display: inline-block;
+  width: 330rpx;
+  height: 532rpx;
+  margin-left:30rpx;
+
 }
 
 .dataPicContainer {
-  width: 250rpx;
+  /* width: 250rpx;
   height: 360rpx;
+  display: block;
+  overflow: hidden; */
+  width: 330rpx;
+  height: 344rpx;
   display: block;
   overflow: hidden;
 }
 
 .dataPic {
-  width: 250rpx;
+  /* width: 250rpx;
   height: 400rpx;
   display: flex;
-  flex-direction: row;
+  flex-direction: row; */
+  width: 256rpx;
+  height: 344rpx;
+  display: block;
+  position: relative;
+  margin-left:37rpx;
+
 }
 
 .dataPrice {
-  width: 250rpx;
+  /* width: 250rpx;
   height: 110rpx;
   display: block;
   position: relative;
+  overflow: hidden; */
+    width: 324rpx;
+  height: 160rpx;
+  display: block;
+  position: relative;
   overflow: hidden;
+  margin-top:28rpx;
+
 }
 
 .dataIcons {
@@ -53,9 +75,24 @@
   font-size: 20rpx;
   line-height: 40rpx;
 }
+.dataPrice .nameOn {
+  position: absolute;
+  display: block;
+  height: 24rpx;
+  width:318rpx;
+  /*  background: yellow;
+*/
+  top:0rpx;
+  left:0rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 
 .dataPrice .name {
-  position: absolute;
+  /* position: absolute;
   display: block;
   width: 166rpx;
   height: 24rpx;
@@ -64,11 +101,25 @@
   line-height: 24rpx;
   overflow: hidden;
   white-space: nowrap;
+  text-overflow: ellipsis; */
+    position: absolute;
+  display: block;
+  height: 24rpx;
+  width:234rpx;
+  /*  background: yellow;
+*/
+  top:0rpx;
+  left:90rpx;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
+
 }
 
 .dataPrice .changed {
-  position: absolute;
+  /* position: absolute;
   display: block;
   width: 78rpx;
   height: 32rpx;
@@ -76,11 +127,20 @@
   left: 20rpx;
   font-size: 32rpx;
   line-height: 32rpx;
+  color: #eb5160; */
+    display: inline;
+margin-right:10rpx;
+margin-left:-8rpx;
+  /*  background: blue;
+*/
+  font-size: 32rpx;
+  line-height: 32rpx;
   color: #eb5160;
+
 }
 
 .dataPrice .change {
-  position: absolute;
+  /* position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -90,7 +150,14 @@
   right: 22rpx;
   font-size: 24rpx;
   line-height: 24rpx;
+  color: #a8abaf; */
+    display: inline;
+  font-size: 24rpx;
+  line-height: 62rpx;
   color: #a8abaf;
+  border:0rpx;
+  text-decoration: line-through;
+
 }
 
 .dataPrice .change .a {
@@ -140,3 +207,20 @@
   display: none;
 }
 
+.outViewOne{
+  width:324rpx;
+  height:26rpx;
+  display: block;
+  position: absolute;
+  top:0rpx;
+  left:0rpx;
+}
+
+.outViewTwo{
+  width:324rpx;
+  height:32rpx;
+  display: block;
+  position: absolute;
+  bottom:70rpx;
+  left:0rpx;
+}

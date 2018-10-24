@@ -1,10 +1,12 @@
 var util = require('../../utils/util.js');
 var WNTSApi = require('../../utils/WNTSApi.js');
+var WNTSToken = require("../../vendor/wafer2-client-sdk/lib/WNTSToken.js");
 var unSeletedImage = "../WANTSImages/check_unselected.png"
 var seletedImage = "../WANTSImages/check_selected.png"
 var isLoading = false;
 var express = 0;
 var appId = util.App_id;
+var productSumExpress = {};
 Page({
 
   /**we
@@ -21,7 +23,6 @@ Page({
     deleteImage: "../WANTSImages/delete.png",
     hasList: false,          // 列表是否有数据
     totalPrice: 0,           // 总价，初始为0
-    expressPrice: 0,           // 邮价，初始为0
     selectAllStatus: true,    // 全选状态，默认全选
     obj: {
       name: "hello"
@@ -35,7 +36,7 @@ Page({
     express: 0,
     offset: 0,
     page: 0,
-    limit: 15,
+    limit: 16,
     loadMoreBool: true,
     randomBackgroundColor: [],
     guessLikeShow: false,
@@ -72,7 +73,6 @@ Page({
    * 当前商品选中事件
    */
   selectList(e) {
-
     const index = e.currentTarget.dataset.index;
     let currentProduct = e.currentTarget.dataset.product;
     let seller_list = this.data.seller_list;
@@ -96,7 +96,6 @@ Page({
     this.checkSellerSelected(section, row);
     this.checkAllSelected();
     this.getShoppingCartTotalPrice();
-
   },
   //获取当前商品的索引
   getProductSectionAndRow(product) {
@@ -271,33 +270,78 @@ Page({
           selectedNewProductsNum += products[j].num;
         }
       }
-    }
+    };
+    productSumExpress.product = selectedNewProducts;
     that.setData({
       selectedNewProducts,
       selectedNewProductsNum
     });
     //获取价格接口
-    console.log(WNTSApi.shoppingCarPricetApi + "?order_product_id=" + selectedProducts + "&app_id=" + appId);
-    util.requestMethodWithParaterm("GET", null, WNTSApi.shoppingCarPricetApi + "?order_product_id=" + selectedProducts, function (res) {
-      console.log(res);
-      var express = res.data.express;
-      var price = res.data.sum / 100;
-      console.log(price);
-      if (selectAllStatus == false) {
-        that.setData({
-          totalPrice: price,
-          express: 0
-        });
-      } else {
+    if (selectAllStatus == false) {
+      util.requestMethodWithParaterm("GET", null, WNTSApi.getShoppingCartPrice + "?order_product_id=" + selectedProducts + "&choose_all_products_in_cart=false", function (res) {
+        var express = res.data.price.express;
+        var price = res.data.price.sum / 100 + express / 100;
+
         that.setData({
           totalPrice: price,
           express: express
         });
-      };
-    });
+        productSumExpress.totalPrice = that.data.totalPrice;
+        productSumExpress.express = that.data.express;
+      });
+    } else {
+      util.requestMethodWithParaterm("GET", null, WNTSApi.getShoppingCartPrice + "?choose_all_products_in_cart=true", function (res) {
+        console.log(res.data);
+        if (res.data.seller_list == null) {
+          var express = 0;
+        } else {
+          var express = res.data.price.express;
+        };
+        if (res.data.seller_list == null) {
+          var price = 0;
+        } else {
+          var price = res.data.price.sum / 100 + express / 100;
+        };
+
+        that.setData({
+          totalPrice: price,
+          express: express
+        });
+        productSumExpress.totalPrice = that.data.totalPrice;
+        productSumExpress.express = that.data.express;
+      });
+    };
+    // util.requestMethodWithParaterm("GET", null, WNTSApi.getShoppingCartPrice + "?order_product_id=" + selectedProducts, function (res) {
+    //   var express = res.data.express;
+    //   var price = res.data.sum / 100;
+    //   if (selectAllStatus == false) {
+    //     that.setData({
+    //       totalPrice: price,
+    //       express: 0
+    //     });
+    //   }else{
+    //     that.setData({
+    //       totalPrice: price,
+    //       express: express
+    //     });
+    //   };
+    // });
   },
   //创建订单
   createOrderClick(e) {
+    var fId = e.detail.formId;
+    var fIdArr = getApp().globalData.formIdArr;
+    fIdArr.push(fId);
+    if (fIdArr.length >= 3) {
+      //推送formId到服务端
+      console.log(fIdArr);
+      var fIdUrl = WNTSApi.mainUrl + '/user/batch_add_miniapp_form_id_list';
+      util.requestPost({ "form_id_list": fIdArr }, fIdUrl, function (res) {
+        console.log(res);
+        getApp().globalData.formIdArr = [];
+      })
+    };
+
     if (!this.data.selectedNewProductsNum) {
       wx.showToast({
         title: "请至少选择一件商品",
@@ -306,10 +350,12 @@ Page({
       })
       return;
     }
+    getApp().globalData.modalTurn = false;//购物车过去到创建订单界面 先别显示了就
     //跳转确认订单界面
-    var json_str = JSON.stringify(this.data.selectedNewProducts);
+    var json_str = JSON.stringify(productSumExpress);
+    var json_string = encodeURIComponent(json_str);
     wx.navigateTo({
-      url: '../WNTSCreateOrderPage/WNTSCreateOrderPage' + "?selectedProducts=" + json_str,
+      url: '../WNTSCreateOrderPage/WNTSCreateOrderPage' + "?selectedProducts=" + json_string,
     })
   },
 
@@ -317,6 +363,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
     var that = this;
     that.setData({
       randomBackgroundColor: ['#2F4C52', '#414D65', '#A3A093', '#8F5B56', '#DDE8DE', '#F2E6F7', '#D0F6F9', '#F4F6B6', '#EFADCD']
@@ -329,7 +376,6 @@ Page({
         });
       }
     });
-    this.loadData();
   },
 
 
@@ -338,7 +384,7 @@ Page({
     util.getShoppingCartSellerList(function (res) {
       wx.stopPullDownRefresh();
       var seller_list = res.data.seller_list;
-
+      console.log(res.data);
       //配置数据
       var showNoData = false;
       if (!seller_list || (seller_list.length <= 0)) {
@@ -350,6 +396,8 @@ Page({
       that.setData({
         showNoData: showNoData
       });
+      console.log(seller_list);
+
       that.configCart(seller_list);
       util.getProductsTotalThenSetTabBarBadgeWithSellerList(seller_list);
       if (seller_list == null) {
@@ -382,10 +430,10 @@ Page({
     that.setData({
       loaddingContext: "加载更多..."
     });
-    util.requestGet(util.URL_ROOT + '/product/recommend?scene=2&offset=' + that.data.offset + '&limit=15',
-      function (data) {
-        var temp = util.getGessLikeDataTool(data);
-        if (data.length == 0) {
+    util.requestGet(util.URL_ROOT + '/product/recommend?scene=2&offset=' + that.data.offset + '&limit=16',
+      function (res) {
+        var temp = util.getGessLikeMoreDataTool(res.data);
+        if (res.data.length == 0) {
           that.setData({
             loaddingContext: "没有更多啦～"
           });
@@ -416,14 +464,17 @@ Page({
   //
   configCart(e) {
     var that = this;
+
     if (!e) return;
+
     var seller_list_data = e;
     var tempList = [];
     for (var i = 0; i < seller_list_data.length; i++) {
       var temp = {};
       var newProducts = [];
       var newSeller = {};
-      var products = seller_list_data[i].products;
+      var products = seller_list_data[i].order_product_list;
+      console.log(products);
       seller_list_data[i].section = i;
       for (var j = 0; j < products.length; j++) {
         products[j].row = j;
@@ -443,6 +494,7 @@ Page({
         newProduct.sum = products[j].sum;
         newProduct.status = products[j].status;
         newProduct.tag_price = products[j].tag_price;
+        newProduct.promotion_id = products[j].promotion_id;
         newProducts.push(newProduct);
       }
       newSeller.id = seller_list_data[i].seller.id;

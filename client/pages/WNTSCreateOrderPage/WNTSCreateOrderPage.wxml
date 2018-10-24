@@ -32,7 +32,7 @@
   <!--当一商品时 start  -->
   <view wx:if="{{selectedProducts.length == 1}}">
     <view class="goods-list ">
-      <image class="goods-img" mode="aspectFill" src="{{selectedProducts[0].product_img}}"></image>
+      <image class="goods-img" mode="aspectFill" src="{{productImgUrl}}"></image>
       <view class="goods-desc">
         <view class="goods-title ">{{selectedProducts[0].product_title}}</view>
         <view class="goods-stock ">{{selectedProducts[0].stock_descp}}</view>

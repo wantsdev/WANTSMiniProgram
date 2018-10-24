@@ -26,5 +26,10 @@
   <image class='no_coll_icon' src='../WANTSImages/coll_nor.png'></image>
   <view class='no_coll'>暂时没有相关收藏</view>
   <view class='go_shop' bindtap='go_shop'>逛一逛</view>
-  <include src="../../utils/WNTSRecommend.wxml" />
+</view>
+<view class="{{showNoData ? '' :'hide'}}" style="width:750rpx;height:40rpx;display:block;"></view>
+<view class="{{showNoData ? '' :'hide'}}">
+  <include src="../../utils/WNTSRecommend.wxml"/>
+  <view style="width:100%;height:26rpx;box-sizing:border-box;color:black;background:white;display:block;">
+  </view>
 </view>

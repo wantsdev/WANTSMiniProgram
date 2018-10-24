@@ -1,4 +1,5 @@
 /* pages/WNTSOrderDetial/WNTSOrderDetial.wxss */
+@import '../../utils/WNTSRecommend.wxss';
 @import '../../utils/WNTSAlertView.wxss';
 
 /*最外层父空间  */
@@ -9,7 +10,57 @@
   width: 100%;
   height: 100%;
 }
-
+ /* 待付款卡片  */
+.prepayCard{
+  width:750rpx;
+  height:184rpx;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.prepayCardImg{
+  width:750rpx;
+  height:184rpx;
+  display: block;
+  position: absolute;
+  top:0rpx;
+  left:0rpx;
+}
+.prepayCardIcon{
+  width:36rpx;
+  height:36rpx;
+  display: block;
+  position: absolute;
+  top:70rpx;
+  left: 50rpx;
+}
+.prepayCardTitle{
+  width:112rpx;
+  height:40rpx;
+  display: block;
+  position: absolute;
+  top:69rpx;
+  left:96rpx;
+  color: #ffffff;
+  font-size: 28rpx;
+}
+.prepayCardTime{
+  height:28rpx;
+  font-size:28rpx;
+  position: absolute;
+  top:47rpx;
+  right:60rpx;
+  color: #ffffff;
+}
+.prepayCardPrice{
+height:24rpx;
+line-height: 24rpx;
+color:#ffffff;
+position: absolute;
+bottom: 62rpx;
+right:60rpx;
+font-size: 24rpx;
+}
 /*物流栏父控件  */
 
 .express-layout {
@@ -59,7 +110,6 @@
   flex-direction: row;
   height: 178rpx;
   background: #fcfcfc;
-  border-top: 20rpx solid #fff;
   border-left: 20rpx solid #fff;
   border-right: 20rpx solid #fff;
   border-bottom: 20rpx solid #fff;
@@ -493,7 +543,7 @@
 
 .opreation-layout {
   width: 100%;
-  height: 100rpx;
+  
   position: fixed;
   justify-content: space-around;
   flex-direction: column;

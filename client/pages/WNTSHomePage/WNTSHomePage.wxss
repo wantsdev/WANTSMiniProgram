@@ -66,12 +66,12 @@
   margin-top:0rpx;
 }
 .sixBlocksItemOne{
-  width: 376rpx;
+  width: 375rpx;
   height: 250rpx;
   display: block;
 }
 .sixBlocksItemTwo{
-  width: 376rpx;
+  width: 375rpx;
   height: 250rpx;
   display: block;
 }

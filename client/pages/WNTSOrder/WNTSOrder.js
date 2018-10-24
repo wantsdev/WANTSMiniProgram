@@ -25,12 +25,14 @@ Page({
     guessLike: [],
     offset: 0,
     page: 0,
-    limit: 10,
+    limit: 16,
     loadMoreBool: true,
     winWidth: 0,
     winHeight: 0,
     dialog_title: "",
     dialog_type: null,
+    orderShow: false,
+    owner: ''
   },
 
   /**
@@ -40,21 +42,22 @@ Page({
     var that = this;
     util.requestGet(util.URL_ROOT + "/user/" + providerId, function (data) {
       var data_list = that.data.dataList;
-      data_list[i].sellerName = data.name;
+      data_list[i].sellerName = data.data.name;
       that.setData({
         dataList: data_list,
       })
     }, function (data) {
       wx.showToast({
-        title: data,
+        title: data.data,
         icon: "none",
-        duration: 2000
+        duration: 2000,
+        orderShow: true
       })
     })
   },
   /**
-    * 获取商户名称
-    */
+   * 获取商户名称
+   */
   createPromise() {
     var promise;
     promise = new Promise(function (resolve, reject) {
@@ -89,12 +92,13 @@ Page({
     var offset = that.data.offset;
     var limit = that.data.limit;
     util.requestGet(url + "?offset=" + offset + "&limit=" + limit, function (data) {
-      that.successData(data);
+      that.successData(data.data);
     }, function (data) {
       wx.showToast({
-        title: data,
+        title: data.data,
         icon: "none",
-        duration: 2000
+        duration: 2000,
+        orderShow: true
       })
     })
   },
@@ -115,34 +119,44 @@ Page({
     // 获取订单商品总额
     for (var i = 0; i < data_list.length; i++) {
       var total = 0;
+      var created = data_list[i].created;
       var products = data_list[i].products;
       var express_id = data_list[i].express_id;
+      var owner = data_list[i].receiver_name;
+      var currentTimes = new Date();
+      var endTimes = (created + 2 * 60 * 60 * 1000) - currentTimes;
+      if (endTimes <= 0) {
+        // that.cancelOrder(e);
+        // that.setData({
+        //   showLoadingTime: false
+        // });
+      };
+
       that.initSellerName(products, i);
       switch (data_list[i].status) {
         case 10: // 待付款
           data_list[i].button1 = "取消订单";
           data_list[i].button2 = "立即付款";
-          data_list[i].button3 = null;
+          data_list[i].button4 = "查看订单";
           data_list[i].opreation = true;
           break;
-
-        case 30://待收货
-          if (data_list[i].express_company == 0) {//待发货
+        case 30: //待收货
+          if (data_list[i].express_company == 0) { //待发货
             data_list[i].button1 = null;
             data_list[i].button2 = null;
             data_list[i].button3 = "提醒发货";
             data_list[i].opreation = true;
-          } else {//待收货
+          } else { //待收货
             data_list[i].button1 = express_id ? "查看物流" : null;
             data_list[i].button2 = "确认收货";
             data_list[i].button3 = null;
             data_list[i].opreation = true;
           }
           break;
-        case 35://申请退款
-        case 43://结束-申请退款
-        case 44://结束-申请换货
-        case 40://结束
+        case 35: //申请退款
+        case 43: //结束-申请退款
+        case 44: //结束-申请换货
+        case 40: //结束
           data_list[i].button1 = null;
           data_list[i].button2 = express_id ? "查看物流" : null;
           data_list[i].button3 = null;
@@ -150,7 +164,7 @@ Page({
           break;
         case 11: //完成付款，等待系统确认
         case 41: //结束-主动取消
-        case 42:  //结束-异常取消
+        case 42: //结束-异常取消
           data_list[i].button1 = null;
           data_list[i].button2 = null;
           data_list[i].button3 = null;
@@ -180,6 +194,7 @@ Page({
     that.setData({
       dataList: tempList,
       loadMoreBool: loadMoreBool,
+      owner: owner
     });
     wx.stopPullDownRefresh();
   },
@@ -187,16 +202,16 @@ Page({
   //简化数据
   buildData(data_list_item) {
     var data = {};
+    data.created = data_list_item.created;
     data.status = data_list_item.status;
     data.status_descp = data_list_item.status_descp;
     data.totalPrice = data_list_item.totalPrice;
-
     data.button1 = data_list_item.button1;
     data.button2 = data_list_item.button2;
     data.button3 = data_list_item.button3;
+    data.button4 = data_list_item.button4;
     data.opreation = data_list_item.opreation;
-
-
+    data.owner = data_list_item.receiver_name;
     data.id = data_list_item.id;
     data.express_id = data_list_item.express_id;
     data.exptess_no = data_list_item.exptess_no
@@ -226,7 +241,6 @@ Page({
       prductsList.push(new_product_item);
     }
     data.products = prductsList;
-    
     return data;
   },
 
@@ -261,19 +275,17 @@ Page({
     currentTabNum = options.tab;
     //获取系统信息 
     wx.getSystemInfo({
-
       success: function (res) {
         that.setData({
           winWidth: res.windowWidth,
           winHeight: res.windowHeight
         });
       }
-
     });
     that.getData(currentTabNum);
     var pages = getCurrentPages();
-    var currPage = pages[pages.length - 1];//当前页面
-    var prevPage = pages[pages.length - 2];  //上一个页面
+    var currPage = pages[pages.length - 1]; //当前页面
+    var prevPage = pages[pages.length - 2]; //上一个页面
     prevPage.setData({
       fromTo: 'order'
     })
@@ -281,8 +293,8 @@ Page({
 
 
   /**
-     * 立即付款
-     */
+   * 立即付款
+   */
   pay(orderId) {
     var that = this;
     var paraterm = {};
@@ -294,9 +306,8 @@ Page({
       })
       //告诉WANTS服务器付款成功
       util.requestGet(util.URL_ROOT + '/order/' + orderId + '/paied',
-        function (success) {
-        }, function (fail) {
-        });
+        function (success) { },
+        function (fail) { });
       //刷新订单列表，显示最新状态
       that.refesh();
     }, function (fial) {
@@ -317,9 +328,9 @@ Page({
   /**
    * 查看物流
    */
-  getExpress(expressId, goodsNum, goodsImg, goodsTitle) {
+  getExpress(expressId, goodsNum, goodsImg, goodsTitle, goodsPrice, goodsOwner) {
     wx.navigateTo({
-      url: '../WNTSExpress/WNTSExpress?expressId=' + expressId + '&goodsNum=' + goodsNum + '&goodsImg=' + goodsImg + '&goodsTitle=' + goodsTitle,
+      url: '../WNTSExpress/WNTSExpress?expressId=' + expressId + '&goodsNum=' + goodsNum + '&goodsImg=' + goodsImg + '&goodsTitle=' + goodsTitle + '&goodsPrice=' + goodsPrice + '&goodsOwner=' + goodsOwner,
     })
   },
 
@@ -338,10 +349,11 @@ Page({
     that.setData({
       loaddingContext: "加载更多..."
     });
-    util.requestGet(util.URL_ROOT + '/product/recommend?scene=4&offset=' + that.data.offset + '&limit=15&orderStatus=' + orderStatus,
+    util.requestGet(util.URL_ROOT + '/product/recommend?scene=4&offset=' + that.data.offset + '&limit=16&orderStatus=' + orderStatus,
       function (data) {
-        var temp = util.getGessLikeDataTool(data);
+        var temp = util.getGessLikeMoreDataTool(data.data);
         guessLike = guessLike.concat(temp);
+        console.log(guessLike);
         var loadMoreBool = true;
         if (data == null || data.length < that.data.limit) {
           loadMoreBool = false;
@@ -350,8 +362,9 @@ Page({
           guessLike: guessLike,
           loadMoreBool: loadMoreBool
         });
-      }, function (data) {
-        
+      },
+      function (data) {
+
       });
   },
 
@@ -385,7 +398,9 @@ Page({
     var that = this;
     var orderId = e.currentTarget.dataset.seller.id;
     var expressId = e.currentTarget.dataset.seller.express_id;
+    var goodsPrice = e.currentTarget.dataset.seller.products[0].sum / 100;
     var goodsTitle = e.currentTarget.dataset.seller.products[0].product_title;
+    var goodsOwner = e.currentTarget.dataset.seller.receiver_name;
     var goodsImg = e.currentTarget.dataset.seller.products[0].product_img;
     var list = e.currentTarget.dataset.seller.products;
     var goodsNum = 0;
@@ -401,7 +416,7 @@ Page({
       var dialog_type = buttonText;
       that.showDialog(title, dialog_type);
     } else if (buttonText == "查看物流") {
-      that.getExpress(expressId, goodsNum, goodsImg, goodsTitle);
+      that.getExpress(expressId, goodsNum, goodsImg, goodsTitle, goodsPrice, goodsOwner);
     }
   },
 
@@ -412,7 +427,6 @@ Page({
     var that = this;
     var orderId = e.currentTarget.dataset.seller.id;
     var expressId = e.currentTarget.dataset.seller.express_id;
-
     var goodsTitle = e.currentTarget.dataset.seller.products[0].product_title;
     var goodsImg = e.currentTarget.dataset.seller.products[0].product_img;
     var list = e.currentTarget.dataset.seller.products;
@@ -487,10 +501,13 @@ Page({
    */
   go_orderDetail: function (e) {
     var that = this;
+    console.log(e.currentTarget.dataset);
     var orderId = e.currentTarget.dataset.order.id;
     var sellerName = e.currentTarget.dataset.order.sellerName;
+    var status_descp = e.currentTarget.dataset.order.status_descp;
+    var created = e.currentTarget.dataset.order.created;
     wx.navigateTo({
-      url: '../WNTSOrderDetial/WNTSOrderDetial?orderId=' + orderId,
+      url: '../WNTSOrderDetial/WNTSOrderDetial?orderId=' + orderId + '&created=' + created + '&status_descp=' + status_descp,
     })
   },
 
@@ -558,7 +575,7 @@ Page({
     var confirm = "确认收货";
     var cancel = "取消订单";
     if (dialogType == confirm) {
-      that.confirmRecivied();
+      that.confirmRecivied(e);
     } else if (dialogType == cancel) {
       that.cancelOrder(e);
     }
@@ -586,13 +603,14 @@ Page({
   /**
    * 确认收货
    */
-  confirmRecivied(orderId) {
+  confirmRecivied(e) {
     var that = this;
+    var orderId = e.currentTarget.dataset.orderid;
     var url = URL_GET_ORDER + orderId + "/received";
     util.requestPut(url, function (data) {
-      if (data.code == 1) {
+      if (data.data.code == 1) {
         wx.showToast({
-          title: '收获成功',
+          title: '收货成功',
           icon: "success"
         })
         that.getData(that.data.currentTab);
@@ -600,7 +618,7 @@ Page({
       }
     }, function (data) {
       wx.showToast({
-        title: data,
+        title: data.data,
         icon: "none",
         duration: 2000
       })
@@ -618,7 +636,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getData(currentTabNum);
   },
 
   /**

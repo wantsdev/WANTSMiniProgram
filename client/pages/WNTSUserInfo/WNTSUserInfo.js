@@ -3,7 +3,6 @@ const util = require('../../utils/util.js');
 var WNTSToken = require("../../vendor/wafer2-client-sdk/lib/WNTSToken.js");
 var WNTSUserInfo = require("../../vendor/wafer2-client-sdk/lib/WNTSUserInfo.js");
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -16,11 +15,11 @@ Page({
     guessLike: [],
     offset: 0,
     page: 0,
-    limit: 15,
+    limit: 16,
     loadMoreBool: true,
     winWidth: 0,
     winHeight: 0,
-    randomBackgroundColor:[]
+    randomBackgroundColor: [],
   },
 
   /**设置 */
@@ -34,13 +33,13 @@ Page({
   go_personInfo: function (e) {
     var userInfo = e.currentTarget.dataset.userinfo;
     var tourl = "";
+    console.log(userInfo);
     if (userInfo) {
       tourl = "?userInfo=" + JSON.stringify(userInfo);
     }
     wx.navigateTo({
       url: '../WNTSPersonInfo/WNTSPersonInfo' + tourl,
     })
-
   },
 
   /**我的订单 */
@@ -89,7 +88,7 @@ Page({
    */
   util_history: function () {
     wx.navigateTo({
-      url: '../WNTSHistory/WNTSHistory',
+      url: '../WNTSHistory/WNTSHistory?source=WANTS好物',
     })
   },
 
@@ -147,6 +146,20 @@ Page({
       }
     })
   },
+  // 商家入驻跳转
+  util_feedback: function (e) {
+    var that = this;
+    wx.navigateTo({
+      url: '../WNTSDerectMarketing/WNTSDerectMarketing',
+    })
+  },
+  // 优惠券跳转
+  util_coupons: function (e) {
+    var that = this;
+    wx.navigateTo({
+      url: '../WNTSPromotion/WNTSPromotion',
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -155,14 +168,15 @@ Page({
      * 获取系统信息 
      */
     var that = this;
+    console.log(options);
     that.setData({
-      randomBackgroundColor:['#2F4C52','#414D65','#A3A093','#8F5B56','#DDE8DE','#F2E6F7','#D0F6F9','#F4F6B6','#EFADCD']
+      randomBackgroundColor: ['#2F4C52', '#414D65', '#A3A093', '#8F5B56', '#DDE8DE', '#F2E6F7', '#D0F6F9', '#F4F6B6', '#EFADCD']
     });
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
           winWidth: res.windowWidth,
-          winHeight: res.windowHeight
+          winHeight: res.windowHeight,
         });
       }
     });
@@ -182,10 +196,10 @@ Page({
     that.setData({
       loaddingContext: "加载更多..."
     });
-    util.requestGet(util.URL_ROOT + '/product/recommend?scene=6&offset=' + that.data.offset + '&limit=15',
+    util.requestGet(util.URL_ROOT + '/product/recommend?scene=6&offset=' + that.data.offset + '&limit=16',
       function (data) {
-        var temp = util.getGessLikeDataTool(data);
-        if (data.length == 0) {
+        var temp = util.getGessLikeMoreDataTool(data.data);
+        if (data.data.length == 0) {
           that.setData({
             loaddingContext: "没有更多啦～"
           });
@@ -195,11 +209,11 @@ Page({
           guessLike: guessLike
         });
       }, function (data) {
-        
+
       });
   },
 
-  
+
   //猜你喜欢item 点击
   guessLike_item(e) {
     var subject_product = e.currentTarget.dataset.item;
@@ -259,31 +273,33 @@ Page({
       var userInfo = WNTSUserInfo.get();
       if (userInfo.id) {
         that.setData({
-          userInfo
+          userInfo,
+          hasLogin: true
         });
         util.requestGet(util.URL_GET_USER + userInfo.id,
           function (data) {
             that.setData({
-              userInfo: data,
+              userInfo: data.data,
             });
           }, function (data) {
-            that.showErrorDialog(data);
+            that.showErrorDialog(data.data);
           })
-
       } else {
-
+        that.setData({
+          hasLogin: false
+        })
       }
 
       // 获取订单数量
       util.requestGet(util.URL_GET_ORDER_NUM,
         function (data) {
           that.setData({
-            payNum: data.pre_pay_order_count,
-            sendNum: data.wait_shipment_order_count,
-            reciviedNum: data.wait_taking_delivery_order_count
+            payNum: data.data.pre_pay_order_count,
+            sendNum: data.data.wait_shipment_order_count,
+            reciviedNum: data.data.wait_taking_delivery_order_count
           });
         }, function (data) {
-          that.showErrorDialog(data);
+          that.showErrorDialog(data.data);
         })
     }, function (isNotLogin) {
       wx.redirectTo({

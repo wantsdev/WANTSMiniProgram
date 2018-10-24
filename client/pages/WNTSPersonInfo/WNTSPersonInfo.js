@@ -21,6 +21,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     var userInfo = JSON.parse(options.userInfo);
+    console.log(userInfo);
     if (userInfo) {
       that.setData({
         userInfo
@@ -30,12 +31,9 @@ Page({
     //获取用户信息
     util.requestGet(util.URL_GET_USER + userID,
       function (data) {
-
         that.setData({
-
-          userInfo: data,
+          userInfo: data.data,
           sex: data.gender == 1 ? "男" : "女",
-
         });
       }, function (data) {
         wx.showToast({
@@ -91,7 +89,7 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  }
+  // }
 })

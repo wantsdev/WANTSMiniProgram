@@ -10,24 +10,24 @@
     <view bindtap="go_orderDetail" data-order="{{item}}">
       <view class="seller-title">
         <image class="seller-iamge" src="../WANTSImages/seller.png"></image>
-        <text class="seller-title-name" style="">{{item.sellerName? item.sellerName : "販賣東西"}} </text>
+        <text class="seller-title-name" style="">{{item.sellerName? item.sellerName : "WANTS好物"}} </text>
         <text class="seller-status">{{item.status_descp}}</text>
       </view>
       <view class="seller-line"></view>
       <!--商品列表  -->
       <block wx:for="{{item.products}}" wx:key="{{index}}">
-        <view class=" goods-list ">
-          <image class="goods-img " src="{{item.product_img}}" mode ="aspectFit"></image>
-          <view class="goods-desc ">
-            <view class="goods-title ">{{item.product_title}}</view>
-            <view class="goods-stock ">{{item.stock_descp}}</view>
-            <view class="goods-bottom ">
-              <view class="goods-price ">¥{{item.price/100}}</view>
-              <view class="goods-num ">x{{item.num}}</view>
+        <view class=" goods-list">
+          <image class="goods-img" src="{{item.product_img}}" mode="aspectFit"></image>
+          <view class="goods-desc">
+            <view class="goods-title">{{item.product_title}}</view>
+            <view class="goods-stock">{{item.stock_descp}}</view>
+            <view class="goods-bottom">
+              <view class="goods-price">¥{{item.price/100}}</view>
+              <view class="goods-num">x{{item.num}}</view>
             </view>
           </view>
         </view>
-        <view class="seller-line "></view>
+        <view class="seller-line"></view>
       </block>
       <view class="order-bottom " data="">
         <view class="order-goods-num ">共{{item.product_num}}件商品</view>
@@ -36,27 +36,57 @@
     </view>
     <view class="{{item.opreation ? 'seller-line':'hide'}} "></view>
     <view class="{{ item.opreation ? 'order-opreation':'hide' }} ">
-    <!-- <button class="{{item.button1 ? 'contact_button' :'hide'}}" open-type='contact' send-message-title='提醒发货' show-message-card='true' send-message-path="{{'../WNTSSharePage/WNTSSharePage?orderId='+item.id+'&receiver_name='+item.receiver_name+'&receiver_phone='+item.receiver_phone+'&totalPrice='+item.totalPrice+'&receiver_address='+item.receiver_address+'&title='+'提醒发货'}}">
+      <!-- <button class="{{item.button1 ? 'contact_button' :'hide'}}" open-type='contact' send-message-title='提醒发货' show-message-card='true' send-message-path="{{'../WNTSSharePage/WNTSSharePage?orderId='+item.id+'&receiver_name='+item.receiver_name+'&receiver_phone='+item.receiver_phone+'&totalPrice='+item.totalPrice+'&receiver_address='+item.receiver_address+'&title='+'提醒发货'}}">
         <view class='opreation3'>提醒发货</view>
       </button> -->
-       <view class=" {{item.button1 ? 'opreation1':'hide' }}" data-seller="{{item}}" bindtap="opreation_1">{{item.button1}}</view> 
-       <view class=" {{item.button2 ? 'opreation2':'hide' }}" data-seller="{{item}}" bindtap="opreation_2">{{item.button2}}</view> 
+      <view class=" {{item.button4 ? 'opreation4':'hide' }}" data-seller="{{item}}" bindtap="go_orderDetail" data-order="{{item}}">{{item.button4}}</view>
+      <view class=" {{item.button1 ? 'opreation1':'hide' }}" data-seller="{{item}}" bindtap="opreation_1">{{item.button1}}</view>
+      <view class=" {{item.button2 ? 'opreation2':'hide' }}" data-seller="{{item}}" bindtap="opreation_2">{{item.button2}}</view>
       <button class="{{item.button3 ? 'contact_button' :'hide'}}" open-type='contact' send-message-title='提醒发货' show-message-card='true' send-message-path="{{'../WNTSSharePage/WNTSSharePage?orderId='+item.id+'&receiver_name='+item.receiver_name+'&receiver_phone='+item.receiver_phone+'&totalPrice='+item.totalPrice+'&receiver_address='+item.receiver_address+'&title='+'提醒发货'}}">
         <view class='opreation3'>提醒发货</view>
       </button>
     </view>
   </view>
-  <view class='loading' style="margin-top:30rpx;">{{loaddingContext}}</view>
+  <view wx:if="{{loadMoreBool}}" class='loading' style="margin-top:20rpx;">{{loaddingContext}}</view>
+
 </view>
 
 <view wx:else class='order-no-data-layout'>
   <image class='order-no-data-icon' src='../WANTSImages/data_empty_icon.png'></image>
   <view class="order-no-data">当前订单没有数据哦～</view>
   <view class='order-no-data-go' bindtap='go_shop'>逛一逛</view>
-  <include src="../../utils/WNTSRecommend.wxml" />
+  <view style="width:750rpx;height:50rpx;display:block;"></view>
+  <!-- 猜你喜欢 -->
+  <view class="guessYouLike" style="width:400rpx;margin-left:0rpx;margin-top:0rpx;">
+    <text style="display: inline-block;font-size: 28rpx;height: 32rpx;color: #484649;line-height: 0rpx;padding-top:4rpx;">{{'________'}}</text>
+    <text class="a" style="font-weight:bold;"> {{ '猜你喜欢' }} </text>
+    <text style="display: inline-block;font-size: 28rpx;height: 32rpx;color: #484649;line-height: 0rpx;padding-top:4rpx;">{{'________'}}</text>
+  </view>
+  <view class="guessYouLikeDetailLayout">
+    <view class="{{((index+1)%2==0)?('guessYouLike-items-right'):('guessYouLike-items')}}" wx:for="{{guessLike}}" wx:key="{{item.id}}">
+      <view bindtap='guessLike_item' data-item='{{item}}'>
+        <view class="guessLikeLayout">
+          <image style="{{'background:'+randomBackgroundColor[index%8]}}" class="guessYouLikePic" mode="widthFix" src="{{(item.small_img)?(item.small_img):(item.imgs[0])}}" binderror="" bindload="">
+          </image>
+        </view>
+        <view class="guessYouLikePrice">
+          <view class="outViewOne">
+            <image wx:if="{{(item.title_prefix_url_label==null)?(false):(true)}}" src="{{item.title_prefix_url_label}}" mode="widthFix" style="width:84rpx;height:26rpx;display:block;position:absolute;left:0rpx;top:0rpx;"></image>
+            <text class="{{(item.title_prefix_url_label==null)?('nameOn'):('name')}}"> {{ item.title }}</text>
+          </view>
+          <view class="outViewTwo">
+            <text class="changed"> {{'￥'+ item.price/100 }} </text>
+            <text class="change">{{ '￥'+item.tag_price/100 }} </text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='loading' style="width: 750rpx;height:40rpx;display:block; font-size: 28rpx; color: #666; line-height: 40rpx; text-align: center; margin-bottom:20rpx;">{{loaddingContext}}</view>
   <view style="width:100%;height:26rpx;box-sizing:border-box;color:black;background:white;display:block;">
+  </view>
 </view>
-</view>
+
 <view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
 <view class="modal-dialog" wx:if="{{showModal}}">
   <view class="modal-title">{{dialog_title}}</view>

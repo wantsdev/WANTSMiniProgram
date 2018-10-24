@@ -1,22 +1,31 @@
 <!--pages/WNTSHistory/WNTSHistory.wxml-->
 <view class="{{showNoData?'hide':'dataList'}}" wx:for="{{dataList}}" wx:key="{{index}}">
-  <view bindtap="goods_item" data-item="{{item}}" >
+  <view bindtap="goods_item" data-item="{{item}}">
     <view class="dataPicContainer">
-      <image class="dataPic" style="background-image: {{'url('+((item.small_img)?(item.small_img):(item.imgs[0]))+')'}}; background-repeat:no-repeat; background-size:115% 85%; background-position: top center;" mode="" binderror="" bindload="">
-        <view class="{{item.showTips ? 'dataIcons' :'hide'}}" style="position: relative;">
+      <image class="dataPic" src="{{(item.small_img)?(item.small_img):(item.imgs[0])}}" style="" mode="widthFix" binderror="" bindload="">
+        <!-- <view class="{{item.showTips ? 'dataIcons' :'hide'}}" style="position: relative;">
           <text class="text" style="position:absolute; "> {{item.tips}} </text>
           <image class='tip-background' style=" width:116rpx; height: 40rpx;" mode="" src="{{item.tip_background}}" binderror="" bindload=""></image>
           <image class='tip-icon' style=" width:20rpx; height: 20rpx; position: absolute; top: 10rpx; left: 10rpx;" mode="" src="{{item.tip_icon}}" binderror="" bindload=""></image>
-        </view>
+        </view> -->
       </image>
     </view>
     <view class="dataPrice">
-      <text class="name"> {{ item.title }}</text>
+      <!-- <text class="name"> {{ item.title }}</text>
       <text class="changed"> {{'￥'+ item.price/100 }} </text>
       <view class="change">
         <view class="a"> </view>
         <text class="b"> {{ '￥'+item.tag_price/100 }} </text>
+      </view> -->
+      <view class="outViewOne">
+        <image wx:if="{{(item.title_prefix_url_label==null)?(false):(true)}}" src="{{item.title_prefix_url_label}}" mode="widthFix" style="width:84rpx;height:26rpx;display:block;position:absolute;left:0rpx;top:0rpx;"></image>
+        <text class="{{(item.title_prefix_url_label==null)?('nameOn'):('name')}}"> {{ item.title }}</text>
       </view>
+      <view class="outViewTwo">
+        <text class="changed"> {{'￥'+ item.price/100 }} </text>
+        <text class="change">{{ '￥'+item.tag_price/100 }} </text>
+      </view>
+
     </view>
   </view>
 </view>
