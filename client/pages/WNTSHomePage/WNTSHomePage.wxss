@@ -66,23 +66,23 @@
   margin-top:0rpx;
 }
 .sixBlocksItemOne{
-  width: 375rpx;
+  width: 376rpx;
   height: 250rpx;
   display: block;
 }
 .sixBlocksItemTwo{
-  width: 375rpx;
+  width: 376rpx;
   height: 250rpx;
   display: block;
 }
 .sixBlocks .sixBlocksMiniOne{
-   width: 375rpx;
+   width: 376rpx;
    height: 250rpx;
    display: inline-block;
    position:relative;
 }
 .sixBlocks .sixBlocksMiniTwo{
-   width: 375rpx;
+   width: 376rpx;
    height: 250rpx;
    display: inline-block;
    position:relative;
