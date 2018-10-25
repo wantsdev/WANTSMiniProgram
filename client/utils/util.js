@@ -2,7 +2,7 @@ var requestTool = require('/requestTool/requestTool.js');
 var WNTSToken = require("../vendor/wafer2-client-sdk/lib/WNTSToken.js");
 var WNTSSource = require("../vendor/wafer2-client-sdk/lib/WNTSSource.js");
 var WNTSAPI = require("WNTSApi.js");
-var version = "1.0.1"
+var version = "1.0.2"
 var name = "FanMaiDongXi-MiniProgram"
 var App_id = "ok6kktqewulxr73roo"
 var randomColorArr = ['2F4C52','414D65','A3A093','8F5B56','DDE8DE','F2E6F7','D0F6F9','F4F6B6','EFADCD']
@@ -224,6 +224,7 @@ var requestPost = (paraterm, url, callback, failCallBack) => {
     paraterm.token = tokenGet();
   }
   paraterm.ua = ua();
+  console.log(paraterm);
   requestTool.request("POST", new_url, paraterm, function (res) {
     callback(res);
   }, null);
@@ -343,7 +344,6 @@ var pay = (orderId, success, fail, cancel) => {
     },
     success: function (res) {
       console.log(res);
-
       if (res) {
         if (res.data.code == 60000) {
           wx.showToast({
@@ -351,7 +351,7 @@ var pay = (orderId, success, fail, cancel) => {
             icon: 'none'
           })
           return;
-        }
+        };
         if (res.data.code == 50100) {
           wx.showToast({
             title: res.data.msg,
@@ -377,11 +377,9 @@ var pay = (orderId, success, fail, cancel) => {
                 }
               }
             });
-
             // charge 不正确或者微信小程序支付失败时会在此处返回
           }
         });
-
       } else {
         postErrorLog.call(2, 2, "post请求statusCode=" + statusCode, encodeURI(new_url + "\n" + paraterm + "\n" + res));
       }

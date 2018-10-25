@@ -276,7 +276,7 @@
       <block wx:for="{{SubjectBlock_new_14}}" wx:key="block_location">
         <view wx:if="{{(outIndex==(item.block_location-1))?(true):(false)}}" style="overflow:hidden;">
           <view style="height:30rpx;width:750rpx;display:{{(item.block_space_show==1)?('block'):('none')}};background:{{item.block_space_bgcolor}}"></view>
-          <image src='{{item.block_items[0].item_image}}' mode="widthFix" style='width:751rpx;height:88rpx;display:block;margin-bottom:-1rpx;' data-pop_item="{{item.block_items[0]}}" bindtap="popBandClick"></image>
+          <image src='{{item.block_items[0].item_image}}' mode="widthFix" style='width:753rpx;height:88rpx;display:block;margin-bottom:-1rpx;' data-pop_item="{{item.block_items[0]}}" bindtap="popBandClick"></image>
           <view class="sixBlocks">
             <image src='{{item.block_items[1].item_image}}' mode='scaleToFill' data-pop_item="{{item.block_items[1]}}" bindtap="popBandClick" class="sixBlocksItemOne"></image>
             <view class="sixBlocksMiniOne">

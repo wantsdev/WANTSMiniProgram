@@ -917,6 +917,7 @@ Page({
         SubjectBlockShow: true
       });
       console.log(subjectArrayItemChunkTotal);
+      var maxIndex = subjectArrayItemChunkTotal.length-1;
       for (var t = 0; t < subjectArrayItemChunkTotal.length; t++) {
         if (t < subjectArrayItemChunkTotal.length - 1) {
           if (subjectArrayItemChunkTotal[t].block_location !== subjectArrayItemChunkTotal[t + 1].block_location) {
@@ -928,6 +929,11 @@ Page({
               loadingMoreShow: true
             });
           }
+        };
+        if (subjectArrayItemChunkTotal[maxIndex]){
+          that.setData({
+            loadingMoreShow: false
+          });
         };
       };
     });
@@ -1056,6 +1062,7 @@ Page({
       };
       console.log(guessLike);
       console.log(temp);
+      guessLike =[];
       guessLike = guessLike.concat(temp);
       that.setData({
         guessLike: guessLike
