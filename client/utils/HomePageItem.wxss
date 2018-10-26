@@ -21,16 +21,16 @@
   top: 0rpx;
   z-index: 888;
   display: flex;
-  background: #ffffff;
+  background: #fff;
   flex-direction: row;
   width: 750rpx;
   height: 88rpx;
   align-items: center;
-  border-bottom:2rpx solid #000;
+  border-bottom: 2rpx solid #000;
 }
 
 .SearchModule .tip_button {
-  background-color: #ffffff;
+  background-color: #fff;
   border: 0px;
   display: inline-block;
   height: 38rpx;
@@ -48,6 +48,7 @@
   width: 44rpx;
   margin-left: 30rpx;
   margin-right: 30rpx;
+  margin-top: 23rpx;
 }
 
 .searchBox {
@@ -167,8 +168,8 @@
   flex-direction: row;
   justify-content: space-between;
   background: white;
-  border-bottom:1rpx solid #e6e6e6;
-  border-top:1rpx solid #e6e6e6;
+  border-bottom: 1rpx solid #e6e6e6;
+  border-top: 1rpx solid #e6e6e6;
 }
 
 .swiper-tab-list {
@@ -228,17 +229,16 @@
 .swiper-container-one .swiper {
   height: 376rpx;
   background-color: gainsboro;
-  display:flex;
+  display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
 }
 
 .swiper-container-one .swiper .img {
   width: 100%;
   height: 100%;
-display:inline-block;
-			vertical-align:middle;
-
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .swiper-container-one .dots {

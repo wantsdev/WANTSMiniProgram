@@ -1,9 +1,10 @@
 var requestTool = require('/requestTool/requestTool.js');
 var WNTSToken = require("../vendor/wafer2-client-sdk/lib/WNTSToken.js");
 var WNTSSource = require("../vendor/wafer2-client-sdk/lib/WNTSSource.js");
+var WNTSGenderTurn = require("../vendor/wafer2-client-sdk/lib/genderTurn.js");
 var WNTSAPI = require("WNTSApi.js");
 var version = "1.0.2"
-var name = "FanMaiDongXi-MiniProgram"
+var name = "WXLite"
 var App_id = "ok6kktqewulxr73roo"
 var randomColorArr = ['2F4C52','414D65','A3A093','8F5B56','DDE8DE','F2E6F7','D0F6F9','F4F6B6','EFADCD']
 var randomNum = Math.floor(Math.random() * 8)
@@ -118,12 +119,18 @@ var ua = () => {
   var network_type = network();
 
   var source = WNTSSource.get();
+  var genderSwitch = WNTSGenderTurn.get();
   var gender = 0;
   if (source) {
     gender = 2;
   } else {
     gender = 0;
-  }
+  };
+  if (genderSwitch=='on'){
+    gender = 2;
+  }else{
+    gender = 0;
+  };
   var uadata = {
     app_id: App_id,//WANTS专有APPID
     app_name: name,//APP名称

@@ -3,7 +3,9 @@
 <view>
   <!-- <view style="width:750rpx;height:166rpx;display:block;position:fixed;top:0rpx;z-index:1000;background:red;"></view> -->
   <view class="SearchModule" wx:if="{{(factoryTurn==false)?(true):(false)}}">
-    <image class="wantsLogo" mode="" src="../WANTSImages/logo.png" binderror="" bindload=""></image>
+    <view style="width:102rpx;height:88rpx;display:block;" bindtap='turnGender'>
+      <image class="wantsLogo" mode="" src="{{logoUrl}}" binderror="" bindload=""></image>
+    </view>
     <view class="searchBox" catchtap="search_touch">
       <image class="searchIcon" style="" mode="" src="../WANTSImages/search.png" binderror="" bindload=""></image>
       <text class="searchText"> {{ '潮流新品特卖' }} </text>

@@ -6,9 +6,11 @@ var login = require('./vendor/wafer2-client-sdk/lib/login.js');
 var WNTSApi = require('/utils/WNTSApi.js');
 var WNTSToken = require('./vendor/wafer2-client-sdk/lib/WNTSToken.js');
 // var WNTSSource = require('./vendor/wafer2-client-sdk/lib/WNTSSource');
+var WNTSGenderTurn = require('./vendor/wafer2-client-sdk/lib/genderTurn');
 var code;
 App({
   onLaunch: function (options) {
+    WNTSGenderTurn.set('off');
     // WNTSSource.clear();//清空本地source
     if (wx.canIUse('setTabBarBadge') == true) {
       //判断小程序的API，回调，参数，组件等是否在当前版本可用。https://developers.weixin.qq.com/miniprogram/dev/api/api-caniuse.html

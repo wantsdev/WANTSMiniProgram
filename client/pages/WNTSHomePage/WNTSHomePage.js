@@ -4,6 +4,7 @@ var WNTSApi = require('../../utils/WNTSApi.js');
 var WNTSLoadIcon = require('../../utils/WNTSLoadIcon.js');
 var WNTSUserInfo = require("../../vendor/wafer2-client-sdk/lib/WNTSUserInfo.js");
 // var WNTSSource = require("../../vendor/wafer2-client-sdk/lib/WNTSSource.js");
+var WNTSGenderTurn = require("../../vendor/wafer2-client-sdk/lib/genderTurn.js");
 var login = require('../../vendor/wafer2-client-sdk/lib/login.js');
 //var CONF = require('../../../server/config.js');
 var miniAppId = 'wx74a29a2f9afbb4b0';
@@ -42,6 +43,8 @@ var SubjectBlock_new_12;
 var subjectArrayNew;
 var originArrItems;
 var subjectBlockArrNew;
+var genderSwitchButton;
+var blocksIdArrToString;
 var init = function() {
   app = getApp();
   blockStatus = {};
@@ -277,7 +280,7 @@ var get_list = function(that) {
             blockIdArr: blockIdArr
           });
         };
-        if (blocksArr[a].block_id == 20){
+        if (blocksArr[a].block_id == 20) {
           that.setData({
             blockType: true
           });
@@ -391,8 +394,8 @@ var get_list = function(that) {
               that.setData({
                 RecommendBlockTargetId,
                 RecommendBlockTargetTitle,
-                blockType:true,
-                startLoading:true
+                blockType: true,
+                startLoading: false
               });
               that.guessLikeLoadMore(true);
             }
@@ -646,6 +649,21 @@ var get_list = function(that) {
             break;
         };
       };
+      // console.log(blocksIdArr);
+      // blocksIdArrToString = blocksIdArr.join(' ');
+      // console.log(blocksIdArrToString);
+      // console.log(blocksIdArr.indexOf(4));
+      if (blocksIdArr.indexOf(4)<0){
+        // console.log('6666666666666666');
+        that.setData({
+          startLoading: true
+        });
+      }else{
+        // console.log('88888888888');
+        that.setData({
+          startLoading: false
+        });
+      };
       that.setData({
         BannerBlockArr,
         SubjectBlock_new_16,
@@ -730,7 +748,7 @@ Page({
     location_two: false,
     location_three: false,
     guessLikeStartLoading: false,
-    blockType:false
+    blockType: false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -762,7 +780,8 @@ Page({
     init();
     get_list(that);
     that.setData({
-      randomBackgroundColor: ['#2F4C52', '#414D65', '#A3A093', '#8F5B56', '#DDE8DE', '#F2E6F7', '#D0F6F9', '#F4F6B6', '#EFADCD']
+      randomBackgroundColor: ['#2F4C52', '#414D65', '#A3A093', '#8F5B56', '#DDE8DE', '#F2E6F7', '#D0F6F9', '#F4F6B6', '#EFADCD'],
+      logoUrl: '../WANTSImages/logo.png'
     });
     for (var h = 0; h < that.data.homePageArr.length; h++) {
       if (that.data.homePageArr[h] == 1) {
@@ -807,6 +826,53 @@ Page({
     //     });
     //   }
     // };
+  },
+  //切换男女
+  turnGender(e) {
+    var that = this;
+    var index = 0;
+    var newPage = 0;
+    var loadType = 0;
+    var offset = 0;
+    genderSwitchButton = WNTSGenderTurn.get();
+    console.log(genderSwitchButton);
+    if (genderSwitchButton=='off'){
+      WNTSGenderTurn.set('on');
+      that.setData({
+        logoUrl: '../WANTSImages/redFmdxLogo3x.png'
+      });
+      wx.showToast({
+        title: '已切换为女版',
+        duration: 3000
+      })
+    }else{
+      WNTSGenderTurn.set('off');
+      that.setData({
+        logoUrl: '../WANTSImages/logo.png'
+      });
+      wx.showToast({
+        title: '已切换为男版',
+        duration: 3000
+      })
+    };
+    init();
+    wx.pageScrollTo({
+      scrollTop: 0,
+    });
+    turn = 'on';
+    var currentTabId = that.data.tabs[index].id;
+    // newPage++;
+    loadType = 1 << 1; //2 loadmore
+    offset = newPage * that.data.limit;
+    that.setData({
+      currentIndex: index,
+      currentTabId: currentTabId,
+      page: newPage,
+      offset: offset,
+      startLoading: false,
+      guessLikeLoadShow: false
+    })
+    get_list(that);
   },
   //主题页商品信息简化处理
   subjectBlockFilter(originArr) {
@@ -917,7 +983,7 @@ Page({
         SubjectBlockShow: true
       });
       console.log(subjectArrayItemChunkTotal);
-      var maxIndex = subjectArrayItemChunkTotal.length-1;
+      var maxIndex = subjectArrayItemChunkTotal.length - 1;
       for (var t = 0; t < subjectArrayItemChunkTotal.length; t++) {
         if (t < subjectArrayItemChunkTotal.length - 1) {
           if (subjectArrayItemChunkTotal[t].block_location !== subjectArrayItemChunkTotal[t + 1].block_location) {
@@ -930,7 +996,7 @@ Page({
             });
           }
         };
-        if (subjectArrayItemChunkTotal[maxIndex]){
+        if (subjectArrayItemChunkTotal[maxIndex]) {
           that.setData({
             loadingMoreShow: false
           });
@@ -1002,7 +1068,7 @@ Page({
   //猜你喜欢数据加载更多
   guessLikeLoadMore(loadMoreBool) {
     var that = this;
-    if (that.data.blockType){
+    if (that.data.blockType) {
       wx.stopPullDownRefresh();
       var that = this;
       if (that.data.RecommendBlock_idShow == false) return;
@@ -1048,7 +1114,7 @@ Page({
     if (that.data.cuttentTab_tags) {
       cuttTags = '&target=' + that.data.cuttentTab_tags;
     };
-    var recommendUrl = WNTSApi.mainUrl + '/aggregator/' + that.data.RecommendBlockTargetId +'/41/entity';
+    var recommendUrl = WNTSApi.mainUrl + '/aggregator/' + that.data.RecommendBlockTargetId + '/41/entity';
     util.requestGet(recommendUrl, function(res) {
       console.log(res.data);
       var temp = util.getGessLikeDataTool(res.data);
@@ -1062,7 +1128,7 @@ Page({
       };
       console.log(guessLike);
       console.log(temp);
-      guessLike =[];
+      guessLike = [];
       guessLike = guessLike.concat(temp);
       that.setData({
         guessLike: guessLike
@@ -1280,7 +1346,7 @@ Page({
       //   startLoading: true,
       //   guessLikeLoadShow: true
       // })
-      //that.guessLikeLoadMore(true);
+      that.guessLikeLoadMore(true);
     };
   },
   /**
