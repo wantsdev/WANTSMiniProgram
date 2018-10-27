@@ -75,8 +75,11 @@
 
 .swiper-container .swiper .img {
   width: 750rpx;
+  height:1000rpx;
   position: absolute;
-  display: flex;
+  top:0rpx;
+  left:0rpx;
+  display: inline-block;
 }
 
 .swiper-container .dots {

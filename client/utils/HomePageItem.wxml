@@ -6,7 +6,7 @@
     <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock_new_11')?(true):(false)}}">
       <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_11.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_11.block_space_bgcolor}};"></view>
       <swiper autoplay="{{true}}" duration="{{500}}" interval="{{3000}}" circular="{{true}}">
-        <block wx:for="{{SubjectBlock_new_11.block_items}}" wx:key="index">
+        <block wx:for="{{SubjectBlock_new_11.block_items}}" wx:key="{{index}}">
           <swiper-item scroll-x="true" class="productScrollX">
             <image src='{{item.item_image}}' mode='widthFix' data-pop_item="{{SubjectBlock_new_11.block_items[index]}}" bindtap="popBandClick" class="items"></image>
           </swiper-item>
@@ -16,12 +16,12 @@
 
     <!--四块精品-->
     <view wx:if="{{blockArrNew[outIndex]=='SubjectBlock_new_12'}}">
-      <block wx:for="{{SubjectBlock_new_12}}" wx:key="block_location">
+      <block wx:for="{{SubjectBlock_new_12}}" wx:key="{{block_location}}">
         <view wx:if="{{(outIndex==(item.block_location-1))?(true):(false)}}">
           <view style="height:30rpx;width:750rpx;display:{{(item.block_space_show==1)?('block'):('none')}};background:{{item.block_space_bgcolor}}"></view>
           <image src='{{item.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{item.block_items[0]}}" bindtap="popBandClick"></image>
           <view class="fourBlocks">
-            <image wx:for="{{item.block_items}}" wx:key="index" wx:if="{{(index==0)?(false):(true)}}" src='{{item.item_image}}' mode="{{(index==0)?('widthFix'):('widthFix')}}" data-pop_item="{{item.block_items[index]}}" bindtap="popBandClick" class="{{(index!==0)?('fourBlocksItem'):('fourBlocksItemOn')}}"></image>
+            <image wx:for="{{item.block_items}}" wx:key="{{index}}" wx:if="{{(index==0)?(false):(true)}}" src='{{item.item_image}}' mode="{{(index==0)?('widthFix'):('widthFix')}}" data-pop_item="{{item.block_items[index]}}" bindtap="popBandClick" class="{{(index!==0)?('fourBlocksItem'):('fourBlocksItemOn')}}"></image>
           </view>
         </view>
       </block>
@@ -32,7 +32,7 @@
       <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_13.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_13.block_space_bgcolor}}"></view>
       <image src='{{SubjectBlock_new_13.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_13.block_items[0]}}" bindtap="popBandClick"></image>
       <view class="fiveBlocks">
-        <image wx:for="{{SubjectBlock_new_13.block_items}}" wx:key="index" wx:if="{{(index==0||index==4||index==5)?(false):(true)}}" src='{{item.item_image}}' mode='aspectFit' data-pop_item="{{SubjectBlock_new_13.block_items[index]}}" bindtap="popBandClick" class="fiveBlocksItem"
+        <image wx:for="{{SubjectBlock_new_13.block_items}}" wx:key="{{index}}" wx:if="{{(index==0||index==4||index==5)?(false):(true)}}" src='{{item.item_image}}' mode='aspectFit' data-pop_item="{{SubjectBlock_new_13.block_items[index]}}" bindtap="popBandClick" class="fiveBlocksItem"
           style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
         <view class="fiveBlocksMini">
           <image src='{{SubjectBlock_new_13.block_items[4].item_image}}' mode="widthFix" style='width:187.5rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_13.block_items[4]}}" bindtap="popBandClick"></image>
@@ -68,7 +68,7 @@
       <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_15.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_15.block_space_bgcolor}}"></view>
       <image src='{{SubjectBlock_new_15.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_15.block_items[0]}}" bindtap="popBandClick"></image>
       <view class="sevenBlocks">
-        <image wx:for="{{SubjectBlock_new_15.block_items}}" wx:key="index" wx:if="{{(index==0||index==6||index==7)?(false):(true)}}" src='{{item.item_image}}' mode='aspectFit' data-pop_item="{{SubjectBlock_new_15.block_items[index]}}" bindtap="popBandClick" class="sevenBlocksItem"
+        <image wx:for="{{SubjectBlock_new_15.block_items}}" wx:key="{{index}}" wx:if="{{(index==0||index==6||index==7)?(false):(true)}}" src='{{item.item_image}}' mode='aspectFit' data-pop_item="{{SubjectBlock_new_15.block_items[index]}}" bindtap="popBandClick" class="sevenBlocksItem"
           style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
         <view class="sevenBlocksMini">
           <image src='{{SubjectBlock_new_15.block_items[6].item_image}}' mode="widthFix" style='width:187.5rpx;height:250rpx;display:block;position:absolute;top:0rpx;left:0rpx;' data-pop_item="{{SubjectBlock_new_15.block_items[6]}}" bindtap="popBandClick"></image>
@@ -79,7 +79,7 @@
 
     <!--八块精品-->
     <view wx:if="{{blockArrNew[outIndex]=='SubjectBlock_new_16'}}">
-      <block wx:for="{{SubjectBlock_new_16}}" wx:key="block_location">
+      <block wx:for="{{SubjectBlock_new_16}}" wx:key="{{block_location}}">
         <view wx:if="{{(outIndex==(item.block_location-1))?(true):(false)}}">
           <view style="height:30rpx;width:750rpx;display:{{(item.block_space_show==1)?('block'):('none')}};background:{{item.block_space_bgcolor}}"></view>
           <image src='{{item.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{item.block_items[0]}}" bindtap="popBandClick"></image>
@@ -107,7 +107,7 @@
       <view style="height:30rpx;width:750rpx;display:{{(SubjectBlock_new_17.block_space_show==1)?('block'):('none')}};background:{{SubjectBlock_new_17.block_space_bgcolor}}"></view>
       <image src='{{SubjectBlock_new_17.block_items[0].item_image}}' mode="widthFix" style='width:750rpx;height:60rpx;display:block;' data-pop_item="{{SubjectBlock_new_17.block_items[0]}}" bindtap="popBandClick"></image>
       <view class="nineBlocks">
-        <image wx:for="{{SubjectBlock_new_17.block_items}}" wx:key="index" wx:if="{{(index==0)?(false):(true)}}" src='{{item.item_image}}' mode="{{(index==0)?('widthFix'):('widthFix')}}" data-pop_item="{{SubjectBlock_new_17.block_items[index]}}" bindtap="popBandClick"
+        <image wx:for="{{SubjectBlock_new_17.block_items}}" wx:key="{{index}}" wx:if="{{(index==0)?(false):(true)}}" src='{{item.item_image}}' mode="{{(index==0)?('widthFix'):('widthFix')}}" data-pop_item="{{SubjectBlock_new_17.block_items[index]}}" bindtap="popBandClick"
           class="nineBlocksItem" style="width:{{(index==0)?(750+'rpx'):(375+'rpx')}} height:{{(index==0)?(60+'rpx'):(250+'rpx')}};"></image>
       </view>
     </view>
@@ -115,7 +115,7 @@
   <!--新模板-->
   <!-- 轮播图布局 -->
   <view wx:if="{{blockArrNew[outIndex]=='BannerBlock'}}">
-    <block wx:for="{{BannerBlockArr}}" wx:key="block_location">
+    <block wx:for="{{BannerBlockArr}}" wx:key="{{block_location}}">
       <view class="swiper-container-one" wx:if="{{(outIndex==(item.block_location-1))?(true):(false)}}" style="{{(outIndex==0)?('margin-top:84rpx;'):('margin-top:0rpx;')}}">
         <swiper class="swiper" indicator-dots="{{indicatorDots}}" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
           <block wx:for="{{item.block_items}}" wx:for-item="sonItem" wx:key="{{sonItem.item_id}}">
@@ -133,7 +133,7 @@
   <!-- 主题列表⬇️ -->
 
   <view wx:if="{{(blockArrNew[outIndex]=='SubjectBlock')?(true):(false)}}">
-    <block wx:for="{{SubjectBlock}}" wx:key="block_location">
+    <block wx:for="{{SubjectBlock}}" wx:key="{{block_location}}">
       <!--主题列表⬇️布局一⬇️  -->
       <view class="detailBlockOne" wx:index="{{item.index}}"  wx:if="{{(outIndex==(item.block_location-1))?(true):(false)}}" data-target="{{item.item_target.target_id}}" data-item_title="{{item.item_title}}" catchtap="band_touch">
         <view class="left">

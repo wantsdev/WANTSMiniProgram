@@ -7,7 +7,7 @@
       <view class="swiper-container">
         <swiper autoplay="auto" indicator-dots="true" indicator-color="#F6F6F6" indicator-active-color="#DCDCDC" interval="3000" duration="500" current="{{currentTab}}" bindchange="swiperChange" duration="300" style="height:1000rpx; width: 750rpx;" class="swiper">
           <swiper-item class='img_parent' wx:for="{{subject_product.product_imgs}}" wx:key="{{item.id}}">
-            <image style="" mode="widthFix" src="{{item}}" binderror="" bindload="" class="img"></image>
+          <view class="img" style="{{'background:url('+item+') no-repeat top left;background-size:750rpx 1000rpx;'}}"></view>
           </swiper-item>
         </swiper>
         <view class="swiperPages">
