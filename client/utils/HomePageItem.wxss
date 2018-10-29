@@ -114,6 +114,7 @@
   background: white;
   height: 196rpx;
   width: 750rpx;
+  margin-bottom:46rpx;
 }
 
 ::-webkit-scrollbar {

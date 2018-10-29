@@ -1,1 +1,7 @@
-{}
+{
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "登录",
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark",
+    "onReachBottomDistance": 50
+}
