@@ -483,13 +483,13 @@ Page({
 
     //判断点击“立即购买”时默认商品的库存量，并setData到data对象中，以备后期调用。
     for (var j = 0; j < selected_item_detail_out_arr.length; j++) {
-      selected_items_detail.push(selected_item_detail_out_arr[j].detail);
+      selected_items_detail.push(selected_item_detail_out_arr[j].detail.replace(/\s+/g, ""));
     };
 
     for (var k = 0; k < stocks.length; k++) {
       var stocks_obj = {};
       var n = 0;
-      var stock_arr = stocks[k].descp.split(' ');
+      var stock_arr = stocks[k].descp.replace(/\s+/g, "").split(' ');
       for (var p = 0; p < stock_arr.length; p++) {
         for (var q = 0; q < selected_items_detail.length; q++) {
           if (stock_arr[p] == selected_items_detail[q]) {
