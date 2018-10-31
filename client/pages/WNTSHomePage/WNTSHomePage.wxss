@@ -145,3 +145,29 @@
   display: inline-block;
   background: #ffffff;
 } 
+.addMyMp {
+  width: 86rpx;
+  height: 86rpx;
+  display: block;
+  border-radius: 50%;
+  background: #fff;
+  position: fixed;
+  bottom: 38rpx;
+  right: 38rpx;
+  opacity: 0.9;
+  border: 2rpx solid rgba(192,192,192, 0.6);
+  box-shadow: 0 0 5rpx 2rpx rgba(208, 208, 208, 0.4);
+}
+
+.addMyMpTxt {
+  width: 71rpx;
+  height: 58rpx;
+  display: block;
+  margin-top: 10rpx;
+  margin-left: 12rpx;
+  padding-top: 6rpx;
+  padding-bottom: 6rpx;
+  color: #b0b0b0;
+  font-size: 17rpx;
+  line-height: 29rpx;
+}

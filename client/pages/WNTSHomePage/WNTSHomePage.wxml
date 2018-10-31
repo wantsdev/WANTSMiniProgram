@@ -1,6 +1,6 @@
 <!-- <view class="navBarOne"></view>
 <view class="navBarTwo"></view> -->
-<view>
+<view hidden="{{addMyPgTurn}}">
   <!-- <view style="width:750rpx;height:166rpx;display:block;position:fixed;top:0rpx;z-index:1000;background:red;"></view> -->
   <view class="SearchModule" wx:if="{{(factoryTurn==false)?(true):(false)}}">
     <view style="width:102rpx;height:88rpx;display:block;" bindtap='turnGender'>
@@ -23,10 +23,24 @@
     </scroll-view>
   </view>
   <!--标题栏⬆️-->
-
   <!--blocks板块配置  -->
   <block wx:for="{{blockArrNew}}" wx:key="{{outIndex}}" wx:for-index="outIndex">
     <include src="../../utils/HomePageItem.wxml" />
   </block>
   <!--blocks板块配置  -->
 </view>
+  <view class="addMyMp" bindtap='addToMyPg' wx:if="{{addToMyPgButton}}">
+    <text class="addMyMpTxt">{{'添加到我的小程序'}}</text>
+  </view>
+  <view style="width:750rpx;display:block;padding-top:138rpx;position:relative;" wx:if="{{addMyPgTurn}}">
+    <image style="width:63rpx;height:104rpx;display:block;position:absolute;right:152rpx;top:14rpx;" src="../WANTSImages/toCopy.png" mode="widthFix"></image>
+    <view style="width:580rpx;display:block;position:relative;font-size:24rpx;margin-left:85rpx;margin-bottom:54rpx;">
+      <text style="position:absolute;top:0rpx;left:0rpx;">{{'1.点击右上角按钮'}}</text>
+      <image style="width:36rpx;height:24rpx;display:block;position:absolute;top:4rpx;right:350rpx;" src="../WANTSImages/circle.png" mode="widthFix"></image>
+      <text style="position:absolute;top:0rpx;right:70rpx;">{{'选择“添加到我的小程序”'}}</text>
+    </view>
+    <image style="width:580rpx;display:block;margin-left:85rpx;" src="../WANTSImages/fmdxAddTo2.png" mode="widthFix"></image>
+    <text style="width:580rpx;display:block;font-size:24rpx;margin-left:85rpx;margin-bottom:25rpx;margin-top:45rpx;">{{'2.在微信首页下拉打开任务栏，可在【最近使用】和【我的小程序】中打开“販賣東西”小程序。'}}</text>
+    <image style="width:580rpx;display:block;margin-left:85rpx;" src="../WANTSImages/fmdxAddTo1.png" mode="widthFix"></image>
+    <image style="width:34rpx;height:34rpx;display:block;position:absolute;left:358rpx;bottom:-16rpx;" src="../WANTSImages/cha.png" mode="widthFix" bindtap='showOffToMyPg'></image>
+  </view>

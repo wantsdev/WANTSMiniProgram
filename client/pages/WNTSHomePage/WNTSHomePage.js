@@ -748,7 +748,9 @@ Page({
     location_two: false,
     location_three: false,
     guessLikeStartLoading: false,
-    blockType: false
+    blockType: false,
+    addToMyPgButton: true,
+    addMyPgTurn: false
   },
   /**
    * 生命周期函数--监听页面加载
@@ -826,6 +828,21 @@ Page({
     //     });
     //   }
     // };
+  },
+  //添加到我的小程序
+  addToMyPg(e) {
+    var that = this;
+    that.setData({
+      addMyPgTurn: true,
+      addToMyPgButton: false
+    });
+  },
+  //添加小程序按钮消失
+  showOffToMyPg(e) {
+    var that = this;
+    that.setData({
+      addMyPgTurn: false
+    });
   },
   //切换男女
   turnGender(e) {
