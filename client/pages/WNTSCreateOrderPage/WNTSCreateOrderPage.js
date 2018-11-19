@@ -124,6 +124,7 @@ Page({
     if (selectedProducts[0].from == "productDetail") {
       url = WNTSApi.price_by_stock_promotion_Api + "?stockId=" + selectedProducts[0].id + "&num=" + selectedProducts[0].num;
       util.requestMethodWithParaterm("GET", null, url, function (res) {
+        console.log(res);
         var addPriceArr = [];
         var sum = 0;
         var price = res.data.pay / 100;
