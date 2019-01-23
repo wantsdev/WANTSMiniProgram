@@ -1,4 +1,5 @@
-var mainUrl = "https://api.wantscart.com";
+// var mainUrl = "https://api.wantscart.com";
+var mainUrl = "http://192.168.0.109:8181";
 // var mainUrl = "http://api.staging.wantscart.com";
 var tabsUrl = mainUrl + "/app/layout/tabs";//获取tabs
 var tabIdUrl = mainUrl + '/app/layout/tab/';//获取某个tab数据

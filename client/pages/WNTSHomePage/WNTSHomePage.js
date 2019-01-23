@@ -243,7 +243,7 @@ var get_list = function(that) {
 
   var miniParterm = that.data.checkOutMiniProgramDataBool ? that.data.MiniProgramDataWithParterm : "";
   var tabUrl = WNTSApi.tabsUrl + miniParterm;
-  var newTabUrl = encodeURI(tabUrl);
+  // var newTabUrl = encodeURI(tabUrl);
   util.requestGet(WNTSApi.tabsUrl + miniParterm, function(res) {
     //工厂店的tabName加入
     // var factoryTabName = {

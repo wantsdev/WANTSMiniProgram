@@ -4,7 +4,7 @@ var request = (method, url, paraterm, callback, failCallBack) => {
     conten_type = "application/x-www-form-urlencoded";
   }
   //console.log(url);
-  url = encodeURI(url);
+  // url = encodeURI(url);
   wx.request({
     url: url,
     data: paraterm,
@@ -15,6 +15,7 @@ var request = (method, url, paraterm, callback, failCallBack) => {
     dataType: 'json',
     responseType: 'text',
     success: function(res) {
+      console.log(paraterm);
 //console.log(res);
       if (res.statusCode == 200) {
         callback(res);
